@@ -1,4 +1,4 @@
-import 'package:ff_sampler/app.dart';
 import 'package:flutter/material.dart';
+import 'package:nippo/app.dart';
 
 void main() => runApp(MyApp());

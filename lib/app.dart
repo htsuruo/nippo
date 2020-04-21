@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:ff_sampler/page/list.dart';
-import 'package:ff_sampler/page/mypage.dart';
-import 'package:ff_sampler/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:nippo/page/list.dart';
+import 'package:nippo/page/mypage.dart';
+import 'package:nippo/theme.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //  ロゴアイコンの宣言
   Image appLogo = new Image(
     image: new ExactAssetImage('assets/img/ic_main_logo.png'),
-    height: 36.0,
+    height: 44.0,
     alignment: FractionalOffset.center,
   );
 
