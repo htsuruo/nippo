@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-final ThemeData themeData = new ThemeData(primaryColor: _MyColors.theme[500]);
+final ThemeData themeData =
+    ThemeData.light().copyWith(primaryColor: _MyColors.theme[500]);
 
 class _MyColors {
   _MyColors._(); // this basically makes it so you can instantiate this class
