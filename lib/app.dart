@@ -12,12 +12,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'NIPPO',
       theme: themeData,
-      home: MyHomePage(),
+      initialRoute: MyHomePage.routeName,
+      routes: {
+        MyHomePage.routeName: (context) => MyHomePage(),
+      },
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  static final String routeName = '/';
   MyHomePage({Key key}) : super(key: key);
 
   @override
@@ -85,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
         items: bottomItems(),
         selectedFontSize: 12.0,
         elevation: 4.0,
+        unselectedItemColor: Color(0xFFCCCCCC),
       ),
     );
   }

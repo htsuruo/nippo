@@ -13,7 +13,7 @@ class ProfileTotalPostCount extends StatelessWidget {
     return Container(
       color: Color(0xFFF0F0F0),
       width: double.infinity,
-      margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+      margin: EdgeInsets.all(20),
       padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
