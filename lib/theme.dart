@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-final ThemeData themeData = ThemeData.light().copyWith(
-    primaryColor: _MyColors.theme[500], backgroundColor: Colors.white);
+ThemeData setTheme(context) {
+  return ThemeData.light().copyWith(
+      primaryColor: _MyColors.theme[500],
+      backgroundColor: Colors.white,
+      textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme));
+}
 
 class _MyColors {
   _MyColors._(); // this basically makes it so you can instantiate this class

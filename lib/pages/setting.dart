@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/page/signin.dart';
+import 'package:nippo/pages/signin.dart';
 
 class SettingPage extends StatelessWidget {
   static const String routeName = '/setting';

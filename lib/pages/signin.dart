@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nippo/app.dart';
 
 class SignInPage extends StatelessWidget {
@@ -86,7 +87,9 @@ class SignInBtn extends StatelessWidget {
             ),
             Text(
               this.label,
-              style: TextStyle(fontSize: 16.0),
+              style: GoogleFonts.roboto(
+                  textStyle:
+                      TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
             ),
           ],
         ),

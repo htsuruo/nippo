@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/profile_circle_image.dart';
 import 'package:nippo/components/profile_total_post_count.dart';
-import 'package:nippo/page/setting.dart';
+import 'package:nippo/pages/setting.dart';
 import 'package:nippo/theme.dart';
 
 class ProfilePage extends StatelessWidget {

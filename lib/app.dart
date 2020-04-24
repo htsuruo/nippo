@@ -1,9 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:nippo/page/list.dart';
-import 'package:nippo/page/profile.dart';
-import 'package:nippo/page/setting.dart';
-import 'package:nippo/page/signin.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nippo/pages/list.dart';
+import 'package:nippo/pages/profile.dart';
+import 'package:nippo/pages/setting.dart';
+import 'package:nippo/pages/signin.dart';
 import 'package:nippo/theme.dart';
 
 class MyApp extends StatelessWidget {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'NIPPO',
-      theme: themeData,
+      theme: setTheme(context),
       initialRoute: SignInPage.routeName,
       routes: <String, WidgetBuilder>{
         HomePage.routeName: (context) => HomePage(),
@@ -32,9 +33,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-//  ページ切り替え用のコントローラを宣言
-//  PageController _pageController;
-
 //  ページインデックス保持する変数を宣言
   int _page = 0;
 
@@ -45,21 +43,6 @@ class _HomePageState extends State<HomePage> {
       BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('マイページ')),
     ];
   }
-
-//  @override
-//  void initState() {
-//    super.initState();
-//    _pageController = PageController(
-//      initialPage: _page, // 初期ページの設定
-//    );
-//  }
-//
-//  @override
-//  void dispose() {
-//    super.dispose();
-//    // コントローラ破棄
-//    _pageController.dispose();
-//  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -91,15 +74,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-//  void onTapBottomNavigation(int page) {
-//    _pageController.animateToPage(page,
-//        duration: const Duration(milliseconds: 300), curve: Curves.ease);
-//  }
-
-//  void onPageChanged(int page) {
-//    setState(() {
-//      this._page = page;
-//    });
-//  }
 }
