@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:nippo/page/list.dart';
 import 'package:nippo/page/profile.dart';
+import 'package:nippo/page/setting.dart';
 import 'package:nippo/page/signin.dart';
 import 'package:nippo/theme.dart';
 
@@ -13,16 +14,17 @@ class MyApp extends StatelessWidget {
       title: 'NIPPO',
       theme: themeData,
       initialRoute: SignInPage.routeName,
-      routes: {
+      routes: <String, WidgetBuilder>{
         HomePage.routeName: (context) => HomePage(),
-        SignInPage.routeName: (context) => SignInPage()
+        SignInPage.routeName: (context) => SignInPage(),
+        SettingPage.routeName: (context) => SettingPage(),
       },
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  static final String routeName = '/';
+  static final String routeName = '/home';
   HomePage({Key key}) : super(key: key);
 
   @override
@@ -31,7 +33,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 //  ページ切り替え用のコントローラを宣言
-  PageController _pageController;
+//  PageController _pageController;
 
 //  ページインデックス保持する変数を宣言
   int _page = 0;
@@ -44,50 +46,45 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(
-      initialPage: _page, // 初期ページの設定
-    );
+//  @override
+//  void initState() {
+//    super.initState();
+//    _pageController = PageController(
+//      initialPage: _page, // 初期ページの設定
+//    );
+//  }
+//
+//  @override
+//  void dispose() {
+//    super.dispose();
+//    // コントローラ破棄
+//    _pageController.dispose();
+//  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _page = index;
+      print('this is $_page');
+    });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    // コントローラ破棄
-    _pageController.dispose();
+  Widget _changePage(int index) {
+    return _page == 0 ? ListPage() : ProfilePage();
   }
-
-//  ロゴアイコンの宣言
-  Image appLogo = new Image(
-    image: new ExactAssetImage('assets/img/ic_main_logo.png'),
-    height: 44.0,
-    alignment: FractionalOffset.center,
-  );
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context).settings.arguments;
+    print(args);
     return Scaffold(
-      appBar: AppBar(
-        title: appLogo,
-//        leading: Icon(Icons.notifications, color: Colors.grey),
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-      ),
-      body: new PageView(
-        controller: _pageController,
-        onPageChanged: onPageChanged,
-        children: <Widget>[
-          ListPage(),
-          ProfilePage(),
-        ],
+      body: Container(
+        child: _changePage(_page),
       ),
       bottomNavigationBar: BottomNavigationBar(
 //        現在のページインデックス
-        currentIndex: _page,
-        onTap: onTapBottomNavigation,
+        onTap: _onItemTapped,
         items: bottomItems(),
+        currentIndex: _page,
         selectedFontSize: 12.0,
         elevation: 4.0,
         unselectedItemColor: Color(0xFFCCCCCC),
@@ -95,15 +92,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void onTapBottomNavigation(int page) {
+//  void onTapBottomNavigation(int page) {
 //    _pageController.animateToPage(page,
 //        duration: const Duration(milliseconds: 300), curve: Curves.ease);
-    _pageController.jumpToPage(page);
-  }
+//  }
 
-  void onPageChanged(int page) {
-    setState(() {
-      this._page = page;
-    });
-  }
+//  void onPageChanged(int page) {
+//    setState(() {
+//      this._page = page;
+//    });
+//  }
 }

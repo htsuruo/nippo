@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/profile_circle_image.dart';
 import 'package:nippo/components/profile_total_post_count.dart';
+import 'package:nippo/page/setting.dart';
+import 'package:nippo/theme.dart';
 
 class ProfilePage extends StatelessWidget {
   static final String routeName = '/profile';
@@ -15,32 +17,59 @@ class ProfilePage extends StatelessWidget {
     const int postCount = 42;
 
     return Scaffold(
-        body: Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ProfileCircleImage(
-                imageUrl: imageUrl,
+//        appBar: AppBar(
+//          backgroundColor: Colors.white,
+//          elevation: 0.0,
+//          actions: <Widget>[
+//            IconButton(
+//              color: Colors.black,
+//              icon: Icon(Icons.add_alert),
+//              tooltip: 'show hogehoge',
+//              onPressed: () {},
+//            )
+//          ],
+//        ),
+        body: SafeArea(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    icon: Icon(Icons.more_horiz),
+                    color: Color(0xFF2D3047),
+                    onPressed: () {
+                      Navigator.pushNamed(context, SettingPage.routeName);
+                    },
+                  ),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                name,
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ProfileCircleImage(
+                  imageUrl: imageUrl,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
-                description,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  name,
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            ProfileTotalPostCount(postCount: postCount)
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Text(
+                  description,
+                ),
+              ),
+              ProfileTotalPostCount(postCount: postCount)
+            ],
+          ),
         ),
       ),
     ));

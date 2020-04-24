@@ -37,7 +37,7 @@ class SignInPage extends StatelessWidget {
               logoImg: GoogleLogo,
               label: 'Sign in with Google',
               callback: () {
-                Navigator.pushNamed(context, HomePage.routeName,
+                Navigator.pushReplacementNamed(context, HomePage.routeName,
                     arguments: 'from google.');
               },
             ),
@@ -48,7 +48,7 @@ class SignInPage extends StatelessWidget {
               logoImg: TwitterLogo,
               label: 'Sign in with Twitter',
               callback: () {
-                Navigator.pushNamed(context, HomePage.routeName,
+                Navigator.pushReplacementNamed(context, HomePage.routeName,
                     arguments: 'from twitter.');
               },
             ),
