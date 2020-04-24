@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nippo/components/profile_circle_image.dart';
 import 'package:nippo/components/profile_total_post_count.dart';
 
-class MyPage extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
+  static final String routeName = '/profile';
+
   @override
   Widget build(BuildContext context) {
     const String name = '鶴岡秀樹';

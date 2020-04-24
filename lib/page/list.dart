@@ -5,18 +5,18 @@ class ListPage extends StatelessWidget {
     length: 2,
     child: Scaffold(
       appBar: AppBar(
-        flexibleSpace: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            TabBar(
-              tabs: [
-                Tab(text: 'タイムライン', icon: Icon(Icons.directions_transit)),
-                Tab(text: 'お気に入り', icon: Icon(Icons.directions_transit)),
-              ],
-            )
-          ],
-        ),
-      ),
+//        flexibleSpace: Column(
+//          mainAxisAlignment: MainAxisAlignment.end,
+//          children: <Widget>[
+//            TabBar(
+//              tabs: [
+//                Tab(text: 'タイムライン', icon: Icon(Icons.directions_transit)),
+//                Tab(text: 'お気に入り', icon: Icon(Icons.directions_transit)),
+//              ],
+//            )
+//          ],
+//        ),
+          ),
     ),
   );
   @override

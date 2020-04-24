@@ -1,8 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:nippo/page/list.dart';
-import 'package:nippo/page/mypage.dart';
+import 'package:nippo/page/profile.dart';
+import 'package:nippo/page/signin.dart';
 import 'package:nippo/theme.dart';
 
 class MyApp extends StatelessWidget {
@@ -12,23 +12,24 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'NIPPO',
       theme: themeData,
-      initialRoute: MyHomePage.routeName,
+      initialRoute: SignInPage.routeName,
       routes: {
-        MyHomePage.routeName: (context) => MyHomePage(),
+        HomePage.routeName: (context) => HomePage(),
+        SignInPage.routeName: (context) => SignInPage()
       },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   static final String routeName = '/';
-  MyHomePage({Key key}) : super(key: key);
+  HomePage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
 //  ページ切り替え用のコントローラを宣言
   PageController _pageController;
 
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPageChanged: onPageChanged,
         children: <Widget>[
           ListPage(),
-          MyPage(),
+          ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
