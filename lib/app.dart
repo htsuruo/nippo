@@ -1,21 +1,20 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nippo/pages/list.dart';
 import 'package:nippo/pages/profile.dart';
 import 'package:nippo/pages/setting.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'NIPPO',
       theme: setTheme(context),
 //      darkTheme: ThemeData.dark(), // これだけでダークモード的な事ができる.
-      initialRoute: SignInPage.routeName,
+      initialRoute: HomePage.routeName,
       routes: <String, WidgetBuilder>{
         HomePage.routeName: (context) => HomePage(),
         SignInPage.routeName: (context) => SignInPage(),

@@ -2,9 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nippo/app.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInPage extends StatelessWidget {
   static final String routeName = '/signin';
+
+  final _googleSignIn = GoogleSignIn();
+  final _auth = FirebaseAuth.instance;
+
+  Future<FirebaseUser> _handleGoogleSignIn() async {
+    GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    AuthResult result = await _auth.signInWithCredential(
+        GoogleAuthProvider.getCredential(
+            idToken: googleAuth.idToken, accessToken: googleAuth.accessToken));
+    FirebaseUser user = result.user;
+    print("sign in [ ${user.email} ], [ ${user.displayName} ]");
+    return user;
+  }
 
   Image appLogo = new Image(
     image: ExactAssetImage('assets/img/ic_main_logo.png'),
@@ -37,9 +53,15 @@ class SignInPage extends StatelessWidget {
             SignInBtn(
               logoImg: GoogleLogo,
               label: 'Sign in with Google',
-              callback: () {
-                Navigator.pushReplacementNamed(context, HomePage.routeName,
-                    arguments: 'from google.');
+              callback: () async {
+                try {
+                  FirebaseUser user = await _handleGoogleSignIn();
+                  print(user);
+                  Navigator.pushReplacementNamed(context, HomePage.routeName,
+                      arguments: 'from google.');
+                } catch (e) {
+                  print(e);
+                }
               },
             ),
             SizedBox(

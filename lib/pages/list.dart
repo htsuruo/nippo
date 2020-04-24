@@ -16,8 +16,6 @@ class ListPage extends StatelessWidget {
     alignment: FractionalOffset.center,
   );
 
-  TabController _tabController;
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -29,8 +27,9 @@ class ListPage extends StatelessWidget {
           title: appLogo,
           bottom: TabBar(
             tabs: tabItems,
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
+            indicatorColor: Color(0xFF2D3047),
+            labelColor: Color(0xFF2D3047),
+            labelStyle: TextStyle(fontWeight: FontWeight.bold),
             unselectedLabelColor: Color(0xFFAAAAAA),
           ),
         ),
