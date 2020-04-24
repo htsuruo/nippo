@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nippo/app.dart';
 import 'package:nippo/pages/signin.dart';
 
 class SettingPage extends StatelessWidget {
@@ -17,8 +18,8 @@ class SettingPage extends StatelessWidget {
           child: Text('ログアウト'),
           onPressed: () {
             print('ログアウト');
-            Navigator.popUntil(
-                context, ModalRoute.withName(SignInPage.routeName));
+            Navigator.pushNamedAndRemoveUntil(
+                context, SignInPage.routeName, (Route<dynamic> route) => false);
           },
         ),
       ),

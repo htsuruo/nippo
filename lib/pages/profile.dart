@@ -29,49 +29,52 @@ class ProfilePage extends StatelessWidget {
 //            )
 //          ],
 //        ),
-        body: SafeArea(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Container(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    icon: Icon(Icons.more_horiz),
-                    color: Color(0xFF2D3047),
-                    onPressed: () {
-                      Navigator.pushNamed(context, SettingPage.routeName);
-                    },
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                      icon: Icon(Icons.more_horiz),
+                      color: Color(0xFF2D3047),
+                      onPressed: () {
+                        Navigator.pushNamed(context, SettingPage.routeName);
+                      },
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ProfileCircleImage(
-                  imageUrl: imageUrl,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ProfileCircleImage(
+                    imageUrl: imageUrl,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  name,
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    name,
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Text(
-                  description,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Text(
+                    description,
+                  ),
                 ),
-              ),
-              ProfileTotalPostCount(postCount: postCount)
-            ],
+                ProfileTotalPostCount(postCount: postCount)
+              ],
+            ),
           ),
         ),
       ),
-    ));
+    );
   }
 }
