@@ -6,6 +6,7 @@ import 'package:nippo/pages/setting.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/pages/user.dart';
 import 'package:nippo/theme.dart';
+import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -25,19 +26,54 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatefulWidget {
-  static final String routeName = '/home';
-  HomePage({Key key}) : super(key: key);
+class BottomNavBarStore with ChangeNotifier {
+  int _currentIndex = 0;
+//  void change({int index}) {
+//    _currentIndex = index;
+//    print('selected page is $_currentIndex');
+//    notifyListeners();
+//  }
+  get currentIndex => _currentIndex;
 
-  @override
-  _HomePageState createState() => _HomePageState();
+  set currentIndex(int index) {
+    _currentIndex = index;
+    notifyListeners();
+  }
 }
 
-class _HomePageState extends State<HomePage> {
-//  ページインデックス保持する変数を宣言
-  int _page = 0;
+class HomePage extends StatelessWidget {
+  static final String routeName = '/home';
 
-//  ボトムナビゲーションの一覧を宣言
+  @override
+  Widget build(BuildContext context) {
+    final args = ModalRoute.of(context).settings.arguments;
+    print(args);
+    return ChangeNotifierProvider<BottomNavBarStore>(
+      create: (context) => BottomNavBarStore(),
+      child: Scaffold(
+        body: ContainerPage(),
+        bottomNavigationBar: BottomNavBar(),
+      ),
+    );
+  }
+}
+
+class ContainerPage extends StatelessWidget {
+  Widget _changePage({int page}) {
+    var pageList = [ListPage(), UserPage(), ProfilePage()];
+    return pageList[page];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tabIns = Provider.of<BottomNavBarStore>(context);
+    return Container(
+      child: _changePage(page: tabIns._currentIndex),
+    );
+  }
+}
+
+class BottomNavBar extends StatelessWidget {
   List<BottomNavigationBarItem> bottomItems() {
     return [
       BottomNavigationBarItem(icon: Icon(Icons.view_list), title: Text('日報')),
@@ -46,43 +82,18 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _page = index;
-      print('this is $_page');
-    });
-  }
-
-  Widget _changePage(int index) {
-    switch (_page) {
-      case 0:
-        return ListPage();
-      case 1:
-        return UserPage();
-      case 2:
-        return ProfilePage();
-      default:
-        return ListPage();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context).settings.arguments;
-    print(args);
-    return Scaffold(
-      body: Container(
-        child: _changePage(_page),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-//        現在のページインデックス
-        onTap: _onItemTapped,
-        items: bottomItems(),
-        currentIndex: _page,
-        selectedFontSize: 12.0,
-        elevation: 4.0,
-        unselectedItemColor: Color(0xFFCCCCCC),
-      ),
+    final provider = Provider.of<BottomNavBarStore>(context);
+    return BottomNavigationBar(
+      onTap: (index) {
+        provider.currentIndex = index;
+      },
+      items: bottomItems(),
+      currentIndex: provider._currentIndex,
+      selectedFontSize: 12.0,
+      elevation: 4.0,
+      unselectedItemColor: Color(0xFFCCCCCC),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:nippo/app.dart';
 
 class ListPage extends StatelessWidget {
   final List<Tab> tabItems = <Tab>[
