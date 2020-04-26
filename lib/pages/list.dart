@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ListPage extends StatelessWidget {
   final List<Tab> tabItems = <Tab>[
     Tab(
-      text: 'タイムライン',
+      text: '全体',
     ),
     Tab(
       text: 'お気に入り',

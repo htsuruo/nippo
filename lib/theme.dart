@@ -5,7 +5,17 @@ ThemeData setTheme(context) {
   return ThemeData.light().copyWith(
       primaryColor: _MyColors.theme[500],
       backgroundColor: Colors.white,
-      textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme));
+      textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
+      scaffoldBackgroundColor: Colors.white,
+      appBarTheme: AppBarTheme(
+          color: Colors.white,
+          elevation: 0.0,
+          iconTheme: IconThemeData(color: Colors.black),
+          textTheme: TextTheme(
+              title: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                  color: Colors.black))));
 }
 
 class _MyColors {

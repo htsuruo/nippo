@@ -4,8 +4,8 @@ import 'package:nippo/pages/list.dart';
 import 'package:nippo/pages/profile.dart';
 import 'package:nippo/pages/setting.dart';
 import 'package:nippo/pages/signin.dart';
+import 'package:nippo/pages/user.dart';
 import 'package:nippo/theme.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         HomePage.routeName: (context) => HomePage(),
         SignInPage.routeName: (context) => SignInPage(),
+        UserPage.routeName: (context) => UserPage(),
         SettingPage.routeName: (context) => SettingPage(),
       },
     );
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
   List<BottomNavigationBarItem> bottomItems() {
     return [
       BottomNavigationBarItem(icon: Icon(Icons.view_list), title: Text('日報')),
+      BottomNavigationBarItem(icon: Icon(Icons.people), title: Text('登録者')),
       BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('マイページ')),
     ];
   }
@@ -52,7 +54,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _changePage(int index) {
-    return _page == 0 ? ListPage() : ProfilePage();
+    switch (_page) {
+      case 0:
+        return ListPage();
+      case 1:
+        return UserPage();
+      case 2:
+        return ProfilePage();
+      default:
+        return ListPage();
+    }
   }
 
   @override
