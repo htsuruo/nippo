@@ -84,7 +84,8 @@ class BottomNavBar extends StatelessWidget {
       items: bottomItems(),
       currentIndex: provider._currentIndex,
       selectedFontSize: 12.0,
-      elevation: 4.0,
+      elevation: 5.0,
+      backgroundColor: Colors.white,
       unselectedItemColor: Color(0xFFCCCCCC),
     );
   }

@@ -9,7 +9,7 @@ ThemeData setTheme(context) {
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
       color: Colors.white,
-      elevation: 0.0,
+      elevation: 0.5,
       iconTheme: IconThemeData(color: Colors.black),
       textTheme: TextTheme(
           title: TextStyle(

@@ -66,11 +66,6 @@ class SettingPage extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: <Widget>[
-              Expanded(
-                child: ListView(
-                  children: widgetItems,
-                ),
-              ),
               Container(
                 color: Colors.red[50],
                 child: ListTile(
