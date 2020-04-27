@@ -30,6 +30,7 @@ dependencies:
   firebase_analytics: ^5.0.11
   google_sign_in: ^4.4.4
   provider: ^4.0.5
+  modal_progress_hud: ^0.1.3
 
 dev_dependencies:
   flutter_test:

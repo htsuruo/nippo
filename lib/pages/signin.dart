@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nippo/app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
   static final String routeName = '/signin';
@@ -41,44 +43,81 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            appLogo,
-            SizedBox(
-              height: 80.0,
-            ),
-            SignInBtn(
-              logoImg: GoogleLogo,
-              label: 'Sign in with Google',
-              callback: () async {
-                try {
-                  FirebaseUser user = await _handleGoogleSignIn();
-                  print(user);
-                  Navigator.pushReplacementNamed(context, HomePage.routeName,
-                      arguments: 'from google.');
-                } catch (e) {
-                  print(e);
-                }
-              },
-            ),
-            SizedBox(
-              height: 24.0,
-            ),
-            SignInBtn(
-              logoImg: TwitterLogo,
-              label: 'Sign in with Twitter',
-              callback: () {
-                Navigator.pushReplacementNamed(context, HomePage.routeName,
-                    arguments: 'from twitter.');
-              },
-            ),
-          ],
+        body: ModalProgressHUD(
+      child: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              appLogo,
+              SizedBox(
+                height: 80.0,
+              ),
+              SignInBtn(
+                logoImg: GoogleLogo,
+                label: 'Sign in with Google',
+                callback: () async {
+                  Provider.of<ProgressHUDState>(context).update(newState: true);
+                  try {
+                    FirebaseUser user = await _handleGoogleSignIn();
+                    print(user);
+                    Navigator.pushReplacementNamed(context, HomePage.routeName,
+                        arguments: 'from google.');
+                  } catch (e) {
+                    print(e);
+                  }
+                  Provider.of<ProgressHUDState>(context)
+                      .update(newState: false);
+                },
+              ),
+              SizedBox(
+                height: 24.0,
+              ),
+              SignInBtn(
+                logoImg: TwitterLogo,
+                label: 'Sign in with Twitter',
+                callback: () async {
+                  var result = await showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('確認'),
+                          content: Text('Twitterログインは現在ご利用いただけません'),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop(0);
+                              },
+                            )
+                          ],
+                        );
+                      });
+                  print('dialog result is $result');
+                },
+              ),
+            ],
+          ),
         ),
       ),
+      inAsyncCall:
+          Provider.of<ProgressHUDState>(context, listen: false)._saving,
     ));
+  }
+}
+
+class ProgressHUDState with ChangeNotifier {
+  bool _saving = false;
+  bool get saving => _saving;
+//  下記と同義
+//  bool get saving {
+//    return _saving;
+//  }
+
+  void update({bool newState}) {
+    _saving = newState;
+    notifyListeners();
   }
 }
 

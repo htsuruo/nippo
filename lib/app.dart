@@ -11,17 +11,20 @@ import 'package:provider/provider.dart';
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'NIPPO',
-      theme: setTheme(context),
+    return ChangeNotifierProvider<ProgressHUDState>(
+      create: (context) => ProgressHUDState(),
+      child: MaterialApp(
+        title: 'NIPPO',
+        theme: setTheme(context),
 //      darkTheme: ThemeData.dark(), // これだけでダークモード的な事ができる.
-      initialRoute: HomePage.routeName,
-      routes: <String, WidgetBuilder>{
-        HomePage.routeName: (context) => HomePage(),
-        SignInPage.routeName: (context) => SignInPage(),
-        UserPage.routeName: (context) => UserPage(),
-        SettingPage.routeName: (context) => SettingPage(),
-      },
+        initialRoute: HomePage.routeName,
+        routes: <String, WidgetBuilder>{
+          HomePage.routeName: (context) => HomePage(),
+          SignInPage.routeName: (context) => SignInPage(),
+          UserPage.routeName: (context) => UserPage(),
+          SettingPage.routeName: (context) => SettingPage(),
+        },
+      ),
     );
   }
 }
