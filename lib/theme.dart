@@ -26,8 +26,4 @@ class _MyColors {
     500: const Color(0xFF2D3047),
     600: const Color(0xFFF7B52C),
   };
-
-//  static const Map<int, Color> accent = const <int, Color>{
-//    500: const Color(0xFF00A7E1),
-//  };
 }

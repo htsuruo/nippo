@@ -28,15 +28,9 @@ class MyApp extends StatelessWidget {
 
 class BottomNavBarStore with ChangeNotifier {
   int _currentIndex = 0;
-//  void change({int index}) {
-//    _currentIndex = index;
-//    print('selected page is $_currentIndex');
-//    notifyListeners();
-//  }
-  get currentIndex => _currentIndex;
-
-  set currentIndex(int index) {
+  void change({int index}) {
     _currentIndex = index;
+    print('selected page is $_currentIndex');
     notifyListeners();
   }
 }
@@ -86,9 +80,7 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<BottomNavBarStore>(context);
     return BottomNavigationBar(
-      onTap: (index) {
-        provider.currentIndex = index;
-      },
+      onTap: (index) => provider.change(index: index),
       items: bottomItems(),
       currentIndex: provider._currentIndex,
       selectedFontSize: 12.0,
