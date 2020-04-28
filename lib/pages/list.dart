@@ -114,11 +114,14 @@ class ContentCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-            child: Icon(
-              Icons.favorite_border,
-              color: Color(0xFFE84855),
-              size: 28.0,
+            padding: EdgeInsets.symmetric(vertical: 4),
+            child: IconButton(
+              icon: Icon(
+                Icons.favorite_border,
+                color: Color(0xFFE84855),
+                size: 28.0,
+              ),
+              onPressed: () {},
             ),
           ),
         ],

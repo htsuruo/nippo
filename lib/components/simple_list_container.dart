@@ -12,7 +12,7 @@ class SimpleListContainer extends StatelessWidget {
       child: ListTile(
         title: Text(
           title,
-          style: TextStyle(fontSize: 15),
+          style: TextStyle(fontSize: 14),
         ),
         trailing: trailing,
         onTap: onTap,

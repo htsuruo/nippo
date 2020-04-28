@@ -19,7 +19,7 @@ ThemeData setTheme(context) {
       ),
 //      dividerColor: Colors.black26,
       dividerTheme:
-          DividerThemeData(color: Colors.black26, thickness: 0.0, space: 6.0));
+          DividerThemeData(color: Colors.black26, thickness: 0.0, space: 2.0));
 }
 
 class _MyColors {
