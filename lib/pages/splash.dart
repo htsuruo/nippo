@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/app.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nippo/components/app_logo.dart';
+import 'package:nippo/pages/home.dart';
 
 Future<bool> isLogin() async {
   final _auth = FirebaseAuth.instance;
@@ -24,12 +25,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  Image appLogo = new Image(
-    image: ExactAssetImage('assets/img/ic_main_logo.png'),
-    height: 240.0,
-    alignment: FractionalOffset.center,
-  );
-
   @override
   void initState() {
     super.initState();
@@ -42,7 +37,10 @@ class _SplashPageState extends State<SplashPage> {
     return new Scaffold(
       body: new Center(
         // TODO: スプラッシュアニメーション
-        child: appLogo,
+        child: Hero(
+          child: AppLogo(height: 240),
+          tag: 'appLogo',
+        ),
       ),
     );
   }
