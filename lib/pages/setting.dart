@@ -55,38 +55,35 @@ class SettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CounterStore(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            '設定',
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          '設定',
         ),
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Container(
-                color: Colors.red[50],
-                child: ListTile(
-                  title: Center(
-                    child: Text(
-                      'ログアウト',
-                      style: TextStyle(color: Colors.red),
-                    ),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Container(
+              color: Colors.red[50],
+              child: ListTile(
+                title: Center(
+                  child: Text(
+                    'ログアウト',
+                    style: TextStyle(color: Colors.red),
                   ),
-                  onTap: () async {
-                    await _auth.signOut();
-                    print('logout successful.');
-                    Navigator.pushNamedAndRemoveUntil(context,
-                        SignInPage.routeName, (Route<dynamic> route) => false);
-                  },
                 ),
+                onTap: () async {
+                  await _auth.signOut();
+                  print('logout successful.');
+                  Navigator.pushNamedAndRemoveUntil(context,
+                      SignInPage.routeName, (Route<dynamic> route) => false);
+                },
               ),
+            ),
 //              CounterText(),
 //              IncrementButton()
-            ],
-          ),
+          ],
         ),
       ),
     );

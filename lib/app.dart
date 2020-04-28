@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         title: 'NIPPO',
         theme: setTheme(context),
 //      darkTheme: ThemeData.dark(), // これだけでダークモード的な事ができる.
-        initialRoute: HomePage.routeName,
+        initialRoute: SignInPage.routeName,
         routes: <String, WidgetBuilder>{
           HomePage.routeName: (context) => HomePage(),
           SignInPage.routeName: (context) => SignInPage(),

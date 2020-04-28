@@ -30,12 +30,12 @@ class SignInPage extends StatelessWidget {
     alignment: FractionalOffset.center,
   );
 
-  Image GoogleLogo = new Image(
+  Image googleLogo = new Image(
     image: ExactAssetImage('assets/img/ic_logo_google.png'),
     height: 24.0,
   );
 
-  Image TwitterLogo = new Image(
+  Image twitterLogo = new Image(
     image: ExactAssetImage('assets/img/ic_logo_twitter.png'),
     height: 24.0,
   );
@@ -44,6 +44,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ModalProgressHUD(
+      inAsyncCall: Provider.of<ProgressHUDState>(context)._saving,
       child: SafeArea(
         child: Center(
           child: Column(
@@ -54,11 +55,12 @@ class SignInPage extends StatelessWidget {
                 height: 80.0,
               ),
               SignInBtn(
-                logoImg: GoogleLogo,
+                logoImg: googleLogo,
                 label: 'Sign in with Google',
                 callback: () async {
-                  Provider.of<ProgressHUDState>(context).update(newState: true);
                   try {
+                    Provider.of<ProgressHUDState>(context, listen: false)
+                        .update(newState: true);
                     FirebaseUser user = await _handleGoogleSignIn();
                     print(user);
                     Navigator.pushReplacementNamed(context, HomePage.routeName,
@@ -66,7 +68,7 @@ class SignInPage extends StatelessWidget {
                   } catch (e) {
                     print(e);
                   }
-                  Provider.of<ProgressHUDState>(context)
+                  Provider.of<ProgressHUDState>(context, listen: false)
                       .update(newState: false);
                 },
               ),
@@ -74,7 +76,7 @@ class SignInPage extends StatelessWidget {
                 height: 24.0,
               ),
               SignInBtn(
-                logoImg: TwitterLogo,
+                logoImg: twitterLogo,
                 label: 'Sign in with Twitter',
                 callback: () async {
                   var result = await showDialog(
@@ -101,8 +103,6 @@ class SignInPage extends StatelessWidget {
           ),
         ),
       ),
-      inAsyncCall:
-          Provider.of<ProgressHUDState>(context, listen: false)._saving,
     ));
   }
 }
