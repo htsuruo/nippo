@@ -3,16 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:nippo/pages/home_list.dart';
 import 'package:nippo/pages/user.dart';
 import 'package:nippo/pages/profile.dart';
-
-class BottomNavBarStore with ChangeNotifier {
-  int _currentIndex = 0;
-  int get currentIndex => _currentIndex;
-  void change({int index}) {
-    _currentIndex = index;
-    print('selected page is $_currentIndex');
-    notifyListeners();
-  }
-}
+import 'package:nippo/stores/bottom_nav_bar_store.dart';
 
 class HomePage extends StatelessWidget {
   static final String routeName = '/home';
