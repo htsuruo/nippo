@@ -11,47 +11,16 @@ class CounterStore with ChangeNotifier {
   }
 }
 
+void signOut(context) async {
+  final _auth = FirebaseAuth.instance;
+  await _auth.signOut();
+  print('logout successful.');
+  Navigator.pushNamedAndRemoveUntil(
+      context, SignInPage.routeName, (Route<dynamic> route) => false);
+}
+
 class SettingPage extends StatelessWidget {
   static const String routeName = '/setting';
-  final _auth = FirebaseAuth.instance;
-
-  final List<Widget> widgetItems = [
-    ListTile(
-      title: Text(
-        'アカウント情報',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      dense: true,
-    ),
-    ListTile(
-      title: Text('最終ログイン日時'),
-    ),
-    ListTile(
-      title: Text('認証プロバイダ'),
-    ),
-    SizedBox(
-      height: 20.0,
-    ),
-    ListTile(
-      title: Text(
-        'サービスについて',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      dense: true,
-    ),
-    ListTile(
-      title: Text('利用規約'),
-    ),
-    ListTile(
-      title: Text('プライバシーポリシー'),
-    ),
-    ListTile(
-      title: Text('運営会社'),
-    ),
-    SizedBox(
-      height: 40.0,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -62,28 +31,92 @@ class SettingPage extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Container(
-              color: Colors.red[50],
-              child: ListTile(
-                title: Center(
-                  child: Text(
-                    'ログアウト',
-                    style: TextStyle(color: Colors.red),
+        child: Container(
+          color: Color(0xFF0F0F0),
+          child: ListView(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 48, left: 16, right: 16, bottom: 8),
+                child: Text(
+                  'アカウント情報について',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              const Divider(height: 0.5, color: Colors.black26),
+              Container(
+                child: ListTile(
+                  title: Text('認証プロバイダ'),
+                  trailing: Text('Google'),
+                ),
+              ),
+              const Divider(indent: 16, height: 0.5, color: Colors.black26),
+              Container(
+                child: ListTile(
+                  title: Text('最終ログイン日時'),
+                  trailing: Text('2020.04.30'),
+                ),
+              ),
+              const Divider(height: 0.5, color: Colors.black26),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 48, left: 16, right: 16, bottom: 8),
+                child: Text(
+                  'サービスについて',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              const Divider(height: 0.5, color: Colors.black26),
+              Container(
+                child: ListTile(
+                  title: Text('利用規約'),
+                  trailing: Icon(Icons.navigate_next),
+                  onTap: () {},
+                ),
+              ),
+              const Divider(indent: 16, height: 0.5, color: Colors.black26),
+              Container(
+                child: ListTile(
+                  title: Text('プライバシーポリシー'),
+                  trailing: Icon(Icons.navigate_next),
+                  onTap: () {},
+                ),
+              ),
+              const Divider(indent: 16, height: 0.5, color: Colors.black26),
+              Container(
+                child: ListTile(
+                  title: Text('運営会社'),
+                  trailing: Icon(Icons.open_in_new),
+                  onTap: () {},
+                ),
+              ),
+              const Divider(indent: 16, height: 0.5, color: Colors.black26),
+              Container(
+                child: ListTile(
+                  title: Text('バージョン'),
+                  trailing: Text('1.0.0'),
+                ),
+              ),
+              const Divider(height: 0.5, color: Colors.black26),
+              SizedBox(
+                height: 32,
+              ),
+              Container(
+                color: Colors.red[50],
+                child: Container(
+                  alignment: Alignment.center,
+                  child: ListTile(
+                    title: Center(
+                      child: Text('ログアウト',
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold)),
+                    ),
+                    onTap: () => signOut(context),
                   ),
                 ),
-                onTap: () async {
-                  await _auth.signOut();
-                  print('logout successful.');
-                  Navigator.pushNamedAndRemoveUntil(context,
-                      SignInPage.routeName, (Route<dynamic> route) => false);
-                },
               ),
-            ),
-//              CounterText(),
-//              IncrementButton()
-          ],
+            ],
+          ),
         ),
       ),
     );

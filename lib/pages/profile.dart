@@ -18,8 +18,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String name = '鶴岡秀樹';
-    const String description =
-        'FinTech / UI / フロントエンド / 最近はFlutter頑張る人。デザインとエンジニアリング、モノをつくるのが好き。Perfumeはもっと好き。P.T.A. 8年目';
+    const String description = 'Google認証';
     const String imageUrl =
         'https://i.pinimg.com/originals/05/82/9e/05829e5e6c8e65aa31d7d9ade9e05503.jpg';
     const int postCount = 42;
