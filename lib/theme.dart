@@ -3,21 +3,23 @@ import 'package:google_fonts/google_fonts.dart';
 
 ThemeData setTheme(context) {
   return ThemeData.light().copyWith(
-    primaryColor: _MyColors.theme[500],
-    backgroundColor: Colors.white,
-    textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
-    scaffoldBackgroundColor: Colors.white,
-    appBarTheme: AppBarTheme(
-      color: Colors.white,
-      elevation: 0.5,
-      iconTheme: IconThemeData(color: Colors.black),
-      textTheme: TextTheme(
-          title: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0,
-              color: Colors.black)),
-    ),
-  );
+      primaryColor: _MyColors.theme[500],
+      backgroundColor: Colors.white,
+      textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
+      scaffoldBackgroundColor: Colors.white,
+      appBarTheme: AppBarTheme(
+        color: Colors.white,
+        elevation: 0.5,
+        iconTheme: IconThemeData(color: Colors.black),
+        textTheme: TextTheme(
+            title: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                color: Colors.black)),
+      ),
+//      dividerColor: Colors.black26,
+      dividerTheme:
+          DividerThemeData(color: Colors.black26, thickness: 0.0, space: 6.0));
 }
 
 class _MyColors {

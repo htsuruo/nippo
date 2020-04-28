@@ -17,7 +17,6 @@ class ProfileTotalPostCount extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           const Divider(
-            color: Colors.black26,
             height: 32,
           ),
           Text(
@@ -26,7 +25,6 @@ class ProfileTotalPostCount extends StatelessWidget {
           ),
           Text('投稿数'),
           const Divider(
-            color: Colors.black26,
             height: 32,
           ),
         ],
