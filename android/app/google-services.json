@@ -30,6 +30,13 @@
             {
               "client_id": "743783425498-a792nb0qqqsuu3dnhb2cq7u5rm586r1p.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "743783425498-bo81l70g7mbg96s0mt16nff96eo3g2jv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tsuruoka.com"
+              }
             }
           ]
         }
