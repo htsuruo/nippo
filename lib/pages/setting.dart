@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nippo/components/simple_list_container.dart';
 import 'package:nippo/components/simple_list_section.dart';
 import 'package:nippo/pages/signin.dart';
+import 'package:nippo/services/auth.dart';
 
 class SettingPage extends StatelessWidget {
   static const String routeName = '/setting';
@@ -101,9 +101,7 @@ class SignOutBtn extends StatelessWidget {
 }
 
 Future<void> signOut(BuildContext context) async {
-  final _auth = FirebaseAuth.instance;
-  await _auth.signOut();
-  print('logout successful.');
+  await Auth().signOut();
   await Navigator.pushNamedAndRemoveUntil(
       context, SignInPage.routeName, (Route<dynamic> route) => false);
 }

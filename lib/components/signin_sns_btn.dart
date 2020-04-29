@@ -7,7 +7,7 @@ class SignInSnsBtn extends StatelessWidget {
 
   final Image logoImg;
   final String label;
-  final Function callback;
+  final Function() callback;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class SignInSnsBtn extends StatelessWidget {
       color: Colors.white,
       borderSide: const BorderSide(color: Color(0xFFDDDDDD)),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-      onPressed: () => callback,
+      onPressed: callback,
       highlightColor: Colors.white,
       child: Container(
         width: 220,

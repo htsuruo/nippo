@@ -63,10 +63,10 @@ class BottomNavBar extends StatelessWidget {
             Icons.people,
             color: Colors.white,
           ),
-          title: Text(
+          title: const Text(
             '日報を書く',
             style: TextStyle(
-                color: const Color(0xFFE84855), fontWeight: FontWeight.bold),
+                color: Color(0xFFE84855), fontWeight: FontWeight.bold),
           )),
       BottomNavigationBarItem(
           icon: Icon(Icons.person), title: const Text('マイページ')),
