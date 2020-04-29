@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:nippo/pages/home_list.dart';
-import 'package:nippo/pages/user.dart';
 import 'package:nippo/pages/profile.dart';
+import 'package:nippo/pages/user.dart';
 import 'package:nippo/stores/bottom_nav_bar_store.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
-  static final String routeName = '/home';
+  static const String routeName = '/home';
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +31,16 @@ class FAB extends StatelessWidget {
       onPressed: () {
         Provider.of<BottomNavBarStore>(context, listen: false).change(index: 1);
       },
-      elevation: 0.0,
+      elevation: 0,
       child: Icon(Icons.mode_edit),
-      backgroundColor: Color(0xFFE84855),
+      backgroundColor: const Color(0xFFE84855),
     );
   }
 }
 
 class ContainerPage extends StatelessWidget {
   Widget _changePage({int page}) {
-    var pageList = [HomeListPage(), UserPage(), ProfilePage()];
+    final pageList = [HomeListPage(), UserPage(), ProfilePage()];
     return pageList[page];
   }
 
@@ -56,7 +56,8 @@ class ContainerPage extends StatelessWidget {
 class BottomNavBar extends StatelessWidget {
   List<BottomNavigationBarItem> bottomItems() {
     return [
-      BottomNavigationBarItem(icon: Icon(Icons.view_list), title: Text('日報')),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.view_list), title: const Text('日報')),
       BottomNavigationBarItem(
           icon: Icon(
             Icons.people,
@@ -65,9 +66,10 @@ class BottomNavBar extends StatelessWidget {
           title: Text(
             '日報を書く',
             style: TextStyle(
-                color: Color(0xFFE84855), fontWeight: FontWeight.bold),
+                color: const Color(0xFFE84855), fontWeight: FontWeight.bold),
           )),
-      BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('マイページ')),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.person), title: const Text('マイページ')),
     ];
   }
 
@@ -78,10 +80,10 @@ class BottomNavBar extends StatelessWidget {
       onTap: (index) => provider.change(index: index),
       items: bottomItems(),
       currentIndex: provider.currentIndex,
-      selectedFontSize: 12.0,
-      elevation: 5.0,
+      selectedFontSize: 12,
+      elevation: 5,
       backgroundColor: Colors.white,
-      unselectedItemColor: Color(0xFFCCCCCC),
+      unselectedItemColor: const Color(0xFFCCCCCC),
     );
   }
 }

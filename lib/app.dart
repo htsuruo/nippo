@@ -1,15 +1,12 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:nippo/pages/home_list.dart';
-import 'package:nippo/pages/profile.dart';
+import 'package:nippo/pages/home.dart';
 import 'package:nippo/pages/setting.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/pages/splash.dart';
 import 'package:nippo/pages/user.dart';
+import 'package:nippo/stores/progress_hub_store.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:nippo/stores/progress_hub_store.dart';
-import 'package:nippo/pages/home.dart';
 
 class MyApp extends StatelessWidget {
   @override

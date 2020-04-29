@@ -4,24 +4,18 @@ import 'package:nippo/components/profile_circle_image.dart';
 import 'package:nippo/components/profile_total_post_count.dart';
 import 'package:nippo/pages/setting.dart';
 
+@immutable
 class ProfilePage extends StatelessWidget {
-  static final String routeName = '/profile';
-  FirebaseUser user;
-
-  void getCurrentUser() async {
-    FirebaseAuth _auth = FirebaseAuth.instance;
-    FirebaseUser currentUser = await _auth.currentUser();
-    user = currentUser;
-//    return currentUser;
-  }
+  static const String routeName = '/profile';
+  final FirebaseUser user = null;
 
   @override
   Widget build(BuildContext context) {
-    String name = '鶴岡秀樹';
-    const String description = 'Google認証';
-    const String imageUrl =
+    const name = '鶴岡秀樹';
+    const description = 'Google認証';
+    const imageUrl =
         'https://i.pinimg.com/originals/05/82/9e/05829e5e6c8e65aa31d7d9ade9e05503.jpg';
-    const int postCount = 42;
+    const postCount = 42;
 
     return Scaffold(
 //        appBar: AppBar(
@@ -42,7 +36,7 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(right: 16.0),
+                padding: const EdgeInsets.only(right: 16),
                 child: Container(
                   alignment: Alignment.centerRight,
                   child: IconButton(
@@ -54,26 +48,26 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8),
                 child: ProfileCircleImage(
                   imageUrl: imageUrl,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8),
                 child: Text(
                   name,
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
                   description,
                 ),
               ),
-              ProfileTotalPostCount(postCount: postCount)
+              const ProfileTotalPostCount(postCount: postCount)
             ],
           ),
         ),

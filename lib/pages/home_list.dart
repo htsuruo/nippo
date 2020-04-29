@@ -4,10 +4,10 @@ import 'package:nippo/components/content_cart.dart';
 
 class HomeListPage extends StatelessWidget {
   final List<Tab> tabItems = <Tab>[
-    Tab(
+    const Tab(
       text: 'みんなの日報',
     ),
-    Tab(
+    const Tab(
       text: 'お気に入り',
     ),
   ];
@@ -29,6 +29,7 @@ class HomeListPage extends StatelessWidget {
         itemCount: 3,
       );
     }
+    return Container();
   }
 
   @override
@@ -38,14 +39,14 @@ class HomeListPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          elevation: 0.0,
-          title: AppLogo(height: 50),
+          elevation: 0,
+          title: const AppLogo(height: 50),
           bottom: TabBar(
             tabs: tabItems,
-            indicatorColor: Color(0xFF2D3047),
-            labelColor: Color(0xFF2D3047),
+            indicatorColor: const Color(0xFF2D3047),
+            labelColor: const Color(0xFF2D3047),
             labelStyle: TextStyle(fontWeight: FontWeight.bold),
-            unselectedLabelColor: Color(0xFFAAAAAA),
+            unselectedLabelColor: const Color(0xFFAAAAAA),
           ),
         ),
         body: SafeArea(

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+@immutable
 class SignInSnsBtn extends StatelessWidget {
-  SignInSnsBtn({@required this.logoImg, this.label, this.callback});
+  const SignInSnsBtn({@required this.logoImg, this.label, this.callback});
 
   final Image logoImg;
   final String label;
@@ -11,26 +12,26 @@ class SignInSnsBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlineButton(
-      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       color: Colors.white,
-      borderSide: BorderSide(color: Color(0xFFDDDDDD)),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
-      onPressed: this.callback,
+      borderSide: const BorderSide(color: Color(0xFFDDDDDD)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      onPressed: () => callback,
       highlightColor: Colors.white,
       child: Container(
         width: 220,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            this.logoImg,
-            SizedBox(
+            logoImg,
+            const SizedBox(
               width: 16,
             ),
             Text(
-              this.label,
+              label,
               style: GoogleFonts.roboto(
                   textStyle:
-                      TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             ),
           ],
         ),

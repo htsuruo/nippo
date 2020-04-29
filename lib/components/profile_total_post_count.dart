@@ -12,7 +12,7 @@ class ProfileTotalPostCount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+      padding: const EdgeInsets.only(top: 20, bottom: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -21,9 +21,9 @@ class ProfileTotalPostCount extends StatelessWidget {
           ),
           Text(
             postCount.toString(),
-            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w900),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
           ),
-          Text('投稿数'),
+          const Text('投稿数'),
           const Divider(
             height: 32,
           ),

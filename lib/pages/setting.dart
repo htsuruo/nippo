@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:nippo/pages/signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:nippo/components/simple_list_container.dart';
 import 'package:nippo/components/simple_list_section.dart';
+import 'package:nippo/pages/signin.dart';
 
 class SettingPage extends StatelessWidget {
   static const String routeName = '/setting';
@@ -11,7 +11,7 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           '設定',
         ),
       ),
@@ -21,7 +21,7 @@ class SettingPage extends StatelessWidget {
             children: <Widget>[
               ...firstSection(),
               ...secondSection(),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
               SignOutBtn(),
@@ -34,25 +34,26 @@ class SettingPage extends StatelessWidget {
 }
 
 List<Widget> firstSection() {
-  return [
+  const children = [
     SimpleListSection(title: 'ログイン情報'),
-    const Divider(),
+    Divider(),
     SimpleListContainer(
       title: '認証プロバイダ',
       trailing: Text('Google'),
     ),
-    const Divider(indent: 16),
+    Divider(indent: 16),
     SimpleListContainer(
       title: '最終ログイン日時',
       trailing: Text('2020.04.30'),
     ),
-    const Divider(),
+    Divider(),
   ];
+  return children;
 }
 
 List<Widget> secondSection() {
-  return [
-    SimpleListSection(title: 'サービスについて'),
+  final children = [
+    const SimpleListSection(title: 'サービスについて'),
     const Divider(),
     SimpleListContainer(
       title: '利用規約',
@@ -72,12 +73,13 @@ List<Widget> secondSection() {
       onTap: () {},
     ),
     const Divider(indent: 16),
-    SimpleListContainer(
+    const SimpleListContainer(
       title: 'バージョン',
       trailing: Text('1.0.0'),
     ),
     const Divider(),
   ];
+  return children;
 }
 
 class SignOutBtn extends StatelessWidget {
@@ -98,10 +100,10 @@ class SignOutBtn extends StatelessWidget {
   }
 }
 
-void signOut(context) async {
+Future<void> signOut(BuildContext context) async {
   final _auth = FirebaseAuth.instance;
   await _auth.signOut();
   print('logout successful.');
-  Navigator.pushNamedAndRemoveUntil(
+  await Navigator.pushNamedAndRemoveUntil(
       context, SignInPage.routeName, (Route<dynamic> route) => false);
 }

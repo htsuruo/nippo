@@ -37,6 +37,9 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: any
 
+  # monoさんのカスタムlinter（https://github.com/dart-lang/pedantic + https://github.com/flutter/samples）
+  pedantic_mono: any
+
 
 flutter_icons:
   android: true

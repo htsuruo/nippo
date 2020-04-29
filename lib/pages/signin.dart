@@ -1,30 +1,32 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:nippo/constant.dart';
-import 'package:provider/provider.dart';
 import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/components/signin_sns_btn.dart';
-import 'package:nippo/stores/progress_hub_store.dart';
+import 'package:nippo/constant.dart';
 import 'package:nippo/pages/home.dart';
+import 'package:nippo/stores/progress_hub_store.dart';
+import 'package:provider/provider.dart';
 
+@immutable
+// ignore: must_be_immutable
 class SignInPage extends StatelessWidget {
-  static final String routeName = '/signin';
-  static final double snsLogoHeight = 24;
+  static const String routeName = '/signin';
+  static const double snsLogoHeight = 24;
 
   final _googleSignIn = GoogleSignIn();
   final _auth = FirebaseAuth.instance;
 
   Future<FirebaseUser> _handleGoogleSignIn() async {
-    GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-    AuthResult result = await _auth.signInWithCredential(
+    final googleUser = await _googleSignIn.signIn();
+    final googleAuth = await googleUser.authentication;
+    final result = await _auth.signInWithCredential(
         GoogleAuthProvider.getCredential(
             idToken: googleAuth.idToken, accessToken: googleAuth.accessToken));
-    FirebaseUser user = result.user;
-    print("sign in [ ${user.email} ], [ ${user.displayName} ]");
+    final user = result.user;
+    print('sign in [ ${user.email} ], [ ${user.displayName} ]');
     return user;
   }
 
@@ -48,12 +50,12 @@ class SignInPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Hero(
+              const Hero(
                 child: AppLogo(height: 160),
                 tag: 'appLogo',
               ),
-              SizedBox(
-                height: 80.0,
+              const SizedBox(
+                height: 80,
               ),
               SignInSnsBtn(
                 logoImg: googleLogo,
@@ -62,34 +64,35 @@ class SignInPage extends StatelessWidget {
                   try {
                     Provider.of<ProgressHUDStore>(context, listen: false)
                         .update(newState: true);
-                    FirebaseUser user = await _handleGoogleSignIn();
+                    final user = await _handleGoogleSignIn();
                     print(user);
-                    Navigator.pushReplacementNamed(context, HomePage.routeName,
+                    await Navigator.pushReplacementNamed(
+                        context, HomePage.routeName,
                         arguments: 'from google.');
-                  } catch (e) {
+                  } on Exception catch (e) {
                     print(e);
                   }
                   Provider.of<ProgressHUDStore>(context, listen: false)
                       .update(newState: false);
                 },
               ),
-              SizedBox(
-                height: 24.0,
+              const SizedBox(
+                height: 24,
               ),
               SignInSnsBtn(
                 logoImg: twitterLogo,
                 label: 'Sign in with Twitter',
                 callback: () async {
-                  var result = await showDialog(
+                  final result = await showDialog<AlertDialog>(
                       context: context,
                       barrierDismissible: false,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('確認'),
-                          content: Text('Twitterログインは現在ご利用いただけません'),
+                          title: const Text('確認'),
+                          content: const Text('Twitterログインは現在ご利用いただけません'),
                           actions: <Widget>[
                             FlatButton(
-                              child: Text('OK'),
+                              child: const Text('OK'),
                               onPressed: () {
                                 Navigator.of(context).pop(0);
                               },

@@ -12,10 +12,10 @@ class SimpleListContainer extends StatelessWidget {
       child: ListTile(
         title: Text(
           title,
-          style: TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 14),
         ),
         trailing: trailing,
-        onTap: onTap,
+        onTap: () => onTap,
       ),
     );
   }
