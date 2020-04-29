@@ -15,8 +15,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    setTimeout();
-    handleTimeout();
+//    setTimeout();
+    Future<void>.delayed(const Duration(seconds: 2))
+        .then((value) => handleTimeout());
   }
 
   @override
@@ -32,9 +33,10 @@ class _SplashPageState extends State<SplashPage> {
     );
   }
 
-  Future<void> setTimeout() async {
-    await Future<bool>.delayed(const Duration(seconds: 2));
-  }
+//  これだと意図した動作にならない.
+//  Future<void> setTimeout() async {
+//    await Future<bool>.delayed(const Duration(seconds: 2));
+//  }
 
   Future<void> handleTimeout() async {
     if (await Auth().isLogin()) {
