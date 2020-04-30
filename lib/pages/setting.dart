@@ -3,6 +3,8 @@ import 'package:nippo/components/simple_list_container.dart';
 import 'package:nippo/components/simple_list_section.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/services/auth.dart';
+import 'package:nippo/stores/user_data_store.dart';
+import 'package:provider/provider.dart';
 
 class SettingPage extends StatelessWidget {
   static const String routeName = '/setting';
@@ -19,7 +21,7 @@ class SettingPage extends StatelessWidget {
         child: Container(
           child: ListView(
             children: <Widget>[
-              ...firstSection(),
+              ...firstSection(context),
               ...secondSection(),
               const SizedBox(
                 height: 32,
@@ -33,20 +35,21 @@ class SettingPage extends StatelessWidget {
   }
 }
 
-List<Widget> firstSection() {
-  const children = [
-    SimpleListSection(title: 'ログイン情報'),
-    Divider(),
+List<Widget> firstSection(BuildContext context) {
+  final provider = Provider.of<UserDataStore>(context).user;
+  final children = [
+    const SimpleListSection(title: 'ログイン情報'),
+    const Divider(),
     SimpleListContainer(
       title: '認証プロバイダ',
-      trailing: Text('Google'),
+      trailing: Text(provider.providerData),
     ),
-    Divider(indent: 16),
+    const Divider(indent: 16),
     SimpleListContainer(
       title: '最終ログイン日時',
-      trailing: Text('2020.04.30'),
+      trailing: Text(provider.lastSignInTime.toString()),
     ),
-    Divider(),
+    const Divider(),
   ];
   return children;
 }

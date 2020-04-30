@@ -8,6 +8,7 @@ import 'package:nippo/pages/home.dart';
 import 'package:nippo/services/auth.dart';
 import 'package:nippo/stores/progress_hub_store.dart';
 import 'package:provider/provider.dart';
+import 'package:nippo/stores/user_data_store.dart';
 
 @immutable
 // ignore: must_be_immutable
@@ -31,6 +32,7 @@ class SignInPage extends StatelessWidget {
           .update(newState: true);
       final user = await Auth().signInWithGoogle();
       if (user != null) {
+        Provider.of<UserDataStore>(context, listen: false).setData(user: user);
         Navigator.pushReplacementNamed(context, HomePage.routeName,
             arguments: 'from google.');
       }

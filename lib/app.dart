@@ -5,14 +5,22 @@ import 'package:nippo/pages/signin.dart';
 import 'package:nippo/pages/splash.dart';
 import 'package:nippo/pages/user.dart';
 import 'package:nippo/stores/progress_hub_store.dart';
+import 'package:nippo/stores/user_data_store.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ProgressHUDStore>(
-      create: (context) => ProgressHUDStore(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ProgressHUDStore>(
+          create: (context) => ProgressHUDStore(),
+        ),
+        ChangeNotifierProvider<UserDataStore>(
+          create: (context) => UserDataStore(),
+        )
+      ],
       child: MaterialApp(
         title: 'NIPPO',
         theme: setTheme(context),

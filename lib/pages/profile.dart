@@ -4,6 +4,8 @@ import 'package:nippo/components/profile_circle_image.dart';
 import 'package:nippo/components/profile_total_post_count.dart';
 import 'package:nippo/pages/setting.dart';
 import 'package:nippo/services/auth.dart';
+import 'package:nippo/stores/user_data_store.dart';
+import 'package:provider/provider.dart';
 
 @immutable
 class ProfilePage extends StatelessWidget {
@@ -49,24 +51,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              FutureBuilder(
-                  future: Auth().currentUser(),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<User> snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done) {
-                      return const CircularProgressIndicator();
-                    }
-                    if (snapshot.hasError) {
-                      return Text(snapshot.error.toString());
-                    }
-                    if (snapshot.hasData) {
-                      return ProfileArea(
-                        user: snapshot.data,
-                      );
-                    } else {
-                      return const Text('データ存在しません');
-                    }
-                  }),
+              ProfileArea(user: Provider.of<UserDataStore>(context).user),
               const ProfileTotalPostCount(postCount: postCount)
             ],
           ),
