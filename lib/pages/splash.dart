@@ -41,7 +41,7 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> handleTimeout() async {
     if (await Auth().isLogin()) {
       // ホーム画面へ
-//      Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+      Navigator.of(context).pushReplacementNamed(HomePage.routeName);
       return;
     }
     Navigator.of(context).pushReplacementNamed(SignInPage.routeName);

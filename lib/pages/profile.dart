@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/components/profile_circle_image.dart';
 import 'package:nippo/components/profile_total_post_count.dart';
 import 'package:nippo/pages/setting.dart';
+import 'package:nippo/services/auth.dart';
 
 @immutable
 class ProfilePage extends StatelessWidget {
@@ -48,30 +49,58 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(8),
-                child: ProfileCircleImage(
-                  imageUrl: imageUrl,
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  name,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                child: Text(
-                  description,
-                ),
-              ),
+              FutureBuilder(
+                  future: Auth().currentUser(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<User> snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return const CircularProgressIndicator();
+                    }
+                    if (snapshot.hasError) {
+                      return Text(snapshot.error.toString());
+                    }
+                    if (snapshot.hasData) {
+                      return ProfileArea(
+                        user: snapshot.data,
+                      );
+                    } else {
+                      return const Text('データ存在しません');
+                    }
+                  }),
               const ProfileTotalPostCount(postCount: postCount)
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class ProfileArea extends StatelessWidget {
+  const ProfileArea({@required this.user});
+  final User user;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: ProfileCircleImage(
+            imageUrl: user.photoUrl,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text(
+            user.displayName,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Text('uid: ${user.uid}')),
+      ],
     );
   }
 }

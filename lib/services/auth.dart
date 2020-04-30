@@ -4,11 +4,20 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 // ModelのようなEntityのようなもの
 class User {
-  User({@required this.uid, this.email, this.photoUrl, this.displayName});
+  User({
+    @required this.uid,
+    this.email,
+    this.photoUrl,
+    this.displayName,
+    this.providerData,
+    this.lastSignInTime,
+  });
   final String uid;
   final String email;
   final String photoUrl;
   final String displayName;
+  final String providerData;
+  final DateTime lastSignInTime;
 }
 
 // Interfaceっぽいもの（DartにはInterface修飾子がない）
@@ -32,7 +41,17 @@ class Auth implements AuthBase {
       email: user.email,
       displayName: user.displayName,
       photoUrl: user.photoUrl,
+      lastSignInTime: user.metadata.lastSignInTime,
+      providerData: _getProviderData(user),
     );
+  }
+
+  String _getProviderData(FirebaseUser user) {
+    String providerId;
+    for (final profile in user.providerData) {
+      providerId = profile.providerId;
+    }
+    return providerId;
   }
 
   @override
