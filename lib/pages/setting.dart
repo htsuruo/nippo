@@ -49,10 +49,25 @@ List<Widget> firstSection(BuildContext context) {
       title: '最終ログイン日時',
       trailing: Text(provider.lastSignInTime.toString()),
     ),
+//    const Divider(indent: 16),
+//    googleSignInSettingTile(user: provider),
     const Divider(),
   ];
   return children;
 }
+
+//StatelessWidget googleSignInSettingTile({User user}) {
+//  if (user.providerData.contains('google')) {
+//    return const SimpleListContainer(
+//      title: 'Google連携',
+//      trailing: Text('連携を解除', style: TextStyle(color: Color(0xFFE84855))),
+//    );
+//  }
+//  return const SimpleListContainer(
+//    title: 'Google連携',
+//    trailing: Text('連携する', style: TextStyle(color: Color(0xFFE84855))),
+//  );
+//}
 
 List<Widget> secondSection() {
   final children = [

@@ -16,15 +16,15 @@ class UserPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('登録者'),
       ),
-      body: FutureBuilder<List<DocumentSnapshot>>(
-        future: getPosts(),
+      body: FutureBuilder<QuerySnapshot>(
+        future: firestore.collection('users').getDocuments(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           print('snapshot is $snapshot');
           if (snapshot.hasData) {
-            print('snapshot.data is ${snapshot.data}');
-            return UserListView();
+            final list = snapshot.data.documents as List<DocumentSnapshot>;
+            return UserListView(list: list);
           } else {
-            return const Text('データが存在しません');
+            return const Center(child: Text('データが存在しません'));
           }
         },
       ),
@@ -34,7 +34,7 @@ class UserPage extends StatelessWidget {
 
 Future<List<DocumentSnapshot>> getPosts() async {
   final firestore = Firestore.instance;
-  final docs = await firestore.collection('posts').getDocuments();
+  final docs = await firestore.collection('users').getDocuments();
   print('docs is $docs');
   print('docs is ${docs.documents}');
   print('length is ${docs.documents.length}');
@@ -42,6 +42,9 @@ Future<List<DocumentSnapshot>> getPosts() async {
 }
 
 class UserListView extends StatelessWidget {
+  UserListView({@required this.list});
+  List<DocumentSnapshot> list;
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -50,15 +53,15 @@ class UserListView extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: ListTile(
             title: Text(
-              '$index',
+              list[index]['description'].toString(),
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
             ),
-            subtitle: const Text('Google認証'),
+            subtitle: Text(list[index]['uid'].toString()),
             leading: Icon(Icons.people),
           ),
         );
       },
-      itemCount: 1,
+      itemCount: list.length,
     );
   }
 }
