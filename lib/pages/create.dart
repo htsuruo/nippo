@@ -33,22 +33,55 @@ class CreatePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'tenrefaf',
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'please sssss';
-                    }
-                    return null;
-                  },
-                ),
+                InputTitleForm(),
+                const SizedBox(height: 40),
+                InputDescriptionForm(),
               ],
             ),
           )),
         ),
       ),
+    );
+  }
+}
+
+class InputTitleForm extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      maxLines: 1,
+      autofocus: true,
+      decoration: const InputDecoration(
+        alignLabelWithHint: true,
+        hintText: '今日を一言でいうと？',
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'please sssss';
+        }
+        return null;
+      },
+    );
+  }
+}
+
+class InputDescriptionForm extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      maxLines: 10,
+      autofocus: true,
+      decoration: const InputDecoration(
+        border: InputBorder.none,
+        alignLabelWithHint: true,
+        hintText: '今日起きたたくさんの出来事を記録しましょう',
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'please sssss';
+        }
+        return null;
+      },
     );
   }
 }
