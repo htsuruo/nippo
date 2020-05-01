@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>743783425498-bo81l70g7mbg96s0mt16nff96eo3g2jv.apps.googleusercontent.com</string>
+	<string>554602506203-4uaf67asspnrfa5u5d6ikvpubesmr8h2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.743783425498-bo81l70g7mbg96s0mt16nff96eo3g2jv</string>
+	<string>com.googleusercontent.apps.554602506203-4uaf67asspnrfa5u5d6ikvpubesmr8h2</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDxh0F-5NGlHfYkmMPph0BapDoxDS1LIFc</string>
+	<string>AIzaSyALpm4NWeHM-PkaBkMaVuOWUJhRG0DHE-I</string>
 	<key>GCM_SENDER_ID</key>
-	<string>743783425498</string>
+	<string>554602506203</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.tsuruoka.com</string>
+	<string>com.tsuruoka.nippo</string>
 	<key>PROJECT_ID</key>
-	<string>nippo-91d05</string>
+	<string>nippo-e8922</string>
 	<key>STORAGE_BUCKET</key>
-	<string>nippo-91d05.appspot.com</string>
+	<string>nippo-e8922.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:743783425498:ios:5b93c3d1602b64207d4ce3</string>
+	<string>1:554602506203:ios:15f599a37d65e4ad3ee9fe</string>
 	<key>DATABASE_URL</key>
-	<string>https://nippo-91d05.firebaseio.com</string>
+	<string>https://nippo-e8922.firebaseio.com</string>
 </dict>
 </plist>
