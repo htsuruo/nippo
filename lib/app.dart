@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nippo/pages/create.dart';
 import 'package:nippo/pages/home.dart';
 import 'package:nippo/pages/setting.dart';
 import 'package:nippo/pages/signin.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
           SignInPage.routeName: (context) => SignInPage(),
           UserPage.routeName: (context) => UserPage(),
           SettingPage.routeName: (context) => SettingPage(),
+          CreatePage.routeName: (context) => CreatePage(),
         },
       ),
     );

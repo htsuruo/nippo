@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/components/content_cart.dart';
+import 'package:nippo/pages/create.dart';
 
 class HomeListPage extends StatelessWidget {
   final List<Tab> tabItems = <Tab>[
@@ -55,7 +56,29 @@ class HomeListPage extends StatelessWidget {
             return tabBarContainer(tabText: tab.text);
           }).toList(),
         )),
+        floatingActionButton: FAB(),
       ),
+    );
+  }
+}
+
+class FAB extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute<MaterialPageRoute>(
+              builder: (BuildContext context) {
+                return CreatePage();
+              },
+              fullscreenDialog: true,
+            ));
+      },
+      elevation: 0,
+      child: Icon(Icons.mode_edit),
+      backgroundColor: const Color(0xFFE84855),
     );
   }
 }
