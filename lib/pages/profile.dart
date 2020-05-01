@@ -14,27 +14,10 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const name = '鶴岡秀樹';
-    const description = 'Google認証';
-    const imageUrl =
-        'https://i.pinimg.com/originals/05/82/9e/05829e5e6c8e65aa31d7d9ade9e05503.jpg';
     const postCount = 42;
 
     return Scaffold(
-//        appBar: AppBar(
-//          backgroundColor: Colors.white,
-//          elevation: 0.0,
-//          actions: <Widget>[
-//            IconButton(
-//              color: Colors.black,
-//              icon: Icon(Icons.add_alert),
-//              tooltip: 'show hogehoge',
-//              onPressed: () {},
-//            )
-//          ],
-//        ),
       body: Container(
-//        color: Color(0xFF2D3047),
         child: SafeArea(
           child: Column(
             children: <Widget>[
