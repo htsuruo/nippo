@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nippo/stores/user_data_store.dart';
+import 'package:provider/provider.dart';
 
 class CreatePage extends StatelessWidget {
   static const String routeName = '/create';
@@ -17,6 +20,7 @@ class CreatePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             FlatButton(
+              padding: const EdgeInsets.all(0),
               child: const Text(
                 'キャンセル',
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -64,7 +68,7 @@ class InputTitleForm extends StatelessWidget {
       cursorColor: const Color(0xFFE84855),
       style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: .5),
       decoration: const InputDecoration(
-        icon: Icon(Icons.message, color: Color(0xFFE84855)),
+//        icon: Icon(Icons.message, color: Color(0xFFE84855)),
         hintText: '今日を一言で表現すると？',
         hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
         focusedBorder: UnderlineInputBorder(
@@ -125,7 +129,7 @@ class SubmitBtn extends StatelessWidget {
         if (formKey.currentState.validate()) {
           print(
               'input: ${controller['title'].text}, ${controller['description'].text}');
-          Navigator.pop(context);
+          submit(controller, context);
         }
       },
       child: Padding(
@@ -138,4 +142,16 @@ class SubmitBtn extends StatelessWidget {
       ),
     );
   }
+}
+
+void submit(
+    Map<String, TextEditingController> controller, BuildContext context) {
+  final Post = {
+    'title': controller['title'].text,
+    'description': controller['description'].text,
+    'uid': Provider.of<UserDataStore>(context, listen: false).user.uid,
+  };
+  final firestore = Firestore.instance;
+  firestore.collection('posts').add(Post);
+  Navigator.pop(context);
 }
