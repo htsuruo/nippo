@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 class CreatePage extends StatelessWidget {
   static const String routeName = '/create';
   final _formKey = GlobalKey<FormState>();
+  final _formController = {
+    'title': TextEditingController(),
+    'description': TextEditingController(),
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class CreatePage extends StatelessWidget {
               ),
               onPressed: () => Navigator.pop(context),
             ),
-            SubmitBtn(formKey: _formKey),
+            SubmitBtn(formKey: _formKey, controller: _formController),
           ],
         ),
         automaticallyImplyLeading: false,
@@ -34,9 +38,10 @@ class CreatePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                InputTitleForm(),
+                InputTitleForm(controller: _formController['title']),
                 const SizedBox(height: 16),
-                InputDescriptionForm(),
+                InputDescriptionForm(
+                    controller: _formController['description']),
               ],
             ),
           )),
@@ -47,9 +52,13 @@ class CreatePage extends StatelessWidget {
 }
 
 class InputTitleForm extends StatelessWidget {
+  InputTitleForm({this.controller});
+  TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       maxLines: 1,
       autofocus: true,
       cursorColor: const Color(0xFFE84855),
@@ -73,9 +82,13 @@ class InputTitleForm extends StatelessWidget {
 }
 
 class InputDescriptionForm extends StatelessWidget {
+  InputDescriptionForm({this.controller});
+  TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       style: const TextStyle(fontWeight: FontWeight.bold),
       maxLines: 8,
       autofocus: true,
@@ -98,9 +111,10 @@ class InputDescriptionForm extends StatelessWidget {
 }
 
 class SubmitBtn extends StatelessWidget {
-  const SubmitBtn({@required this.formKey});
+  const SubmitBtn({@required this.formKey, this.controller});
 
   final GlobalKey<FormState> formKey;
+  final Map<String, TextEditingController> controller;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +123,8 @@ class SubmitBtn extends StatelessWidget {
       color: const Color(0xFFE84855),
       onPressed: () {
         if (formKey.currentState.validate()) {
-          print('success');
+          print(
+              'input: ${controller['title'].text}, ${controller['description'].text}');
           Navigator.pop(context);
         }
       },
