@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/services/auth.dart';
+import 'package:nippo/models/user.dart';
 
 class UserDataState with ChangeNotifier {
   User _user;

@@ -1,24 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:nippo/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-// ModelのようなEntityのようなもの
-class User {
-  User({
-    @required this.uid,
-    this.email,
-    this.photoUrl,
-    this.displayName,
-    this.providerData,
-    this.lastSignInTime,
-  });
-  final String uid;
-  final String email;
-  final String photoUrl;
-  final String displayName;
-  final String providerData;
-  final DateTime lastSignInTime;
-}
 
 // Interfaceっぽいもの（DartにはInterface修飾子がない）
 abstract class AuthBase {
