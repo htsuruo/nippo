@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ProgressHUDStore with ChangeNotifier {
+class ProgressHUDState with ChangeNotifier {
   bool _saving = false;
   bool get saving => _saving;
 

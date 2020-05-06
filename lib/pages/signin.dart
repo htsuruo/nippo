@@ -6,9 +6,9 @@ import 'package:nippo/components/signin_sns_btn.dart';
 import 'package:nippo/constant.dart';
 import 'package:nippo/pages/home.dart';
 import 'package:nippo/services/auth.dart';
-import 'package:nippo/stores/progress_hub_store.dart';
+import 'package:nippo/states/progress_hub_state.dart';
 import 'package:provider/provider.dart';
-import 'package:nippo/stores/user_data_store.dart';
+import 'package:nippo/states/user_data_state.dart';
 
 @immutable
 // ignore: must_be_immutable
@@ -33,17 +33,17 @@ class SignInPage extends StatelessWidget {
 
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
-      Provider.of<ProgressHUDStore>(context, listen: false)
+      Provider.of<ProgressHUDState>(context, listen: false)
           .update(newState: true);
       final user = await Auth().signInWithGoogle();
       if (user != null) {
-        Provider.of<UserDataStore>(context, listen: false).setData(user: user);
+        Provider.of<UserDataState>(context, listen: false).setData(user: user);
         Navigator.pushReplacementNamed(context, HomePage.routeName);
       }
     } on Exception catch (e) {
       print(e);
     }
-    Provider.of<ProgressHUDStore>(context, listen: false)
+    Provider.of<ProgressHUDState>(context, listen: false)
         .update(newState: false);
   }
 
@@ -56,7 +56,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ModalProgressHUD(
-      inAsyncCall: Provider.of<ProgressHUDStore>(context).saving,
+      inAsyncCall: Provider.of<ProgressHUDState>(context).saving,
       child: SafeArea(
         child: Center(
           child: Column(

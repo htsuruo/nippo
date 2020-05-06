@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/pages/create.dart';
 import 'package:nippo/pages/home_list.dart';
 import 'package:nippo/pages/profile.dart';
 import 'package:nippo/pages/user.dart';
-import 'package:nippo/stores/bottom_nav_bar_store.dart';
+import 'package:nippo/states/bottom_nav_bar_store.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,8 +12,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context).settings.arguments;
     print(args);
-    return ChangeNotifierProvider<BottomNavBarStore>(
-      create: (context) => BottomNavBarStore(),
+    return ChangeNotifierProvider<BottomNavBarState>(
+      create: (context) => BottomNavBarState(),
       child: Scaffold(
         body: PageView(),
         bottomNavigationBar: BottomNavBar(),
@@ -33,7 +32,7 @@ class PageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabIns = Provider.of<BottomNavBarStore>(context);
+    final tabIns = Provider.of<BottomNavBarState>(context);
     return Container(
       child: _currentPage(page: tabIns.currentIndex),
     );
@@ -54,7 +53,7 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<BottomNavBarStore>(context);
+    final provider = Provider.of<BottomNavBarState>(context);
     return BottomNavigationBar(
       onTap: (index) => provider.change(index: index),
       items: bottomItems(),

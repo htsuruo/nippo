@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/services/auth.dart';
 
-class UserDataStore with ChangeNotifier {
+class UserDataState with ChangeNotifier {
   User _user;
   User get user => _user;
 

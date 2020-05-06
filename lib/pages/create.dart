@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:nippo/stores/user_data_store.dart';
+import 'package:nippo/states/user_data_state.dart';
 import 'package:provider/provider.dart';
 
 class CreatePage extends StatelessWidget {
@@ -149,7 +149,7 @@ void submit(
   final Post = {
     'title': controller['title'].text,
     'description': controller['description'].text,
-    'uid': Provider.of<UserDataStore>(context, listen: false).user.uid,
+    'uid': Provider.of<UserDataState>(context, listen: false).user.uid,
   };
   final firestore = Firestore.instance;
   firestore.collection('posts').add(Post);

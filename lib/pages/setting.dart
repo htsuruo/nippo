@@ -3,7 +3,7 @@ import 'package:nippo/components/simple_list_container.dart';
 import 'package:nippo/components/simple_list_section.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/services/auth.dart';
-import 'package:nippo/stores/user_data_store.dart';
+import 'package:nippo/states/user_data_state.dart';
 import 'package:provider/provider.dart';
 
 class SettingPage extends StatelessWidget {
@@ -36,7 +36,7 @@ class SettingPage extends StatelessWidget {
 }
 
 List<Widget> firstSection(BuildContext context) {
-  final provider = Provider.of<UserDataStore>(context).user;
+  final provider = Provider.of<UserDataState>(context).user;
   final children = [
     const SimpleListSection(title: 'ログイン情報'),
     const Divider(),

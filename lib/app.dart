@@ -5,8 +5,8 @@ import 'package:nippo/pages/setting.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/pages/splash.dart';
 import 'package:nippo/pages/user.dart';
-import 'package:nippo/stores/progress_hub_store.dart';
-import 'package:nippo/stores/user_data_store.dart';
+import 'package:nippo/states/progress_hub_state.dart';
+import 'package:nippo/states/user_data_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ProgressHUDStore>(
-          create: (context) => ProgressHUDStore(),
+        ChangeNotifierProvider<ProgressHUDState>(
+          create: (context) => ProgressHUDState(),
         ),
-        ChangeNotifierProvider<UserDataStore>(
-          create: (context) => UserDataStore(),
+        ChangeNotifierProvider<UserDataState>(
+          create: (context) => UserDataState(),
         )
       ],
       child: MaterialApp(
