@@ -62,6 +62,7 @@ flutter:
     - assets/img/ic_main_logo.png
     - assets/img/ic_logo_google.png
     - assets/img/ic_logo_twitter.png
+    - assets/img/ic_logo_mail.png
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

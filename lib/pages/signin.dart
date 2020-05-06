@@ -16,6 +16,11 @@ class SignInPage extends StatelessWidget {
   static const String routeName = '/signin';
   static const double snsLogoHeight = 24;
 
+  Image mailLogo = Image(
+    image: ExactAssetImage(AssetPath.MAIL_LOGO_PATH),
+    height: snsLogoHeight,
+  );
+
   Image googleLogo = Image(
     image: ExactAssetImage(AssetPath.GOOGLE_LOGO_PATH),
     height: snsLogoHeight,
@@ -33,8 +38,7 @@ class SignInPage extends StatelessWidget {
       final user = await Auth().signInWithGoogle();
       if (user != null) {
         Provider.of<UserDataStore>(context, listen: false).setData(user: user);
-        Navigator.pushReplacementNamed(context, HomePage.routeName,
-            arguments: 'from google.');
+        Navigator.pushReplacementNamed(context, HomePage.routeName);
       }
     } on Exception catch (e) {
       print(e);
@@ -76,6 +80,14 @@ class SignInPage extends StatelessWidget {
               SignInSnsBtn(
                 logoImg: twitterLogo,
                 label: 'Sign in with Twitter',
+                callback: () => signInWithTwitter(context),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              SignInSnsBtn(
+                logoImg: mailLogo,
+                label: 'Sign in with Email',
                 callback: () => signInWithTwitter(context),
               ),
             ],

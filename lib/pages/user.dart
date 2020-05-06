@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:nippo/services/auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 @immutable
 class UserPage extends StatelessWidget {
@@ -30,15 +28,6 @@ class UserPage extends StatelessWidget {
       ),
     );
   }
-}
-
-Future<List<DocumentSnapshot>> getPosts() async {
-  final firestore = Firestore.instance;
-  final docs = await firestore.collection('users').getDocuments();
-  print('docs is $docs');
-  print('docs is ${docs.documents}');
-  print('length is ${docs.documents.length}');
-  return docs.documents;
 }
 
 class UserListView extends StatelessWidget {
