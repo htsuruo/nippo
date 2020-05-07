@@ -1,8 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nippo/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-// Interfaceっぽいもの（DartにはInterface修飾子がない）
 abstract class AuthBase {
   Future<bool> isLogin();
   Future<User> currentUser();
@@ -23,7 +23,7 @@ class Auth implements AuthBase {
       email: user.email,
       displayName: user.displayName,
       photoUrl: user.photoUrl,
-      lastSignInTime: user.metadata.lastSignInTime,
+      lastSignInTime: user.metadata.lastSignInTime.toString(),
       providerData: _getProviderData(user),
     );
   }

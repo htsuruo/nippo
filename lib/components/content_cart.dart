@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nippo/models/post.dart';
 
 class ContentCard extends StatelessWidget {
+  ContentCard({this.post});
+  Post post;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -9,24 +13,27 @@ class ContentCard extends StatelessWidget {
           border: Border.all(width: 1, color: Colors.black12),
           borderRadius: const BorderRadius.all(Radius.circular(8))),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              child: CircleAvatar(
-                radius: 24,
-                backgroundColor: Colors.lightBlueAccent,
-              )),
           Expanded(
+            child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                child: CircleAvatar(
+                  radius: 24,
+                  backgroundColor: Colors.lightBlueAccent,
+                )),
+          ),
+          Expanded(
+            flex: 4,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 16, left: 4),
                     child: Text(
-                      'タイトルタイトルタイトルタイトルタイトル',
+                      post.title,
                       softWrap: true,
                       maxLines: 1,
                       style:
@@ -38,25 +45,25 @@ class ContentCard extends StatelessWidget {
                   style: TextStyle(color: Colors.black54, fontSize: 14),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
-                  child: const Padding(
-                    padding: EdgeInsets.only(bottom: 16, left: 4),
-                    child: Text(
-                        '関係者によりますと、東京都内で２７日、新たに３９人が新型コロナウイルスに感染していたことが分かりました。'),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 16, left: 4),
+                    child: Text(post.description),
                   ),
                 )
               ],
-              mainAxisSize: MainAxisSize.min,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: IconButton(
-              icon: Icon(
-                Icons.favorite_border,
-                color: const Color(0xFFE84855),
-                size: 28,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: IconButton(
+                icon: Icon(
+                  Icons.favorite_border,
+                  color: const Color(0xFFE84855),
+                  size: 28,
+                ),
+                onPressed: () {},
               ),
-              onPressed: () {},
             ),
           ),
         ],

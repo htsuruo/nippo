@@ -6,10 +6,11 @@ class UserState {
   User user;
 }
 
-class UserController extends StateNotifier<UserState> {
+class UserController extends StateNotifier<UserState> with LocatorMixin {
   UserController() : super(UserState(user: null));
 
-  void update({User user}) {
+  void updateData({User user}) {
+    print('UserController -> updateData');
     state = UserState(user: user);
   }
 }

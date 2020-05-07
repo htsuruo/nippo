@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/components/content_cart.dart';
 import 'package:nippo/pages/create.dart';
+import 'package:nippo/models/post.dart';
 
 class HomeListPage extends StatelessWidget {
   final List<Tab> tabItems = <Tab>[
@@ -13,24 +15,45 @@ class HomeListPage extends StatelessWidget {
     ),
   ];
 
+  final Firestore firestore = Firestore.instance;
+
   Widget tabBarContainer({String tabText}) {
     if (tabText.toLowerCase().contains(tabItems[0].text)) {
-      return ListView.builder(
-        itemBuilder: (_, index) {
-          return ContentCard();
-        },
-        itemCount: 10,
-      );
+      return FutureBuilder<QuerySnapshot>(
+          future: firestore.collection('posts').getDocuments(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) {
+              return Container();
+            }
+            if (snapshot.hasError) {
+              return const Center(child: Text('エラーです'));
+            }
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return const Center(child: Text('データを読込中..'));
+              case ConnectionState.done:
+                return ListView.builder(
+                    itemCount: snapshot.data.documents.length as int,
+                    itemBuilder: (context, index) {
+                      final dynamic data = snapshot.data.documents[index];
+                      final post = Post(
+                        title: data['title'].toString(),
+                        description: data['description'].toString(),
+                        uid: 'xxxxx',
+                      );
+                      return ContentCard(post: post);
+                    });
+              default:
+                return const Center(child: Text('hgohoge'));
+            }
+          });
     }
     if (tabText.toLowerCase().contains(tabItems[1].text)) {
-      return ListView.builder(
-        itemBuilder: (_, index) {
-          return ContentCard();
-        },
-        itemCount: 3,
-      );
+      return Text('ｈのんげ');
+//      return ListView.builder(itemBuilder: (BuildContext context, int index) {
+//        return ContentCard(title: '$index', description: 'hoghge');
+//      });
     }
-    return Container();
   }
 
   @override

@@ -7,7 +7,7 @@ import 'package:nippo/pages/signin.dart';
 import 'package:nippo/pages/splash.dart';
 import 'package:nippo/pages/user.dart';
 import 'package:nippo/states/progress_hub_state.dart';
-import 'package:nippo/states/user.dart';
+import 'package:nippo/states/user_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
