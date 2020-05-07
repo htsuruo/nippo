@@ -3,7 +3,7 @@ import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/services/auth.dart';
 import 'package:nippo/pages/home.dart';
 import 'package:nippo/pages/signin.dart';
-import 'package:nippo/states/user_data_state.dart';
+import 'package:nippo/states/user.dart';
 import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
@@ -42,8 +42,8 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> handleTimeout() async {
     if (await Auth().isLogin()) {
-      Provider.of<UserDataState>(context, listen: false)
-          .setData(user: await Auth().currentUser());
+      Provider.of<UserController>(context, listen: false)
+          .update(user: await Auth().currentUser());
       // ホーム画面へ
       Navigator.of(context).pushReplacementNamed(HomePage.routeName);
       return;

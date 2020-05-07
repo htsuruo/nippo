@@ -4,7 +4,7 @@ import 'package:nippo/components/profile_circle_image.dart';
 import 'package:nippo/components/profile_total_post_count.dart';
 import 'package:nippo/pages/setting.dart';
 import 'package:nippo/models/user.dart';
-import 'package:nippo/states/user_data_state.dart';
+import 'package:nippo/states/user.dart';
 import 'package:provider/provider.dart';
 
 @immutable
@@ -34,7 +34,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              ProfileArea(user: Provider.of<UserDataState>(context).user),
+              ProfileArea(user: Provider.of<UserState>(context).user),
               const ProfileTotalPostCount(postCount: postCount)
             ],
           ),
