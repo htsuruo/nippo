@@ -1,16 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nippo/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-abstract class AuthBase {
-  Future<bool> isLogin();
-  Future<User> currentUser();
-  Future<User> signInWithGoogle();
-  Future<void> signOut();
-}
-
-class Auth implements AuthBase {
+class Auth {
   final _firebaseAuth = FirebaseAuth.instance;
 
   User _getUserData(FirebaseUser user) {
@@ -36,24 +28,18 @@ class Auth implements AuthBase {
     return providerId;
   }
 
-  @override
   Future<bool> isLogin() async {
-    // TODO(tsuruo): implement isLogin
     final user = await currentUser();
     print('current user is [ ${user != null || false} ]');
     return user != null || false;
   }
 
-  @override
   Future<User> currentUser() async {
-    // TODO(tsuruo): implement currentUser
     final user = await _firebaseAuth.currentUser();
     return _getUserData(user);
   }
 
-  @override
   Future<User> signInWithGoogle() async {
-    // TODO(tsuruo): implement signInWithGoogle
     final _googleSignIn = GoogleSignIn();
     final googleUser = await _googleSignIn.signIn();
     if (googleUser == null) {
@@ -69,9 +55,7 @@ class Auth implements AuthBase {
     return _getUserData(result.user);
   }
 
-  @override
   Future<void> signOut() async {
-    // TODO(tsuruo): implement signOut
     await _firebaseAuth.signOut();
     print('signout success.');
   }

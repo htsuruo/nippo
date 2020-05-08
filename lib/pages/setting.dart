@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/components/simple_list_container.dart';
 import 'package:nippo/components/simple_list_section.dart';
 import 'package:nippo/pages/signin.dart';
-import 'package:nippo/services/auth.dart';
+import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
 

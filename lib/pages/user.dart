@@ -54,9 +54,8 @@ class UserListView extends StatelessWidget {
               users[index].displayName,
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
             ),
-            subtitle: Text(users[index].email),
+            subtitle: Text('最終ログイン: ${users[index].lastSignInTime}'),
             leading: CircleAvatar(
-              backgroundColor: Colors.black,
               child: Image.network(users[index].photoUrl),
             ),
           ),

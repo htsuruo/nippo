@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/pages/home_list.dart';
 import 'package:nippo/pages/profile.dart';
 import 'package:nippo/pages/user.dart';
-import 'package:nippo/states/bottom_nav_bar_store.dart';
+import 'package:nippo/states/bottom_nav_bar_state.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,8 +17,6 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         body: PageView(),
         bottomNavigationBar: BottomNavBar(),
-//        floatingActionButton: FAB(),
-//        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }
