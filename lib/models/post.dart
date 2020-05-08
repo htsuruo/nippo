@@ -7,8 +7,25 @@ class Post {
     this.date,
     @required this.uid,
   });
-  final String title;
-  final String description;
-  final String date;
-  final String uid;
+
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      title: json['title'].toString(),
+      description: json['description'].toString(),
+      date: json['date'].toString(),
+      uid: json['createUser'].toString(),
+    );
+  }
+
+  String title;
+  String description;
+  String date;
+  String uid;
+
+  Map<String, String> toJson() => {
+        'title': title,
+        'description': description,
+        'date': date,
+        'createUser': uid,
+      };
 }

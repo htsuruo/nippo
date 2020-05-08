@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nippo/models/post.dart';
+import 'package:nippo/repositories/post_repository.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
 
@@ -144,14 +145,12 @@ class SubmitBtn extends StatelessWidget {
   }
 }
 
-void submit(
-    Map<String, TextEditingController> controller, BuildContext context) {
-  final Post = {
-    'title': controller['title'].text,
-    'description': controller['description'].text,
-    'uid': Provider.of<UserState>(context, listen: false).user.uid,
-  };
-  final firestore = Firestore.instance;
-  firestore.collection('posts').add(Post);
+Future<void> submit(
+    Map<String, TextEditingController> controller, BuildContext context) async {
+  final post = Post(
+      title: controller['title'].text,
+      description: controller['description'].text,
+      uid: Provider.of<UserState>(context, listen: false).user.uid);
+  await PostRepository().createPost(post: post);
   Navigator.pop(context);
 }

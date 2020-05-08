@@ -4,6 +4,7 @@ import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/components/content_cart.dart';
 import 'package:nippo/pages/create.dart';
 import 'package:nippo/models/post.dart';
+import 'package:nippo/repositories/post_repository.dart';
 
 class HomeListPage extends StatelessWidget {
   final List<Tab> tabItems = <Tab>[
@@ -19,8 +20,8 @@ class HomeListPage extends StatelessWidget {
 
   Widget tabBarContainer({String tabText}) {
     if (tabText.toLowerCase().contains(tabItems[0].text)) {
-      return FutureBuilder<QuerySnapshot>(
-          future: firestore.collection('posts').getDocuments(),
+      return FutureBuilder<List<Post>>(
+          future: PostRepository().fetchAll(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
               return Container();
@@ -32,14 +33,16 @@ class HomeListPage extends StatelessWidget {
               case ConnectionState.waiting:
                 return const Center(child: Text('データを読込中..'));
               case ConnectionState.done:
+                final list = snapshot.data as List<Post>;
                 return ListView.builder(
-                    itemCount: snapshot.data.documents.length as int,
+                    itemCount: list.length,
                     itemBuilder: (context, index) {
-                      final dynamic data = snapshot.data.documents[index];
+                      final data = list[index];
                       final post = Post(
-                        title: data['title'].toString(),
-                        description: data['description'].toString(),
-                        uid: 'xxxxx',
+                        title: data.title,
+                        description: data.description,
+                        date: data.date,
+                        uid: data.uid,
                       );
                       return ContentCard(post: post);
                     });

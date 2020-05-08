@@ -1,0 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nippo/models/post.dart';
+
+class PostRepository {
+  final Firestore fireStore = Firestore.instance;
+  static const String collection = 'posts';
+
+  Future<List<Post>> fetchAll() async {
+    print('PostRepository -> fetchAll');
+    final posts = await fireStore.collection(collection).getDocuments();
+    final postList = <Post>[];
+    for (final post in posts.documents) {
+      final p = Post.fromJson(post.data);
+      postList.add(p);
+    }
+    print(postList);
+    return postList;
+  }
+
+  Future<void> createPost({Post post}) async {
+    print('PostRepository -> createPost');
+    final map = post.toJson();
+    await fireStore.collection(collection).document().setData(map);
+  }
+}

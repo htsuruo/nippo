@@ -4,6 +4,7 @@ import 'package:nippo/models/user.dart';
 
 class UserRepository {
   final Firestore fireStore = Firestore.instance;
+  static const String collection = 'users';
 
   Future<void> updateUser({@required User user}) async {
     print('UserRepository -> updateUser');
@@ -14,18 +15,18 @@ class UserRepository {
     }
     currentUser.lastSignInTime = user.lastSignInTime;
     final map = currentUser.toJson();
-    await fireStore.collection('users').document(user.uid).setData(map);
+    await fireStore.collection(collection).document(user.uid).setData(map);
   }
 
   Future<void> createUser({@required User user}) async {
     print('UserRepository -> createUser');
     final map = user.toJson();
-    await fireStore.collection('users').document(user.uid).setData(map);
+    await fireStore.collection(collection).document(user.uid).setData(map);
   }
 
   Future<List<User>> fetchAll() async {
     print('UserRepository -> fetchUserAll');
-    final docs = await fireStore.collection('users').getDocuments();
+    final docs = await fireStore.collection(collection).getDocuments();
     final users = <User>[];
     for (final doc in docs.documents) {
       final user = User.fromJson(doc.data);
@@ -36,7 +37,7 @@ class UserRepository {
 
   Future<User> fetchOne({@required String uid}) async {
     print('UserRepository -> fetchOne');
-    final doc = await fireStore.collection('users').document(uid).get();
+    final doc = await fireStore.collection(collection).document(uid).get();
     return doc.exists ? User.fromJson(doc.data) : null;
   }
 }
