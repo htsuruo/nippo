@@ -153,6 +153,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.5"
+  flutter_overboard:
+    dependency: "direct main"
+    description:
+      name: flutter_overboard
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.5"
   flutter_state_notifier:
     dependency: "direct main"
     description:

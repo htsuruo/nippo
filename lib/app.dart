@@ -5,6 +5,7 @@ import 'package:nippo/pages/home.dart';
 import 'package:nippo/pages/setting.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/pages/splash.dart';
+import 'package:nippo/pages/tutorial.dart';
 import 'package:nippo/pages/user.dart';
 import 'package:nippo/pages/user_detail.dart';
 import 'package:nippo/states/progress_hub_state.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         initialRoute: SplashPage.routeName,
         routes: <String, WidgetBuilder>{
           SplashPage.routeName: (context) => SplashPage(),
+          TutorialPage.routeName: (context) => TutorialPage(),
           HomePage.routeName: (context) => HomePage(),
           SignInPage.routeName: (context) => SignInPage(),
           UserPage.routeName: (context) => UserPage(),

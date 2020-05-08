@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/app_logo.dart';
+import 'package:nippo/pages/tutorial.dart';
 import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/pages/home.dart';
@@ -52,6 +53,7 @@ class _SplashPageState extends State<SplashPage> {
         return;
       }
     }
+//    Navigator.of(context).pushReplacementNamed(TutorialPage.routeName);
     Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
   }
 }

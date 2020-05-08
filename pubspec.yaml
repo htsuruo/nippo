@@ -34,6 +34,7 @@ dependencies:
   state_notifier: ^0.4.0
   flutter_state_notifier: ^0.4.2
   intl: ^0.16.1
+  flutter_overboard: ^1.1.5
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ flutter:
     - assets/img/ic_logo_google.png
     - assets/img/ic_logo_twitter.png
     - assets/img/ic_logo_mail.png
+    - assets/img/ic_tutorial_line.png
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
