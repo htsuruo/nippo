@@ -41,7 +41,7 @@ class SignInPage extends StatelessWidget {
           .update(newState: true);
       final user = await Auth().signInWithGoogle();
       if (user != null) {
-        await UserRepository().createUser(user: user);
+        await UserRepository().updateUser(user: user);
         Provider.of<UserController>(context, listen: false)
             .updateData(user: user);
         Navigator.pushReplacementNamed(context, HomePage.routeName);

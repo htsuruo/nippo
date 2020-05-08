@@ -15,7 +15,7 @@ class UserPage extends StatelessWidget {
         title: const Text('登録者'),
       ),
       body: FutureBuilder<List<User>>(
-        future: UserRepository().fetchUserAll(),
+        future: UserRepository().fetchAll(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           print('snapshot is $snapshot');
           if (!snapshot.hasData) {

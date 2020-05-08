@@ -23,17 +23,18 @@ class User {
   }
 
 //  in sns login, get fire base auth.
-  final String uid;
-  final String email;
-  final String photoUrl;
-  final String displayName;
-  final String providerData;
-  final String lastSignInTime;
+  String uid;
+  String email;
+  String photoUrl;
+  String displayName;
+  String providerData;
+  String lastSignInTime;
 
 //  custom data.
-  final String description;
+  String description;
 
   Map<String, String> toJson() => {
+        'uid': uid,
         'email': email,
         'photoUrl': photoUrl,
         'displayName': displayName,

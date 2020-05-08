@@ -16,11 +16,11 @@ class ContentCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
+            flex: 1,
             child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                 child: CircleAvatar(
-                  radius: 24,
                   backgroundColor: Colors.lightBlueAccent,
                 )),
           ),
@@ -60,7 +60,7 @@ class ContentCard extends StatelessWidget {
                 icon: Icon(
                   Icons.favorite_border,
                   color: const Color(0xFFE84855),
-                  size: 28,
+                  size: 26,
                 ),
                 onPressed: () {},
               ),

@@ -1,42 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:nippo/models/user.dart';
 
 class UserRepository {
-  Future<void> createUser({User user}) async {
-    print('UserRepository -> createUser');
-    final fireStore = Firestore.instance;
-    final model = User(
-      uid: user.uid,
-      email: user.email,
-      photoUrl: user.photoUrl,
-      displayName: user.displayName,
-      providerData: user.providerData,
-      lastSignInTime: user.lastSignInTime,
-    );
-    final map = model.toJson();
-    await fireStore.collection('users').document(user.uid).setData(map);
-  }
+  final Firestore fireStore = Firestore.instance;
 
-  Future<void> updateUser({User user}) async {
+  Future<void> updateUser({@required User user}) async {
     print('UserRepository -> updateUser');
-    final fireStore = Firestore.instance;
-    final snap = await fireStore.collection('users').document(user.uid).get();
-    print(snap.data);
-    final model = User(
-      uid: user.uid,
-      email: user.email,
-      photoUrl: user.photoUrl,
-      displayName: user.displayName,
-      providerData: user.providerData,
-      lastSignInTime: user.lastSignInTime,
-    );
-    final map = model.toJson();
+    final currentUser = await fetchOne(uid: user.uid);
+    if (currentUser == null) {
+      await createUser(user: user);
+      return;
+    }
+    currentUser.lastSignInTime = user.lastSignInTime;
+    final map = currentUser.toJson();
     await fireStore.collection('users').document(user.uid).setData(map);
   }
 
-  Future<List<User>> fetchUserAll() async {
+  Future<void> createUser({@required User user}) async {
+    print('UserRepository -> createUser');
+    final map = user.toJson();
+    await fireStore.collection('users').document(user.uid).setData(map);
+  }
+
+  Future<List<User>> fetchAll() async {
     print('UserRepository -> fetchUserAll');
-    final fireStore = Firestore.instance;
     final docs = await fireStore.collection('users').getDocuments();
     final users = <User>[];
     for (final doc in docs.documents) {
@@ -44,5 +32,11 @@ class UserRepository {
       users.add(user);
     }
     return users;
+  }
+
+  Future<User> fetchOne({@required String uid}) async {
+    print('UserRepository -> fetchOne');
+    final doc = await fireStore.collection('users').document(uid).get();
+    return doc.exists ? User.fromJson(doc.data) : null;
   }
 }

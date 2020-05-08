@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/app_logo.dart';
+import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/services/auth.dart';
 import 'package:nippo/pages/home.dart';
 import 'package:nippo/pages/signin.dart';
@@ -42,8 +43,14 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> handleTimeout() async {
     if (await Auth().isLogin()) {
-      Navigator.of(context).pushReplacementNamed(HomePage.routeName);
-      return;
+      final authUser = await Auth().currentUser();
+      final currentUser = await UserRepository().fetchOne(uid: authUser.uid);
+      if (currentUser != null) {
+        Provider.of<UserController>(context, listen: false)
+            .updateData(user: currentUser);
+        Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+        return;
+      }
     }
     Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
   }
