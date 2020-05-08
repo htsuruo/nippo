@@ -59,10 +59,10 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: ModalProgressHUD(
+    return ModalProgressHUD(
       inAsyncCall: Provider.of<ProgressHUDState>(context).saving,
-      child: SafeArea(
+      child: Scaffold(
+          body: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +98,7 @@ class SignInPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

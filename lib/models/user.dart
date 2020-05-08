@@ -33,7 +33,7 @@ class User {
 //  custom data.
   String description;
 
-  Map<String, String> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'uid': uid,
         'email': email,
         'photoUrl': photoUrl,

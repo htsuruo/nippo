@@ -1,9 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/models/post.dart';
 import 'package:nippo/repositories/post_repository.dart';
+import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class CreatePage extends StatelessWidget {
   static const String routeName = '/create';
@@ -15,41 +18,44 @@ class CreatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            FlatButton(
-              padding: const EdgeInsets.all(0),
-              child: const Text(
-                'キャンセル',
-                style: TextStyle(fontWeight: FontWeight.bold),
+    return ModalProgressHUD(
+      inAsyncCall: Provider.of<ProgressHUDState>(context).saving,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              FlatButton(
+                padding: const EdgeInsets.all(0),
+                child: const Text(
+                  'キャンセル',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                onPressed: () => Navigator.pop(context),
               ),
-              onPressed: () => Navigator.pop(context),
-            ),
-            SubmitBtn(formKey: _formKey, controller: _formController),
-          ],
+              SubmitBtn(formKey: _formKey, controller: _formController),
+            ],
+          ),
+          automaticallyImplyLeading: false,
+          titleSpacing: 16,
         ),
-        automaticallyImplyLeading: false,
-        titleSpacing: 16,
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Container(
-              child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                InputTitleForm(controller: _formController['title']),
-                const SizedBox(height: 16),
-                InputDescriptionForm(
-                    controller: _formController['description']),
-              ],
-            ),
-          )),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Container(
+                child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  InputTitleForm(controller: _formController['title']),
+                  const SizedBox(height: 16),
+                  InputDescriptionForm(
+                      controller: _formController['description']),
+                ],
+              ),
+            )),
+          ),
         ),
       ),
     );
@@ -126,11 +132,14 @@ class SubmitBtn extends StatelessWidget {
     return FlatButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       color: const Color(0xFFE84855),
-      onPressed: () {
+      onPressed: () async {
         if (formKey.currentState.validate()) {
-          print(
-              'input: ${controller['title'].text}, ${controller['description'].text}');
-          submit(controller, context);
+          Provider.of<ProgressHUDState>(context, listen: false)
+              .update(newState: true);
+          await submit(controller, context);
+          Navigator.pop(context);
+          Provider.of<ProgressHUDState>(context, listen: false)
+              .update(newState: false);
         }
       },
       child: Padding(
@@ -147,10 +156,12 @@ class SubmitBtn extends StatelessWidget {
 
 Future<void> submit(
     Map<String, TextEditingController> controller, BuildContext context) async {
+  final dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
   final post = Post(
       title: controller['title'].text,
       description: controller['description'].text,
+      date: dateFormat.format(DateTime.now()),
       uid: Provider.of<UserState>(context, listen: false).user.uid);
+  print('input: ${post.title}, ${post.description}');
   await PostRepository().createPost(post: post);
-  Navigator.pop(context);
 }

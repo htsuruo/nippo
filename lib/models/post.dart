@@ -22,7 +22,7 @@ class Post {
   String date;
   String uid;
 
-  Map<String, String> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'title': title,
         'description': description,
         'date': date,

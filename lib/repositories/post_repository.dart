@@ -7,13 +7,16 @@ class PostRepository {
 
   Future<List<Post>> fetchAll() async {
     print('PostRepository -> fetchAll');
-    final posts = await fireStore.collection(collection).getDocuments();
+    final posts = await fireStore
+        .collection(collection)
+        .orderBy('date', descending: true)
+        .getDocuments();
     final postList = <Post>[];
     for (final post in posts.documents) {
       final p = Post.fromJson(post.data);
+      print(p);
       postList.add(p);
     }
-    print(postList);
     return postList;
   }
 

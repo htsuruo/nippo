@@ -47,9 +47,22 @@ class ContentCard extends StatelessWidget {
                   maxLines: 3,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 16, left: 4),
-                    child: Text(post.description),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(post.description),
+                        const SizedBox(height: 5),
+                        Text(
+                          post.date,
+                          style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor),
+                        ),
+                      ],
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),

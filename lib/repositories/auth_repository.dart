@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nippo/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl/intl.dart';
 
 class Auth {
   final _firebaseAuth = FirebaseAuth.instance;
@@ -10,12 +11,13 @@ class Auth {
       return null;
     }
     print('sign in [ ${user.email} ], [ ${user.displayName} ]');
+    final dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
     return User(
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoUrl: user.photoUrl,
-      lastSignInTime: user.metadata.lastSignInTime.toString(),
+      lastSignInTime: dateFormat.format(user.metadata.lastSignInTime),
       providerData: _getProviderData(user),
     );
   }
