@@ -70,13 +70,13 @@ class InputTitleForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: TextInputAction.next, // return押下時の処理を変更できる.
       controller: controller,
       maxLines: 1,
       autofocus: true,
       cursorColor: VIC.red,
       style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: .5),
       decoration: const InputDecoration(
-//        icon: Icon(Icons.message, color: Color(0xFFE84855)),
         hintText: '今日を一言で表現すると？',
         hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
         focusedBorder: UnderlineInputBorder(
@@ -100,6 +100,7 @@ class InputDescriptionForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: TextInputAction.done,
       controller: controller,
       style: const TextStyle(fontWeight: FontWeight.bold),
       maxLines: 8,
