@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:nippo/states/bottom_nav_bar_state.dart';
 
@@ -7,36 +8,36 @@ class BubbleBottomNavBar extends StatelessWidget {
   List<BubbleBottomBarItem> bottomItems() {
     return [
       BubbleBottomBarItem(
-          backgroundColor: const Color(0xFFE84855),
+          backgroundColor: VIC.red,
           icon: Icon(
             Icons.view_list,
             color: const Color(0xFFCCCCCC),
           ),
           activeIcon: Icon(
             Icons.view_list,
-            color: const Color(0xFFE84855),
+            color: VIC.red,
           ),
           title: const Text('日報')),
       BubbleBottomBarItem(
-          backgroundColor: const Color(0xFF1B998B),
+          backgroundColor: VIC.green,
           icon: Icon(
             Icons.people,
             color: const Color(0xFFCCCCCC),
           ),
           activeIcon: Icon(
             Icons.people,
-            color: const Color(0xFF1B998B),
+            color: VIC.green,
           ),
           title: const Text('登録者')),
       BubbleBottomBarItem(
-          backgroundColor: const Color(0xFF2D3047),
+          backgroundColor: VIC.navy,
           icon: Icon(
             Icons.person,
             color: const Color(0xFFCCCCCC),
           ),
           activeIcon: Icon(
             Icons.person,
-            color: const Color(0xFF2D3047),
+            color: VIC.navy,
           ),
           title: const Text('マイページ')),
     ];

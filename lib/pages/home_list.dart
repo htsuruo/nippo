@@ -5,6 +5,7 @@ import 'package:nippo/components/content_cart.dart';
 import 'package:nippo/pages/create.dart';
 import 'package:nippo/models/post.dart';
 import 'package:nippo/repositories/post_repository.dart';
+import 'package:nippo/theme.dart';
 
 class HomeListPage extends StatelessWidget {
   final List<Tab> tabItems = <Tab>[
@@ -104,7 +105,7 @@ class FAB extends StatelessWidget {
       },
 //      elevation: 0,
       child: Icon(Icons.mode_edit),
-      backgroundColor: const Color(0xFFE84855),
+      backgroundColor: VIC.red,
     );
   }
 }

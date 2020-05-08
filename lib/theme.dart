@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 ThemeData setTheme(BuildContext context) {
   return ThemeData.light().copyWith(
-      primaryColor: _MyColors.theme[500],
+      primaryColor: VIC.navy,
       backgroundColor: Colors.white,
       textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
       scaffoldBackgroundColor: Colors.white,
@@ -22,10 +22,10 @@ ThemeData setTheme(BuildContext context) {
           DividerThemeData(color: Colors.black26, thickness: 0, space: 2));
 }
 
-class _MyColors {
-  _MyColors._(); // this basically makes it so you can instantiate this class
-  static const Map<int, Color> theme = <int, Color>{
-    500: Color(0xFF2D3047),
-    600: Color(0xFFF7B52C),
-  };
+// Visual Identity Color.
+class VIC {
+  static const navy = Color(0xFF2D3047);
+  static const red = Color(0xFFE84855);
+  static const yellow = Color(0xFFF7B52C);
+  static const green = Color(0xFF1B998B);
 }

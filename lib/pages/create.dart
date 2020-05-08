@@ -5,6 +5,7 @@ import 'package:nippo/models/post.dart';
 import 'package:nippo/repositories/post_repository.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/states/user_state.dart';
+import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -72,14 +73,14 @@ class InputTitleForm extends StatelessWidget {
       controller: controller,
       maxLines: 1,
       autofocus: true,
-      cursorColor: const Color(0xFFE84855),
+      cursorColor: VIC.red,
       style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: .5),
       decoration: const InputDecoration(
 //        icon: Icon(Icons.message, color: Color(0xFFE84855)),
         hintText: '今日を一言で表現すると？',
         hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFFE84855)),
+          borderSide: BorderSide(color: VIC.red),
         ),
       ),
       validator: (value) {
@@ -103,7 +104,7 @@ class InputDescriptionForm extends StatelessWidget {
       style: const TextStyle(fontWeight: FontWeight.bold),
       maxLines: 8,
       autofocus: true,
-      cursorColor: const Color(0xFFE84855),
+      cursorColor: VIC.red,
       decoration: const InputDecoration(
         filled: true,
         border: InputBorder.none,
@@ -131,7 +132,7 @@ class SubmitBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-      color: const Color(0xFFE84855),
+      color: VIC.red,
       onPressed: () async {
         if (formKey.currentState.validate()) {
           Provider.of<ProgressHUDState>(context, listen: false)

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/models/post.dart';
+import 'package:nippo/theme.dart';
 
 class ContentCard extends StatelessWidget {
   ContentCard({this.post});
@@ -72,7 +73,7 @@ class ContentCard extends StatelessWidget {
               child: IconButton(
                 icon: Icon(
                   Icons.favorite_border,
-                  color: const Color(0xFFE84855),
+                  color: VIC.red,
                   size: 26,
                 ),
                 onPressed: () {},
