@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:nippo/pages/user_detail.dart';
 import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/models/user.dart';
 
@@ -47,17 +48,31 @@ class UserListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) {
+        final user = users[index];
         return Padding(
           padding: const EdgeInsets.all(8),
           child: ListTile(
             title: Text(
-              users[index].displayName,
+              user.displayName,
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
             ),
-            subtitle: Text('最終ログイン: ${users[index].lastSignInTime}'),
-            leading: CircleAvatar(
-              child: Image.network(users[index].photoUrl),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('認証プロバイダ: ${user.providerData}'),
+                Text('最終ログイン: ${user.lastSignInTime}'),
+              ],
             ),
+            leading: CircleAvatar(
+              child: Image.network(user.photoUrl),
+            ),
+            trailing: Icon(Icons.navigate_next),
+            onTap: () {
+              Navigator.pushNamed(context, UserDetailPage.routeName,
+                  arguments: UserDetailPage(
+                    user: user,
+                  ));
+            },
           ),
         );
       },

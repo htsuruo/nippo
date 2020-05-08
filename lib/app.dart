@@ -6,6 +6,7 @@ import 'package:nippo/pages/setting.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/pages/splash.dart';
 import 'package:nippo/pages/user.dart';
+import 'package:nippo/pages/user_detail.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:nippo/theme.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           HomePage.routeName: (context) => HomePage(),
           SignInPage.routeName: (context) => SignInPage(),
           UserPage.routeName: (context) => UserPage(),
+          UserDetailPage.routeName: (context) => UserDetailPage(),
           SettingPage.routeName: (context) => SettingPage(),
           CreatePage.routeName: (context) => CreatePage(),
         },

@@ -14,7 +14,6 @@ class PostRepository {
     final postList = <Post>[];
     for (final post in posts.documents) {
       final p = Post.fromJson(post.data);
-      print(p);
       postList.add(p);
     }
     return postList;

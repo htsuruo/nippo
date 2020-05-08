@@ -1,16 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nippo/components/profile_circle_image.dart';
 import 'package:nippo/components/profile_total_post_count.dart';
 import 'package:nippo/pages/setting.dart';
-import 'package:nippo/models/user.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
+import 'package:nippo/components/profile_area.dart';
 
 @immutable
 class ProfilePage extends StatelessWidget {
   static const String routeName = '/profile';
-  final FirebaseUser user = null;
 
   @override
   Widget build(BuildContext context) {
@@ -40,35 +37,6 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class ProfileArea extends StatelessWidget {
-  const ProfileArea({@required this.user});
-  final User user;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: ProfileCircleImage(
-            imageUrl: user.photoUrl,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Text(
-            user.displayName,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Text('uid: ${user.uid}')),
-      ],
     );
   }
 }
