@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/pages/user_detail.dart';
 import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/models/user.dart';
-import 'package:nippo/dateutil.dart';
+import 'package:nippo/theme.dart';
 
 @immutable
 class UserPage extends StatelessWidget {
@@ -22,7 +22,10 @@ class UserPage extends StatelessWidget {
           print('snapshot is $snapshot');
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Center(child: Text('データを読込中..'));
+              return const Center(
+                child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(VIC.green)),
+              );
             case ConnectionState.done:
               if (!snapshot.hasData) {
                 return const Center(child: Text('データが見つかりません'));

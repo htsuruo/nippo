@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/profile_total_post_count.dart';
+import 'package:nippo/models/post.dart';
 import 'package:nippo/pages/setting.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
 import 'package:nippo/components/profile_area.dart';
+import 'package:nippo/repositories/post_repository.dart';
 
 @immutable
 class ProfilePage extends StatelessWidget {
@@ -11,7 +13,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const postCount = 42;
+    final currentUser = Provider.of<UserState>(context).user;
 
     return Scaffold(
       body: Container(
@@ -31,8 +33,23 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              ProfileArea(user: Provider.of<UserState>(context).user),
-              const ProfileTotalPostCount(postCount: postCount),
+              ProfileArea(user: currentUser),
+              FutureBuilder<List<Post>>(
+                  future: PostRepository().fetchByUser(uid: currentUser.uid),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    final list = snapshot.data as List<Post>;
+                    return Column(
+                      children: <Widget>[
+                        ProfileTotalPostCount(postCount: list.length),
+//                        ListView.builder(
+//                          itemBuilder: (context, index) {
+//                            return Text("da");
+//                          },
+//                          itemCount: list.length,
+//                        )
+                      ],
+                    );
+                  }),
             ],
           ),
         ),

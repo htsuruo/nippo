@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/profile_area.dart';
 import 'package:nippo/components/profile_total_post_count.dart';
+import 'package:nippo/models/post.dart';
 import 'package:nippo/models/user.dart';
+import 'package:nippo/components/post_data_list_view.dart';
+import 'package:nippo/repositories/post_repository.dart';
 
 class UserDetailPage extends StatelessWidget {
   UserDetailPage({@required this.user});
@@ -17,7 +20,17 @@ class UserDetailPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             ProfileArea(user: args.user),
-            const ProfileTotalPostCount(postCount: 20),
+            FutureBuilder<List<Post>>(
+              future: PostRepository().fetchByUser(uid: args.user.uid),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                final list = snapshot.data as List<Post>;
+                return Column(
+                  children: <Widget>[
+                    ProfileTotalPostCount(postCount: list.length),
+                  ],
+                );
+              },
+            ),
           ],
         ),
       ),

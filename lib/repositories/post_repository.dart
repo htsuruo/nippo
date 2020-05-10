@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:nippo/models/post.dart';
 import 'package:nippo/repositories/user_repository.dart';
 
@@ -16,6 +17,22 @@ class PostRepository {
     for (final post in posts.documents) {
       final p = Post.fromJson(post.data);
       p.user = await UserRepository().fetchOneFromRef(ref: p.userRef);
+      postList.add(p);
+    }
+    return postList;
+  }
+
+  Future<List<Post>> fetchByUser({@required String uid}) async {
+    print('PostRepository -> fetchByUser');
+    final posts = await fireStore
+        .collection('users')
+        .document(uid)
+        .collection(collection)
+        .orderBy('createdAt', descending: true)
+        .getDocuments();
+    final postList = <Post>[];
+    for (final post in posts.documents) {
+      final p = Post.fromJson(post.data);
       postList.add(p);
     }
     return postList;

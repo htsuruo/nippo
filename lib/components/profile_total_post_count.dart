@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileTotalPostCount extends StatelessWidget {
-  const ProfileTotalPostCount({
-    Key key,
-    @required this.postCount,
-  }) : super(key: key);
+  const ProfileTotalPostCount({@required this.postCount});
 
   final int postCount;
 

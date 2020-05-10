@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nippo/components/app_logo.dart';
-import 'package:nippo/components/content_cart.dart';
 import 'package:nippo/pages/create.dart';
-import 'package:nippo/models/post.dart';
 import 'package:nippo/repositories/post_repository.dart';
 import 'package:nippo/theme.dart';
+import 'package:nippo/components/post_data_list_view.dart';
 
 class HomeListPage extends StatelessWidget {
   final List<Tab> tabItems = <Tab>[
@@ -21,42 +20,10 @@ class HomeListPage extends StatelessWidget {
 
   Widget tabBarContainer({String tabText}) {
     if (tabText.toLowerCase().contains(tabItems[0].text)) {
-      return FutureBuilder<List<Post>>(
-          future: PostRepository().fetchAll(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return const Center(child: Text('データを読込中..'));
-              case ConnectionState.done:
-                if (!snapshot.hasData) {
-                  return const Center(child: Text('データが見つかりません'));
-                }
-                if (snapshot.hasError) {
-                  return const Center(child: Text('エラーです'));
-                }
-                final list = snapshot.data as List<Post>;
-                return ListView.builder(
-                    itemCount: list.length,
-                    itemBuilder: (context, index) {
-                      final data = list[index];
-                      final post = Post(
-                        title: data.title,
-                        description: data.description,
-                        createdAt: data.createdAt,
-                        user: data.user,
-                      );
-                      return ContentCard(post: post);
-                    });
-              default:
-                return const Center(child: Text('hgohoge'));
-            }
-          });
+      return PostDataListView(future: PostRepository().fetchAll());
     }
     if (tabText.toLowerCase().contains(tabItems[1].text)) {
-      return Text('ｈのんげ');
-//      return ListView.builder(itemBuilder: (BuildContext context, int index) {
-//        return ContentCard(title: '$index', description: 'hoghge');
-//      });
+      return Text('お気に入り');
     }
   }
 
@@ -103,7 +70,6 @@ class FAB extends StatelessWidget {
               fullscreenDialog: true,
             ));
       },
-//      elevation: 0,
       child: Icon(Icons.mode_edit),
       backgroundColor: VIC.red,
     );
