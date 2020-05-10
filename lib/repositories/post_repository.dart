@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nippo/models/post.dart';
+import 'package:nippo/repositories/user_repository.dart';
 
 class PostRepository {
   final Firestore fireStore = Firestore.instance;
@@ -9,11 +10,12 @@ class PostRepository {
     print('PostRepository -> fetchAll');
     final posts = await fireStore
         .collection(collection)
-        .orderBy('date', descending: true)
+        .orderBy('createdAt', descending: true)
         .getDocuments();
     final postList = <Post>[];
     for (final post in posts.documents) {
       final p = Post.fromJson(post.data);
+      p.user = await UserRepository().fetchOneFromRef(ref: p.userRef);
       postList.add(p);
     }
     return postList;

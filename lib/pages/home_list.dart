@@ -43,7 +43,7 @@ class HomeListPage extends StatelessWidget {
                         title: data.title,
                         description: data.description,
                         createdAt: data.createdAt,
-                        userRef: data.userRef,
+                        user: data.user,
                       );
                       return ContentCard(post: post);
                     });

@@ -25,7 +25,7 @@ class ContentCard extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                 child: CircleAvatar(
                   child: Image.network(
-                    'https://i.pinimg.com/originals/69/29/99/692999d8468d80255d3ce142640952c4.jpg',
+                    post.user.photoUrl,
                     fit: BoxFit.cover,
                   ),
                 )),

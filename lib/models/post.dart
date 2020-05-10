@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nippo/models/user.dart';
 
 class Post {
   Post({
@@ -7,6 +8,7 @@ class Post {
     this.description,
     this.createdAt,
     this.userRef,
+    this.user,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class Post {
   String description;
   Timestamp createdAt;
   DocumentReference userRef;
+  User user;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'title': title,
