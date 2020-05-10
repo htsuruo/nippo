@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:nippo/models/post.dart';
 import 'package:nippo/theme.dart';
 import 'package:nippo/dateutil.dart';
+import 'package:nippo/models/user.dart';
 
 class ContentCard extends StatelessWidget {
-  ContentCard({this.post});
+  ContentCard({this.post, this.user});
   Post post;
+  User user;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class ContentCard extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                 child: CircleAvatar(
                   child: Image.network(
-                    post.user.photoUrl,
+                    user.photoUrl,
                     fit: BoxFit.cover,
                   ),
                 )),

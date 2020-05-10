@@ -9,7 +9,7 @@ class ProfileTotalPostCount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.only(top: 20, bottom: 20),
+      padding: const EdgeInsets.only(top: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

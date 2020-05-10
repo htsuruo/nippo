@@ -33,9 +33,11 @@ class PostDataListView extends StatelessWidget {
                       title: data.title,
                       description: data.description,
                       createdAt: data.createdAt,
+                    );
+                    return ContentCard(
+                      post: post,
                       user: data.user,
                     );
-                    return ContentCard(post: post);
                   });
             default:
               return const Center(child: Text('hgohoge'));
