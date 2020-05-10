@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nippo/models/post.dart';
 import 'package:nippo/theme.dart';
+import 'package:nippo/dateutil.dart';
 
 class ContentCard extends StatelessWidget {
   ContentCard({this.post});
@@ -23,7 +24,10 @@ class ContentCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                 child: CircleAvatar(
-                  child: Image.network(''),
+                  child: Image.network(
+                    'https://i.pinimg.com/originals/69/29/99/692999d8468d80255d3ce142640952c4.jpg',
+                    fit: BoxFit.cover,
+                  ),
                 )),
           ),
           Expanded(
@@ -55,7 +59,7 @@ class ContentCard extends StatelessWidget {
                         Text(post.description),
                         const SizedBox(height: 5),
                         Text(
-                          post.date,
+                          formatDateFromTimeStamp(timestamp: post.createdAt),
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,

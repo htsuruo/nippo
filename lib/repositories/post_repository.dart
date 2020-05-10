@@ -19,9 +19,16 @@ class PostRepository {
     return postList;
   }
 
-  Future<void> createPost({Post post}) async {
+//  usersコレクションのサブコレクションとして追加する.
+  Future<void> createPost({Post post, String uid}) async {
     print('PostRepository -> createPost');
+    post.createdAt = Timestamp.fromDate(DateTime.now());
     final map = post.toJson();
-    await fireStore.collection(collection).document().setData(map);
+    await fireStore
+        .collection('users')
+        .document(uid)
+        .collection(collection)
+        .document()
+        .setData(map);
   }
 }

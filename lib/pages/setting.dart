@@ -5,6 +5,7 @@ import 'package:nippo/pages/signin.dart';
 import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
+import 'package:nippo/dateutil.dart';
 
 class SettingPage extends StatelessWidget {
   static const String routeName = '/setting';
@@ -47,10 +48,8 @@ List<Widget> firstSection(BuildContext context) {
     const Divider(indent: 16),
     SimpleListContainer(
       title: '最終ログイン日時',
-      trailing: Text(provider.lastSignInTime.toString()),
+      trailing: Text(provider.lastSignInTime),
     ),
-//    const Divider(indent: 16),
-//    googleSignInSettingTile(user: provider),
     const Divider(),
   ];
   return children;

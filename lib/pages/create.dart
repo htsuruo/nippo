@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/models/post.dart';
 import 'package:nippo/repositories/post_repository.dart';
-import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 
 class CreatePage extends StatelessWidget {
   static const String routeName = '/create';
@@ -159,13 +157,10 @@ class SubmitBtn extends StatelessWidget {
 
 Future<void> submit(
     Map<String, TextEditingController> controller, BuildContext context) async {
-  final dateFormat = DateFormat('yyyy-MM-dd HH:mm:ss');
   final post = Post(
       title: controller['title'].text,
-      description: controller['description'].text,
-      date: dateFormat.format(DateTime.now()),
-      userRef: UserRepository().fetchOneForRef(
-          uid: Provider.of<UserState>(context, listen: false).user.uid));
+      description: controller['description'].text);
   print('input: ${post.title}, ${post.description}');
-  await PostRepository().createPost(post: post);
+  await PostRepository().createPost(
+      post: post, uid: Provider.of<UserState>(context, listen: false).user.uid);
 }

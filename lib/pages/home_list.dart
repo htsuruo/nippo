@@ -29,7 +29,7 @@ class HomeListPage extends StatelessWidget {
                 return const Center(child: Text('データを読込中..'));
               case ConnectionState.done:
                 if (!snapshot.hasData) {
-                  return Container();
+                  return const Center(child: Text('データが見つかりません'));
                 }
                 if (snapshot.hasError) {
                   return const Center(child: Text('エラーです'));
@@ -42,8 +42,8 @@ class HomeListPage extends StatelessWidget {
                       final post = Post(
                         title: data.title,
                         description: data.description,
-                        date: data.date,
-                        user: data.user,
+                        createdAt: data.createdAt,
+                        userRef: data.userRef,
                       );
                       return ContentCard(post: post);
                     });
