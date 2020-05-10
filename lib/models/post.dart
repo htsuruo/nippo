@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nippo/models/user.dart';
 
 class Post {
   Post({
     @required this.title,
     this.description,
     this.date,
-    @required this.uid,
+    this.user,
+    this.userRef,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
@@ -13,19 +16,21 @@ class Post {
       title: json['title'].toString(),
       description: json['description'].toString(),
       date: json['date'].toString(),
-      uid: json['createUser'].toString(),
+      user: json['createUser'] as User,
+      userRef: json['createUserRef'] as DocumentReference,
     );
   }
 
   String title;
   String description;
   String date;
-  String uid;
+  User user;
+  DocumentReference userRef;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'title': title,
         'description': description,
         'date': date,
-        'createUser': uid,
+        'createUser': user,
       };
 }

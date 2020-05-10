@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/models/post.dart';
 import 'package:nippo/repositories/post_repository.dart';
+import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:nippo/theme.dart';
@@ -163,7 +164,8 @@ Future<void> submit(
       title: controller['title'].text,
       description: controller['description'].text,
       date: dateFormat.format(DateTime.now()),
-      uid: Provider.of<UserState>(context, listen: false).user.uid);
+      userRef: UserRepository().fetchOneForRef(
+          uid: Provider.of<UserState>(context, listen: false).user.uid));
   print('input: ${post.title}, ${post.description}');
   await PostRepository().createPost(post: post);
 }

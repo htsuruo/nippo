@@ -40,4 +40,9 @@ class UserRepository {
     final doc = await fireStore.collection(collection).document(uid).get();
     return doc.exists ? User.fromJson(doc.data) : null;
   }
+
+  DocumentReference fetchOneForRef({@required String uid}) {
+    print('UserRepository -> fetchOne');
+    return fireStore.collection(collection).document(uid);
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nippo/models/post.dart';
 import 'package:nippo/theme.dart';
@@ -22,7 +23,7 @@ class ContentCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                 child: CircleAvatar(
-                  backgroundColor: Colors.lightBlueAccent,
+                  child: Image.network(''),
                 )),
           ),
           Expanded(
@@ -56,7 +57,7 @@ class ContentCard extends StatelessWidget {
                         Text(
                           post.date,
                           style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 12,
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).primaryColor),
                         ),

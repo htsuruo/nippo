@@ -24,16 +24,16 @@ class HomeListPage extends StatelessWidget {
       return FutureBuilder<List<Post>>(
           future: PostRepository().fetchAll(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (!snapshot.hasData) {
-              return Container();
-            }
-            if (snapshot.hasError) {
-              return const Center(child: Text('エラーです'));
-            }
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
                 return const Center(child: Text('データを読込中..'));
               case ConnectionState.done:
+                if (!snapshot.hasData) {
+                  return Container();
+                }
+                if (snapshot.hasError) {
+                  return const Center(child: Text('エラーです'));
+                }
                 final list = snapshot.data as List<Post>;
                 return ListView.builder(
                     itemCount: list.length,
@@ -43,7 +43,7 @@ class HomeListPage extends StatelessWidget {
                         title: data.title,
                         description: data.description,
                         date: data.date,
-                        uid: data.uid,
+                        user: data.user,
                       );
                       return ContentCard(post: post);
                     });

@@ -19,16 +19,16 @@ class UserPage extends StatelessWidget {
         future: UserRepository().fetchAll(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           print('snapshot is $snapshot');
-          if (!snapshot.hasData) {
-            return Container();
-          }
-          if (snapshot.hasError) {
-            return const Center(child: Text('エラーです'));
-          }
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return const Center(child: Text('データを読込中..'));
             case ConnectionState.done:
+              if (!snapshot.hasData) {
+                return Container();
+              }
+              if (snapshot.hasError) {
+                return const Center(child: Text('エラーです'));
+              }
               final users = snapshot.data as List<User>;
               return UserListView(users: users);
             default:
