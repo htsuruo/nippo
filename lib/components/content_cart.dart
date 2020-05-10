@@ -12,83 +12,136 @@ class ContentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
-      decoration: BoxDecoration(
-          border: Border.all(width: 1, color: Colors.black12),
-          borderRadius: const BorderRadius.all(Radius.circular(8))),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                child: CircleAvatar(
-                  child: Image.network(
-                    user.photoUrl,
-                    fit: BoxFit.cover,
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+      child: InkWell(
+        onTap: () async {
+          onTapCard(context: context);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(width: 1, color: Colors.black12),
+              borderRadius: const BorderRadius.all(Radius.circular(8))),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 16),
+                    child: CircleAvatar(
+                      child: Image.network(
+                        user.photoUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    )),
+              ),
+              Expanded(
+                flex: 4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 16, left: 4),
+                        child: Text(
+                          post.title,
+                          softWrap: true,
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    DefaultTextStyle(
+                      style: TextStyle(color: Colors.black54, fontSize: 14),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 16, left: 4),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(post.description),
+                            const SizedBox(height: 5),
+                            Text(
+                              formatDateFromTimeStamp(
+                                  timestamp: post.createdAt),
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.favorite_border,
+                      color: VIC.red,
+                      size: 26,
+                    ),
+                    onPressed: () {},
                   ),
-                )),
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            flex: 4,
+        ),
+      ),
+    );
+  }
+
+  void onTapCard({BuildContext context}) async {
+    final res = await showModalBottomSheet<int>(
+        context: context,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 20, left: 40, right: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 16, left: 4),
-                    child: Text(
-                      post.title,
-                      softWrap: true,
-                      maxLines: 1,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                Row(
+                  children: <Widget>[
+                    Image.network(
+                      user.photoUrl,
+                      height: 44,
                     ),
-                  ),
-                ),
-                DefaultTextStyle(
-                  style: TextStyle(color: Colors.black54, fontSize: 14),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 3,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 16, left: 4),
-                    child: Column(
+                    const SizedBox(width: 10),
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(post.description),
-                        const SizedBox(height: 5),
+                        Text(user.displayName,
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                         Text(
-                          formatDateFromTimeStamp(timestamp: post.createdAt),
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor),
-                        ),
+                            '${formatDateFromTimeStamp(timestamp: post.createdAt)} に投稿'),
                       ],
-                    ),
-                  ),
+                    )
+                  ],
                 ),
+                const SizedBox(height: 16),
+                const Divider(),
+                const SizedBox(height: 8),
+                Text(post.title,
+                    style:
+                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                Text(post.description,
+                    style: const TextStyle(
+                      fontSize: 16,
+                    )),
               ],
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: IconButton(
-                icon: Icon(
-                  Icons.favorite_border,
-                  color: VIC.red,
-                  size: 26,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+          );
+        });
+    print('bottom sheet result: $res');
   }
 }
