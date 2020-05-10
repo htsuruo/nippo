@@ -6,6 +6,7 @@ import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
 import 'package:nippo/dateutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
   static const String routeName = '/setting';
@@ -85,9 +86,11 @@ List<Widget> secondSection() {
     ),
     const Divider(indent: 16),
     SimpleListContainer(
-      title: '運営会社',
+      title: 'ディベロッパー',
       trailing: Icon(Icons.open_in_new),
-      onTap: () {},
+      onTap: () async {
+        await launchUrl(url: 'https://scrapbox.io/tsuruo/');
+      },
     ),
     const Divider(indent: 16),
     const SimpleListContainer(
@@ -121,4 +124,12 @@ Future<void> signOut(BuildContext context) async {
   await Auth().signOut();
   await Navigator.pushNamedAndRemoveUntil(
       context, SignInPage.routeName, (Route<dynamic> route) => false);
+}
+
+Future<void> launchUrl({String url}) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    print('Could not Launch $url');
+  }
 }

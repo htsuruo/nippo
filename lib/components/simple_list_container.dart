@@ -4,7 +4,7 @@ class SimpleListContainer extends StatelessWidget {
   const SimpleListContainer({@required this.title, this.trailing, this.onTap});
   final String title;
   final Widget trailing;
-  final Function onTap;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class SimpleListContainer extends StatelessWidget {
           style: const TextStyle(fontSize: 14),
         ),
         trailing: trailing,
-        onTap: () => onTap,
+        onTap: onTap,
       ),
     );
   }
