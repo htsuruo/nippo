@@ -4,3 +4,7 @@ class AssetPath {
   static const TW_LOGO_PATH = 'assets/img/ic_logo_twitter.png';
   static const MAIL_LOGO_PATH = 'assets/img/ic_logo_mail.png';
 }
+
+class Pref {
+  static const IS_TUTORIAL_DONE = 'isTutorial_done';
+}

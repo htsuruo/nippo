@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/app_logo.dart';
+import 'package:nippo/constant.dart';
 import 'package:nippo/pages/tutorial.dart';
 import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/repositories/auth_repository.dart';
@@ -7,6 +8,7 @@ import 'package:nippo/pages/home.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   static const String routeName = '/splash';
@@ -53,7 +55,11 @@ class _SplashPageState extends State<SplashPage> {
         return;
       }
     }
-//    Navigator.of(context).pushReplacementNamed(TutorialPage.routeName);
-    Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getInt(Pref.IS_TUTORIAL_DONE) == 1) {
+      Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
+      return;
+    }
+    Navigator.of(context).pushReplacementNamed(TutorialPage.routeName);
   }
 }

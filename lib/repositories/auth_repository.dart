@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nippo/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nippo/dateutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nippo/constant.dart';
 
 class Auth {
   final _firebaseAuth = FirebaseAuth.instance;
@@ -11,6 +13,7 @@ class Auth {
       return null;
     }
     print('sign in [ ${user.email} ], [ ${user.displayName} ]');
+    _setSharedPreference();
     return User(
       uid: user.uid,
       email: user.email,
@@ -28,6 +31,11 @@ class Auth {
       providerId = profile.providerId;
     }
     return providerId;
+  }
+
+  Future<void> _setSharedPreference() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(Pref.IS_TUTORIAL_DONE, 1);
   }
 
   Future<bool> isLogin() async {
