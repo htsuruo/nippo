@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/models/user.dart';
-import 'package:nippo/components/profile_circle_image.dart';
+import 'package:nippo/components/atoms/profile_circle_image.dart';
 
 class ProfileArea extends StatelessWidget {
   const ProfileArea({@required this.user});

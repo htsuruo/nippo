@@ -4,7 +4,7 @@ import 'package:nippo/pages/profile.dart';
 import 'package:nippo/pages/user.dart';
 import 'package:nippo/states/bottom_nav_bar_state.dart';
 import 'package:provider/provider.dart';
-import 'package:nippo/components/bubble_bottom_nav_bar.dart';
+import 'package:nippo/components/templates/bubble_bottom_nav_bar.dart';
 
 class HomePage extends StatelessWidget {
   static const String routeName = '/home';

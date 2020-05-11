@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_overboard/flutter_overboard.dart';
-import 'package:nippo/components/tutorial_child.dart';
+import 'package:nippo/components/templates/tutorial_child.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/theme.dart';
 

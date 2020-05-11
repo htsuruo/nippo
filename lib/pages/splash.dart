@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/components/app_logo.dart';
+import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/constant.dart';
 import 'package:nippo/pages/tutorial.dart';
 import 'package:nippo/repositories/user_repository.dart';

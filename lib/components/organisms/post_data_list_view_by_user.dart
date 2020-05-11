@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nippo/models/user.dart';
 import 'package:nippo/models/post.dart';
 import 'package:nippo/repositories/post_repository.dart';
-import 'package:nippo/components/profile_total_post_count.dart';
-import 'package:nippo/components/content_cart.dart';
+import 'package:nippo/components/molecules/profile_total_post_count.dart';
+import 'package:nippo/components/molecules/content_cart.dart';
 
 class PostDataListViewByUser extends StatelessWidget {
   const PostDataListViewByUser({@required this.user});

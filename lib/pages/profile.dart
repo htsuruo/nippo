@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nippo/pages/setting.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
-import 'package:nippo/components/profile_area.dart';
-import 'package:nippo/components/post_data_list_view_by_user.dart';
+import 'package:nippo/components/organisms/profile_area.dart';
+import 'package:nippo/components/organisms/post_data_list_view_by_user.dart';
 
 @immutable
 class ProfilePage extends StatelessWidget {
