@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:nippo/pages/create.dart';
 import 'package:nippo/pages/home.dart';
+import 'package:nippo/pages/register.dart';
 import 'package:nippo/pages/setting.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/pages/splash.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           TutorialPage.routeName: (context) => TutorialPage(),
           HomePage.routeName: (context) => HomePage(),
           SignInPage.routeName: (context) => SignInPage(),
+          RegisterPage.routeName: (context) => RegisterPage(),
           UserPage.routeName: (context) => UserPage(),
           UserDetailPage.routeName: (context) => UserDetailPage(),
           SettingPage.routeName: (context) => SettingPage(),

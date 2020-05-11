@@ -6,10 +6,12 @@ import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/components/atoms/signin_sns_btn.dart';
 import 'package:nippo/constant.dart';
 import 'package:nippo/pages/home.dart';
+import 'package:nippo/pages/register.dart';
 import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/states/user_state.dart';
+import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
 @immutable
@@ -26,11 +28,6 @@ class SignInPage extends StatelessWidget {
 
   Image googleLogo = Image(
     image: ExactAssetImage(AssetPath.GOOGLE_LOGO_PATH),
-    height: snsLogoHeight,
-  );
-
-  Image twitterLogo = Image(
-    image: ExactAssetImage(AssetPath.TW_LOGO_PATH),
     height: snsLogoHeight,
   );
 
@@ -72,7 +69,7 @@ class SignInPage extends StatelessWidget {
                 tag: 'appLogo',
               ),
               const SizedBox(
-                height: 80,
+                height: 50,
               ),
               SignInSnsBtn(
                 logoImg: googleLogo,
@@ -83,18 +80,22 @@ class SignInPage extends StatelessWidget {
                 height: 24,
               ),
               SignInSnsBtn(
-                logoImg: twitterLogo,
-                label: 'Sign in with Twitter',
-                callback: () => signInWithTwitter(context),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              SignInSnsBtn(
                 logoImg: mailLogo,
                 label: 'Sign in with Email',
                 callback: () => signInWithTwitter(context),
               ),
+              const SizedBox(
+                height: 16,
+              ),
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, RegisterPage.routeName);
+                  },
+                  child: Text('アカウント登録はこちら',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: VIC.navy))),
             ],
           ),
         ),
