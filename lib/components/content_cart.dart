@@ -29,7 +29,7 @@ class ContentCard extends StatelessWidget {
                 flex: 1,
                 child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 16),
+                        horizontal: 12, vertical: 12),
                     child: CircleAvatar(
                       child: Image.network(
                         user.photoUrl,
@@ -44,7 +44,7 @@ class ContentCard extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 16, left: 4),
+                        padding: const EdgeInsets.only(top: 12, left: 4),
                         child: Text(
                           post.title,
                           softWrap: true,
@@ -64,14 +64,14 @@ class ContentCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(post.description),
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 4),
                             Text(
                               formatDateFromTimeStamp(
                                   timestamp: post.createdAt),
                               style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).primaryColor),
+                                  color: VIC.navy),
                             ),
                           ],
                         ),
@@ -113,9 +113,9 @@ class ContentCard extends StatelessWidget {
                   children: <Widget>[
                     Image.network(
                       user.photoUrl,
-                      height: 44,
+                      height: 36,
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -129,7 +129,7 @@ class ContentCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Divider(),
-                const SizedBox(height: 8),
+                const SizedBox(height: 16),
                 Text(post.title,
                     style:
                         TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),

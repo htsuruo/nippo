@@ -22,7 +22,7 @@ class UserDetailPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               ProfileArea(user: args.user),
-              PostDataListViewByUser(user: args.user, height: 420),
+              PostDataListViewByUser(user: args.user),
             ],
           ),
         ),

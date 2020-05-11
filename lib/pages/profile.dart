@@ -14,9 +14,9 @@ class ProfilePage extends StatelessWidget {
     final currentUser = Provider.of<UserState>(context).user;
 
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: SafeArea(
+      body: SafeArea(
+        child: Container(
+          alignment: Alignment.center,
           child: Column(
             children: <Widget>[
               Padding(
@@ -33,7 +33,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               ProfileArea(user: currentUser),
-              PostDataListViewByUser(user: currentUser, height: 400),
+              PostDataListViewByUser(user: currentUser),
             ],
           ),
         ),

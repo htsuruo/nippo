@@ -63,8 +63,10 @@ class UserListView extends StatelessWidget {
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('認証プロバイダ: ${user.providerData}'),
-                Text('最終ログイン: ${user.lastSignInTime}'),
+                Text('認証プロバイダ: ${user.providerData}',
+                    style: const TextStyle(fontSize: 12)),
+                Text('最終ログイン: ${user.lastSignInTime}',
+                    style: const TextStyle(fontSize: 12)),
               ],
             ),
             leading: CircleAvatar(
