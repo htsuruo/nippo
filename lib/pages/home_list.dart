@@ -23,8 +23,11 @@ class HomeListPage extends StatelessWidget {
       return PostDataListView(future: PostRepository().fetchAll());
     }
     if (tabText.toLowerCase().contains(tabItems[1].text)) {
-      return Text('お気に入り');
+      return const Center(
+        child: Text('お気に入りは未実装'),
+      );
     }
+    return Container();
   }
 
   @override

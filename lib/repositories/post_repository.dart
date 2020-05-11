@@ -6,12 +6,14 @@ import 'package:nippo/repositories/user_repository.dart';
 class PostRepository {
   final Firestore fireStore = Firestore.instance;
   static const String collection = 'posts';
+  final limit = 20; //TODO(tsuruoka):仮
 
   Future<List<Post>> fetchAll() async {
     print('PostRepository -> fetchAll');
     final posts = await fireStore
         .collection(collection)
         .orderBy('createdAt', descending: true)
+        .limit(limit)
         .getDocuments();
     final postList = <Post>[];
     for (final post in posts.documents) {
@@ -29,6 +31,7 @@ class PostRepository {
         .document(uid)
         .collection(collection)
         .orderBy('createdAt', descending: true)
+        .limit(limit)
         .getDocuments();
     final postList = <Post>[];
     for (final post in posts.documents) {
