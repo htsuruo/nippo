@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/pages/create.dart';
@@ -15,8 +14,6 @@ class HomeListPage extends StatelessWidget {
       text: 'お気に入り',
     ),
   ];
-
-  final Firestore firestore = Firestore.instance;
 
   Widget tabBarContainer({String tabText}) {
     if (tabText.toLowerCase().contains(tabItems[0].text)) {

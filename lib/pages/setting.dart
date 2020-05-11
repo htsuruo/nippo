@@ -5,7 +5,6 @@ import 'package:nippo/pages/signin.dart';
 import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
-import 'package:nippo/dateutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
@@ -55,19 +54,6 @@ List<Widget> firstSection(BuildContext context) {
   ];
   return children;
 }
-
-//StatelessWidget googleSignInSettingTile({User user}) {
-//  if (user.providerData.contains('google')) {
-//    return const SimpleListContainer(
-//      title: 'Google連携',
-//      trailing: Text('連携を解除', style: TextStyle(color: Color(0xFFE84855))),
-//    );
-//  }
-//  return const SimpleListContainer(
-//    title: 'Google連携',
-//    trailing: Text('連携する', style: TextStyle(color: Color(0xFFE84855))),
-//  );
-//}
 
 List<Widget> secondSection() {
   final children = [
