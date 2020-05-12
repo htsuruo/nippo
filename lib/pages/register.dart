@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/models/user.dart';
 import 'package:nippo/pages/home.dart';
 import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/repositories/user_repository.dart';
+import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
 import 'package:nippo/components/molecules/login_form_field.dart';
@@ -39,7 +41,6 @@ class RegisterPage extends StatelessWidget {
       await Navigator.pushReplacementNamed(context, HomePage.routeName);
       _controller['email'].dispose();
       _controller['password'].dispose();
-      return;
     }
 
     void onFailed({BuildContext context, String errMessage}) {
@@ -51,43 +52,46 @@ class RegisterPage extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('メールアドレスで登録')),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 16, left: 24, right: 24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                EmailFormField(
-                  controller: _controller['email'],
-                ),
-                const SizedBox(height: 16),
-                PasswordFormField(
-                  controller: _controller['password'],
-                ),
-                const SizedBox(height: 16),
-                //SnackBar表示のためにcontextを生成.
-                Builder(
-                  builder: (context) {
-                    return SubmitBtn(
-                      onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          final map = await submit();
-                          if (map['result'] as bool) {
-                            await onSuccess(tmpUser: map['user'] as User);
-                          } else {
-                            final message = map['message'].toString();
-                            onFailed(context: context, errMessage: message);
+    return ModalProgressHUD(
+      inAsyncCall: Provider.of<ProgressHUDState>(context).saving,
+      child: Scaffold(
+        appBar: AppBar(title: const Text('メールアドレスで登録')),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 16, left: 24, right: 24),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  EmailFormField(
+                    controller: _controller['email'],
+                  ),
+                  const SizedBox(height: 16),
+                  PasswordFormField(
+                    controller: _controller['password'],
+                  ),
+                  const SizedBox(height: 16),
+                  //SnackBar表示のためにcontextを生成.
+                  Builder(
+                    builder: (context) {
+                      return SubmitBtn(
+                        onPressed: () async {
+                          if (_formKey.currentState.validate()) {
+                            final map = await submit();
+                            if (map['result'] as bool) {
+                              await onSuccess(tmpUser: map['user'] as User);
+                            } else {
+                              final message = map['message'].toString();
+                              onFailed(context: context, errMessage: message);
+                            }
                           }
-                        }
-                      },
-                      btnText: 'アカウント登録',
-                    );
-                  },
-                )
-              ],
+                        },
+                        btnText: 'アカウント登録',
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
