@@ -7,6 +7,7 @@ import 'package:nippo/components/atoms/signin_sns_btn.dart';
 import 'package:nippo/constant.dart';
 import 'package:nippo/pages/home.dart';
 import 'package:nippo/pages/register.dart';
+import 'package:nippo/pages/signin_email.dart';
 import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/states/progress_hub_state.dart';
@@ -49,9 +50,12 @@ class SignInPage extends StatelessWidget {
         .update(newState: false);
   }
 
-  Future<void> signInWithTwitter(BuildContext context) {
-    print('twitter is not unavaiable.');
-    return null;
+  void onClickSignInWithEmailBtn() {
+    MaterialPageRoute<MaterialPageRoute>(
+        fullscreenDialog: true,
+        builder: (BuildContext context) {
+          return SignInEmailPage();
+        });
   }
 
   @override
@@ -82,7 +86,7 @@ class SignInPage extends StatelessWidget {
               SignInSnsBtn(
                 logoImg: mailLogo,
                 label: 'Sign in with Email',
-                callback: () => signInWithTwitter(context),
+                callback: () => onClickSignInWithEmailBtn(),
               ),
               const SizedBox(
                 height: 16,

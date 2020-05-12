@@ -70,6 +70,7 @@ flutter:
     - assets/img/ic_logo_twitter.png
     - assets/img/ic_logo_mail.png
     - assets/img/ic_tutorial_line.png
+    - assets/img/profile_dummy.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
