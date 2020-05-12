@@ -24,7 +24,6 @@ class RegisterPage extends StatelessWidget {
     Future<Map<String, Object>> submit() async {
       final email = _controller['email'].text;
       final password = _controller['password'].text;
-      print('value: $email, $password');
       return Auth().signUpWithEmail(email: email, password: password);
     }
 
@@ -34,7 +33,7 @@ class RegisterPage extends StatelessWidget {
           email: tmpUser.email,
           providerData: tmpUser.providerData,
           lastSignInTime: tmpUser.lastSignInTime);
-      await UserRepository().createUser(user: user);
+      await UserRepository().updateUser(user: user);
       Provider.of<UserController>(context, listen: false)
           .updateData(user: user);
       await Navigator.pushReplacementNamed(context, HomePage.routeName);
@@ -53,7 +52,7 @@ class RegisterPage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('メールアドレスの登録')),
+      appBar: AppBar(title: const Text('メールアドレスで登録')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 16, left: 24, right: 24),
@@ -61,7 +60,7 @@ class RegisterPage extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                LoginFormField(
+                EmailFormField(
                   controller: _controller['email'],
                 ),
                 const SizedBox(height: 16),
@@ -72,17 +71,20 @@ class RegisterPage extends StatelessWidget {
                 //SnackBar表示のためにcontextを生成.
                 Builder(
                   builder: (context) {
-                    return SubmitBtn(onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        final map = await submit();
-                        if (map['result'] as bool) {
-                          await onSuccess(tmpUser: map['user'] as User);
-                        } else {
-                          final message = map['message'].toString();
-                          onFailed(context: context, errMessage: message);
+                    return SubmitBtn(
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          final map = await submit();
+                          if (map['result'] as bool) {
+                            await onSuccess(tmpUser: map['user'] as User);
+                          } else {
+                            final message = map['message'].toString();
+                            onFailed(context: context, errMessage: message);
+                          }
                         }
-                      }
-                    });
+                      },
+                      btnText: 'アカウント登録',
+                    );
                   },
                 )
               ],

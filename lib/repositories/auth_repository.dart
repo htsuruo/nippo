@@ -14,7 +14,7 @@ class Auth {
     if (user == null) {
       return null;
     }
-    print('sign in [ ${user.email} ], [ ${user.displayName} ]');
+    print('firebse user sign in [ ${user.email} ], [ ${user.displayName} ]');
     _setSharedPreference();
     return User(
       uid: user.uid,
@@ -72,6 +72,21 @@ class Auth {
     final map = <String, Object>{'user': null, 'result': false, 'message': ''};
     try {
       final result = await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      map['user'] = _getUserData(result.user);
+      map['result'] = true;
+    } on PlatformException catch (e) {
+      print(e);
+      map['message'] = e.toString();
+    }
+    return map;
+  }
+
+  Future<Map<String, Object>> signInWithEmail(
+      {@required String email, @required String password}) async {
+    final map = <String, Object>{'user': null, 'result': false, 'message': ''};
+    try {
+      final result = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       map['user'] = _getUserData(result.user);
       map['result'] = true;
