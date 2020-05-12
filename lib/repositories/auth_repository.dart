@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:nippo/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nippo/dateutil.dart';
@@ -62,6 +63,16 @@ class Auth {
     final result = await _firebaseAuth.signInWithCredential(
         GoogleAuthProvider.getCredential(
             idToken: googleAuth.idToken, accessToken: googleAuth.accessToken));
+    return _getUserData(result.user);
+  }
+
+  Future<User> signUpWithEmail(
+      {@required String email, @required String password}) async {
+    final result = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    if (result == null) {
+      return null;
+    }
     return _getUserData(result.user);
   }
 

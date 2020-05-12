@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nippo/pages/home.dart';
+import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/theme.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -6,42 +8,29 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = <String, TextEditingController>{
+    final _controller = <String, TextEditingController>{
       'email': TextEditingController(),
       'password': TextEditingController(),
     };
+    final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(title: const Text('メールアドレスの登録')),
       body: SafeArea(
+        key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+          padding: const EdgeInsets.only(top: 16, left: 24, right: 24),
           child: Column(
             children: <Widget>[
               LoginFormField(
-                  controller: controller['email'],
-                  hintText: 'メールアドレス',
-                  keyboardType: TextInputType.emailAddress),
-              const SizedBox(height: 24),
-              LoginFormField(
-                  controller: controller['password'], hintText: 'パスワード'),
-              const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                height: 54,
-                child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
-                  color: VIC.navy,
-                  child: Text('アカウント登録',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white)),
-                  onPressed: () {
-                    print(
-                        'value: ${controller['email'].text}, ${controller['password'].text}');
-                  },
-                ),
-              )
+                controller: _controller['email'],
+              ),
+              const SizedBox(height: 16),
+              PasswordFormField(
+                controller: _controller['password'],
+              ),
+              const SizedBox(height: 16),
+              SubmitBtn(formKey: _formKey, controller: _controller)
             ],
           ),
         ),
@@ -51,29 +40,128 @@ class RegisterPage extends StatelessWidget {
 }
 
 class LoginFormField extends StatelessWidget {
-  const LoginFormField(
-      {@required this.controller, this.hintText, this.keyboardType});
-
+  LoginFormField({@required this.controller});
   final TextEditingController controller;
-  final String hintText;
-  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(color: VIC.navy),
+      style:
+          TextStyle(color: VIC.navy, fontSize: 15, fontWeight: FontWeight.bold),
       cursorColor: VIC.navy,
       autofocus: true,
       controller: controller,
-      keyboardType: keyboardType,
       decoration: InputDecoration(
+        icon: Icon(Icons.email, size: 20, color: VIC.navy),
         contentPadding: const EdgeInsets.all(16),
         border: const OutlineInputBorder(
           borderSide: BorderSide(width: 1, color: VIC.border),
           gapPadding: 0,
         ),
-        hintText: hintText,
+        hintText: 'メールアドレス',
+        hintStyle: TextStyle(fontWeight: FontWeight.normal),
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'メールアドレスを入力しましょう';
+        }
+        return null;
+      },
+    );
+  }
+}
+
+class PasswordFormField extends StatefulWidget {
+  PasswordFormField({@required this.controller});
+
+  final TextEditingController controller;
+
+  @override
+  _PasswordFormFieldState createState() =>
+      _PasswordFormFieldState(controller: controller);
+}
+
+class _PasswordFormFieldState extends State<PasswordFormField> {
+  _PasswordFormFieldState({@required this.controller});
+
+  final TextEditingController controller;
+  bool obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      obscureText: obscureText,
+      style:
+          TextStyle(color: VIC.navy, fontSize: 15, fontWeight: FontWeight.bold),
+      cursorColor: VIC.navy,
+      autofocus: true,
+      controller: controller,
+      decoration: InputDecoration(
+          icon: Icon(Icons.lock, size: 20, color: VIC.navy),
+          contentPadding: const EdgeInsets.all(16),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: VIC.border),
+            gapPadding: 0,
+          ),
+          hintText: 'パスワード',
+          hintStyle: TextStyle(fontWeight: FontWeight.normal),
+          suffixIcon: IconButton(
+            icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
+            onPressed: () {
+              setState(() {
+                obscureText = !obscureText;
+              });
+            },
+          )),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'パスワードを入力しましょう';
+        }
+        return null;
+      },
+    );
+  }
+}
+
+class SubmitBtn extends StatelessWidget {
+  const SubmitBtn({
+    @required this.formKey,
+    @required this.controller,
+  });
+
+  final GlobalKey<FormState> formKey;
+  final Map<String, TextEditingController> controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 52,
+      child: FlatButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        color: VIC.navy,
+        child: Text('アカウント登録',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+        onPressed: () async {
+          if (formKey.currentState.validate()) {
+            print('validate');
+            await submit(controller, context);
+            Navigator.pushReplacementNamed(context, HomePage.routeName);
+            controller['email'].dispose();
+            controller['password'].dispose();
+          } else {
+            print('not validate');
+          }
+        },
       ),
     );
   }
+}
+
+Future<void> submit(
+    Map<String, TextEditingController> controller, BuildContext context) async {
+  final email = controller['email'].text;
+  final password = controller['password'].text;
+  print('value: $email, $password');
+  await Auth().signUpWithEmail(email: email, password: password);
 }
