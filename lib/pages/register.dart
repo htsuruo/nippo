@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:nippo/models/user.dart';
 import 'package:nippo/pages/home.dart';
 import 'package:nippo/repositories/auth_repository.dart';
+import 'package:nippo/repositories/user_repository.dart';
+import 'package:nippo/states/user_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
   static const String routeName = '/register';
@@ -154,10 +158,24 @@ class SubmitBtn extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
         onPressed: () async {
           if (formKey.currentState.validate()) {
-            await submit(controller, context);
-            Navigator.pushReplacementNamed(context, HomePage.routeName);
-            controller['email'].dispose();
-            controller['password'].dispose();
+            final map = await submit(controller, context);
+            if (map['result'] as bool) {
+              final tmpUser = map['user'] as User;
+              final user = User(
+                  uid: tmpUser.uid,
+                  email: tmpUser.email,
+                  providerData: tmpUser.providerData,
+                  lastSignInTime: tmpUser.lastSignInTime);
+              await UserRepository().createUser(user: user);
+              Provider.of<UserController>(context, listen: false)
+                  .updateData(user: user);
+              await Navigator.pushReplacementNamed(context, HomePage.routeName);
+              controller['email'].dispose();
+              controller['password'].dispose();
+              return;
+            }
+            print(map['result']);
+            print('error is ${map['message']}');
           }
         },
       ),
@@ -165,10 +183,10 @@ class SubmitBtn extends StatelessWidget {
   }
 }
 
-Future<void> submit(
+Future<Map<String, Object>> submit(
     Map<String, TextEditingController> controller, BuildContext context) async {
   final email = controller['email'].text;
   final password = controller['password'].text;
   print('value: $email, $password');
-  await Auth().signUpWithEmail(email: email, password: password);
+  return Auth().signUpWithEmail(email: email, password: password);
 }

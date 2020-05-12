@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:nippo/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nippo/dateutil.dart';
@@ -66,14 +67,19 @@ class Auth {
     return _getUserData(result.user);
   }
 
-  Future<User> signUpWithEmail(
+  Future<Map<String, Object>> signUpWithEmail(
       {@required String email, @required String password}) async {
-    final result = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
-    if (result == null) {
-      return null;
+    final map = <String, Object>{'user': null, 'result': false, 'message': ''};
+    try {
+      final result = await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      map['user'] = _getUserData(result.user);
+      map['result'] = true;
+    } on PlatformException catch (e) {
+      print(e);
+      map['message'] = e.toString();
     }
-    return _getUserData(result.user);
+    return map;
   }
 
   Future<void> signOut() async {
