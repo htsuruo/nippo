@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/pages/home.dart';
 import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/theme.dart';
+import 'package:email_validator/email_validator.dart';
 
 class RegisterPage extends StatelessWidget {
   static const String routeName = '/register';
@@ -17,21 +18,23 @@ class RegisterPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('メールアドレスの登録')),
       body: SafeArea(
-        key: _formKey,
         child: Padding(
           padding: const EdgeInsets.only(top: 16, left: 24, right: 24),
-          child: Column(
-            children: <Widget>[
-              LoginFormField(
-                controller: _controller['email'],
-              ),
-              const SizedBox(height: 16),
-              PasswordFormField(
-                controller: _controller['password'],
-              ),
-              const SizedBox(height: 16),
-              SubmitBtn(formKey: _formKey, controller: _controller)
-            ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                LoginFormField(
+                  controller: _controller['email'],
+                ),
+                const SizedBox(height: 16),
+                PasswordFormField(
+                  controller: _controller['password'],
+                ),
+                const SizedBox(height: 16),
+                SubmitBtn(formKey: _formKey, controller: _controller)
+              ],
+            ),
           ),
         ),
       ),
@@ -62,8 +65,12 @@ class LoginFormField extends StatelessWidget {
         hintStyle: TextStyle(fontWeight: FontWeight.normal),
       ),
       validator: (value) {
+        print(value);
         if (value.isEmpty) {
           return 'メールアドレスを入力しましょう';
+        }
+        if (!EmailValidator.validate(value)) {
+          return '正しく入力して下さい';
         }
         return null;
       },
@@ -117,6 +124,9 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
         if (value.isEmpty) {
           return 'パスワードを入力しましょう';
         }
+        if (value.length < 8) {
+          return '8文字以上必要です';
+        }
         return null;
       },
     );
@@ -144,13 +154,10 @@ class SubmitBtn extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
         onPressed: () async {
           if (formKey.currentState.validate()) {
-            print('validate');
             await submit(controller, context);
             Navigator.pushReplacementNamed(context, HomePage.routeName);
             controller['email'].dispose();
             controller['password'].dispose();
-          } else {
-            print('not validate');
           }
         },
       ),
