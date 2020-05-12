@@ -78,7 +78,7 @@ class RegisterPage extends StatelessWidget {
                         if (map['result'] as bool) {
                           await onSuccess(tmpUser: map['user'] as User);
                         } else {
-                          final message = map['user'].toString();
+                          final message = map['message'].toString();
                           onFailed(context: context, errMessage: message);
                         }
                       }
