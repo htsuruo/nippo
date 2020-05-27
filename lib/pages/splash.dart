@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/constant.dart';
-import 'package:nippo/pages/tutorial.dart';
-import 'package:nippo/repositories/user_repository.dart';
-import 'package:nippo/repositories/auth_repository.dart';
-import 'package:nippo/pages/home.dart';
+import 'package:nippo/pages/base.dart';
 import 'package:nippo/pages/signin.dart';
+import 'package:nippo/pages/tutorial.dart';
+import 'package:nippo/repositories/auth_repository.dart';
+import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,7 +51,7 @@ class _SplashPageState extends State<SplashPage> {
       if (currentUser != null) {
         Provider.of<UserController>(context, listen: false)
             .updateData(user: currentUser);
-        Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+        Navigator.of(context).pushReplacementNamed(BasePage.routeName);
         return;
       }
     }

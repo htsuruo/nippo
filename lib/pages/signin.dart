@@ -4,11 +4,11 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/components/atoms/signin_sns_btn.dart';
 import 'package:nippo/constant.dart';
-import 'package:nippo/pages/home.dart';
+import 'package:nippo/pages/base.dart';
 import 'package:nippo/pages/register.dart';
 import 'package:nippo/pages/signin_email.dart';
-import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/repositories/auth_repository.dart';
+import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:nippo/theme.dart';
@@ -39,7 +39,7 @@ class SignInPage extends StatelessWidget {
         await UserRepository().updateUser(user: user);
         Provider.of<UserController>(context, listen: false)
             .updateData(user: user);
-        Navigator.pushReplacementNamed(context, HomePage.routeName);
+        Navigator.pushReplacementNamed(context, BasePage.routeName);
       }
     } on Exception catch (e) {
       print(e);

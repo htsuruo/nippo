@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:nippo/pages/user_detail.dart';
-import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/models/user.dart';
+import 'package:nippo/pages/user/detail.dart';
+import 'package:nippo/repositories/user_repository.dart' as list;
 import 'package:nippo/theme.dart';
 
 @immutable
@@ -17,7 +17,7 @@ class UserPage extends StatelessWidget {
         title: const Text('登録者'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: UserRepository().fetchAllSnapshot(),
+        stream: list.UserRepository().fetchAllSnapshot(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           print('snapshot is $snapshot');
           switch (snapshot.connectionState) {

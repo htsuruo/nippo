@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/pages/setting.dart';
+import 'package:nippo/components/organisms/post_data_list_view_by_user.dart';
+import 'package:nippo/components/organisms/profile_area.dart';
+import 'package:nippo/pages/profile/setting.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
-import 'package:nippo/components/organisms/profile_area.dart';
-import 'package:nippo/components/organisms/post_data_list_view_by_user.dart';
 
 @immutable
 class ProfilePage extends StatelessWidget {
@@ -25,7 +25,6 @@ class ProfilePage extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: IconButton(
                     icon: Icon(Icons.more_horiz),
-//                    color: Colors.white,
                     onPressed: () {
                       Navigator.pushNamed(context, SettingPage.routeName);
                     },

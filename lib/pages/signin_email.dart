@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/molecules/login_form_field.dart';
 import 'package:nippo/components/molecules/password_form_field.dart';
-import 'package:nippo/repositories/auth_repository.dart';
-import 'package:provider/provider.dart';
-import 'package:nippo/pages/home.dart';
+import 'package:nippo/components/molecules/submit_btn.dart';
 import 'package:nippo/models/user.dart';
+import 'package:nippo/pages/base.dart';
+import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/states/user_state.dart';
-import 'package:nippo/components/molecules/submit_btn.dart';
+import 'package:provider/provider.dart';
 
 class SignInEmailPage extends StatelessWidget {
   static const String routeName = '/signin_email';
@@ -30,7 +30,7 @@ class SignInEmailPage extends StatelessWidget {
       await UserRepository().updateUser(user: user);
       Provider.of<UserController>(context, listen: false)
           .updateData(user: user);
-      await Navigator.pushReplacementNamed(context, HomePage.routeName);
+      await Navigator.pushReplacementNamed(context, BasePage.routeName);
       _controller['email'].dispose();
       _controller['password'].dispose();
       return;

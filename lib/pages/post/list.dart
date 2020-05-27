@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
-import 'package:nippo/pages/create.dart';
+import 'package:nippo/components/organisms/post_data_list_view.dart';
+import 'package:nippo/pages/post/create.dart';
 import 'package:nippo/repositories/post_repository.dart';
 import 'package:nippo/theme.dart';
-import 'package:nippo/components/organisms/post_data_list_view.dart';
 
 class HomeListPage extends StatelessWidget {
   final List<Tab> tabItems = <Tab>[

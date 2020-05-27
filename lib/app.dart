@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:nippo/pages/create.dart';
-import 'package:nippo/pages/home.dart';
+import 'package:nippo/pages/base.dart';
+import 'package:nippo/pages/post/create.dart';
+import 'package:nippo/pages/profile/setting.dart';
 import 'package:nippo/pages/register.dart';
-import 'package:nippo/pages/setting.dart';
 import 'package:nippo/pages/signin.dart';
 import 'package:nippo/pages/signin_email.dart';
 import 'package:nippo/pages/splash.dart';
 import 'package:nippo/pages/tutorial.dart';
-import 'package:nippo/pages/user.dart';
-import 'package:nippo/pages/user_detail.dart';
+import 'package:nippo/pages/user/detail.dart';
+import 'package:nippo/pages/user/list.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/states/user_state.dart';
 import 'package:nippo/theme.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           SplashPage.routeName: (context) => SplashPage(),
           TutorialPage.routeName: (context) => TutorialPage(),
-          HomePage.routeName: (context) => HomePage.wrapped(),
+          BasePage.routeName: (context) => BasePage.wrapped(),
           SignInPage.routeName: (context) => SignInPage(),
           SignInEmailPage.routeName: (context) => SignInEmailPage(),
           RegisterPage.routeName: (context) => RegisterPage(),
