@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:nippo/pages/home.dart';
 import 'package:provider/provider.dart';
-import 'package:nippo/states/bottom_nav_bar_state.dart';
 
 class NormalBottomNavBar extends StatelessWidget {
+  const NormalBottomNavBar({this.index, this.onTap});
+  final int index;
+  final Function(int) onTap;
   List<BottomNavigationBarItem> bottomItems() {
     return [
       BottomNavigationBarItem(
@@ -18,9 +21,9 @@ class NormalBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<BottomNavBarState>(context);
     return BottomNavigationBar(
-      onTap: (index) => provider.change(index: index),
+      onTap: onTap,
       items: bottomItems(),
-      currentIndex: provider.currentIndex,
+      currentIndex: index,
       selectedFontSize: 12,
       elevation: 5,
       backgroundColor: Colors.white,

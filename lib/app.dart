@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           SplashPage.routeName: (context) => SplashPage(),
           TutorialPage.routeName: (context) => TutorialPage(),
-          HomePage.routeName: (context) => HomePage(),
+          HomePage.routeName: (context) => HomePage.wrapped(),
           SignInPage.routeName: (context) => SignInPage(),
           SignInEmailPage.routeName: (context) => SignInEmailPage(),
           RegisterPage.routeName: (context) => RegisterPage(),

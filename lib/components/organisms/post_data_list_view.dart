@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/models/post.dart';
-import 'package:nippo/components/molecules/content_cart.dart';
+import 'package:nippo/components/molecules/content_card.dart';
 import 'package:nippo/theme.dart';
 
 class PostDataListView extends StatelessWidget {

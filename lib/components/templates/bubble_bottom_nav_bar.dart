@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
-import 'package:provider/provider.dart';
-import 'package:nippo/states/bottom_nav_bar_state.dart';
 
 class BubbleBottomNavBar extends StatelessWidget {
+  const BubbleBottomNavBar({this.index, this.onTap});
+  final int index;
+  final Function(int) onTap;
+
   List<BubbleBottomBarItem> bottomItems() {
     return [
       BubbleBottomBarItem(
@@ -45,19 +47,16 @@ class BubbleBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<BottomNavBarState>(context);
     return BubbleBottomBar(
       opacity: .2,
       hasNotch: true,
       hasInk: true,
-      onTap: (index) => provider.change(index: index),
+      onTap: onTap,
       items: bottomItems(),
-      currentIndex: provider.currentIndex,
-//      selectedFontSize: 12,
+      currentIndex: index,
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
       elevation: 5,
       backgroundColor: Colors.white,
-//      unselectedItemColor: const Color(0xFFCCCCCC),
     );
   }
 }
