@@ -4,7 +4,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/components/atoms/signin_sns_btn.dart';
 import 'package:nippo/constant.dart';
-import 'package:nippo/models/controllers/auth_controller/auth_controller.dart';
+import 'package:nippo/models/controllers/auth/auth_controller.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/models/repositories/user_repository.dart';
 import 'package:nippo/pages/auth/register_page.dart';

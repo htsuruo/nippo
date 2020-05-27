@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:nippo/models/controllers/auth_controller/auth_controller.dart';
-import 'package:nippo/models/controllers/auth_controller/auth_state.dart';
+import 'package:nippo/models/controllers/auth/auth_controller.dart';
+import 'package:nippo/models/controllers/auth/auth_state.dart';
 import 'package:nippo/pages/auth/register_page.dart';
 import 'package:nippo/pages/auth/sign_in_email_page.dart';
 import 'package:nippo/pages/auth/sign_in_page.dart';

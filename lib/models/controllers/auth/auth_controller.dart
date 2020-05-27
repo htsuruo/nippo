@@ -1,8 +1,8 @@
-import 'package:nippo/models/controllers/auth_controller/auth_state.dart';
+import 'package:nippo/models/controllers/auth/auth_state.dart';
 import 'package:nippo/models/entities/user.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-class AuthController extends StateNotifier<AuthState> with LocatorMixin {
+class AuthController extends StateNotifier<AuthState> {
   AuthController() : super(AuthState(user: null));
 
   void updateData({User user}) {

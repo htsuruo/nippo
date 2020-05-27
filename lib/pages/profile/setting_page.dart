@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/organisms/simple_list_container.dart';
 import 'package:nippo/components/organisms/simple_list_section.dart';
-import 'package:nippo/models/controllers/auth_controller/auth_state.dart';
+import 'package:nippo/models/controllers/auth/auth_state.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/pages/auth/sign_in_page.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +37,7 @@ class SettingPage extends StatelessWidget {
 }
 
 List<Widget> firstSection(BuildContext context) {
-  final provider = Provider.of<AuthState>(context).user;
+  final provider = context.select((AuthState s) => s.user);
   final children = [
     const SimpleListSection(title: 'ログイン情報'),
     const Divider(),

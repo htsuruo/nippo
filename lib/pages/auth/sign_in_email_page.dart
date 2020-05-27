@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/components/molecules/login_form_field.dart';
 import 'package:nippo/components/molecules/password_form_field.dart';
 import 'package:nippo/components/molecules/submit_btn.dart';
-import 'package:nippo/models/controllers/auth_controller/auth_controller.dart';
+import 'package:nippo/models/controllers/auth/auth_controller.dart';
 import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/models/repositories/user_repository.dart';
