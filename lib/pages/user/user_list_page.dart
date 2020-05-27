@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nippo/models/entities/user.dart';
+import 'package:nippo/models/repositories/user_repository.dart' as list;
 import 'package:nippo/pages/user/user_detail_page.dart';
-import 'package:nippo/repositories/user_repository.dart' as list;
 import 'package:nippo/theme.dart';
 
 @immutable

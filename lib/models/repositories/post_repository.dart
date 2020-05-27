@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nippo/models/entities/post.dart';
-import 'package:nippo/repositories/user_repository.dart';
+import 'package:nippo/models/repositories/user_repository.dart';
 
 class PostRepository {
   final Firestore fireStore = Firestore.instance;

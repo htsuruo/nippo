@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nippo/components/organisms/simple_list_container.dart';
 import 'package:nippo/components/organisms/simple_list_section.dart';
 import 'package:nippo/models/controllers/auth_controller/auth_state.dart';
+import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/pages/auth/sign_in_page.dart';
-import 'package:nippo/repositories/auth_repository.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 

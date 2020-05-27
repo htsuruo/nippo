@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/models/controllers/auth_controller/auth_state.dart';
 import 'package:nippo/models/entities/post.dart';
-import 'package:nippo/repositories/post_repository.dart';
+import 'package:nippo/models/repositories/post_repository.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';

@@ -3,7 +3,7 @@ import 'package:nippo/components/molecules/content_card.dart';
 import 'package:nippo/components/molecules/profile_total_post_count.dart';
 import 'package:nippo/models/entities/post.dart';
 import 'package:nippo/models/entities/user.dart';
-import 'package:nippo/repositories/post_repository.dart';
+import 'package:nippo/models/repositories/post_repository.dart';
 
 class PostDataListViewByUser extends StatelessWidget {
   const PostDataListViewByUser({@required this.user});
