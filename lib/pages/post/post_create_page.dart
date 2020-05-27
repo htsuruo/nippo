@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:nippo/models/post.dart';
+import 'package:nippo/models/controllers/auth_controller/auth_state.dart';
+import 'package:nippo/models/entities/post.dart';
 import 'package:nippo/repositories/post_repository.dart';
 import 'package:nippo/states/progress_hub_state.dart';
-import 'package:nippo/states/user_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -164,5 +164,5 @@ Future<void> submit(
       description: controller['description'].text);
   print('input: ${post.title}, ${post.description}');
   await PostRepository().createPost(
-      post: post, uid: Provider.of<UserState>(context, listen: false).user.uid);
+      post: post, uid: Provider.of<AuthState>(context, listen: false).user.uid);
 }

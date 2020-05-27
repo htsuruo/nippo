@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/organisms/post_data_list_view_by_user.dart';
 import 'package:nippo/components/organisms/profile_area.dart';
-import 'package:nippo/models/user.dart';
+import 'package:nippo/models/entities/user.dart';
 
 class UserDetailPage extends StatelessWidget {
   UserDetailPage({@required this.user});

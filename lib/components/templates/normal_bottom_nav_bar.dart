@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/pages/base.dart';
+import 'package:nippo/pages/base_page.dart';
 import 'package:provider/provider.dart';
 
 class NormalBottomNavBar extends StatelessWidget {
@@ -19,7 +19,7 @@ class NormalBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<BottomNavBarController>(context);
+    final provider = Provider.of<BottomNavigationBarController>(context);
     return BottomNavigationBar(
       onTap: onTap,
       items: bottomItems(),

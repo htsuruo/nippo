@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:nippo/models/user.dart';
+import 'package:flutter/material.dart';
+import 'package:nippo/models/entities/user.dart';
 
 class Post {
   Post({

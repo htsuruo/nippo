@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/constant.dart';
-import 'package:nippo/pages/base.dart';
-import 'package:nippo/pages/signin.dart';
-import 'package:nippo/pages/tutorial.dart';
+import 'package:nippo/models/controllers/auth_controller/auth_controller.dart';
+import 'package:nippo/pages/auth/sign_in_page.dart';
+import 'package:nippo/pages/base_page.dart';
+import 'package:nippo/pages/tutorial_page.dart';
 import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/repositories/user_repository.dart';
-import 'package:nippo/states/user_state.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,8 +49,7 @@ class _SplashPageState extends State<SplashPage> {
       final authUser = await Auth().currentUser();
       final currentUser = await UserRepository().fetchOne(uid: authUser.uid);
       if (currentUser != null) {
-        Provider.of<UserController>(context, listen: false)
-            .updateData(user: currentUser);
+        context.read<AuthController>().updateData(user: currentUser);
         Navigator.of(context).pushReplacementNamed(BasePage.routeName);
         return;
       }

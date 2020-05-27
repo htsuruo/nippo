@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/organisms/post_data_list_view_by_user.dart';
 import 'package:nippo/components/organisms/profile_area.dart';
-import 'package:nippo/pages/profile/setting.dart';
-import 'package:nippo/states/user_state.dart';
+import 'package:nippo/models/controllers/auth_controller/auth_state.dart';
+import 'package:nippo/pages/profile/setting_page.dart';
 import 'package:provider/provider.dart';
 
 @immutable
@@ -11,7 +11,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = Provider.of<UserState>(context).user;
+    final currentUser = Provider.of<AuthState>(context).user;
 
     return Scaffold(
       body: SafeArea(

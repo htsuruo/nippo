@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:nippo/components/templates/bubble_bottom_nav_bar.dart';
-import 'package:nippo/pages/post/list.dart';
-import 'package:nippo/pages/profile/profile.dart';
-import 'package:nippo/pages/user/list.dart';
+import 'package:nippo/pages/post/post_list_page.dart';
+import 'package:nippo/pages/profile/profile_page.dart';
+import 'package:nippo/pages/user/user_list_page.dart';
 import 'package:provider/provider.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -12,8 +12,8 @@ class BasePage extends StatelessWidget {
   static const String routeName = '/home';
 
   static Widget wrapped() {
-    return StateNotifierProvider<BottomNavBarController, int>(
-      create: (context) => BottomNavBarController(),
+    return StateNotifierProvider<BottomNavigationBarController, int>(
+      create: (context) => BottomNavigationBarController(),
       child: const BasePage._(),
     );
   }
@@ -23,9 +23,9 @@ class BasePage extends StatelessWidget {
     return Scaffold(
       body: PageView(),
       bottomNavigationBar: BubbleBottomNavBar(
-        index: context.select((BottomNavBarController s) => s.currentIndex),
+        index: context.select((int s) => s),
         onTap: (index) {
-          context.read<BottomNavBarController>().currentIndex = index;
+          context.read<BottomNavigationBarController>().change(index: index);
         },
       ),
     );
@@ -41,14 +41,15 @@ class PageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _currentPage(
-          page: context.select((BottomNavBarController s) => s.currentIndex)),
+      child: _currentPage(page: context.select((int s) => s)),
     );
   }
 }
 
-class BottomNavBarController extends StateNotifier<int> {
-  BottomNavBarController() : super(0);
-  int get currentIndex => state;
-  set currentIndex(int index) => index;
+class BottomNavigationBarController extends StateNotifier<int> {
+  BottomNavigationBarController() : super(0);
+  void change({int index}) {
+    state = index;
+    print('change to bottomNavIndex: $index');
+  }
 }

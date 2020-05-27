@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/components/organisms/post_data_list_view.dart';
-import 'package:nippo/pages/post/create.dart';
+import 'package:nippo/pages/post/post_create_page.dart';
 import 'package:nippo/repositories/post_repository.dart';
 import 'package:nippo/theme.dart';
 

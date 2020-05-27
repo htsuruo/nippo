@@ -4,13 +4,13 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/components/atoms/signin_sns_btn.dart';
 import 'package:nippo/constant.dart';
-import 'package:nippo/pages/base.dart';
-import 'package:nippo/pages/register.dart';
-import 'package:nippo/pages/signin_email.dart';
+import 'package:nippo/models/controllers/auth_controller/auth_controller.dart';
+import 'package:nippo/pages/auth/register_page.dart';
+import 'package:nippo/pages/auth/sign_in_email_page.dart';
+import 'package:nippo/pages/base_page.dart';
 import 'package:nippo/repositories/auth_repository.dart';
 import 'package:nippo/repositories/user_repository.dart';
 import 'package:nippo/states/progress_hub_state.dart';
-import 'package:nippo/states/user_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -37,8 +37,7 @@ class SignInPage extends StatelessWidget {
       final user = await Auth().signInWithGoogle();
       if (user != null) {
         await UserRepository().updateUser(user: user);
-        Provider.of<UserController>(context, listen: false)
-            .updateData(user: user);
+        context.read<AuthController>().updateData(user: user);
         Navigator.pushReplacementNamed(context, BasePage.routeName);
       }
     } on Exception catch (e) {

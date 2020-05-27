@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:nippo/pages/base.dart';
-import 'package:nippo/pages/post/create.dart';
-import 'package:nippo/pages/profile/setting.dart';
-import 'package:nippo/pages/register.dart';
-import 'package:nippo/pages/signin.dart';
-import 'package:nippo/pages/signin_email.dart';
-import 'package:nippo/pages/splash.dart';
-import 'package:nippo/pages/tutorial.dart';
-import 'package:nippo/pages/user/detail.dart';
-import 'package:nippo/pages/user/list.dart';
+import 'package:nippo/models/controllers/auth_controller/auth_controller.dart';
+import 'package:nippo/models/controllers/auth_controller/auth_state.dart';
+import 'package:nippo/pages/auth/register_page.dart';
+import 'package:nippo/pages/auth/sign_in_email_page.dart';
+import 'package:nippo/pages/auth/sign_in_page.dart';
+import 'package:nippo/pages/base_page.dart';
+import 'package:nippo/pages/post/post_create_page.dart';
+import 'package:nippo/pages/profile/setting_page.dart';
+import 'package:nippo/pages/splash_page.dart';
+import 'package:nippo/pages/tutorial_page.dart';
+import 'package:nippo/pages/user/user_detail_page.dart';
+import 'package:nippo/pages/user/user_list_page.dart';
 import 'package:nippo/states/progress_hub_state.dart';
-import 'package:nippo/states/user_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -23,8 +24,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ProgressHUDState>(
           create: (context) => ProgressHUDState(),
         ),
-        StateNotifierProvider<UserController, UserState>(
-          create: (context) => UserController(),
+        StateNotifierProvider<AuthController, AuthState>(
+          create: (context) => AuthController(),
         )
       ],
       child: MaterialApp(
