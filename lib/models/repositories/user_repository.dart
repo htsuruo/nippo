@@ -39,7 +39,11 @@ class UserRepository {
 
   void fetchAllSnapshot({Function(QuerySnapshot) func}) {
     print('UserRepository -> fetchAllSnapshot');
-    fireStore.collection(collection).snapshots().listen(func);
+    fireStore
+        .collection(collection)
+        .orderBy('lastSignInTime', descending: true)
+        .snapshots()
+        .listen(func);
   }
 
   Future<User> fetchOne({@required String uid}) async {

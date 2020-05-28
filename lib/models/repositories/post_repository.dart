@@ -1,27 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nippo/models/entities/post.dart';
-import 'package:nippo/models/repositories/user_repository.dart';
 
 class PostRepository {
   final Firestore fireStore = Firestore.instance;
   static const String collection = 'posts';
-  final limit = 20; //TODO(tsuruoka):仮
+  final int limit = 20; //TODO(tsuruoka):仮
 
-  Future<List<Post>> fetchAll() async {
-    print('PostRepository -> fetchAll');
-    final posts = await fireStore
+  void fetchSnapshot({Function(QuerySnapshot) func}) {
+    print('PostRepository -> fetchSnapshot');
+    fireStore
         .collection(collection)
         .orderBy('createdAt', descending: true)
         .limit(limit)
-        .getDocuments();
-    final postList = <Post>[];
-    for (final post in posts.documents) {
-      final p = Post.fromJson(post.data);
-      p.user = await UserRepository().fetchOneFromRef(ref: p.userRef);
-      postList.add(p);
-    }
-    return postList;
+        .snapshots()
+        .listen(func);
   }
 
   Future<List<Post>> fetchByUser({@required String uid}) async {

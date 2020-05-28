@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/components/post_card.dart';
-import 'package:nippo/models/controllers/post/post_controller.dart';
 import 'package:nippo/models/controllers/post/post_state.dart';
 import 'package:nippo/models/entities/post.dart';
 import 'package:nippo/pages/post/post_create_page.dart';
@@ -10,14 +8,7 @@ import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
 class PostListPage extends StatelessWidget {
-  const PostListPage._({Key key}) : super(key: key);
-
-  static Widget wrapped() {
-    return StateNotifierProvider<PostController, PostState>(
-      create: (context) => PostController(),
-      child: const PostListPage._(),
-    );
-  }
+  const PostListPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

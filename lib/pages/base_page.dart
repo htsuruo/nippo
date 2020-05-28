@@ -3,6 +3,8 @@ import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:nippo/components/templates/bubble_bottom_nav_bar.dart';
 import 'package:nippo/models/controllers/auth/auth_controller.dart';
 import 'package:nippo/models/controllers/auth/auth_state.dart';
+import 'package:nippo/models/controllers/post/post_controller.dart';
+import 'package:nippo/models/controllers/post/post_state.dart';
 import 'package:nippo/models/controllers/user/user_controller.dart';
 import 'package:nippo/models/controllers/user/user_state.dart';
 import 'package:nippo/pages/post/post_list_page.dart';
@@ -20,6 +22,9 @@ class BasePage extends StatelessWidget {
       providers: [
         StateNotifierProvider<AuthController, AuthState>(
           create: (context) => AuthController(),
+        ),
+        StateNotifierProvider<PostController, PostState>(
+          create: (context) => PostController(),
         ),
         StateNotifierProvider<UserController, UserState>(
           create: (context) => UserController(),
@@ -49,7 +54,7 @@ class BasePage extends StatelessWidget {
 class PageView extends StatelessWidget {
   Widget _currentPage({int page}) {
     final pageList = [
-      PostListPage.wrapped(),
+      const PostListPage(),
       const UserPage(),
       const ProfilePage()
     ];
