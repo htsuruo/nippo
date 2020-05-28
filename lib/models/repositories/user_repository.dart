@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nippo/models/entities/user.dart';
@@ -24,20 +26,20 @@ class UserRepository {
     await fireStore.collection(collection).document(user.uid).setData(map);
   }
 
-  Future<List<User>> fetchAll() async {
-    print('UserRepository -> fetchUserAll');
-    final docs = await fireStore.collection(collection).getDocuments();
-    final users = <User>[];
-    for (final doc in docs.documents) {
-      final user = User.fromJson(doc.data);
-      users.add(user);
-    }
-    return users;
-  }
+//  Future<List<User>> fetchAll() async {
+//    print('UserRepository -> fetchUserAll');
+//    final docs = await fireStore.collection(collection).getDocuments();
+//    final users = <User>[];
+//    for (final doc in docs.documents) {
+//      final user = User.fromJson(doc.data);
+//      users.add(user);
+//    }
+//    return users;
+//  }
 
-  Stream<QuerySnapshot> fetchAllSnapshot() {
+  void fetchAllSnapshot({Function(QuerySnapshot) func}) {
     print('UserRepository -> fetchAllSnapshot');
-    return fireStore.collection(collection).snapshots();
+    fireStore.collection(collection).snapshots().listen(func);
   }
 
   Future<User> fetchOne({@required String uid}) async {

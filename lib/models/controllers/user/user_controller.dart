@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nippo/models/controllers/user/user_state.dart';
+import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/models/repositories/user_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
@@ -6,10 +8,19 @@ class UserController extends StateNotifier<UserState> with LocatorMixin {
   UserController() : super(UserState(users: []));
 
   @override
-  Future<void> initState() async {
+  void initState() {
     // TODO(tsuru): implement initState
-    state = UserState(
-      users: await UserRepository().fetchAll(),
-    );
+    void sync(QuerySnapshot querySnapshot) {
+      final users = <User>[];
+      for (final element in querySnapshot.documents) {
+        final user = User.fromJson(element.data);
+        users.add(user);
+      }
+      state = UserState(
+        users: users,
+      );
+    }
+
+    UserRepository().fetchAllSnapshot(func: sync);
   }
 }

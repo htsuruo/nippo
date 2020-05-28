@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:nippo/models/controllers/user/user_controller.dart';
 import 'package:nippo/models/controllers/user/user_state.dart';
 import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/pages/user/user_detail_page.dart';
 import 'package:provider/provider.dart';
 
 class UserPage extends StatelessWidget {
-  const UserPage._({Key key}) : super(key: key);
+  const UserPage({Key key}) : super(key: key);
   static const String routeName = '/user';
-
-  static Widget wrapped() {
-    return StateNotifierProvider<UserController, UserState>(
-      create: (context) => UserController(),
-      child: const UserPage._(),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
