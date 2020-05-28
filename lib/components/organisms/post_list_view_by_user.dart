@@ -11,30 +11,31 @@ class PostListViewByUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ProfileTotalPostCount(
-          postCount: posts.length,
-        ),
-        SizedBox(
-          height: 200,
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              final data = posts[index];
-              final post = Post(
-                title: data.title,
-                description: data.description,
-                createdAt: data.createdAt,
-              );
-              return PostCard(
-                post: post,
-                user: user,
-              );
-            },
-            itemCount: posts.length,
+    return Expanded(
+      child: Column(
+        children: <Widget>[
+          ProfileTotalPostCount(
+            postCount: posts.length,
           ),
-        )
-      ],
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                final data = posts[index];
+                final post = Post(
+                  title: data.title,
+                  description: data.description,
+                  createdAt: data.createdAt,
+                );
+                return PostCard(
+                  post: post,
+                  user: user,
+                );
+              },
+              itemCount: posts.length,
+            ),
+          )
+        ],
+      ),
     );
     ;
   }

@@ -21,30 +21,45 @@ class PostListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final posts = context.select((PostState s) => s.posts);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const AppLogo(height: 50),
       ),
-      body: SafeArea(
-        child: ListView.builder(
-          itemCount: posts.length,
-          itemBuilder: (context, index) {
-            final data = posts[index];
-            final post = Post(
-              title: data.title,
-              description: data.description,
-              createdAt: data.createdAt,
-            );
-            return PostCard(
-              post: post,
-              user: data.user,
-            );
-          },
-        ),
+      body: const SafeArea(
+        child: PostListView(),
       ),
       floatingActionButton: FAB(),
+    );
+  }
+}
+
+class PostListView extends StatelessWidget {
+  const PostListView({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final posts = context.select((PostState s) => s.posts);
+    if (posts != null) {
+      return ListView.builder(
+        itemCount: posts.length,
+        itemBuilder: (context, index) {
+          final data = posts[index];
+          final post = Post(
+            title: data.title,
+            description: data.description,
+            createdAt: data.createdAt,
+          );
+          return PostCard(
+            post: post,
+            user: data.user,
+          );
+        },
+      );
+    }
+    // TODO(tsuruoka):読込中にインジケータを表示したいが表示されない.
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 }
