@@ -6,9 +6,7 @@ import 'package:state_notifier/state_notifier.dart';
 class AuthController extends StateNotifier<AuthState> with LocatorMixin {
   AuthController() : super(AuthState(user: null, posts: []));
 
-  @override
-  Future<void> initState() async {
-    // TODO(tsuruoka): implement initState
+  Future<void> updateData() async {
     print('AuthController -> initState');
     if (await AuthRepository().isLogin()) {
       final currentUser = await AuthRepository().currentUser();

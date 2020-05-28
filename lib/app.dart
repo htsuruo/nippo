@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:nippo/models/controllers/auth/auth_controller.dart';
-import 'package:nippo/models/controllers/auth/auth_state.dart';
 import 'package:nippo/pages/auth/register_page.dart';
 import 'package:nippo/pages/auth/sign_in_email_page.dart';
 import 'package:nippo/pages/auth/sign_in_page.dart';
@@ -14,6 +12,9 @@ import 'package:nippo/pages/user/user_detail_page.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
+
+import 'models/controllers/auth/auth_controller.dart';
+import 'models/controllers/auth/auth_state.dart';
 
 class MyApp extends StatelessWidget {
   @override

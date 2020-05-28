@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:nippo/components/templates/bubble_bottom_nav_bar.dart';
 import 'package:nippo/models/controllers/auth/auth_controller.dart';
-import 'package:nippo/models/controllers/auth/auth_state.dart';
 import 'package:nippo/models/controllers/post/post_controller.dart';
 import 'package:nippo/models/controllers/post/post_state.dart';
 import 'package:nippo/models/controllers/user/user_controller.dart';
@@ -20,9 +19,6 @@ class BasePage extends StatelessWidget {
   static Widget wrapped() {
     return MultiProvider(
       providers: [
-        StateNotifierProvider<AuthController, AuthState>(
-          create: (context) => AuthController(),
-        ),
         StateNotifierProvider<PostController, PostState>(
           create: (context) => PostController(),
         ),
@@ -39,6 +35,7 @@ class BasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<AuthController>().updateData();
     return Scaffold(
       body: PageView(),
       bottomNavigationBar: BubbleBottomNavBar(
