@@ -38,18 +38,18 @@ class SettingPage extends StatelessWidget {
 }
 
 List<Widget> firstSection(BuildContext context) {
-  final provider = context.select((AuthState s) => s.user);
+  final currentUser = context.select((AuthState s) => s.user);
   final children = [
     const SimpleListSection(title: 'ログイン情報'),
     const Divider(),
     SimpleListContainer(
       title: '認証プロバイダ',
-      trailing: Text(provider.providerData),
+      trailing: Text(currentUser != null ? currentUser.providerData : '読込中'),
     ),
     const Divider(indent: 16),
     SimpleListContainer(
       title: '最終ログイン日時',
-      trailing: Text(provider.lastSignInTime),
+      trailing: Text(currentUser != null ? currentUser.lastSignInTime : '読込中'),
     ),
     const Divider(),
   ];
