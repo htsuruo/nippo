@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
+  const SettingPage({Key key}) : super(key: key);
   static const String routeName = '/setting';
 
   @override

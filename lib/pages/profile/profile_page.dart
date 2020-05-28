@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 @immutable
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({Key key}) : super(key: key);
   static const String routeName = '/profile';
 
   @override

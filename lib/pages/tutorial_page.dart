@@ -5,6 +5,7 @@ import 'package:nippo/pages/auth/sign_in_page.dart';
 import 'package:nippo/theme.dart';
 
 class TutorialPage extends StatelessWidget {
+  const TutorialPage({Key key}) : super(key: key);
   static const String routeName = '/tutorial';
 
   @override

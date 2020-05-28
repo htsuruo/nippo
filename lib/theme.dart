@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData setTheme(BuildContext context) {
-  return ThemeData.light().copyWith(
-      primaryColor: VIC.navy,
-      backgroundColor: Colors.white,
-      textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
-      scaffoldBackgroundColor: Colors.white,
-      appBarTheme: AppBarTheme(
-        color: Colors.white,
-        elevation: 0.5,
-        iconTheme: IconThemeData(color: Colors.black),
-        textTheme: TextTheme(
-            title: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black)),
-      ),
+  return ThemeData.from(
+    colorScheme: const ColorScheme.light(
+      primary: VIC.navy,
+    ),
+  ).copyWith(
+    backgroundColor: Colors.white,
+    textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
+    scaffoldBackgroundColor: Colors.white,
+    appBarTheme: AppBarTheme(
+      color: Colors.white,
+      elevation: 0.5,
+      iconTheme: const IconThemeData(color: Colors.black),
+      textTheme: TextTheme(
+          title: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
+    ),
 //      dividerColor: Colors.black26,
-      dividerTheme:
-          DividerThemeData(color: Colors.black26, thickness: 0, space: 2));
+    dividerTheme:
+        DividerThemeData(color: Colors.black26, thickness: 0, space: 2),
+  );
 }
 
 // Visual Identity Color.

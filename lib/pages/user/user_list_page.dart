@@ -51,8 +51,8 @@ class UserPage extends StatelessWidget {
 }
 
 class UserListView extends StatelessWidget {
-  UserListView({@required this.users});
-  List<User> users;
+  const UserListView({@required this.users});
+  final List<User> users;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class UserListView extends StatelessWidget {
             trailing: Icon(Icons.navigate_next),
             onTap: () {
               Navigator.pushNamed(context, UserDetailPage.routeName,
-                  arguments: UserDetailPage(
+                  arguments: UserDetailArgs(
                     user: user,
                   ));
             },

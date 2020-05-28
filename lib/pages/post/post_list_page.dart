@@ -72,6 +72,7 @@ class FAB extends StatelessWidget {
       },
       child: Icon(Icons.mode_edit),
       backgroundColor: VIC.red,
+      foregroundColor: Colors.white,
     );
   }
 }
