@@ -32,7 +32,7 @@ class PostCard extends StatelessWidget {
                         horizontal: 12, vertical: 12),
                     child: CircleAvatar(
                       child: Image.network(
-                        user.photoUrl,
+                        user.photoUrl ?? '',
                         fit: BoxFit.cover,
                       ),
                     )),

@@ -4,7 +4,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/components/atoms/signin_sns_btn.dart';
 import 'package:nippo/constant.dart';
-import 'package:nippo/models/controllers/auth/auth_controller.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/models/repositories/user_repository.dart';
 import 'package:nippo/pages/auth/register_page.dart';
@@ -34,10 +33,9 @@ class SignInPage extends StatelessWidget {
     try {
       Provider.of<ProgressHUDState>(context, listen: false)
           .update(newState: true);
-      final user = await Auth().signInWithGoogle();
+      final user = await AuthRepository().signInWithGoogle();
       if (user != null) {
         await UserRepository().updateUser(user: user);
-        context.read<AuthController>().updateData(user: user);
         Navigator.pushReplacementNamed(context, BasePage.routeName);
       }
     } on Exception catch (e) {

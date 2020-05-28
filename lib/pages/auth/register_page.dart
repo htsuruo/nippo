@@ -4,7 +4,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/components/molecules/login_form_field.dart';
 import 'package:nippo/components/molecules/password_form_field.dart';
 import 'package:nippo/components/molecules/submit_btn.dart';
-import 'package:nippo/models/controllers/auth/auth_controller.dart';
 import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/models/repositories/user_repository.dart';
@@ -27,7 +26,7 @@ class RegisterPage extends StatelessWidget {
     Future<Map<String, Object>> submit() async {
       final email = _controller['email'].text;
       final password = _controller['password'].text;
-      return Auth().signUpWithEmail(email: email, password: password);
+      return AuthRepository().signUpWithEmail(email: email, password: password);
     }
 
     Future<void> onSuccess({User tmpUser}) async {
@@ -37,7 +36,6 @@ class RegisterPage extends StatelessWidget {
           providerData: tmpUser.providerData,
           lastSignInTime: tmpUser.lastSignInTime);
       await UserRepository().updateUser(user: user);
-      context.read<AuthController>().updateData(user: user);
       await Navigator.pushReplacementNamed(context, BasePage.routeName);
       _controller['email'].dispose();
       _controller['password'].dispose();

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:nippo/components/templates/bubble_bottom_nav_bar.dart';
+import 'package:nippo/models/controllers/auth/auth_controller.dart';
+import 'package:nippo/models/controllers/auth/auth_state.dart';
 import 'package:nippo/models/controllers/user/user_controller.dart';
 import 'package:nippo/models/controllers/user/user_state.dart';
 import 'package:nippo/pages/post/post_list_page.dart';
@@ -16,6 +18,9 @@ class BasePage extends StatelessWidget {
   static Widget wrapped() {
     return MultiProvider(
       providers: [
+        StateNotifierProvider<AuthController, AuthState>(
+          create: (context) => AuthController(),
+        ),
         StateNotifierProvider<UserController, UserState>(
           create: (context) => UserController(),
         ),

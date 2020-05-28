@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
 import 'package:nippo/constant.dart';
-import 'package:nippo/models/controllers/auth/auth_controller.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
-import 'package:nippo/models/repositories/user_repository.dart';
 import 'package:nippo/pages/auth/sign_in_page.dart';
 import 'package:nippo/pages/base_page.dart';
 import 'package:nippo/pages/tutorial_page.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
@@ -46,14 +43,9 @@ class _SplashPageState extends State<SplashPage> {
 //  }
 
   Future<void> handleTimeout() async {
-    if (await Auth().isLogin()) {
-      final authUser = await Auth().currentUser();
-      final currentUser = await UserRepository().fetchOne(uid: authUser.uid);
-      if (currentUser != null) {
-        context.read<AuthController>().updateData(user: currentUser);
-        Navigator.of(context).pushReplacementNamed(BasePage.routeName);
-        return;
-      }
+    if (await AuthRepository().isLogin()) {
+      Navigator.of(context).pushReplacementNamed(BasePage.routeName);
+      return;
     }
     final prefs = await SharedPreferences.getInstance();
     if (prefs.getInt(Pref.IS_TUTORIAL_DONE) == 1) {

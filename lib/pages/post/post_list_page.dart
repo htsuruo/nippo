@@ -40,7 +40,7 @@ class PostListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final posts = context.select((PostState s) => s.posts);
-    if (posts != null) {
+    if (posts.isNotEmpty) {
       return ListView.builder(
         itemCount: posts.length,
         itemBuilder: (context, index) {
@@ -57,7 +57,6 @@ class PostListView extends StatelessWidget {
         },
       );
     }
-    // TODO(tsuruoka):読込中にインジケータを表示したいが表示されない.
     return const Center(
       child: CircularProgressIndicator(),
     );

@@ -7,7 +7,7 @@ import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Auth {
+class AuthRepository {
   final _firebaseAuth = FirebaseAuth.instance;
 
   User _getUserData(FirebaseUser user) {

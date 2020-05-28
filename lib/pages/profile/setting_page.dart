@@ -108,7 +108,7 @@ class SignOutBtn extends StatelessWidget {
 }
 
 Future<void> signOut(BuildContext context) async {
-  await Auth().signOut();
+  await AuthRepository().signOut();
   await Navigator.pushNamedAndRemoveUntil(
       context, SignInPage.routeName, (Route<dynamic> route) => false);
 }

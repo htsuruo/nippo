@@ -23,12 +23,11 @@ class SignInEmailPage extends StatelessWidget {
     Future<Map<String, Object>> submit() async {
       final email = _controller['email'].text;
       final password = _controller['password'].text;
-      return Auth().signInWithEmail(email: email, password: password);
+      return AuthRepository().signInWithEmail(email: email, password: password);
     }
 
     Future<void> onSuccess({User user}) async {
       await UserRepository().updateUser(user: user);
-      context.read<AuthController>().updateData(user: user);
       await Navigator.pushReplacementNamed(context, BasePage.routeName);
       _controller['email'].dispose();
       _controller['password'].dispose();

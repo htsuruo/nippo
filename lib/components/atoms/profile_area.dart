@@ -13,7 +13,7 @@ class ProfileArea extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8),
           child: ProfileCircleImage(
-            imageUrl: user.photoUrl,
+            imageUrl: user.photoUrl ?? '',
           ),
         ),
         Padding(
