@@ -34,7 +34,11 @@ class BasePage extends StatelessWidget {
 
 class PageView extends StatelessWidget {
   Widget _currentPage({int page}) {
-    final pageList = [HomeListPage(), UserPage.wrapped(), ProfilePage()];
+    final pageList = [
+      PostListPage.wrapped(),
+      UserPage.wrapped(),
+      const ProfilePage()
+    ];
     return pageList[page];
   }
 

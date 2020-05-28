@@ -11,7 +11,6 @@ import 'package:nippo/pages/profile/setting_page.dart';
 import 'package:nippo/pages/splash_page.dart';
 import 'package:nippo/pages/tutorial_page.dart';
 import 'package:nippo/pages/user/user_detail_page.dart';
-import 'package:nippo/pages/user/user_list_page.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +39,6 @@ class MyApp extends StatelessWidget {
           SignInPage.routeName: (context) => SignInPage(),
           SignInEmailPage.routeName: (context) => SignInEmailPage(),
           RegisterPage.routeName: (context) => const RegisterPage(),
-          UserPage.routeName: (context) => UserPage.wrapped(),
           UserDetailPage.routeName: (context) => const UserDetailPage(),
           SettingPage.routeName: (context) => const SettingPage(),
           CreatePage.routeName: (context) => CreatePage(),

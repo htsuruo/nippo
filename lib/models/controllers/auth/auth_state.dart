@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:nippo/models/entities/user.dart';
 
 class AuthState {
-  AuthState({this.user});
+  AuthState({@required this.user});
   User user;
 }
