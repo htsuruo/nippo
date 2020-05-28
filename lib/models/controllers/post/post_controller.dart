@@ -17,7 +17,8 @@ class PostController extends StateNotifier<PostState> with LocatorMixin {
         final posts = <Post>[];
         for (final element in querySnapshot.documents) {
           final post = Post.fromJson(element.data);
-          post.user = await UserRepository().fetchOneFromRef(ref: post.userRef);
+          post.user =
+              await read<UserRepository>().fetchOneFromRef(ref: post.userRef);
           posts.add(post);
         }
         state = PostState(
@@ -26,11 +27,11 @@ class PostController extends StateNotifier<PostState> with LocatorMixin {
         );
       }
 
-      PostRepository().fetchSnapshot(func: sync);
+      read<PostRepository>().fetchSnapshot(func: sync);
     } else {
       state = PostState(
         posts: null,
-        postsByUserId: await PostRepository().fetchByUser(uid: uid),
+        postsByUserId: await read<PostRepository>().fetchByUser(uid: uid),
       );
     }
   }

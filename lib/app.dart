@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:nippo/models/repositories/auth_repository.dart';
+import 'package:nippo/models/repositories/post_repository.dart';
+import 'package:nippo/models/repositories/user_repository.dart';
 import 'package:nippo/pages/auth/register_page.dart';
 import 'package:nippo/pages/auth/sign_in_email_page.dart';
 import 'package:nippo/pages/auth/sign_in_page.dart';
@@ -23,6 +26,15 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ProgressHUDState>(
           create: (context) => ProgressHUDState(),
+        ),
+        Provider(
+          create: (context) => AuthRepository(),
+        ),
+        Provider(
+          create: (context) => PostRepository(),
+        ),
+        Provider(
+          create: (context) => UserRepository(),
         ),
         StateNotifierProvider<AuthController, AuthState>(
           create: (context) => AuthController(),

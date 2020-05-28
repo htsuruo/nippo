@@ -21,6 +21,6 @@ class UserController extends StateNotifier<UserState> with LocatorMixin {
       );
     }
 
-    UserRepository().fetchAllSnapshot(func: sync);
+    read<UserRepository>().fetchAllSnapshot(func: sync);
   }
 }
