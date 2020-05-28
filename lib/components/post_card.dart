@@ -5,10 +5,10 @@ import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/theme.dart';
 import 'package:nippo/util.dart';
 
-class ContentCard extends StatelessWidget {
-  ContentCard({this.post, this.user});
-  Post post;
-  User user;
+class PostCard extends StatelessWidget {
+  const PostCard({this.post, this.user});
+  final Post post;
+  final User user;
 
   @override
   Widget build(BuildContext context) {

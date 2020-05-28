@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/components/organisms/post_data_list_view_by_user.dart';
-import 'package:nippo/components/organisms/profile_area.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:nippo/components/atoms/profile_area.dart';
+import 'package:nippo/components/organisms/post_list_view_by_user.dart';
+import 'package:nippo/models/controllers/post/post_controller.dart';
+import 'package:nippo/models/controllers/post/post_state.dart';
 import 'package:nippo/models/entities/user.dart';
+import 'package:provider/provider.dart';
 
 class UserDetailPage extends StatelessWidget {
   const UserDetailPage({Key key}) : super(key: key);
@@ -10,19 +14,46 @@ class UserDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context).settings.arguments as UserDetailArgs;
-    return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        alignment: Alignment.center,
-        child: SafeArea(
-          child: Column(
-            children: <Widget>[
-              ProfileArea(user: args.user),
-              PostDataListViewByUser(user: args.user),
-            ],
+    return StateNotifierProvider<PostController, PostState>(
+      //TODO(tsuru):wrapped()で切り出したいがargsを受け渡したい
+      create: (context) => PostController(uid: args.user.uid),
+      builder: (context, _child) => Scaffold(
+        appBar: AppBar(),
+        body: Container(
+          alignment: Alignment.center,
+          child: SafeArea(
+            child: Column(
+              children: <Widget>[
+                ProfileArea(user: args.user),
+                PostListView(user: args.user),
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class PostListView extends StatelessWidget {
+  const PostListView({
+    Key key,
+    @required this.user,
+  }) : super(key: key);
+
+  final User user;
+
+  @override
+  Widget build(BuildContext context) {
+    final posts = context.select((PostState s) => s.postsByUserId);
+    if (posts == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return PostListViewByUser(
+      posts: posts,
+      user: user,
     );
   }
 }

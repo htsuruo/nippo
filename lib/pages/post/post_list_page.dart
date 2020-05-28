@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:nippo/components/atoms/app_logo.dart';
-import 'package:nippo/components/molecules/content_card.dart';
+import 'package:nippo/components/post_card.dart';
 import 'package:nippo/models/controllers/post/post_controller.dart';
 import 'package:nippo/models/controllers/post/post_state.dart';
 import 'package:nippo/models/entities/post.dart';
@@ -25,7 +25,6 @@ class PostListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0,
         title: const AppLogo(height: 50),
       ),
       body: SafeArea(
@@ -38,7 +37,7 @@ class PostListPage extends StatelessWidget {
               description: data.description,
               createdAt: data.createdAt,
             );
-            return ContentCard(
+            return PostCard(
               post: post,
               user: data.user,
             );

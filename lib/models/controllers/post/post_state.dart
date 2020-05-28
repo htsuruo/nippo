@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:nippo/models/entities/post.dart';
 
 class PostState {
-  PostState({@required this.posts});
+  PostState({this.posts, this.postsByUserId});
   final List<Post> posts;
+  final List<Post> postsByUserId;
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-@immutable
 class SignInSnsBtn extends StatelessWidget {
   const SignInSnsBtn({@required this.logoImg, this.label, this.onPressed});
 
