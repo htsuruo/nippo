@@ -1,14 +1,21 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:nippo/models/controllers/user/user_controller.dart';
+import 'package:nippo/models/controllers/user/user_state.dart';
 import 'package:nippo/models/entities/user.dart';
-import 'package:nippo/models/repositories/user_repository.dart' as list;
 import 'package:nippo/pages/user/user_detail_page.dart';
-import 'package:nippo/theme.dart';
+import 'package:provider/provider.dart';
 
-@immutable
 class UserPage extends StatelessWidget {
+  const UserPage._({Key key}) : super(key: key);
   static const String routeName = '/user';
-  final Firestore fireStore = Firestore.instance;
+
+  static Widget wrapped() {
+    return StateNotifierProvider<UserController, UserState>(
+      create: (context) => UserController(),
+      child: const UserPage._(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,36 +23,7 @@ class UserPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('登録者'),
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: list.UserRepository().fetchAllSnapshot(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          print('snapshot is $snapshot');
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return const Center(
-                child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(VIC.green)),
-              );
-            case ConnectionState.active:
-              if (!snapshot.hasData) {
-                return const Center(child: Text('データが見つかりません'));
-              }
-              if (snapshot.hasError) {
-                return const Center(child: Text('エラーです'));
-              }
-              final snapList =
-                  snapshot.data.documents as List<DocumentSnapshot>;
-              final users = <User>[];
-              for (final doc in snapList) {
-                final user = User.fromJson(doc.data);
-                users.add(user);
-              }
-              return UserListView(users: users);
-            default:
-              return const Center(child: Text('hgohoge'));
-          }
-        },
-      ),
+      body: UserListView(users: context.select((UserState u) => u.users)),
     );
   }
 }
