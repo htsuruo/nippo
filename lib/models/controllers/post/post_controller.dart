@@ -13,7 +13,7 @@ class PostController extends StateNotifier<PostState> with LocatorMixin {
   Future<void> initState() async {
     // TODO(tsuru): implement initState
     if (uid == null) {
-      void sync(QuerySnapshot querySnapshot) async {
+      Future<void> sync(QuerySnapshot querySnapshot) async {
         final posts = <Post>[];
         for (final element in querySnapshot.documents) {
           final post = Post.fromJson(element.data);
