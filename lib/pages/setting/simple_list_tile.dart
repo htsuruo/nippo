@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SimpleListContainer extends StatelessWidget {
-  const SimpleListContainer({@required this.title, this.trailing, this.onTap});
+class SimpleListTile extends StatelessWidget {
+  const SimpleListTile({@required this.title, this.trailing, this.onTap});
   final String title;
   final Widget trailing;
   final Function() onTap;

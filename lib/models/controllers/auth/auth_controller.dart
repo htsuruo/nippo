@@ -18,4 +18,6 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
       );
     }
   }
+
+  Future<void> signOut() async => AuthRepository().signOut();
 }
