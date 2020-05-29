@@ -17,7 +17,7 @@
 * CodeMagicなどでCI/CDを回し、TestFlightなどチーム内での共有フローを把握すること。
 
 ## サマリ
-* 状態管理はProvider（StateNotifierとChangeNotifierの併用）
+* 状態管理はStateNotifierProviderを利用し、単方向データフロー
 * Widgetは基本的にStateless Widgetを利用
 * 認証はFirebase Auth、DBはFirestoreを利用し足りない部分をCloud functionsで拡張
 
