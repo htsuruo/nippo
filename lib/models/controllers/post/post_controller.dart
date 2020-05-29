@@ -32,4 +32,8 @@ class PostController extends StateNotifier<PostState> with LocatorMixin {
       postsByUserId: await read<PostRepository>().fetchByUser(uid: uid),
     );
   }
+
+  Future<void> create({Post post, String uid}) async {
+    await read<PostRepository>().create(post: post, uid: uid);
+  }
 }

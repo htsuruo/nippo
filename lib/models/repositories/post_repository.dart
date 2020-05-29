@@ -35,7 +35,7 @@ class PostRepository {
   }
 
 //  usersコレクションのサブコレクションとして追加する.
-  Future<void> createPost({Post post, String uid}) async {
+  Future<void> create({Post post, String uid}) async {
     print('PostRepository -> createPost');
     post.createdAt = Timestamp.fromDate(DateTime.now());
     final map = post.toJson();
