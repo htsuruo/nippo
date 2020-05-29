@@ -26,17 +26,6 @@ class UserRepository {
     await fireStore.collection(collection).document(user.uid).setData(map);
   }
 
-//  Future<List<User>> fetchAll() async {
-//    print('UserRepository -> fetchUserAll');
-//    final docs = await fireStore.collection(collection).getDocuments();
-//    final users = <User>[];
-//    for (final doc in docs.documents) {
-//      final user = User.fromJson(doc.data);
-//      users.add(user);
-//    }
-//    return users;
-//  }
-
   void fetchAllSnapshot({Function(QuerySnapshot) func}) {
     print('UserRepository -> fetchAllSnapshot');
     fireStore

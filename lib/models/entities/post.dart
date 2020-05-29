@@ -3,26 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nippo/models/entities/user.dart';
 
-//part 'post.g.dart';
-//
-//@JsonSerializable()
-//class Post {
-//  Post({
-//    @required this.title,
-//    this.description,
-//    this.createdAt,
-//    this.userRef,
-//    this.user,
-//  });
-//  final String title;
-//  final String description;
-//  final Timestamp createdAt;
-//  final DocumentReference userRef;
-//  final User user;
-//  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
-//  Map<String, dynamic> toJson() => _$PostToJson(this);
-//}
-
+// TODO(tsuruoka): JsonSerializableを利用したいがtimeStamp周りの良い書き方が分からない.
 class Post {
   Post({
     @required this.title,
