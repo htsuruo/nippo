@@ -31,7 +31,7 @@ class PostListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final posts = context.select((PostState s) => s.posts);
-    if (posts.isNotEmpty) {
+    if (posts != null && posts.isNotEmpty) {
       return ListView.builder(
         itemCount: posts.length,
         itemBuilder: (context, index) {

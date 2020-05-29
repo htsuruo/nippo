@@ -12,7 +12,7 @@ T _$identity<T>(T value) => value;
 class _$AuthStateTearOff {
   const _$AuthStateTearOff();
 
-  _AuthState call({User user = null, List<Post> posts = const <Post>[]}) {
+  _AuthState call({User user, List<Post> posts = const <Post>[]}) {
     return _AuthState(
       user: user,
       posts: posts,
@@ -84,11 +84,9 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 }
 
 class _$_AuthState with DiagnosticableTreeMixin implements _AuthState {
-  const _$_AuthState({this.user = null, this.posts = const <Post>[]})
-      : assert(user != null),
-        assert(posts != null);
+  const _$_AuthState({this.user, this.posts = const <Post>[]})
+      : assert(posts != null);
 
-  @JsonKey(defaultValue: null)
   @override
   final User user;
   @JsonKey(defaultValue: const <Post>[])
