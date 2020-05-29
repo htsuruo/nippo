@@ -16,6 +16,10 @@ import 'package:provider/provider.dart';
 
 import 'models/controllers/auth/auth_controller.dart';
 import 'models/controllers/auth/auth_state.dart';
+import 'models/controllers/post/post_controller.dart';
+import 'models/controllers/post/post_state.dart';
+import 'models/controllers/user/user_controller.dart';
+import 'models/controllers/user/user_state.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -33,7 +37,13 @@ class MyApp extends StatelessWidget {
         ),
         StateNotifierProvider<AuthController, AuthState>(
           create: (context) => AuthController(),
-        )
+        ),
+        StateNotifierProvider<PostController, PostState>(
+          create: (context) => PostController(),
+        ),
+        StateNotifierProvider<UserController, UserState>(
+          create: (context) => UserController(),
+        ),
       ],
       child: MaterialApp(
         title: 'NIPPO',

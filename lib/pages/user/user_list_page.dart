@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/models/controllers/user/user_state.dart';
 import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/pages/user/user_detail_page.dart';
+import 'package:nippo/pages/user/user_list_tile.dart';
 import 'package:provider/provider.dart';
 
 class UserPage extends StatelessWidget {
@@ -30,30 +31,12 @@ class UserListView extends StatelessWidget {
         final user = users[index];
         return Padding(
           padding: const EdgeInsets.all(8),
-          child: ListTile(
-            title: Text(
-              user.displayName,
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('認証プロバイダ: ${user.providerData}',
-                    style: const TextStyle(fontSize: 12)),
-                Text('最終ログイン: ${user.lastSignInTime}',
-                    style: const TextStyle(fontSize: 12)),
-              ],
-            ),
-            leading: CircleAvatar(
-              child: Image.network(user.photoUrl),
-            ),
-            trailing: Icon(Icons.navigate_next),
-            onTap: () {
-              Navigator.pushNamed(context, UserDetailPage.routeName,
-                  arguments: UserDetailArgs(
-                    user: user,
-                  ));
-            },
+          child: UserListTile(
+            user: user,
+            onTap: () => Navigator.pushNamed(context, UserDetailPage.routeName,
+                arguments: UserDetailArgs(
+                  user: user,
+                )),
           ),
         );
       },

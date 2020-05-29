@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:nippo/components/bubble_bottom_nav_bar.dart';
 import 'package:nippo/models/controllers/auth/auth_controller.dart';
-import 'package:nippo/models/controllers/post/post_controller.dart';
-import 'package:nippo/models/controllers/post/post_state.dart';
-import 'package:nippo/models/controllers/user/user_controller.dart';
-import 'package:nippo/models/controllers/user/user_state.dart';
 import 'package:nippo/pages/post/post_list_page.dart';
 import 'package:nippo/pages/profile/profile_page.dart';
 import 'package:nippo/pages/user/user_list_page.dart';
@@ -17,18 +13,8 @@ class BasePage extends StatelessWidget {
   static const String routeName = '/home';
 
   static Widget wrapped() {
-    return MultiProvider(
-      providers: [
-        StateNotifierProvider<PostController, PostState>(
-          create: (context) => PostController(),
-        ),
-        StateNotifierProvider<UserController, UserState>(
-          create: (context) => UserController(),
-        ),
-        StateNotifierProvider<BottomNavigationBarController, int>(
-          create: (context) => BottomNavigationBarController(),
-        ),
-      ],
+    return StateNotifierProvider<BottomNavigationBarController, int>(
+      create: (context) => BottomNavigationBarController(),
       child: const BasePage._(),
     );
   }
@@ -39,7 +25,7 @@ class BasePage extends StatelessWidget {
     return Scaffold(
       body: PageView(),
       bottomNavigationBar: BubbleBottomNavBar(
-        index: context.select((int s) => s),
+        index: context.select((int currentIndex) => currentIndex),
         onTap: (index) {
           context.read<BottomNavigationBarController>().change(index: index);
         },
@@ -61,7 +47,8 @@ class PageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _currentPage(page: context.select((int s) => s)),
+      child: _currentPage(
+          page: context.select((int currentIndex) => currentIndex)),
     );
   }
 }

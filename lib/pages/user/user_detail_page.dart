@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:nippo/components/post_list_view_by_user.dart';
 import 'package:nippo/components/profile_area.dart';
 import 'package:nippo/models/controllers/post/post_controller.dart';
@@ -14,20 +13,17 @@ class UserDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context).settings.arguments as UserDetailArgs;
-    return StateNotifierProvider<PostController, PostState>(
-      // TODO(tsuru): wrapped()で切り出したいがargsを受け渡したい
-      create: (context) => PostController(uid: args.user.uid),
-      builder: (context, _child) => Scaffold(
-        appBar: AppBar(),
-        body: Container(
-          alignment: Alignment.center,
-          child: SafeArea(
-            child: Column(
-              children: <Widget>[
-                ProfileArea(user: args.user),
-                PostListView(user: args.user),
-              ],
-            ),
+    context.watch<PostController>().fetchByUser(uid: args.user.uid);
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(
+        alignment: Alignment.center,
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              ProfileArea(user: args.user),
+              PostListView(user: args.user),
+            ],
           ),
         ),
       ),
