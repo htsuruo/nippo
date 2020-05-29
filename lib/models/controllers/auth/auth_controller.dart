@@ -4,7 +4,7 @@ import 'package:nippo/models/repositories/post_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 class AuthController extends StateNotifier<AuthState> with LocatorMixin {
-  AuthController() : super(AuthState(user: null, posts: []));
+  AuthController() : super(AuthState());
 
   Future<void> updateData() async {
     print('AuthController -> initState');

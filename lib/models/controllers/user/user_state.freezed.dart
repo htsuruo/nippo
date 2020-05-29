@@ -12,7 +12,7 @@ T _$identity<T>(T value) => value;
 class _$UserStateTearOff {
   const _$UserStateTearOff();
 
-  _UserState call({@required List<User> users}) {
+  _UserState call({List<User> users = const <User>[]}) {
     return _UserState(
       users: users,
     );
@@ -78,8 +78,9 @@ class __$UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
 }
 
 class _$_UserState with DiagnosticableTreeMixin implements _UserState {
-  const _$_UserState({@required this.users}) : assert(users != null);
+  const _$_UserState({this.users = const <User>[]}) : assert(users != null);
 
+  @JsonKey(defaultValue: const <User>[])
   @override
   final List<User> users;
 
@@ -114,7 +115,7 @@ class _$_UserState with DiagnosticableTreeMixin implements _UserState {
 }
 
 abstract class _UserState implements UserState {
-  const factory _UserState({@required List<User> users}) = _$_UserState;
+  const factory _UserState({List<User> users}) = _$_UserState;
 
   @override
   List<User> get users;

@@ -8,6 +8,6 @@ part 'user_state.freezed.dart';
 @freezed
 abstract class UserState with _$UserState {
   const factory UserState({
-    @required List<User> users,
+    @Default(<User>[]) List<User> users,
   }) = _UserState;
 }

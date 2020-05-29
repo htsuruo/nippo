@@ -15,7 +15,7 @@ class UserRepository {
       await createUser(user: user);
       return;
     }
-    currentUser.lastSignInTime = user.lastSignInTime;
+//    currentUser.lastSignInTime = user.lastSignInTime;
     final map = currentUser.toJson();
     await fireStore.collection(collection).document(user.uid).setData(map);
   }

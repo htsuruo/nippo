@@ -9,7 +9,7 @@ part 'auth_state.freezed.dart';
 @freezed
 abstract class AuthState with _$AuthState {
   const factory AuthState({
-    @required User user,
-    @required List<Post> posts,
+    @Default(null) User user,
+    @Default(<Post>[]) List<Post> posts,
   }) = _AuthState;
 }
