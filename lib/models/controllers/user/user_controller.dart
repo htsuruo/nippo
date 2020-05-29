@@ -5,7 +5,7 @@ import 'package:nippo/models/repositories/user_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 class UserController extends StateNotifier<UserState> with LocatorMixin {
-  UserController() : super(UserState(users: []));
+  UserController() : super(const UserState(users: []));
 
   @override
   void initState() {

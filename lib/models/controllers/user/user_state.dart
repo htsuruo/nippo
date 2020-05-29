@@ -1,7 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nippo/models/entities/user.dart';
 
-class UserState {
-  UserState({@required this.users});
-  List<User> users;
+part 'user_state.freezed.dart';
+
+@freezed
+abstract class UserState with _$UserState {
+  const factory UserState({
+    @required List<User> users,
+  }) = _UserState;
 }

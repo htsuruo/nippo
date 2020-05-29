@@ -1,9 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nippo/models/entities/post.dart';
 import 'package:nippo/models/entities/user.dart';
 
-class AuthState {
-  AuthState({@required this.user, @required this.posts});
-  User user;
-  List<Post> posts;
+part 'auth_state.freezed.dart';
+
+@freezed
+abstract class AuthState with _$AuthState {
+  const factory AuthState({
+    @required User user,
+    @required List<Post> posts,
+  }) = _AuthState;
 }

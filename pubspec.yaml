@@ -39,12 +39,16 @@ dependencies:
   url_launcher:
   shared_preferences:
   email_validator:
+  freezed_annotation:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: any
   pedantic_mono: any
+  json_serializable:
+  build_runner:
+  freezed:
 
 
 flutter_icons:

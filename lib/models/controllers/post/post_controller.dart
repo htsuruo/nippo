@@ -6,7 +6,7 @@ import 'package:nippo/models/repositories/user_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 class PostController extends StateNotifier<PostState> with LocatorMixin {
-  PostController({this.uid}) : super(PostState(posts: []));
+  PostController({this.uid}) : super(const PostState());
   final String uid;
 
   @override
@@ -21,16 +21,14 @@ class PostController extends StateNotifier<PostState> with LocatorMixin {
               await read<UserRepository>().fetchOneFromRef(ref: post.userRef);
           posts.add(post);
         }
-        state = PostState(
+        state = state.copyWith(
           posts: posts,
-          postsByUserId: null,
         );
       }
 
       read<PostRepository>().fetchSnapshot(func: sync);
     } else {
-      state = PostState(
-        posts: null,
+      state = state.copyWith(
         postsByUserId: await read<PostRepository>().fetchByUser(uid: uid),
       );
     }
