@@ -16,7 +16,7 @@ class PostCard extends StatelessWidget {
       padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
       child: InkWell(
         onTap: () async {
-          onTapCard(context: context);
+          await onTapCard(context: context);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -80,19 +80,6 @@ class PostCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.favorite_border,
-                      color: VIC.red,
-                      size: 26,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
             ],
           ),
         ),
@@ -100,7 +87,7 @@ class PostCard extends StatelessWidget {
     );
   }
 
-  void onTapCard({BuildContext context}) async {
+  Future<void> onTapCard({BuildContext context}) async {
     final res = await showModalBottomSheet<int>(
         context: context,
         builder: (BuildContext context) {
