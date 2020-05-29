@@ -130,6 +130,7 @@ class SubmitBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final uid = context.select((AuthState s) => s.user.uid);
     return FlatButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       color: VIC.red,
@@ -137,12 +138,13 @@ class SubmitBtn extends StatelessWidget {
         if (formKey.currentState.validate()) {
           Provider.of<ProgressHUDState>(context, listen: false)
               .update(newState: true);
-          await submit(controller, context);
+          await submit(controller: controller, context: context, uid: uid);
+          // TODO(tsuruoka): Stateless Widgetでもdispose()は明示しなければならない?
+//          controller['title'].dispose();
+//          controller['description'].dispose();
           Navigator.pop(context);
           Provider.of<ProgressHUDState>(context, listen: false)
               .update(newState: false);
-          controller['title'].dispose();
-          controller['description'].dispose();
         }
       },
       child: Padding(
@@ -158,11 +160,12 @@ class SubmitBtn extends StatelessWidget {
 }
 
 Future<void> submit(
-    Map<String, TextEditingController> controller, BuildContext context) async {
+    {Map<String, TextEditingController> controller,
+    BuildContext context,
+    String uid}) async {
   final post = Post(
       title: controller['title'].text,
       description: controller['description'].text);
   print('input: ${post.title}, ${post.description}');
-  await PostRepository()
-      .createPost(post: post, uid: context.select((AuthState s) => s.user.uid));
+  await PostRepository().createPost(post: post, uid: uid);
 }
