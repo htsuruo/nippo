@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/components/atoms/app_logo.dart';
+import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/constant.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/pages/auth/sign_in_page.dart';
 import 'package:nippo/pages/base_page.dart';
-import 'package:nippo/pages/tutorial_page.dart';
+import 'package:nippo/pages/tutorial/tutorial_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {

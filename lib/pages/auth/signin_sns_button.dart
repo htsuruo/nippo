@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SignInSnsBtn extends StatelessWidget {
-  const SignInSnsBtn({@required this.logoImg, this.label, this.onPressed});
+class SignInSnsButton extends StatelessWidget {
+  const SignInSnsButton({@required this.logoImg, this.label, this.onPressed});
 
   final Image logoImg;
   final String label;

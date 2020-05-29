@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:nippo/components/molecules/login_form_field.dart';
-import 'package:nippo/components/molecules/password_form_field.dart';
-import 'package:nippo/components/molecules/submit_btn.dart';
 import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/models/repositories/user_repository.dart';
+import 'package:nippo/pages/auth/email_form_field.dart';
+import 'package:nippo/pages/auth/password_form_field.dart';
+import 'package:nippo/pages/auth/submit_button.dart';
 import 'package:nippo/pages/base_page.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +72,7 @@ class RegisterPage extends StatelessWidget {
                   //SnackBar表示のためにcontextを生成.
                   Builder(
                     builder: (context) {
-                      return SubmitBtn(
+                      return SubmitButton(
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
                             final map = await submit();

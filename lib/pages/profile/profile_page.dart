@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/components/atoms/profile_area.dart';
-import 'package:nippo/components/organisms/post_list_view_by_user.dart';
+import 'package:nippo/components/post_list_view_by_user.dart';
+import 'package:nippo/components/profile_area.dart';
 import 'package:nippo/models/controllers/auth/auth_state.dart';
-import 'package:nippo/pages/profile/setting_page.dart';
+import 'package:nippo/pages/setting/setting_page.dart';
 import 'package:provider/provider.dart';
 
 @immutable

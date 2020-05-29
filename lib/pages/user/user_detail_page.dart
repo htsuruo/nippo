@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:nippo/components/atoms/profile_area.dart';
-import 'package:nippo/components/organisms/post_list_view_by_user.dart';
+import 'package:nippo/components/post_list_view_by_user.dart';
+import 'package:nippo/components/profile_area.dart';
 import 'package:nippo/models/controllers/post/post_controller.dart';
 import 'package:nippo/models/controllers/post/post_state.dart';
 import 'package:nippo/models/entities/user.dart';

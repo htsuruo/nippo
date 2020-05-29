@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:nippo/components/atoms/app_logo.dart';
-import 'package:nippo/components/atoms/signin_sns_btn.dart';
+import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/constant.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/models/repositories/user_repository.dart';
 import 'package:nippo/pages/auth/register_page.dart';
 import 'package:nippo/pages/auth/sign_in_email_page.dart';
+import 'package:nippo/pages/auth/signin_sns_button.dart';
 import 'package:nippo/pages/base_page.dart';
 import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/theme.dart';
@@ -72,7 +72,7 @@ class SignInPage extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              SignInSnsBtn(
+              SignInSnsButton(
                 logoImg: googleLogo,
                 label: 'Sign in with Google',
                 onPressed: () async => signInWithGoogle(context: context),
@@ -80,7 +80,7 @@ class SignInPage extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-              SignInSnsBtn(
+              SignInSnsButton(
                 logoImg: mailLogo,
                 label: 'Sign in with Email',
                 onPressed: () => onClickSignInWithEmailBtn(context: context),

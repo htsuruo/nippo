@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
-class SubmitBtn extends StatelessWidget {
-  const SubmitBtn({@required this.onPressed, @required this.btnText});
+class SubmitButton extends StatelessWidget {
+  const SubmitButton({@required this.onPressed, @required this.btnText});
   final Function() onPressed;
   final String btnText;
 
