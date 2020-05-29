@@ -1,25 +1,35 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/models/controllers/auth/auth_state.dart';
 import 'package:nippo/models/entities/post.dart';
 import 'package:nippo/models/repositories/post_repository.dart';
-import 'package:nippo/states/progress_hub_state.dart';
+import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
-class CreatePage extends StatelessWidget {
+final _formKey = GlobalKey<FormState>();
+final _formController = {
+  'title': TextEditingController(),
+  'description': TextEditingController(),
+};
+
+class PostCreatePage extends StatelessWidget {
+  const PostCreatePage._({Key key}) : super(key: key);
   static const String routeName = '/create';
-  final _formKey = GlobalKey<FormState>();
-  final _formController = {
-    'title': TextEditingController(),
-    'description': TextEditingController(),
-  };
+
+  static Widget wrapped() {
+    return StateNotifierProvider<ProgressHUDController, bool>(
+      create: (context) => ProgressHUDController(),
+      builder: (context, _child) => const PostCreatePage._(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-      inAsyncCall: Provider.of<ProgressHUDState>(context).saving,
+      inAsyncCall: context.select((bool s) => s),
       child: Scaffold(
         appBar: AppBar(
           title: Row(
@@ -136,15 +146,13 @@ class SubmitBtn extends StatelessWidget {
       color: VIC.red,
       onPressed: () async {
         if (formKey.currentState.validate()) {
-          Provider.of<ProgressHUDState>(context, listen: false)
-              .update(newState: true);
+          context.read<ProgressHUDController>().update(newState: true);
           await submit(controller: controller, context: context, uid: uid);
           // TODO(tsuruoka): Stateless Widgetでもdispose()は明示しなければならない?
 //          controller['title'].dispose();
 //          controller['description'].dispose();
           Navigator.pop(context);
-          Provider.of<ProgressHUDState>(context, listen: false)
-              .update(newState: false);
+          context.read<ProgressHUDController>().update(newState: false);
         }
       },
       child: Padding(

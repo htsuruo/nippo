@@ -7,12 +7,10 @@ import 'package:nippo/pages/auth/register_page.dart';
 import 'package:nippo/pages/auth/sign_in_email_page.dart';
 import 'package:nippo/pages/auth/sign_in_page.dart';
 import 'package:nippo/pages/base_page.dart';
-import 'package:nippo/pages/post/post_create_page.dart';
 import 'package:nippo/pages/setting/setting_page.dart';
 import 'package:nippo/pages/splash_page.dart';
 import 'package:nippo/pages/tutorial/tutorial_page.dart';
 import 'package:nippo/pages/user/user_detail_page.dart';
-import 'package:nippo/states/progress_hub_state.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -24,9 +22,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ProgressHUDState>(
-          create: (context) => ProgressHUDState(),
-        ),
         Provider(
           create: (context) => AuthRepository(),
         ),
@@ -49,12 +44,11 @@ class MyApp extends StatelessWidget {
           SplashPage.routeName: (context) => const SplashPage(),
           TutorialPage.routeName: (context) => const TutorialPage(),
           BasePage.routeName: (context) => BasePage.wrapped(),
-          SignInPage.routeName: (context) => SignInPage(),
+          SignInPage.routeName: (context) => SignInPage.wrapped(),
           SignInEmailPage.routeName: (context) => SignInEmailPage(),
           RegisterPage.routeName: (context) => const RegisterPage(),
           UserDetailPage.routeName: (context) => const UserDetailPage(),
           SettingPage.routeName: (context) => const SettingPage(),
-          CreatePage.routeName: (context) => CreatePage(),
         },
       ),
     );

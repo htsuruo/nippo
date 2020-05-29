@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/constant.dart';
@@ -9,30 +10,28 @@ import 'package:nippo/pages/auth/register_page.dart';
 import 'package:nippo/pages/auth/sign_in_email_page.dart';
 import 'package:nippo/pages/auth/signin_sns_button.dart';
 import 'package:nippo/pages/base_page.dart';
-import 'package:nippo/states/progress_hub_state.dart';
+import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
-@immutable
-// ignore: must_be_immutable
+const double snsLogoHeight = 24;
+Image mailLogo = Image(
+  image: ExactAssetImage(AssetPath.MAIL_LOGO_PATH),
+  height: snsLogoHeight,
+);
+
+Image googleLogo = Image(
+  image: ExactAssetImage(AssetPath.GOOGLE_LOGO_PATH),
+  height: snsLogoHeight,
+);
+
 class SignInPage extends StatelessWidget {
+  const SignInPage._({Key key}) : super(key: key);
   static const String routeName = '/signin';
-  static const double snsLogoHeight = 24;
-
-  Image mailLogo = Image(
-    image: ExactAssetImage(AssetPath.MAIL_LOGO_PATH),
-    height: snsLogoHeight,
-  );
-
-  Image googleLogo = Image(
-    image: ExactAssetImage(AssetPath.GOOGLE_LOGO_PATH),
-    height: snsLogoHeight,
-  );
 
   Future<void> signInWithGoogle({BuildContext context}) async {
     try {
-      Provider.of<ProgressHUDState>(context, listen: false)
-          .update(newState: true);
+      context.read<ProgressHUDController>().update(newState: true);
       final user = await AuthRepository().signInWithGoogle();
       if (user != null) {
         await UserRepository().updateUser(user: user);
@@ -41,11 +40,10 @@ class SignInPage extends StatelessWidget {
     } on Exception catch (e) {
       print(e);
     }
-    Provider.of<ProgressHUDState>(context, listen: false)
-        .update(newState: false);
+    context.read<ProgressHUDController>().update(newState: false);
   }
 
-  void onClickSignInWithEmailBtn({BuildContext context}) {
+  void onClickSignInWithEmailButton({BuildContext context}) {
     Navigator.push(
         context,
         MaterialPageRoute<MaterialPageRoute>(
@@ -55,10 +53,17 @@ class SignInPage extends StatelessWidget {
             }));
   }
 
+  static Widget wrapped() {
+    return StateNotifierProvider<ProgressHUDController, bool>(
+      create: (context) => ProgressHUDController(),
+      builder: (context, _child) => const SignInPage._(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-      inAsyncCall: Provider.of<ProgressHUDState>(context).saving,
+      inAsyncCall: context.select((bool s) => s),
       child: Scaffold(
           body: SafeArea(
         child: Center(
@@ -83,7 +88,7 @@ class SignInPage extends StatelessWidget {
               SignInSnsButton(
                 logoImg: mailLogo,
                 label: 'Sign in with Email',
-                onPressed: () => onClickSignInWithEmailBtn(context: context),
+                onPressed: () => onClickSignInWithEmailButton(context: context),
               ),
               const SizedBox(
                 height: 16,

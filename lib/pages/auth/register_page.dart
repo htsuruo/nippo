@@ -8,7 +8,7 @@ import 'package:nippo/pages/auth/email_form_field.dart';
 import 'package:nippo/pages/auth/password_form_field.dart';
 import 'package:nippo/pages/auth/submit_button.dart';
 import 'package:nippo/pages/base_page.dart';
-import 'package:nippo/states/progress_hub_state.dart';
+import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -51,7 +51,7 @@ class RegisterPage extends StatelessWidget {
     }
 
     return ModalProgressHUD(
-      inAsyncCall: Provider.of<ProgressHUDState>(context).saving,
+      inAsyncCall: Provider.of<ProgressHUDController>(context).saving,
       child: Scaffold(
         appBar: AppBar(title: const Text('メールアドレスで登録')),
         body: SafeArea(

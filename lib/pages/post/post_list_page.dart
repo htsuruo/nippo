@@ -63,7 +63,7 @@ class FAB extends StatelessWidget {
             context,
             MaterialPageRoute<MaterialPageRoute>(
               builder: (BuildContext context) {
-                return CreatePage();
+                return PostCreatePage.wrapped();
               },
               fullscreenDialog: true,
             ));
