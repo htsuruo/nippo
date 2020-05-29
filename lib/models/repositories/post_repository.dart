@@ -5,7 +5,7 @@ import 'package:nippo/models/entities/post.dart';
 class PostRepository {
   final Firestore fireStore = Firestore.instance;
   static const String collection = 'posts';
-  final int limit = 20; //TODO(tsuruoka):仮
+  final int limit = 20; // TODO(tsuruoka): 仮
 
   void fetchSnapshot({Function(QuerySnapshot) func}) {
     print('PostRepository -> fetchSnapshot');

@@ -37,6 +37,5 @@ class PostListViewByUser extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }

@@ -1,9 +1,9 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
-import 'package:email_validator/email_validator.dart';
 
 class EmailFormField extends StatelessWidget {
-  EmailFormField({@required this.controller});
+  const EmailFormField({@required this.controller});
   final TextEditingController controller;
 
   @override

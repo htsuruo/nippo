@@ -44,14 +44,14 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> handleTimeout() async {
     if (await AuthRepository().isLogin()) {
-      Navigator.of(context).pushReplacementNamed(BasePage.routeName);
+      await Navigator.of(context).pushReplacementNamed(BasePage.routeName);
       return;
     }
     final prefs = await SharedPreferences.getInstance();
     if (prefs.getInt(Pref.IS_TUTORIAL_DONE) == 1) {
-      Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
+      await Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
       return;
     }
-    Navigator.of(context).pushReplacementNamed(TutorialPage.routeName);
+    await Navigator.of(context).pushReplacementNamed(TutorialPage.routeName);
   }
 }

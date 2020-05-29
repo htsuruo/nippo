@@ -15,7 +15,7 @@ class UserDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context).settings.arguments as UserDetailArgs;
     return StateNotifierProvider<PostController, PostState>(
-      //TODO(tsuru):wrapped()で切り出したいがargsを受け渡したい
+      // TODO(tsuru): wrapped()で切り出したいがargsを受け渡したい
       create: (context) => PostController(uid: args.user.uid),
       builder: (context, _child) => Scaffold(
         appBar: AppBar(),

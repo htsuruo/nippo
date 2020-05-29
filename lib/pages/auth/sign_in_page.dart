@@ -36,7 +36,7 @@ class SignInPage extends StatelessWidget {
       final user = await AuthRepository().signInWithGoogle();
       if (user != null) {
         await UserRepository().updateUser(user: user);
-        Navigator.pushReplacementNamed(context, BasePage.routeName);
+        await Navigator.pushReplacementNamed(context, BasePage.routeName);
       }
     } on Exception catch (e) {
       print(e);

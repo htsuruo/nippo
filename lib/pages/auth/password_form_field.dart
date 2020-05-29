@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class PasswordFormField extends StatefulWidget {
-  PasswordFormField({@required this.controller});
-
+  const PasswordFormField({@required this.controller});
   final TextEditingController controller;
 
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TutorialChild extends StatelessWidget {
-  TutorialChild(
+  const TutorialChild(
       {this.color = Colors.white, this.title = '', this.description = ''});
 
   final Color color;
