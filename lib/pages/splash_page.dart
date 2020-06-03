@@ -48,7 +48,7 @@ class _SplashPageState extends State<SplashPage> {
       return;
     }
     final prefs = await SharedPreferences.getInstance();
-    if (prefs.getInt(Pref.IS_TUTORIAL_DONE) == 1) {
+    if (prefs.getInt(Preference.isTutorialDone) == 1) {
       await Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
       return;
     }

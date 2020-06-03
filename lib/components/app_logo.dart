@@ -8,7 +8,7 @@ class AppLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image(
-      image: ExactAssetImage(AssetPath.APP_LOGO_PATH),
+      image: ExactAssetImage(AssetPath.appLogoPath),
       height: height,
       alignment: FractionalOffset.center,
     );

@@ -15,12 +15,12 @@ import 'package:provider/provider.dart';
 
 const double snsLogoHeight = 24;
 Image mailLogo = Image(
-  image: ExactAssetImage(AssetPath.MAIL_LOGO_PATH),
+  image: ExactAssetImage(AssetPath.emailIcon),
   height: snsLogoHeight,
 );
 
 Image googleLogo = Image(
-  image: ExactAssetImage(AssetPath.GOOGLE_LOGO_PATH),
+  image: ExactAssetImage(AssetPath.googleIcon),
   height: snsLogoHeight,
 );
 

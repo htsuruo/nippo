@@ -82,7 +82,9 @@ class RegisterPage extends StatelessWidget {
                     builder: (context) {
                       return SubmitButton(
                         onPressed: () async {
-                          // TODO(tsuru):ここにProguressHUBを表示したいが「At this point the state of the widget's element tree is no longer stable.」との警告が解決できない
+                          // TODO(tsuru): ここにProguressHUBを表示したいが下記エラーが解決できない
+//                          「At this point the state of the widget's element
+//                          tree is no longer stable.」
 //                          final controller = context
 //                              .read<ProgressHUDController>()
 //                                ..update(newState: true);

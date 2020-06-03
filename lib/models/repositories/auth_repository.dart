@@ -37,7 +37,7 @@ class AuthRepository {
 
   Future<void> _setSharedPreference() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(Pref.IS_TUTORIAL_DONE, 1);
+    await prefs.setInt(Preference.isTutorialDone, 1);
   }
 
   Future<bool> isLogin() async {
