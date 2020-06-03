@@ -62,7 +62,7 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-      inAsyncCall: context.select((bool s) => s),
+      inAsyncCall: context.select((bool saving) => saving),
       child: Scaffold(
           body: SafeArea(
         child: Center(

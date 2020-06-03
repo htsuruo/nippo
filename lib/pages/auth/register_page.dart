@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
@@ -12,8 +13,15 @@ import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key key}) : super(key: key);
+  const RegisterPage._({Key key}) : super(key: key);
   static const String routeName = '/register';
+
+  static Widget wrapped() {
+    return StateNotifierProvider<ProgressHUDController, bool>(
+      create: (context) => ProgressHUDController(),
+      builder: (context, _child) => const RegisterPage._(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +59,7 @@ class RegisterPage extends StatelessWidget {
     }
 
     return ModalProgressHUD(
-      inAsyncCall: Provider.of<ProgressHUDController>(context).saving,
+      inAsyncCall: context.select((bool saving) => saving),
       child: Scaffold(
         appBar: AppBar(title: const Text('メールアドレスで登録')),
         body: SafeArea(
@@ -74,6 +82,10 @@ class RegisterPage extends StatelessWidget {
                     builder: (context) {
                       return SubmitButton(
                         onPressed: () async {
+                          // TODO(tsuru):ここにProguressHUBを表示したいが「At this point the state of the widget's element tree is no longer stable.」との警告が解決できない
+//                          final controller = context
+//                              .read<ProgressHUDController>()
+//                                ..update(newState: true);
                           if (_formKey.currentState.validate()) {
                             final map = await submit();
                             if (map['result'] as bool) {
@@ -83,6 +95,7 @@ class RegisterPage extends StatelessWidget {
                               onFailed(context: context, errMessage: message);
                             }
                           }
+//                          controller.update(newState: false);
                         },
                         btnText: 'アカウント登録',
                       );
