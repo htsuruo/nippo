@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:nippo/theme.dart';
 
 class SignInSnsButton extends StatelessWidget {
   const SignInSnsButton({@required this.logoImg, this.label, this.onPressed});
@@ -13,7 +13,7 @@ class SignInSnsButton extends StatelessWidget {
     return OutlineButton(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       color: Colors.white,
-      borderSide: const BorderSide(color: Color(0xFFDDDDDD)),
+      borderSide: const BorderSide(color: VIC.border),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       onPressed: onPressed,
       highlightColor: Colors.white,
@@ -26,12 +26,7 @@ class SignInSnsButton extends StatelessWidget {
             const SizedBox(
               width: 16,
             ),
-            Text(
-              label,
-              style: GoogleFonts.roboto(
-                  textStyle:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            ),
+            Text(label),
           ],
         ),
       ),

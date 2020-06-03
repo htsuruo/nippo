@@ -10,7 +10,7 @@ class SimpleListSection extends StatelessWidget {
       padding: const EdgeInsets.only(top: 48, left: 16, right: 16, bottom: 8),
       child: Text(
         title,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.caption,
       ),
     );
   }

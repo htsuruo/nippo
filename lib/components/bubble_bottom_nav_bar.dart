@@ -13,7 +13,7 @@ class BubbleBottomNavBar extends StatelessWidget {
           backgroundColor: VIC.red,
           icon: Icon(
             Icons.view_list,
-            color: const Color(0xFFCCCCCC),
+            color: VIC.navigationUnselected,
           ),
           activeIcon: Icon(
             Icons.view_list,
@@ -24,7 +24,7 @@ class BubbleBottomNavBar extends StatelessWidget {
           backgroundColor: VIC.green,
           icon: Icon(
             Icons.people,
-            color: const Color(0xFFCCCCCC),
+            color: VIC.navigationUnselected,
           ),
           activeIcon: Icon(
             Icons.people,
@@ -35,7 +35,7 @@ class BubbleBottomNavBar extends StatelessWidget {
           backgroundColor: VIC.navy,
           icon: Icon(
             Icons.person,
-            color: const Color(0xFFCCCCCC),
+            color: VIC.navigationUnselected,
           ),
           activeIcon: Icon(
             Icons.person,

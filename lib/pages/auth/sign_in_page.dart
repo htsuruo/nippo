@@ -11,7 +11,6 @@ import 'package:nippo/pages/auth/sign_in_email_page.dart';
 import 'package:nippo/pages/auth/signin_sns_button.dart';
 import 'package:nippo/pages/base_page.dart';
 import 'package:nippo/states/progress_hub_controller.dart';
-import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
 const double snsLogoHeight = 24;
@@ -97,11 +96,10 @@ class SignInPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, RegisterPage.routeName);
                   },
-                  child: Text('アカウント登録はこちら',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: VIC.navy))),
+                  child: Text(
+                    'アカウント登録はこちら',
+                    style: Theme.of(context).textTheme.subtitle2,
+                  )),
             ],
           ),
         ),

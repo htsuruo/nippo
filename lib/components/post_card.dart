@@ -49,13 +49,18 @@ class PostCard extends StatelessWidget {
                           post.title,
                           softWrap: true,
                           maxLines: 1,
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
                     DefaultTextStyle(
-                      style: TextStyle(color: Colors.black54, fontSize: 14),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2
+                          .copyWith(color: Colors.black54),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       child: Padding(
@@ -68,10 +73,12 @@ class PostCard extends StatelessWidget {
                             Text(
                               formatDateFromTimeStamp(
                                   timestamp: post.createdAt),
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: VIC.navy),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .caption
+                                  .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: VIC.navy),
                             ),
                           ],
                         ),
@@ -118,8 +125,10 @@ class PostCard extends StatelessWidget {
                 const Divider(),
                 const SizedBox(height: 16),
                 Text(post.title,
-                    style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5
+                        .copyWith(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 Text(post.description,
                     style: const TextStyle(

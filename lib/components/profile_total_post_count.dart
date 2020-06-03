@@ -18,7 +18,10 @@ class ProfileTotalPostCount extends StatelessWidget {
           ),
           Text(
             postCount.toString(),
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+            style: Theme.of(context)
+                .textTheme
+                .headline5
+                .copyWith(fontWeight: FontWeight.bold),
           ),
           const Text('投稿数'),
           const Divider(

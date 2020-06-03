@@ -11,7 +11,7 @@ class ProfileArea extends StatelessWidget {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.only(top: 8),
           child: ProfileCircleImage(
             imageUrl: user.photoUrl ?? '',
           ),
@@ -20,7 +20,9 @@ class ProfileArea extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Text(
             user.displayName ?? '名もなき人',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.headline5.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
           ),
         ),
         Padding(

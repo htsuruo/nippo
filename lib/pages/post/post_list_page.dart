@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/pages/post/post_create_page.dart';
-import 'package:nippo/theme.dart';
 
 import 'post_list_view.dart';
 
@@ -38,8 +37,6 @@ class PostFloatingActionButton extends StatelessWidget {
             ));
       },
       child: Icon(Icons.mode_edit),
-      backgroundColor: VIC.red,
-      foregroundColor: Colors.white,
     );
   }
 }

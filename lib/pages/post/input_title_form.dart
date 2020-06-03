@@ -13,7 +13,7 @@ class InputTitleForm extends StatelessWidget {
       maxLines: 1,
       autofocus: true,
       cursorColor: VIC.red,
-      style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: .5),
+      style: const TextStyle(fontWeight: FontWeight.bold),
       decoration: const InputDecoration(
         hintText: '今日を一言で表現すると？',
         hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),

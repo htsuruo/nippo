@@ -37,10 +37,7 @@ class PostCreatePage extends StatelessWidget {
             children: <Widget>[
               FlatButton(
                 padding: const EdgeInsets.all(0),
-                child: const Text(
-                  'キャンセル',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                child: const Text('キャンセル'),
                 onPressed: () => Navigator.pop(context),
               ),
               SubmitButton(formKey: _formKey, controller: _formController),

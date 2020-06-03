@@ -9,8 +9,10 @@ class EmailFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style:
-          TextStyle(color: VIC.navy, fontSize: 15, fontWeight: FontWeight.bold),
+      style: Theme.of(context).textTheme.bodyText2.copyWith(
+            color: VIC.navy,
+            fontWeight: FontWeight.bold,
+          ),
       cursorColor: VIC.navy,
       autofocus: true,
       controller: controller,

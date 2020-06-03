@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nippo/theme.dart';
 
 class NormalBottomNavBar extends StatelessWidget {
   const NormalBottomNavBar({this.index, this.onTap});
@@ -24,7 +25,7 @@ class NormalBottomNavBar extends StatelessWidget {
       selectedFontSize: 12,
       elevation: 5,
       backgroundColor: Colors.white,
-      unselectedItemColor: const Color(0xFFCCCCCC),
+      unselectedItemColor: VIC.navigationUnselected,
     );
   }
 }
