@@ -46,7 +46,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
         ),
       ),
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'パスワードを入力しましょう';
         }
         if (value.length < 8) {

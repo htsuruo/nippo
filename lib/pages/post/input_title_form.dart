@@ -21,7 +21,7 @@ class InputTitleForm extends StatelessWidget {
         ),
       ),
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'テキストを入力しましょう';
         }
         return null;

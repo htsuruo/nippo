@@ -15,15 +15,17 @@ class SubmitButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 52,
-      child: FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        color: VIC.navy,
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+          foregroundColor: VIC.navy,
+        ),
+        onPressed: onPressed,
         child: Text(
           btnText,
           style:
               const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        onPressed: onPressed,
       ),
     );
   }

@@ -31,7 +31,7 @@ class SignInPage extends StatelessWidget {
     try {
       context.read<ProgressHUDController>().update(newState: true);
       final user = await AuthRepository().signInWithGoogle();
-      await UserRepository().updateUser(user: user);
+      await UserRepository().updateUser(user: user!);
       await Navigator.pushReplacementNamed(context, BasePage.routeName);
     } on Exception catch (e) {
       print(e);
@@ -92,7 +92,7 @@ class SignInPage extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                FlatButton(
+                OutlinedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, RegisterPage.routeName);
                   },

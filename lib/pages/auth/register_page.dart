@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/models/repositories/user_repository.dart';
@@ -30,8 +31,8 @@ class RegisterPage extends StatelessWidget {
     final formKey = GlobalKey<FormState>();
 
     Future<Map<String, Object>> submit() async {
-      final email = controller['email'].text;
-      final password = controller['password'].text;
+      final email = controller['email']!.text;
+      final password = controller['password']!.text;
       return AuthRepository().signUpWithEmail(email: email, password: password);
     }
 
@@ -44,12 +45,12 @@ class RegisterPage extends StatelessWidget {
       );
       await UserRepository().updateUser(user: user);
       await Navigator.pushReplacementNamed(context, BasePage.routeName);
-      controller['email'].dispose();
-      controller['password'].dispose();
+      controller['email']!.dispose();
+      controller['password']!.dispose();
     }
 
     void onFailed({required BuildContext context, required String errMessage}) {
-      Scaffold.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(errMessage),
           backgroundColor: Colors.red,
@@ -69,11 +70,11 @@ class RegisterPage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   EmailFormField(
-                    controller: controller['email'],
+                    controller: controller['email']!,
                   ),
                   const SizedBox(height: 16),
                   PasswordFormField(
-                    controller: controller['password'],
+                    controller: controller['password']!,
                   ),
                   const SizedBox(height: 16),
                   //SnackBar表示のためにcontextを生成.
@@ -81,13 +82,7 @@ class RegisterPage extends StatelessWidget {
                     builder: (context) {
                       return SubmitButton(
                         onPressed: () async {
-                          // TODO(tsuru): ここにProguressHUBを表示したいが下記エラーが解決できない
-//                          「At this point the state of the widget's element
-//                          tree is no longer stable.」
-//                          final controller = context
-//                              .read<ProgressHUDController>()
-//                                ..update(newState: true);
-                          if (formKey.currentState.validate()) {
+                          if (formKey.currentState!.validate()) {
                             final map = await submit();
                             if (map['result'] as bool) {
                               await onSuccess(tmpUser: map['user'] as User);

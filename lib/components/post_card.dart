@@ -78,7 +78,7 @@ class PostCard extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               formatDateFromTimeStamp(
-                                timestamp: post.createdAt,
+                                timestamp: post.createdAt!,
                               ),
                               style: Theme.of(context)
                                   .textTheme
@@ -126,7 +126,7 @@ class PostCard extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '${formatDateFromTimeStamp(timestamp: post.createdAt)} に投稿',
+                        '${formatDateFromTimeStamp(timestamp: post.createdAt!)} に投稿',
                       ),
                     ],
                   )

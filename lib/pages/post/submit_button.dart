@@ -20,16 +20,18 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uid = context.select((AuthState s) => s.user.uid);
-    return FlatButton(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-      color: VIC.red,
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        foregroundColor: VIC.red,
+      ),
       onPressed: () async {
-        if (formKey.currentState.validate()) {
+        if (formKey.currentState!.validate()) {
           final progressController = context.read<ProgressHUDController>()
             ..update(newState: true);
           final post = Post(
-            title: controller['title'].text,
-            description: controller['description'].text,
+            title: controller['title']!.text,
+            description: controller['description']!.text,
           );
           await context.read<PostController>().create(post: post, uid: uid);
           Navigator.pop(context);

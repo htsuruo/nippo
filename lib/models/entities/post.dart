@@ -6,7 +6,7 @@ class Post {
   Post({
     required this.title,
     required this.description,
-    required this.createdAt,
+    this.createdAt,
     this.userRef,
     this.user,
   });
@@ -22,7 +22,7 @@ class Post {
 
   String title;
   String description;
-  Timestamp createdAt;
+  Timestamp? createdAt;
   DocumentReference? userRef;
   User? user;
 

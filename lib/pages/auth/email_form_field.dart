@@ -27,7 +27,7 @@ class EmailFormField extends StatelessWidget {
         hintStyle: TextStyle(fontWeight: FontWeight.normal),
       ),
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'メールアドレスを入力しましょう';
         }
         if (!EmailValidator.validate(value)) {

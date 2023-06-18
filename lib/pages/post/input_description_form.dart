@@ -22,7 +22,7 @@ class InputDescriptionForm extends StatelessWidget {
         hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
       ),
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'テキストを入力しましょう';
         }
         return null;

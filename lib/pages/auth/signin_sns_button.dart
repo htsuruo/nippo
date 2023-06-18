@@ -15,13 +15,14 @@ class SignInSnsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-      color: Colors.white,
-      borderSide: const BorderSide(color: VIC.border),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+    return OutlinedButton(
       onPressed: onPressed,
-      highlightColor: Colors.white,
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        foregroundColor: Colors.white,
+        side: const BorderSide(color: VIC.border),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      ),
       child: SizedBox(
         width: 220,
         child: Row(

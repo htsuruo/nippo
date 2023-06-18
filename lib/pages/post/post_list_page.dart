@@ -31,7 +31,7 @@ class PostFloatingActionButton extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute<MaterialPageRoute>(
+          MaterialPageRoute<MaterialPageRoute<void>>(
             builder: (BuildContext context) {
               return PostCreatePage.wrapped();
             },

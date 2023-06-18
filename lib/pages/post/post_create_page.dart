@@ -34,8 +34,10 @@ class PostCreatePage extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              FlatButton(
-                padding: const EdgeInsets.all(0),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                ),
                 child: const Text('キャンセル'),
                 onPressed: () => Navigator.pop(context),
               ),
@@ -48,19 +50,17 @@ class PostCreatePage extends StatelessWidget {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: Container(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    InputTitleForm(controller: _formController['title']),
-                    const SizedBox(height: 16),
-                    InputDescriptionForm(
-                      controller: _formController['description'],
-                    ),
-                  ],
-                ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  InputTitleForm(controller: _formController['title']!),
+                  const SizedBox(height: 16),
+                  InputDescriptionForm(
+                    controller: _formController['description']!,
+                  ),
+                ],
               ),
             ),
           ),

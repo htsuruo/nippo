@@ -22,7 +22,7 @@ class PostListView extends StatelessWidget {
           );
           return PostCard(
             post: post,
-            user: data.user,
+            user: data.user!,
           );
         },
       );
