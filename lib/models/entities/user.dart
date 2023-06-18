@@ -9,8 +9,8 @@ class User {
     required this.email,
     this.photoUrl = '',
     this.displayName = '名無しさん',
-    required this.providerData,
-    required this.lastSignInTime,
+    this.providerData,
+    this.lastSignInTime,
     this.description = 'よろしくおねがいします。',
   });
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -19,7 +19,7 @@ class User {
   final String email;
   final String photoUrl;
   final String displayName;
-  final String providerData;
-  final String lastSignInTime;
+  final String? providerData;
+  final String? lastSignInTime;
   final String description;
 }

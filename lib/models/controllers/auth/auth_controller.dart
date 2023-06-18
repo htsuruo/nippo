@@ -11,10 +11,10 @@ class AuthController extends StateNotifier<AuthState> with LocatorMixin {
   Future<void> updateData() async {
     print('AuthController -> initState');
     if (await read<AuthRepository>().isLogin()) {
-      final currentUser = await read<AuthRepository>().currentUser();
+      final user = await read<AuthRepository>().currentUser();
       state = state.copyWith(
-        user: currentUser,
-        posts: await read<PostRepository>().fetchByUser(uid: currentUser.uid),
+        user: User(email: user.email ?? '', uid: user.uid),
+        posts: await read<PostRepository>().fetchByUser(uid: user.uid),
       );
     }
   }

@@ -27,13 +27,13 @@ class PostController extends StateNotifier<PostState> with LocatorMixin {
     read<PostRepository>().fetchSnapshot(func: sync);
   }
 
-  Future<void> fetchByUser({String uid}) async {
+  Future<void> fetchByUser({required String uid}) async {
     state = state.copyWith(
       postsByUserId: await read<PostRepository>().fetchByUser(uid: uid),
     );
   }
 
-  Future<void> create({Post post, String uid}) async {
+  Future<void> create({required Post post, required String uid}) async {
     await read<PostRepository>().create(post: post, uid: uid);
   }
 }

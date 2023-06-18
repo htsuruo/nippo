@@ -102,13 +102,14 @@ class __$$_PostStateCopyWithImpl<$Res>
 
 class _$_PostState implements _PostState {
   const _$_PostState(
-      {required final List<Post> posts,
-      required final List<Post> postsByUserId})
+      {final List<Post> posts = const [],
+      final List<Post> postsByUserId = const []})
       : _posts = posts,
         _postsByUserId = postsByUserId;
 
   final List<Post> _posts;
   @override
+  @JsonKey()
   List<Post> get posts {
     if (_posts is EqualUnmodifiableListView) return _posts;
     // ignore: implicit_dynamic_type
@@ -117,6 +118,7 @@ class _$_PostState implements _PostState {
 
   final List<Post> _postsByUserId;
   @override
+  @JsonKey()
   List<Post> get postsByUserId {
     if (_postsByUserId is EqualUnmodifiableListView) return _postsByUserId;
     // ignore: implicit_dynamic_type
@@ -153,8 +155,7 @@ class _$_PostState implements _PostState {
 
 abstract class _PostState implements PostState {
   const factory _PostState(
-      {required final List<Post> posts,
-      required final List<Post> postsByUserId}) = _$_PostState;
+      {final List<Post> posts, final List<Post> postsByUserId}) = _$_PostState;
 
   @override
   List<Post> get posts;

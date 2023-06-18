@@ -11,8 +11,8 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       email: json['email'] as String,
       photoUrl: json['photoUrl'] as String? ?? '',
       displayName: json['displayName'] as String? ?? '名無しさん',
-      providerData: json['providerData'] as String,
-      lastSignInTime: json['lastSignInTime'] as String,
+      providerData: json['providerData'] as String?,
+      lastSignInTime: json['lastSignInTime'] as String?,
       description: json['description'] as String? ?? 'よろしくおねがいします。',
     );
 

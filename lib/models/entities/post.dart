@@ -7,7 +7,7 @@ class Post {
     required this.title,
     required this.description,
     required this.createdAt,
-    required this.userRef,
+    this.userRef,
     this.user,
   });
 
@@ -23,7 +23,7 @@ class Post {
   String title;
   String description;
   Timestamp createdAt;
-  DocumentReference userRef;
+  DocumentReference? userRef;
   User? user;
 
   Map<String, dynamic> toJson() => <String, dynamic>{

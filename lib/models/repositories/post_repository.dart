@@ -1,15 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:nippo/models/entities/post.dart';
 
 class PostRepository {
-  final Firestore fireStore = Firestore.instance;
+  final firestore = FirebaseFirestore.instance;
   static const String collection = 'posts';
   final int limit = 20; // TODO(tsuruoka): 仮
 
-  void fetchSnapshot({Function(QuerySnapshot) func}) {
-    print('PostRepository -> fetchSnapshot');
-    fireStore
+  void fetchSnapshot({required Function(QuerySnapshot) func}) {
+    firestore
         .collection(collection)
         .orderBy('createdAt', descending: true)
         .limit(limit)
@@ -17,33 +15,31 @@ class PostRepository {
         .listen(func);
   }
 
-  Future<List<Post>> fetchByUser({@required String uid}) async {
-    print('PostRepository -> fetchByUser');
-    final posts = await fireStore
+  Future<List<Post>> fetchByUser({required String uid}) async {
+    final posts = await firestore
         .collection('users')
-        .document(uid)
+        .doc(uid)
         .collection(collection)
         .orderBy('createdAt', descending: true)
         .limit(limit)
-        .getDocuments();
+        .get();
     final postList = <Post>[];
-    for (final post in posts.documents) {
-      final p = Post.fromJson(post.data);
+    for (final post in posts.docs) {
+      final p = Post.fromJson(post.data());
       postList.add(p);
     }
     return postList;
   }
 
 //  usersコレクションのサブコレクションとして追加する.
-  Future<void> create({Post post, String uid}) async {
-    print('PostRepository -> createPost');
+  Future<void> create({required Post post, required String uid}) async {
     post.createdAt = Timestamp.fromDate(DateTime.now());
     final map = post.toJson();
-    await fireStore
+    await firestore
         .collection('users')
-        .document(uid)
+        .doc(uid)
         .collection(collection)
-        .document()
-        .setData(map);
+        .doc()
+        .set(map);
   }
 }

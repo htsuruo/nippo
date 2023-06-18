@@ -6,7 +6,7 @@ part 'post_state.freezed.dart';
 @freezed
 class PostState with _$PostState {
   const factory PostState({
-    required List<Post> posts,
-    required List<Post> postsByUserId,
+    @Default([]) List<Post> posts,
+    @Default([]) List<Post> postsByUserId,
   }) = _PostState;
 }

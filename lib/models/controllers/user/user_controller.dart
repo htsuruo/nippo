@@ -9,7 +9,6 @@ class UserController extends StateNotifier<UserState> with LocatorMixin {
 
   @override
   void initState() {
-    // TODO(tsuru): implement initState
     void sync(QuerySnapshot querySnapshot) {
       final users = <User>[];
       for (final element in querySnapshot.documents) {

@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nippo/constant.dart';
@@ -9,20 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthRepository {
   final _firebaseAuth = FirebaseAuth.instance;
 
-  User _getUserData(FirebaseUser user) {
-    if (user == null) {
-      return null;
-    }
-    print('firebse user sign in [ ${user.email} ], [ ${user.displayName} ]');
+  User _getUserData(auth.User firUser) {
     _setSharedPreference();
-    return User(
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoUrl: user.photoUrl,
+    return User.fromJson(
+      uid: firUser.uid,
+      email: firUser.email,
+      displayName: firUser.displayName,
+      photoUrl: firUser.photoUrl,
       lastSignInTime:
-          formatDateFromDateTime(datetime: user.metadata.lastSignInTime),
-      providerData: _getProviderData(user),
+          formatDateFromDateTime(datetime: firUser.metadata.lastSignInTime),
+      providerData: _getProviderData(firUser),
     );
   }
 
@@ -70,8 +66,8 @@ class AuthRepository {
   }
 
   Future<Map<String, Object>> signUpWithEmail({
-    @required String email,
-    @required String password,
+    required String email,
+    required String password,
   }) async {
     final map = <String, Object>{'user': null, 'result': false, 'message': ''};
     try {
@@ -89,8 +85,8 @@ class AuthRepository {
   }
 
   Future<Map<String, Object>> signInWithEmail({
-    @required String email,
-    @required String password,
+    required String email,
+    required String password,
   }) async {
     final map = <String, Object>{'user': null, 'result': false, 'message': ''};
     try {

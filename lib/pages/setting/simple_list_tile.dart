@@ -4,11 +4,11 @@ class SimpleListTile extends StatelessWidget {
   const SimpleListTile({
     super.key,
     required this.title,
-    required this.trailing,
+    this.trailing,
     this.onTap,
   });
   final String title;
-  final Widget trailing;
+  final Widget? trailing;
   final VoidCallback? onTap;
 
   @override
