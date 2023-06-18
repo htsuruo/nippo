@@ -1,5 +1,5 @@
 name: nippo
-description: A new Flutter project.
+description: This is a daily report app, and it's a sample app using Flutter and Firebase.
 
 version: 1.0.0+1
 
@@ -22,7 +22,7 @@ dependencies:
   intl: ^0.18.1
   modal_progress_hud_nsn: ^0.4.0
   provider: ^6.0.5
-  shared_preferences:
+  shared_preferences: ^2.1.2
   state_notifier: ^0.7.2+1
   url_launcher: ^6.1.11
 
@@ -45,11 +45,5 @@ flutter_icons:
 
 flutter:
   uses-material-design: true
-
   assets:
-    - assets/img/ic_main_logo.png
-    - assets/img/ic_logo_google.png
-    - assets/img/ic_logo_twitter.png
-    - assets/img/ic_logo_mail.png
-    - assets/img/ic_tutorial_line.png
-    - assets/img/profile_dummy.png
+    - assets/img/
