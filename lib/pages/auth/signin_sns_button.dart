@@ -19,7 +19,6 @@ class SignInSnsButton extends StatelessWidget {
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        foregroundColor: Colors.white,
         side: const BorderSide(color: VIC.border),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
@@ -32,7 +31,10 @@ class SignInSnsButton extends StatelessWidget {
             const SizedBox(
               width: 16,
             ),
-            Text(label),
+            Text(
+              label,
+              style: const TextStyle(color: Colors.black),
+            ),
           ],
         ),
       ),

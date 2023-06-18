@@ -43,7 +43,7 @@ class AuthRepository {
 
   Future<app.User?> currentUser() async {
     final user = _firebaseAuth.currentUser;
-    return _getUserData(user!);
+    return user == null ? null : _getUserData(user);
   }
 
   Future<app.User?> signInWithGoogle() async {
