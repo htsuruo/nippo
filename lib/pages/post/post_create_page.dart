@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +9,7 @@ import 'input_title_form.dart';
 import 'submit_button.dart';
 
 class PostCreatePage extends StatelessWidget {
-  PostCreatePage._({Key key}) : super(key: key);
+  PostCreatePage._();
   static const String routeName = '/create';
 
   final _formKey = GlobalKey<FormState>();

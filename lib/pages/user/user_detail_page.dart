@@ -7,7 +7,7 @@ import 'package:nippo/models/entities/user.dart';
 import 'package:provider/provider.dart';
 
 class UserDetailPage extends StatelessWidget {
-  const UserDetailPage({Key key}) : super(key: key);
+  const UserDetailPage({super.key});
   static const String routeName = '/user_detail';
 
   @override
@@ -33,8 +33,8 @@ class UserDetailPage extends StatelessWidget {
 
 class PostListView extends StatelessWidget {
   const PostListView({
-    Key key,
-    @required this.user,
+    required Key key,
+    required this.user,
   }) : super(key: key);
 
   final User user;
@@ -46,17 +46,11 @@ class PostListView extends StatelessWidget {
       posts: posts,
       user: user,
     );
-    return const Padding(
-      padding: EdgeInsets.only(top: 60),
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
   }
 }
 
 @immutable
 class UserDetailArgs {
-  const UserDetailArgs({this.user});
+  const UserDetailArgs({required this.user});
   final User user;
 }

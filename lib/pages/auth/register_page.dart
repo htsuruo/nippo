@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/models/repositories/user_repository.dart';
@@ -12,7 +11,7 @@ import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage._({Key key}) : super(key: key);
+  const RegisterPage._();
   static const String routeName = '/register';
 
   static Widget wrapped() {
@@ -36,7 +35,7 @@ class RegisterPage extends StatelessWidget {
       return AuthRepository().signUpWithEmail(email: email, password: password);
     }
 
-    Future<void> onSuccess({User tmpUser}) async {
+    Future<void> onSuccess({required User tmpUser}) async {
       final user = User(
         uid: tmpUser.uid,
         email: tmpUser.email,
@@ -49,7 +48,7 @@ class RegisterPage extends StatelessWidget {
       controller['password'].dispose();
     }
 
-    void onFailed({BuildContext context, String errMessage}) {
+    void onFailed({required BuildContext context, required String errMessage}) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
           content: Text(errMessage),

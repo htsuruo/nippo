@@ -3,7 +3,7 @@ import 'package:nippo/components/profile_circle_image.dart';
 import 'package:nippo/models/entities/user.dart';
 
 class ProfileArea extends StatelessWidget {
-  const ProfileArea({super.key, @required this.user});
+  const ProfileArea({super.key, required this.user});
   final User user;
 
   @override
@@ -13,14 +13,14 @@ class ProfileArea extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 8),
           child: ProfileCircleImage(
-            imageUrl: user.photoUrl ?? '',
+            imageUrl: user.photoUrl,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: Text(
-            user.displayName ?? '名もなき人',
-            style: Theme.of(context).textTheme.headlineSmall.copyWith(
+            user.displayName,
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
           ),

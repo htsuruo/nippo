@@ -3,9 +3,9 @@ import 'package:nippo/models/entities/user.dart';
 
 class UserListTile extends StatelessWidget {
   const UserListTile({
-    Key key,
-    @required this.user,
-    @required this.onTap,
+    required Key key,
+    required this.user,
+    required this.onTap,
   }) : super(key: key);
 
   final User user;

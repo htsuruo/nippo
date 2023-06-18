@@ -5,7 +5,7 @@ import 'package:nippo/models/entities/post.dart';
 import 'package:provider/provider.dart';
 
 class PostListView extends StatelessWidget {
-  const PostListView({Key key}) : super(key: key);
+  const PostListView({super.key});
 
   @override
   Widget build(BuildContext context) {

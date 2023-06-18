@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:nippo/components/app_logo.dart';
 import 'package:nippo/constant.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
@@ -24,10 +24,10 @@ Image googleLogo = const Image(
 );
 
 class SignInPage extends StatelessWidget {
-  const SignInPage._({Key key}) : super(key: key);
+  const SignInPage({super.key});
   static const String routeName = '/signin';
 
-  Future<void> signInWithGoogle({BuildContext context}) async {
+  Future<void> signInWithGoogle({required BuildContext context}) async {
     try {
       context.read<ProgressHUDController>().update(newState: true);
       final user = await AuthRepository().signInWithGoogle();
@@ -39,10 +39,10 @@ class SignInPage extends StatelessWidget {
     context.read<ProgressHUDController>().update(newState: false);
   }
 
-  void onClickSignInWithEmailButton({BuildContext context}) {
+  void onClickSignInWithEmailButton({required BuildContext context}) {
     Navigator.push(
       context,
-      MaterialPageRoute<MaterialPageRoute>(
+      MaterialPageRoute<MaterialPageRoute<void>>(
         fullscreenDialog: true,
         builder: (BuildContext context) {
           return SignInEmailPage();
@@ -54,7 +54,7 @@ class SignInPage extends StatelessWidget {
   static Widget wrapped() {
     return StateNotifierProvider<ProgressHUDController, bool>(
       create: (context) => ProgressHUDController(),
-      builder: (context, child) => const SignInPage._(),
+      builder: (context, child) => const SignInPage(),
     );
   }
 

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 @immutable
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key key}) : super(key: key);
+  const ProfilePage({super.key});
   static const String routeName = '/profile';
 
   @override
@@ -40,7 +40,7 @@ class ProfilePage extends StatelessWidget {
 }
 
 class SyncArea extends StatelessWidget {
-  const SyncArea({Key key}) : super(key: key);
+  const SyncArea({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +54,6 @@ class SyncArea extends StatelessWidget {
             user: auth.user,
           )
         ],
-      ),
-    );
-    return const Expanded(
-      child: Center(
-        child: CircularProgressIndicator(),
       ),
     );
   }

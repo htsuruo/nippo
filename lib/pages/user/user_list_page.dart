@@ -6,7 +6,7 @@ import 'package:nippo/pages/user/user_list_tile.dart';
 import 'package:provider/provider.dart';
 
 class UserPage extends StatelessWidget {
-  const UserPage({Key key}) : super(key: key);
+  const UserPage({super.key});
   static const String routeName = '/user';
 
   @override
@@ -21,7 +21,7 @@ class UserPage extends StatelessWidget {
 }
 
 class UserListView extends StatelessWidget {
-  const UserListView({super.key, @required this.users});
+  const UserListView({super.key, required this.users});
   final List<User> users;
 
   @override

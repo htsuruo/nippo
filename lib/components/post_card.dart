@@ -5,7 +5,11 @@ import 'package:nippo/theme.dart';
 import 'package:nippo/util.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({super.key, this.post, this.user});
+  const PostCard({
+    super.key,
+    required this.post,
+    required this.user,
+  });
   final Post post;
   final User user;
 
@@ -33,7 +37,7 @@ class PostCard extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     child: Image.network(
-                      user.photoUrl ?? '',
+                      user.photoUrl,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -53,7 +57,7 @@ class PostCard extends StatelessWidget {
                           maxLines: 1,
                           style: Theme.of(context)
                               .textTheme
-                              .titleMedium
+                              .titleMedium!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -61,7 +65,7 @@ class PostCard extends StatelessWidget {
                     DefaultTextStyle(
                       style: Theme.of(context)
                           .textTheme
-                          .bodyMedium
+                          .bodyMedium!
                           .copyWith(color: Colors.black54),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
@@ -78,7 +82,7 @@ class PostCard extends StatelessWidget {
                               ),
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodySmall
+                                  .bodySmall!
                                   .copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: VIC.navy,
@@ -98,7 +102,7 @@ class PostCard extends StatelessWidget {
     );
   }
 
-  Future<void> onTapCard({BuildContext context}) async {
+  Future<void> onTapCard({required BuildContext context}) async {
     final res = await showModalBottomSheet<int>(
       context: context,
       builder: (BuildContext context) {
@@ -135,7 +139,7 @@ class PostCard extends StatelessWidget {
                 post.title,
                 style: Theme.of(context)
                     .textTheme
-                    .headlineSmall
+                    .headlineSmall!
                     .copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),

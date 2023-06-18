@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class SignInSnsButton extends StatelessWidget {
-  const SignInSnsButton(
-      {super.key, @required this.logoImg, this.label, this.onPressed});
+  const SignInSnsButton({
+    super.key,
+    required this.logoImg,
+    required this.label,
+    required this.onPressed,
+  });
 
   final Image logoImg;
   final String label;
-  final Function() onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {

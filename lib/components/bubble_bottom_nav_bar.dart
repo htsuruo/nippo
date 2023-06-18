@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class BubbleBottomNavBar extends StatelessWidget {
-  const BubbleBottomNavBar({super.key, this.index, this.onTap});
+  const BubbleBottomNavBar({
+    super.key,
+    required this.index,
+    required this.onTap,
+  });
   final int index;
-  final Function(int) onTap;
+  final ValueChanged<int?>? onTap;
 
   List<BubbleBottomBarItem> bottomItems() {
     return [

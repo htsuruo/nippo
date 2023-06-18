@@ -5,7 +5,7 @@ import 'package:nippo/pages/tutorial/tutorial_child.dart';
 import 'package:nippo/theme.dart';
 
 class TutorialPage extends StatelessWidget {
-  const TutorialPage({Key key}) : super(key: key);
+  const TutorialPage({super.key});
   static const String routeName = '/tutorial';
 
   @override

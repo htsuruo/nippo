@@ -26,7 +26,7 @@ class SignInEmailPage extends StatelessWidget {
       return AuthRepository().signInWithEmail(email: email, password: password);
     }
 
-    Future<void> onSuccess({User user}) async {
+    Future<void> onSuccess({required User user}) async {
       await UserRepository().updateUser(user: user);
       await Navigator.pushReplacementNamed(context, BasePage.routeName);
       _controller['email'].dispose();
@@ -34,7 +34,7 @@ class SignInEmailPage extends StatelessWidget {
       return;
     }
 
-    void onFailed({BuildContext context, String errMessage}) {
+    void onFailed({required BuildContext context, String errMessage}) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
           content: Text(errMessage),

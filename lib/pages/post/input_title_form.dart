@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class InputTitleForm extends StatelessWidget {
-  const InputTitleForm({super.key, @required this.controller});
+  const InputTitleForm({super.key, required this.controller});
   final TextEditingController controller;
 
   @override

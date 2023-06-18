@@ -8,7 +8,7 @@ import 'package:nippo/pages/user/user_list_page.dart';
 import 'package:provider/provider.dart';
 
 class BasePage extends StatelessWidget {
-  const BasePage._({Key key}) : super(key: key);
+  const BasePage._();
   static const String routeName = '/home';
 
   static Widget wrapped() {
@@ -36,7 +36,7 @@ class BasePage extends StatelessWidget {
 class PageView extends StatelessWidget {
   const PageView({super.key});
 
-  Widget _currentPage({int page}) {
+  Widget _currentPage({required int page}) {
     final pageList = [
       const PostListPage(),
       const UserPage(),
@@ -57,7 +57,7 @@ class PageView extends StatelessWidget {
 
 class BottomNavigationBarController extends StateNotifier<int> {
   BottomNavigationBarController() : super(0);
-  void change({int index}) {
+  void change({required int index}) {
     state = index;
     print('change to bottomNavIndex: $index');
   }

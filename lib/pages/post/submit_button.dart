@@ -8,8 +8,11 @@ import 'package:provider/provider.dart';
 import '../../theme.dart';
 
 class SubmitButton extends StatelessWidget {
-  const SubmitButton(
-      {super.key, @required this.formKey, @required this.controller});
+  const SubmitButton({
+    super.key,
+    required this.formKey,
+    required this.controller,
+  });
 
   final GlobalKey<FormState> formKey;
   final Map<String, TextEditingController> controller;

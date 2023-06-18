@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SimpleListTile extends StatelessWidget {
   const SimpleListTile(
-      {super.key, @required this.title, this.trailing, this.onTap});
+      {super.key, @required this.title, this.trailing, this.onTap,});
   final String title;
   final Widget trailing;
   final Function() onTap;

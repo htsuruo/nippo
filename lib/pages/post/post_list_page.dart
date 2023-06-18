@@ -5,7 +5,7 @@ import 'package:nippo/pages/post/post_create_page.dart';
 import 'post_list_view.dart';
 
 class PostListPage extends StatelessWidget {
-  const PostListPage({Key key}) : super(key: key);
+  const PostListPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class PasswordFormField extends StatefulWidget {
-  const PasswordFormField({super.key, @required this.controller});
+  const PasswordFormField({super.key, required this.controller});
   final TextEditingController controller;
 
   @override
-  _PasswordFormFieldState createState() =>
+  State<PasswordFormField> createState() =>
       _PasswordFormFieldState(controller: controller);
 }
 
 class _PasswordFormFieldState extends State<PasswordFormField> {
-  _PasswordFormFieldState({@required this.controller});
+  _PasswordFormFieldState({required this.controller});
 
   final TextEditingController controller;
   bool obscureText = true;
@@ -20,7 +20,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText,
-      style: Theme.of(context).textTheme.bodyMedium.copyWith(
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: VIC.navy,
             fontWeight: FontWeight.bold,
           ),

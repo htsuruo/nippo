@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class EmailFormField extends StatelessWidget {
-  const EmailFormField({super.key, @required this.controller});
+  const EmailFormField({super.key, required this.controller});
   final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: Theme.of(context).textTheme.bodyMedium.copyWith(
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: VIC.navy,
             fontWeight: FontWeight.bold,
           ),

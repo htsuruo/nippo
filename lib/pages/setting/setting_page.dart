@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
-  const SettingPage({Key key}) : super(key: key);
+  const SettingPage({super.key});
   static const String routeName = '/setting';
 
   @override
@@ -39,7 +39,7 @@ class SettingPage extends StatelessWidget {
   }
 }
 
-List<Widget> firstSection({User currentUser}) {
+List<Widget> firstSection({required User currentUser}) {
   final children = [
     const SimpleListSection(title: 'ログイン情報'),
     const Divider(),
@@ -78,7 +78,7 @@ List<Widget> secondSection() {
   return children;
 }
 
-Future<void> launchUrl({String url}) async {
+Future<void> launchUrl({required String url}) async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {
