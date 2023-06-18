@@ -22,7 +22,7 @@ dependencies:
   google_fonts:
   google_sign_in:
   intl:
-  modal_progress_hud_nsn: ^0.4.0
+  modal_progress_hud_nsn:
   provider:
   shared_preferences:
   state_notifier:
