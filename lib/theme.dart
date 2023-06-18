@@ -10,12 +10,12 @@ ThemeData setTheme(BuildContext context) {
     ),
     textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
   ).copyWith(
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       elevation: 0.5,
-      toolbarTextStyle: TextTheme(
+      toolbarTextStyle: const TextTheme(
         titleLarge: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
       ).bodyMedium,
-      titleTextStyle: TextTheme(
+      titleTextStyle: const TextTheme(
         titleLarge: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
       ).titleLarge,
     ),

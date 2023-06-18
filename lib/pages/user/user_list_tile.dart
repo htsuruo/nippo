@@ -3,20 +3,20 @@ import 'package:nippo/models/entities/user.dart';
 
 class UserListTile extends StatelessWidget {
   const UserListTile({
-    required Key key,
+    super.key,
     required this.user,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final User user;
-  final Function() onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
         user.displayName,
-        style: Theme.of(context).textTheme.titleMedium.copyWith(
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
               fontWeight: FontWeight.bold,
             ),
       ),

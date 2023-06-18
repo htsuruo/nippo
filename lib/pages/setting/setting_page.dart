@@ -20,19 +20,17 @@ class SettingPage extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: Container(
-          child: ListView(
-            children: <Widget>[
-              ...firstSection(
-                currentUser: context.select((AuthState s) => s.user),
-              ),
-              ...secondSection(),
-              const SizedBox(
-                height: 32,
-              ),
-              const SignOutButton(),
-            ],
-          ),
+        child: ListView(
+          children: <Widget>[
+            ...firstSection(
+              currentUser: context.select((AuthState s) => s.user),
+            ),
+            ...secondSection(),
+            const SizedBox(
+              height: 32,
+            ),
+            const SignOutButton(),
+          ],
         ),
       ),
     );
@@ -45,12 +43,12 @@ List<Widget> firstSection({required User currentUser}) {
     const Divider(),
     SimpleListTile(
       title: '認証プロバイダ',
-      trailing: Text(currentUser != null ? currentUser.providerData : '読込中'),
+      trailing: Text(currentUser.providerData),
     ),
     const Divider(indent: 16),
     SimpleListTile(
       title: '最終ログイン日時',
-      trailing: Text(currentUser != null ? currentUser.lastSignInTime : '読込中'),
+      trailing: Text(currentUser.lastSignInTime),
     ),
     const Divider(),
   ];

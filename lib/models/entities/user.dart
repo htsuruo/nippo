@@ -5,12 +5,12 @@ part 'user.g.dart';
 @JsonSerializable()
 class User {
   User({
-    @required this.uid,
-    @required this.email,
+    required this.uid,
+    required this.email,
     this.photoUrl = '',
     this.displayName = '名無しさん',
-    this.providerData,
-    this.lastSignInTime,
+    required this.providerData,
+    required this.lastSignInTime,
     this.description = 'よろしくおねがいします。',
   });
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

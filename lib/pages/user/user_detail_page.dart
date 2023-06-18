@@ -12,7 +12,7 @@ class UserDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context).settings.arguments as UserDetailArgs;
+    final args = ModalRoute.of(context)!.settings.arguments as UserDetailArgs;
     context.watch<PostController>().fetchByUser(uid: args.user.uid);
     return Scaffold(
       appBar: AppBar(),
@@ -33,9 +33,9 @@ class UserDetailPage extends StatelessWidget {
 
 class PostListView extends StatelessWidget {
   const PostListView({
-    required Key key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   final User user;
 

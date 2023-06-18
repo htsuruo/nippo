@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SimpleListSection extends StatelessWidget {
-  const SimpleListSection({super.key, @required this.title});
+  const SimpleListSection({super.key, required this.title});
   final String title;
 
   @override

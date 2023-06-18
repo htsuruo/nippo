@@ -26,7 +26,7 @@ class BasePage extends StatelessWidget {
       bottomNavigationBar: BubbleBottomNavBar(
         index: context.select((int currentIndex) => currentIndex),
         onTap: (index) {
-          context.read<BottomNavigationBarController>().change(index: index);
+          context.read<BottomNavigationBarController>().change(index: index!);
         },
       ),
     );
