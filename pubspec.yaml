@@ -10,7 +10,6 @@ dependencies:
   cloud_firestore: ^4.8.1
   cupertino_icons: ^1.0.5
   email_validator: ^2.1.17
-  firebase_analytics: ^10.4.3
   firebase_auth: ^4.6.3
   firebase_core: ^2.14.0
   flutter:
