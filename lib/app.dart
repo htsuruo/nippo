@@ -22,6 +22,8 @@ import 'models/controllers/user/user_controller.dart';
 import 'models/controllers/user/user_state.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

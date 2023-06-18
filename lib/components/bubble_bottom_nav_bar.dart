@@ -3,45 +3,48 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class BubbleBottomNavBar extends StatelessWidget {
-  const BubbleBottomNavBar({this.index, this.onTap});
+  const BubbleBottomNavBar({super.key, this.index, this.onTap});
   final int index;
   final Function(int) onTap;
 
   List<BubbleBottomBarItem> bottomItems() {
     return [
-      BubbleBottomBarItem(
-          backgroundColor: VIC.red,
-          icon: Icon(
-            Icons.view_list,
-            color: VIC.navigationUnselected,
-          ),
-          activeIcon: Icon(
-            Icons.view_list,
-            color: VIC.red,
-          ),
-          title: const Text('日報')),
-      BubbleBottomBarItem(
-          backgroundColor: VIC.green,
-          icon: Icon(
-            Icons.people,
-            color: VIC.navigationUnselected,
-          ),
-          activeIcon: Icon(
-            Icons.people,
-            color: VIC.green,
-          ),
-          title: const Text('登録者')),
-      BubbleBottomBarItem(
-          backgroundColor: VIC.navy,
-          icon: Icon(
-            Icons.person,
-            color: VIC.navigationUnselected,
-          ),
-          activeIcon: Icon(
-            Icons.person,
-            color: VIC.navy,
-          ),
-          title: const Text('マイページ')),
+      const BubbleBottomBarItem(
+        backgroundColor: VIC.red,
+        icon: Icon(
+          Icons.view_list,
+          color: VIC.navigationUnselected,
+        ),
+        activeIcon: Icon(
+          Icons.view_list,
+          color: VIC.red,
+        ),
+        title: Text('日報'),
+      ),
+      const BubbleBottomBarItem(
+        backgroundColor: VIC.green,
+        icon: Icon(
+          Icons.people,
+          color: VIC.navigationUnselected,
+        ),
+        activeIcon: Icon(
+          Icons.people,
+          color: VIC.green,
+        ),
+        title: Text('登録者'),
+      ),
+      const BubbleBottomBarItem(
+        backgroundColor: VIC.navy,
+        icon: Icon(
+          Icons.person,
+          color: VIC.navigationUnselected,
+        ),
+        activeIcon: Icon(
+          Icons.person,
+          color: VIC.navy,
+        ),
+        title: Text('マイページ'),
+      ),
     ];
   }
 

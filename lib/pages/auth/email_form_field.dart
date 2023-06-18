@@ -3,24 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class EmailFormField extends StatelessWidget {
-  const EmailFormField({@required this.controller});
+  const EmailFormField({super.key, @required this.controller});
   final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: Theme.of(context).textTheme.bodyText2.copyWith(
+      style: Theme.of(context).textTheme.bodyMedium.copyWith(
             color: VIC.navy,
             fontWeight: FontWeight.bold,
           ),
       cursorColor: VIC.navy,
       autofocus: true,
       controller: controller,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         icon: Icon(Icons.email, size: 20, color: VIC.navy),
-        contentPadding: const EdgeInsets.all(16),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: VIC.border),
+        contentPadding: EdgeInsets.all(16),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: VIC.border),
           gapPadding: 0,
         ),
         hintText: 'メールアドレス',

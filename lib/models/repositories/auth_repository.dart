@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nippo/constant.dart';
-import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,8 +51,8 @@ class AuthRepository {
   }
 
   Future<User> signInWithGoogle() async {
-    final _googleSignIn = GoogleSignIn();
-    final googleUser = await _googleSignIn.signIn();
+    final googleSignIn = GoogleSignIn();
+    final googleUser = await googleSignIn.signIn();
     if (googleUser == null) {
       return null;
     }
@@ -62,17 +61,24 @@ class AuthRepository {
       return null;
     }
     final result = await _firebaseAuth.signInWithCredential(
-        GoogleAuthProvider.getCredential(
-            idToken: googleAuth.idToken, accessToken: googleAuth.accessToken));
+      GoogleAuthProvider.getCredential(
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
+      ),
+    );
     return _getUserData(result.user);
   }
 
-  Future<Map<String, Object>> signUpWithEmail(
-      {@required String email, @required String password}) async {
+  Future<Map<String, Object>> signUpWithEmail({
+    @required String email,
+    @required String password,
+  }) async {
     final map = <String, Object>{'user': null, 'result': false, 'message': ''};
     try {
       final result = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
       map['user'] = _getUserData(result.user);
       map['result'] = true;
     } on PlatformException catch (e) {
@@ -82,12 +88,16 @@ class AuthRepository {
     return map;
   }
 
-  Future<Map<String, Object>> signInWithEmail(
-      {@required String email, @required String password}) async {
+  Future<Map<String, Object>> signInWithEmail({
+    @required String email,
+    @required String password,
+  }) async {
     final map = <String, Object>{'user': null, 'result': false, 'message': ''};
     try {
       final result = await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
       map['user'] = _getUserData(result.user);
       map['result'] = true;
     } on PlatformException catch (e) {

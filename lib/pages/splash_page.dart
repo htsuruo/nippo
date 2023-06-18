@@ -30,8 +30,8 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         // TODO(tsuruoka): スプラッシュアニメーション
         child: Hero(
-          child: AppLogo(height: 240),
           tag: 'appLogo',
+          child: AppLogo(height: 240),
         ),
       ),
     );

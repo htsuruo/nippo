@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -22,7 +21,7 @@ class PostCreatePage extends StatelessWidget {
   static Widget wrapped() {
     return StateNotifierProvider<ProgressHUDController, bool>(
       create: (context) => ProgressHUDController(),
-      builder: (context, _child) => PostCreatePage._(),
+      builder: (context, child) => PostCreatePage._(),
     );
   }
 
@@ -50,18 +49,20 @@ class PostCreatePage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Container(
-                child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  InputTitleForm(controller: _formController['title']),
-                  const SizedBox(height: 16),
-                  InputDescriptionForm(
-                      controller: _formController['description']),
-                ],
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    InputTitleForm(controller: _formController['title']),
+                    const SizedBox(height: 16),
+                    InputDescriptionForm(
+                      controller: _formController['description'],
+                    ),
+                  ],
+                ),
               ),
-            )),
+            ),
           ),
         ),
       ),

@@ -6,7 +6,6 @@ import 'package:nippo/pages/post/post_list_page.dart';
 import 'package:nippo/pages/profile/profile_page.dart';
 import 'package:nippo/pages/user/user_list_page.dart';
 import 'package:provider/provider.dart';
-import 'package:state_notifier/state_notifier.dart';
 
 class BasePage extends StatelessWidget {
   const BasePage._({Key key}) : super(key: key);
@@ -23,7 +22,7 @@ class BasePage extends StatelessWidget {
   Widget build(BuildContext context) {
     context.watch<AuthController>().updateData();
     return Scaffold(
-      body: PageView(),
+      body: const PageView(),
       bottomNavigationBar: BubbleBottomNavBar(
         index: context.select((int currentIndex) => currentIndex),
         onTap: (index) {
@@ -35,6 +34,8 @@ class BasePage extends StatelessWidget {
 }
 
 class PageView extends StatelessWidget {
+  const PageView({super.key});
+
   Widget _currentPage({int page}) {
     final pageList = [
       const PostListPage(),
@@ -48,7 +49,8 @@ class PageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: _currentPage(
-          page: context.select((int currentIndex) => currentIndex)),
+        page: context.select((int currentIndex) => currentIndex),
+      ),
     );
   }
 }

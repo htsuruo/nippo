@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 String formatDateFromTimeStamp({Timestamp timestamp}) {
-  if (!(timestamp is Timestamp)) {
+  if (timestamp is! Timestamp) {
     return 'it is not timestamp.';
   }
   final date = timestamp.toDate();

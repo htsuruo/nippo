@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nippo/models/entities/post.dart';
 import 'package:nippo/models/entities/user.dart';
@@ -6,7 +5,7 @@ import 'package:nippo/theme.dart';
 import 'package:nippo/util.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({this.post, this.user});
+  const PostCard({super.key, this.post, this.user});
   final Post post;
   final User user;
 
@@ -18,24 +17,27 @@ class PostCard extends StatelessWidget {
         onTap: () async {
           await onTapCard(context: context);
         },
-        child: Container(
+        child: DecoratedBox(
           decoration: BoxDecoration(
-              border: Border.all(width: 1, color: Colors.black12),
-              borderRadius: const BorderRadius.all(Radius.circular(8))),
+            border: Border.all(color: Colors.black12),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Expanded(
-                flex: 1,
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 12),
-                    child: CircleAvatar(
-                      child: Image.network(
-                        user.photoUrl ?? '',
-                        fit: BoxFit.cover,
-                      ),
-                    )),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 12,
+                  ),
+                  child: CircleAvatar(
+                    child: Image.network(
+                      user.photoUrl ?? '',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ),
               Expanded(
                 flex: 4,
@@ -51,7 +53,7 @@ class PostCard extends StatelessWidget {
                           maxLines: 1,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle1
+                              .titleMedium
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -59,7 +61,7 @@ class PostCard extends StatelessWidget {
                     DefaultTextStyle(
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText2
+                          .bodyMedium
                           .copyWith(color: Colors.black54),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
@@ -72,13 +74,15 @@ class PostCard extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               formatDateFromTimeStamp(
-                                  timestamp: post.createdAt),
+                                timestamp: post.createdAt,
+                              ),
                               style: Theme.of(context)
                                   .textTheme
-                                  .caption
+                                  .bodySmall
                                   .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: VIC.navy),
+                                    fontWeight: FontWeight.bold,
+                                    color: VIC.navy,
+                                  ),
                             ),
                           ],
                         ),
@@ -96,48 +100,56 @@ class PostCard extends StatelessWidget {
 
   Future<void> onTapCard({BuildContext context}) async {
     final res = await showModalBottomSheet<int>(
-        context: context,
-        builder: (BuildContext context) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 20, left: 40, right: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Image.network(
-                      user.photoUrl,
-                      height: 36,
-                    ),
-                    const SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(user.displayName,
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(
-                            '${formatDateFromTimeStamp(timestamp: post.createdAt)} に投稿'),
-                      ],
-                    )
-                  ],
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 20, left: 40, right: 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Image.network(
+                    user.photoUrl,
+                    height: 36,
+                  ),
+                  const SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        user.displayName,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        '${formatDateFromTimeStamp(timestamp: post.createdAt)} に投稿',
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(height: 16),
+              const Divider(),
+              const SizedBox(height: 16),
+              Text(
+                post.title,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                post.description,
+                style: const TextStyle(
+                  fontSize: 16,
                 ),
-                const SizedBox(height: 16),
-                const Divider(),
-                const SizedBox(height: 16),
-                Text(post.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5
-                        .copyWith(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                Text(post.description,
-                    style: const TextStyle(
-                      fontSize: 16,
-                    )),
-              ],
-            ),
-          );
-        });
+              ),
+            ],
+          ),
+        );
+      },
+    );
     print('bottom sheet result: $res');
   }
 }

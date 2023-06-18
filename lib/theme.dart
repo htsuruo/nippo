@@ -11,13 +11,16 @@ ThemeData setTheme(BuildContext context) {
     textTheme: GoogleFonts.notoSansTextTheme(Theme.of(context).textTheme),
   ).copyWith(
     appBarTheme: const AppBarTheme(
-        elevation: 0.5,
-        textTheme: TextTheme(
-          headline6:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        )),
+      elevation: 0.5,
+      toolbarTextStyle: TextTheme(
+        titleLarge: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+      ).bodyMedium,
+      titleTextStyle: TextTheme(
+        titleLarge: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+      ).titleLarge,
+    ),
     dividerTheme:
-        DividerThemeData(color: Colors.black26, thickness: 0, space: 2),
+        const DividerThemeData(color: Colors.black26, thickness: 0, space: 2),
   );
 }
 

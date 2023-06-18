@@ -24,12 +24,13 @@ class SettingPage extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               ...firstSection(
-                  currentUser: context.select((AuthState s) => s.user)),
+                currentUser: context.select((AuthState s) => s.user),
+              ),
               ...secondSection(),
               const SizedBox(
                 height: 32,
               ),
-              SignOutButton(),
+              const SignOutButton(),
             ],
           ),
         ),
@@ -62,7 +63,7 @@ List<Widget> secondSection() {
     const Divider(),
     SimpleListTile(
       title: 'ディベロッパー',
-      trailing: Icon(Icons.open_in_new),
+      trailing: const Icon(Icons.open_in_new),
       onTap: () async {
         await launchUrl(url: 'https://scrapbox.io/tsuruo/');
       },

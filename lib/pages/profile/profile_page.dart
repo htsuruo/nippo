@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.centerRight,
                   child: IconButton(
-                    icon: Icon(Icons.more_horiz),
+                    icon: const Icon(Icons.more_horiz),
                     onPressed: () {
                       Navigator.pushNamed(context, SettingPage.routeName);
                     },
@@ -45,19 +45,17 @@ class SyncArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = context.select((AuthState s) => s);
-    if (auth.user != null) {
-      return Expanded(
-        child: Column(
-          children: <Widget>[
-            ProfileArea(user: auth.user),
-            PostListViewByUser(
-              posts: auth.posts,
-              user: auth.user,
-            )
-          ],
-        ),
-      );
-    }
+    return Expanded(
+      child: Column(
+        children: <Widget>[
+          ProfileArea(user: auth.user),
+          PostListViewByUser(
+            posts: auth.posts,
+            user: auth.user,
+          )
+        ],
+      ),
+    );
     return const Expanded(
       child: Center(
         child: CircularProgressIndicator(),

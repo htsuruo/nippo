@@ -8,6 +8,8 @@ import 'package:nippo/pages/auth/submit_button.dart';
 import 'package:nippo/pages/base_page.dart';
 
 class SignInEmailPage extends StatelessWidget {
+  SignInEmailPage({super.key});
+
   static const String routeName = '/signin_email';
 
   final _formKey = GlobalKey<FormState>();

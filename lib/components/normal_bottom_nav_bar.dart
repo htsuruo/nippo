@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class NormalBottomNavBar extends StatelessWidget {
-  const NormalBottomNavBar({this.index, this.onTap});
+  const NormalBottomNavBar({super.key, this.index, this.onTap});
   final int index;
   final Function(int) onTap;
   List<BottomNavigationBarItem> bottomItems() {
     return [
-      BottomNavigationBarItem(
-          icon: Icon(Icons.view_list), title: const Text('日報')),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.people), title: const Text('登録者')),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.person), title: const Text('マイページ')),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.view_list),
+        label: Text('日報'),
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.people),
+        label: Text('登録者'),
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        label: Text('マイページ'),
+      ),
     ];
   }
 

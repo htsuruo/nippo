@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 import '../../theme.dart';
 
 class SubmitButton extends StatelessWidget {
-  const SubmitButton({@required this.formKey, @required this.controller});
+  const SubmitButton(
+      {super.key, @required this.formKey, @required this.controller});
 
   final GlobalKey<FormState> formKey;
   final Map<String, TextEditingController> controller;
@@ -21,7 +22,7 @@ class SubmitButton extends StatelessWidget {
       color: VIC.red,
       onPressed: () async {
         if (formKey.currentState.validate()) {
-          final _progressController = context.read<ProgressHUDController>()
+          final progressController = context.read<ProgressHUDController>()
             ..update(newState: true);
           final post = Post(
             title: controller['title'].text,
@@ -29,17 +30,20 @@ class SubmitButton extends StatelessWidget {
           );
           await context.read<PostController>().create(post: post, uid: uid);
           Navigator.pop(context);
-          _progressController.update(newState: false);
+          progressController.update(newState: false);
 //          controller['title'].dispose();
 //          controller['description'].dispose();
         }
       },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Text(
           '投稿する',
           style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
         ),
       ),
     );

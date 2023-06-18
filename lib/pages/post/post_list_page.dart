@@ -17,26 +17,29 @@ class PostListPage extends StatelessWidget {
       body: const SafeArea(
         child: PostListView(),
       ),
-      floatingActionButton: PostFloatingActionButton(),
+      floatingActionButton: const PostFloatingActionButton(),
     );
   }
 }
 
 class PostFloatingActionButton extends StatelessWidget {
+  const PostFloatingActionButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
         Navigator.push(
-            context,
-            MaterialPageRoute<MaterialPageRoute>(
-              builder: (BuildContext context) {
-                return PostCreatePage.wrapped();
-              },
-              fullscreenDialog: true,
-            ));
+          context,
+          MaterialPageRoute<MaterialPageRoute>(
+            builder: (BuildContext context) {
+              return PostCreatePage.wrapped();
+            },
+            fullscreenDialog: true,
+          ),
+        );
       },
-      child: Icon(Icons.mode_edit),
+      child: const Icon(Icons.mode_edit),
     );
   }
 }

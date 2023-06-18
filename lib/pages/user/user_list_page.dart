@@ -21,7 +21,7 @@ class UserPage extends StatelessWidget {
 }
 
 class UserListView extends StatelessWidget {
-  const UserListView({@required this.users});
+  const UserListView({super.key, @required this.users});
   final List<User> users;
 
   @override
@@ -33,10 +33,13 @@ class UserListView extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: UserListTile(
             user: user,
-            onTap: () => Navigator.pushNamed(context, UserDetailPage.routeName,
-                arguments: UserDetailArgs(
-                  user: user,
-                )),
+            onTap: () => Navigator.pushNamed(
+              context,
+              UserDetailPage.routeName,
+              arguments: UserDetailArgs(
+                user: user,
+              ),
+            ),
           ),
         );
       },

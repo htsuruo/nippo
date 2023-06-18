@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SimpleListSection extends StatelessWidget {
-  const SimpleListSection({@required this.title});
+  const SimpleListSection({super.key, @required this.title});
   final String title;
 
   @override
@@ -10,7 +10,7 @@ class SimpleListSection extends StatelessWidget {
       padding: const EdgeInsets.only(top: 48, left: 16, right: 16, bottom: 8),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.caption,
+        style: Theme.of(context).textTheme.bodySmall,
       ),
     );
   }

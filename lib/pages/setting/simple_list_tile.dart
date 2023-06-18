@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SimpleListTile extends StatelessWidget {
-  const SimpleListTile({@required this.title, this.trailing, this.onTap});
+  const SimpleListTile(
+      {super.key, @required this.title, this.trailing, this.onTap});
   final String title;
   final Widget trailing;
   final Function() onTap;
@@ -12,7 +13,7 @@ class SimpleListTile extends StatelessWidget {
       child: ListTile(
         title: Text(
           title,
-          style: Theme.of(context).textTheme.subtitle2,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         trailing: trailing,
         onTap: onTap,

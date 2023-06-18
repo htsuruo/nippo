@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class SignInSnsButton extends StatelessWidget {
-  const SignInSnsButton({@required this.logoImg, this.label, this.onPressed});
+  const SignInSnsButton(
+      {super.key, @required this.logoImg, this.label, this.onPressed});
 
   final Image logoImg;
   final String label;
@@ -17,7 +18,7 @@ class SignInSnsButton extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       onPressed: onPressed,
       highlightColor: Colors.white,
-      child: Container(
+      child: SizedBox(
         width: 220,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

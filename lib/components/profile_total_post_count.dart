@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileTotalPostCount extends StatelessWidget {
-  const ProfileTotalPostCount({@required this.postCount});
+  const ProfileTotalPostCount({super.key, @required this.postCount});
 
   final int postCount;
 
@@ -20,7 +20,7 @@ class ProfileTotalPostCount extends StatelessWidget {
             postCount.toString(),
             style: Theme.of(context)
                 .textTheme
-                .headline5
+                .headlineSmall
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           const Text('投稿数'),

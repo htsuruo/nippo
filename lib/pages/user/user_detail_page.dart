@@ -42,12 +42,10 @@ class PostListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final posts = context.select((PostState s) => s.postsByUserId);
-    if (posts != null) {
-      return PostListViewByUser(
-        posts: posts,
-        user: user,
-      );
-    }
+    return PostListViewByUser(
+      posts: posts,
+      user: user,
+    );
     return const Padding(
       padding: EdgeInsets.only(top: 60),
       child: Center(
