@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:nippo/components/bubble_bottom_nav_bar.dart';
+import 'package:nippo/components/bottom_nav_bar.dart';
 import 'package:nippo/models/controllers/auth/auth_controller.dart';
 import 'package:nippo/pages/post/post_list_page.dart';
 import 'package:nippo/pages/profile/profile_page.dart';
@@ -23,10 +23,10 @@ class BasePage extends StatelessWidget {
     context.watch<AuthController>().updateData();
     return Scaffold(
       body: const PageView(),
-      bottomNavigationBar: BubbleBottomNavBar(
+      bottomNavigationBar: BottomNavBar(
         index: context.select((int currentIndex) => currentIndex),
         onTap: (index) {
-          context.read<BottomNavigationBarController>().change(index: index!);
+          context.read<BottomNavigationBarController>().change(index: index);
         },
       ),
     );

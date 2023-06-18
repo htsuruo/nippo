@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
-class NormalBottomNavBar extends StatelessWidget {
-  const NormalBottomNavBar({
+class BottomNavBar extends StatelessWidget {
+  const BottomNavBar({
     super.key,
     required this.index,
     required this.onTap,
