@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class TutorialChild extends StatelessWidget {
-  const TutorialChild(
-      {this.color = Colors.white, this.title = '', this.description = ''});
+  const TutorialChild({
+    super.key,
+    this.color = Colors.white,
+    this.title = '',
+    this.description = '',
+  });
 
   final Color color;
   final String title;
@@ -36,14 +40,19 @@ class TutorialChild extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(title,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 22)),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 22,
+                    ),
+                  ),
                   const SizedBox(height: 16),
-                  Text(description,
-                      style: const TextStyle(color: Colors.white, fontSize: 16))
+                  Text(
+                    description,
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  )
                 ],
               ),
             )

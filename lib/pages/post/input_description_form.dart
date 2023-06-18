@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class InputDescriptionForm extends StatelessWidget {
-  const InputDescriptionForm({@required this.controller});
+  const InputDescriptionForm({super.key, required this.controller});
   final TextEditingController controller;
 
   @override
@@ -22,7 +22,7 @@ class InputDescriptionForm extends StatelessWidget {
         hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
       ),
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'テキストを入力しましょう';
         }
         return null;

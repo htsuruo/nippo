@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.g.dart';
@@ -6,8 +5,8 @@ part 'user.g.dart';
 @JsonSerializable()
 class User {
   User({
-    @required this.uid,
-    @required this.email,
+    required this.uid,
+    required this.email,
     this.photoUrl = '',
     this.displayName = '名無しさん',
     this.providerData,
@@ -20,7 +19,7 @@ class User {
   final String email;
   final String photoUrl;
   final String displayName;
-  final String providerData;
-  final String lastSignInTime;
+  final String? providerData;
+  final String? lastSignInTime;
   final String description;
 }

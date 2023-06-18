@@ -5,7 +5,7 @@ import 'package:nippo/pages/tutorial/tutorial_child.dart';
 import 'package:nippo/theme.dart';
 
 class TutorialPage extends StatelessWidget {
-  const TutorialPage({Key key}) : super(key: key);
+  const TutorialPage({super.key});
   static const String routeName = '/tutorial';
 
   @override
@@ -13,7 +13,6 @@ class TutorialPage extends StatelessWidget {
     return Scaffold(
       body: OverBoard(
         pages: tutorialPages(),
-        showBullets: true,
         skipText: 'スキップ',
         nextText: '次へ',
         finishText: 'はじめる',
@@ -33,37 +32,37 @@ class TutorialPage extends StatelessWidget {
 List<PageModel> tutorialPages() {
   final pages = [
     PageModel.withChild(
-        child: TutorialChild(
-          color: VIC.red,
-          title: 'チュートリアル1です',
-          description: 'チュートリアルのディスクリプションです',
-        ),
+      child: const TutorialChild(
         color: VIC.red,
-        doAnimateChild: false),
+        title: 'チュートリアル1です',
+        description: 'チュートリアルのディスクリプションです',
+      ),
+      color: VIC.red,
+    ),
     PageModel.withChild(
-        child: TutorialChild(
-          color: VIC.yellow,
-          title: 'チュートリアル2です',
-          description: 'チュートリアルのディスクリプションです',
-        ),
+      child: const TutorialChild(
         color: VIC.yellow,
-        doAnimateChild: false),
+        title: 'チュートリアル2です',
+        description: 'チュートリアルのディスクリプションです',
+      ),
+      color: VIC.yellow,
+    ),
     PageModel.withChild(
-        child: TutorialChild(
-          color: VIC.navy,
-          title: 'チュートリアル3です',
-          description: 'チュートリアルのディスクリプションです',
-        ),
+      child: const TutorialChild(
         color: VIC.navy,
-        doAnimateChild: false),
+        title: 'チュートリアル3です',
+        description: 'チュートリアルのディスクリプションです',
+      ),
+      color: VIC.navy,
+    ),
     PageModel.withChild(
-        child: TutorialChild(
-          color: VIC.green,
-          title: 'チュートリアル4です',
-          description: 'チュートリアルのディスクリプションです',
-        ),
+      child: const TutorialChild(
         color: VIC.green,
-        doAnimateChild: false),
+        title: 'チュートリアル4です',
+        description: 'チュートリアルのディスクリプションです',
+      ),
+      color: VIC.green,
+    ),
   ];
   return pages;
 }

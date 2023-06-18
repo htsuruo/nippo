@@ -1,0 +1,29 @@
+name: nippo
+
+packages:
+  - ./
+
+sdkPath: '.fvm/flutter_sdk'
+
+scripts:
+  pub:upgrade:
+    exec: flutter pub upgrade
+    packageFilters:
+      flutter: true
+  analyze:
+    run: |
+      melos exec -c 1 -- \
+        dart analyze . --fatal-infos
+
+  fix:format:
+    exec: melos run fix && melos run format
+  fix:
+    exec: dart fix --apply .
+  format:
+    exec: dart format .
+
+  test:
+    run: |
+      melos exec --ignore="*example*" --dir-exists=test \
+      --fail-fast -- \
+      "flutter test --no-pub"

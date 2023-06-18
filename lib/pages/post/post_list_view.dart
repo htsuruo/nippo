@@ -5,12 +5,12 @@ import 'package:nippo/models/entities/post.dart';
 import 'package:provider/provider.dart';
 
 class PostListView extends StatelessWidget {
-  const PostListView({Key key}) : super(key: key);
+  const PostListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final posts = context.select((PostState s) => s.posts);
-    if (posts != null && posts.isNotEmpty) {
+    if (posts.isNotEmpty) {
       return ListView.builder(
         itemCount: posts.length,
         itemBuilder: (context, index) {
@@ -22,7 +22,7 @@ class PostListView extends StatelessWidget {
           );
           return PostCard(
             post: post,
-            user: data.user,
+            user: data.user!,
           );
         },
       );

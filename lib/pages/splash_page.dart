@@ -8,11 +8,11 @@ import 'package:nippo/pages/tutorial/tutorial_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key key}) : super(key: key);
+  const SplashPage({super.key});
   static const String routeName = '/splash';
 
   @override
-  _SplashPageState createState() => _SplashPageState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
 class _SplashPageState extends State<SplashPage> {
@@ -30,8 +30,8 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         // TODO(tsuruoka): スプラッシュアニメーション
         child: Hero(
-          child: AppLogo(height: 240),
           tag: 'appLogo',
+          child: AppLogo(height: 240),
         ),
       ),
     );

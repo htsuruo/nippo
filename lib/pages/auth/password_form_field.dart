@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class PasswordFormField extends StatefulWidget {
-  const PasswordFormField({@required this.controller});
+  const PasswordFormField({super.key, required this.controller});
   final TextEditingController controller;
 
   @override
-  _PasswordFormFieldState createState() =>
+  State<PasswordFormField> createState() =>
       _PasswordFormFieldState(controller: controller);
 }
 
 class _PasswordFormFieldState extends State<PasswordFormField> {
-  _PasswordFormFieldState({@required this.controller});
+  _PasswordFormFieldState({required this.controller});
 
   final TextEditingController controller;
   bool obscureText = true;
@@ -20,7 +20,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText,
-      style: Theme.of(context).textTheme.bodyText2.copyWith(
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: VIC.navy,
             fontWeight: FontWeight.bold,
           ),
@@ -28,24 +28,25 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       autofocus: true,
       controller: controller,
       decoration: InputDecoration(
-          icon: Icon(Icons.lock, size: 20, color: VIC.navy),
-          contentPadding: const EdgeInsets.all(16),
-          border: const OutlineInputBorder(
-            borderSide: BorderSide(width: 1, color: VIC.border),
-            gapPadding: 0,
-          ),
-          hintText: 'パスワード',
-          hintStyle: TextStyle(fontWeight: FontWeight.normal),
-          suffixIcon: IconButton(
-            icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
-            onPressed: () {
-              setState(() {
-                obscureText = !obscureText;
-              });
-            },
-          )),
+        icon: const Icon(Icons.lock, size: 20, color: VIC.navy),
+        contentPadding: const EdgeInsets.all(16),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(color: VIC.border),
+          gapPadding: 0,
+        ),
+        hintText: 'パスワード',
+        hintStyle: const TextStyle(fontWeight: FontWeight.normal),
+        suffixIcon: IconButton(
+          icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
+          onPressed: () {
+            setState(() {
+              obscureText = !obscureText;
+            });
+          },
+        ),
+      ),
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'パスワードを入力しましょう';
         }
         if (value.length < 8) {

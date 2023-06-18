@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/models/repositories/user_repository.dart';
@@ -13,44 +12,45 @@ import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage._({Key key}) : super(key: key);
+  const RegisterPage._();
   static const String routeName = '/register';
 
   static Widget wrapped() {
     return StateNotifierProvider<ProgressHUDController, bool>(
       create: (context) => ProgressHUDController(),
-      builder: (context, _child) => const RegisterPage._(),
+      builder: (context, child) => const RegisterPage._(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final _controller = <String, TextEditingController>{
+    final controller = <String, TextEditingController>{
       'email': TextEditingController(),
       'password': TextEditingController(),
     };
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     Future<Map<String, Object>> submit() async {
-      final email = _controller['email'].text;
-      final password = _controller['password'].text;
+      final email = controller['email']!.text;
+      final password = controller['password']!.text;
       return AuthRepository().signUpWithEmail(email: email, password: password);
     }
 
-    Future<void> onSuccess({User tmpUser}) async {
+    Future<void> onSuccess({required User tmpUser}) async {
       final user = User(
-          uid: tmpUser.uid,
-          email: tmpUser.email,
-          providerData: tmpUser.providerData,
-          lastSignInTime: tmpUser.lastSignInTime);
+        uid: tmpUser.uid,
+        email: tmpUser.email,
+        providerData: tmpUser.providerData,
+        lastSignInTime: tmpUser.lastSignInTime,
+      );
       await UserRepository().updateUser(user: user);
       await Navigator.pushReplacementNamed(context, BasePage.routeName);
-      _controller['email'].dispose();
-      _controller['password'].dispose();
+      controller['email']!.dispose();
+      controller['password']!.dispose();
     }
 
-    void onFailed({BuildContext context, String errMessage}) {
-      Scaffold.of(context).showSnackBar(
+    void onFailed({required BuildContext context, required String errMessage}) {
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(errMessage),
           backgroundColor: Colors.red,
@@ -66,15 +66,15 @@ class RegisterPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 16, left: 24, right: 24),
             child: Form(
-              key: _formKey,
+              key: formKey,
               child: Column(
                 children: <Widget>[
                   EmailFormField(
-                    controller: _controller['email'],
+                    controller: controller['email']!,
                   ),
                   const SizedBox(height: 16),
                   PasswordFormField(
-                    controller: _controller['password'],
+                    controller: controller['password']!,
                   ),
                   const SizedBox(height: 16),
                   //SnackBar表示のためにcontextを生成.
@@ -82,13 +82,7 @@ class RegisterPage extends StatelessWidget {
                     builder: (context) {
                       return SubmitButton(
                         onPressed: () async {
-                          // TODO(tsuru): ここにProguressHUBを表示したいが下記エラーが解決できない
-//                          「At this point the state of the widget's element
-//                          tree is no longer stable.」
-//                          final controller = context
-//                              .read<ProgressHUDController>()
-//                                ..update(newState: true);
-                          if (_formKey.currentState.validate()) {
+                          if (formKey.currentState!.validate()) {
                             final map = await submit();
                             if (map['result'] as bool) {
                               await onSuccess(tmpUser: map['user'] as User);

@@ -5,7 +5,11 @@ import 'package:nippo/models/entities/post.dart';
 import 'package:nippo/models/entities/user.dart';
 
 class PostListViewByUser extends StatelessWidget {
-  const PostListViewByUser({Key key, this.posts, this.user}) : super(key: key);
+  const PostListViewByUser({
+    super.key,
+    required this.posts,
+    required this.user,
+  });
   final List<Post> posts;
   final User user;
 

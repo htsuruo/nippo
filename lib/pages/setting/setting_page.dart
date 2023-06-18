@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
-  const SettingPage({Key key}) : super(key: key);
+  const SettingPage({super.key});
   static const String routeName = '/setting';
 
   @override
@@ -20,36 +20,38 @@ class SettingPage extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: Container(
-          child: ListView(
-            children: <Widget>[
-              ...firstSection(
-                  currentUser: context.select((AuthState s) => s.user)),
-              ...secondSection(),
-              const SizedBox(
-                height: 32,
-              ),
-              SignOutButton(),
-            ],
-          ),
+        child: ListView(
+          children: <Widget>[
+            ...firstSection(
+              currentUser: context.select((AuthState s) => s.user),
+            ),
+            ...secondSection(),
+            const SizedBox(
+              height: 32,
+            ),
+            const SignOutButton(),
+          ],
         ),
       ),
     );
   }
 }
 
-List<Widget> firstSection({User currentUser}) {
+List<Widget> firstSection({required User currentUser}) {
+  final lastSignInTime = currentUser.lastSignInTime;
+  final providerData = currentUser.providerData;
   final children = [
     const SimpleListSection(title: 'ログイン情報'),
     const Divider(),
     SimpleListTile(
       title: '認証プロバイダ',
-      trailing: Text(currentUser != null ? currentUser.providerData : '読込中'),
+      trailing: providerData == null ? null : Text(providerData),
+      // trailing: Text(currentUser.providerData),
     ),
     const Divider(indent: 16),
     SimpleListTile(
       title: '最終ログイン日時',
-      trailing: Text(currentUser != null ? currentUser.lastSignInTime : '読込中'),
+      trailing: lastSignInTime == null ? null : Text(lastSignInTime),
     ),
     const Divider(),
   ];
@@ -62,7 +64,7 @@ List<Widget> secondSection() {
     const Divider(),
     SimpleListTile(
       title: 'ディベロッパー',
-      trailing: Icon(Icons.open_in_new),
+      trailing: const Icon(Icons.open_in_new),
       onTap: () async {
         await launchUrl(url: 'https://scrapbox.io/tsuruo/');
       },
@@ -77,7 +79,7 @@ List<Widget> secondSection() {
   return children;
 }
 
-Future<void> launchUrl({String url}) async {
+Future<void> launchUrl({required String url}) async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {

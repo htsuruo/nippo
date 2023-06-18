@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nippo/theme.dart';
 
 class InputTitleForm extends StatelessWidget {
-  const InputTitleForm({@required this.controller});
+  const InputTitleForm({super.key, required this.controller});
   final TextEditingController controller;
 
   @override
@@ -10,7 +10,6 @@ class InputTitleForm extends StatelessWidget {
     return TextFormField(
       textInputAction: TextInputAction.next, // return押下時の処理を変更できる.
       controller: controller,
-      maxLines: 1,
       autofocus: true,
       cursorColor: VIC.red,
       style: const TextStyle(fontWeight: FontWeight.bold),
@@ -22,7 +21,7 @@ class InputTitleForm extends StatelessWidget {
         ),
       ),
       validator: (value) {
-        if (value.isEmpty) {
+        if (value!.isEmpty) {
           return 'テキストを入力しましょう';
         }
         return null;

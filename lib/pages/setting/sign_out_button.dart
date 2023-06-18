@@ -4,6 +4,8 @@ import 'package:nippo/pages/auth/sign_in_page.dart';
 import 'package:provider/provider.dart';
 
 class SignOutButton extends StatelessWidget {
+  const SignOutButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     final controller = context.watch<AuthController>();
@@ -12,13 +14,16 @@ class SignOutButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         child: ListTile(
-          title: Center(
+          title: const Center(
             child: Text('サインアウト', style: TextStyle(color: Colors.red)),
           ),
           onTap: () async {
             await controller.signOut();
             await Navigator.pushNamedAndRemoveUntil(
-                context, SignInPage.routeName, (Route<dynamic> route) => false);
+              context,
+              SignInPage.routeName,
+              (Route<dynamic> route) => false,
+            );
           },
         ),
       ),

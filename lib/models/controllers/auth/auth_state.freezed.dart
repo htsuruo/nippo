@@ -1,5 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'auth_state.dart';
 
@@ -9,132 +11,146 @@ part of 'auth_state.dart';
 
 T _$identity<T>(T value) => value;
 
-class _$AuthStateTearOff {
-  const _$AuthStateTearOff();
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-  _AuthState call({User user, List<Post> posts = const <Post>[]}) {
-    return _AuthState(
-      user: user,
-      posts: posts,
-    );
-  }
-}
-
-// ignore: unused_element
-const $AuthState = _$AuthStateTearOff();
-
+/// @nodoc
 mixin _$AuthState {
-  User get user;
-  List<Post> get posts;
+  User get user => throw _privateConstructorUsedError;
+  List<Post> get posts => throw _privateConstructorUsedError;
 
-  $AuthStateCopyWith<AuthState> get copyWith;
+  @JsonKey(ignore: true)
+  $AuthStateCopyWith<AuthState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
-      _$AuthStateCopyWithImpl<$Res>;
+      _$AuthStateCopyWithImpl<$Res, AuthState>;
+  @useResult
   $Res call({User user, List<Post> posts});
 }
 
-class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
+/// @nodoc
+class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
+    implements $AuthStateCopyWith<$Res> {
   _$AuthStateCopyWithImpl(this._value, this._then);
 
-  final AuthState _value;
   // ignore: unused_field
-  final $Res Function(AuthState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object user = freezed,
-    Object posts = freezed,
+    Object? user = null,
+    Object? posts = null,
   }) {
     return _then(_value.copyWith(
-      user: user == freezed ? _value.user : user as User,
-      posts: posts == freezed ? _value.posts : posts as List<Post>,
-    ));
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      posts: null == posts
+          ? _value.posts
+          : posts // ignore: cast_nullable_to_non_nullable
+              as List<Post>,
+    ) as $Val);
   }
 }
 
-abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
-  factory _$AuthStateCopyWith(
-          _AuthState value, $Res Function(_AuthState) then) =
-      __$AuthStateCopyWithImpl<$Res>;
+/// @nodoc
+abstract class _$$_AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
+  factory _$$_AuthStateCopyWith(
+          _$_AuthState value, $Res Function(_$_AuthState) then) =
+      __$$_AuthStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({User user, List<Post> posts});
 }
 
-class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
-    implements _$AuthStateCopyWith<$Res> {
-  __$AuthStateCopyWithImpl(_AuthState _value, $Res Function(_AuthState) _then)
-      : super(_value, (v) => _then(v as _AuthState));
+/// @nodoc
+class __$$_AuthStateCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_AuthState>
+    implements _$$_AuthStateCopyWith<$Res> {
+  __$$_AuthStateCopyWithImpl(
+      _$_AuthState _value, $Res Function(_$_AuthState) _then)
+      : super(_value, _then);
 
-  @override
-  _AuthState get _value => super._value as _AuthState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object user = freezed,
-    Object posts = freezed,
+    Object? user = null,
+    Object? posts = null,
   }) {
-    return _then(_AuthState(
-      user: user == freezed ? _value.user : user as User,
-      posts: posts == freezed ? _value.posts : posts as List<Post>,
+    return _then(_$_AuthState(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+      posts: null == posts
+          ? _value._posts
+          : posts // ignore: cast_nullable_to_non_nullable
+              as List<Post>,
     ));
   }
 }
 
-class _$_AuthState with DiagnosticableTreeMixin implements _AuthState {
-  const _$_AuthState({this.user, this.posts = const <Post>[]})
-      : assert(posts != null);
+/// @nodoc
+
+class _$_AuthState implements _AuthState {
+  const _$_AuthState(
+      {required this.user, final List<Post> posts = const <Post>[]})
+      : _posts = posts;
 
   @override
   final User user;
-  @JsonKey(defaultValue: const <Post>[])
+  final List<Post> _posts;
   @override
-  final List<Post> posts;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthState(user: $user, posts: $posts)';
+  @JsonKey()
+  List<Post> get posts {
+    if (_posts is EqualUnmodifiableListView) return _posts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_posts);
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'AuthState'))
-      ..add(DiagnosticsProperty('user', user))
-      ..add(DiagnosticsProperty('posts', posts));
+  String toString() {
+    return 'AuthState(user: $user, posts: $posts)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AuthState &&
-            (identical(other.user, user) ||
-                const DeepCollectionEquality().equals(other.user, user)) &&
-            (identical(other.posts, posts) ||
-                const DeepCollectionEquality().equals(other.posts, posts)));
+        (other.runtimeType == runtimeType &&
+            other is _$_AuthState &&
+            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality().equals(other._posts, _posts));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(user) ^
-      const DeepCollectionEquality().hash(posts);
+  int get hashCode => Object.hash(
+      runtimeType, user, const DeepCollectionEquality().hash(_posts));
 
+  @JsonKey(ignore: true)
   @override
-  _$AuthStateCopyWith<_AuthState> get copyWith =>
-      __$AuthStateCopyWithImpl<_AuthState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>
+      __$$_AuthStateCopyWithImpl<_$_AuthState>(this, _$identity);
 }
 
 abstract class _AuthState implements AuthState {
-  const factory _AuthState({User user, List<Post> posts}) = _$_AuthState;
+  const factory _AuthState({required final User user, final List<Post> posts}) =
+      _$_AuthState;
 
   @override
   User get user;
   @override
   List<Post> get posts;
   @override
-  _$AuthStateCopyWith<_AuthState> get copyWith;
+  @JsonKey(ignore: true)
+  _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

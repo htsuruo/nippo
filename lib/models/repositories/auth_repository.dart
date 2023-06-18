@@ -1,38 +1,34 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nippo/constant.dart';
-import 'package:nippo/models/entities/user.dart';
 import 'package:nippo/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../entities/user.dart' as app;
 
 class AuthRepository {
   final _firebaseAuth = FirebaseAuth.instance;
 
-  User _getUserData(FirebaseUser user) {
-    if (user == null) {
-      return null;
-    }
-    print('firebse user sign in [ ${user.email} ], [ ${user.displayName} ]');
+  app.User _getUserData(User firUser) {
     _setSharedPreference();
-    return User(
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoUrl: user.photoUrl,
+    return app.User(
+      uid: firUser.uid,
+      email: firUser.email ?? '',
+      displayName: firUser.displayName ?? '',
+      photoUrl: firUser.photoURL ?? '',
       lastSignInTime:
-          formatDateFromDateTime(datetime: user.metadata.lastSignInTime),
-      providerData: _getProviderData(user),
+          formatDateFromDateTime(datetime: firUser.metadata.lastSignInTime!),
+      providerData: _getProviderData(firUser),
     );
   }
 
-  String _getProviderData(FirebaseUser user) {
-    String providerId;
+  String _getProviderData(User user) {
+    final providerIds = <String>[];
     for (final profile in user.providerData) {
-      providerId = profile.providerId;
+      providerIds.add(profile.providerId);
     }
-    return providerId;
+    return providerIds.first;
   }
 
   Future<void> _setSharedPreference() async {
@@ -42,18 +38,17 @@ class AuthRepository {
 
   Future<bool> isLogin() async {
     final user = await currentUser();
-    print('current user is [ ${user != null || false} ]');
-    return user != null || false;
+    return user != null;
   }
 
-  Future<User> currentUser() async {
-    final user = await _firebaseAuth.currentUser();
-    return _getUserData(user);
+  Future<app.User?> currentUser() async {
+    final user = _firebaseAuth.currentUser;
+    return user == null ? null : _getUserData(user);
   }
 
-  Future<User> signInWithGoogle() async {
-    final _googleSignIn = GoogleSignIn();
-    final googleUser = await _googleSignIn.signIn();
+  Future<app.User?> signInWithGoogle() async {
+    final googleSignIn = GoogleSignIn();
+    final googleUser = await googleSignIn.signIn();
     if (googleUser == null) {
       return null;
     }
@@ -62,18 +57,25 @@ class AuthRepository {
       return null;
     }
     final result = await _firebaseAuth.signInWithCredential(
-        GoogleAuthProvider.getCredential(
-            idToken: googleAuth.idToken, accessToken: googleAuth.accessToken));
-    return _getUserData(result.user);
+      GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
+      ),
+    );
+    return _getUserData(result.user!);
   }
 
-  Future<Map<String, Object>> signUpWithEmail(
-      {@required String email, @required String password}) async {
-    final map = <String, Object>{'user': null, 'result': false, 'message': ''};
+  Future<Map<String, Object>> signUpWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    final map = <String, Object>{'user': '', 'result': false, 'message': ''};
     try {
       final result = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      map['user'] = _getUserData(result.user);
+        email: email,
+        password: password,
+      );
+      map['user'] = _getUserData(result.user!);
       map['result'] = true;
     } on PlatformException catch (e) {
       print(e);
@@ -82,13 +84,17 @@ class AuthRepository {
     return map;
   }
 
-  Future<Map<String, Object>> signInWithEmail(
-      {@required String email, @required String password}) async {
-    final map = <String, Object>{'user': null, 'result': false, 'message': ''};
+  Future<Map<String, Object>> signInWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    final map = <String, Object>{'user': '', 'result': false, 'message': ''};
     try {
       final result = await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-      map['user'] = _getUserData(result.user);
+        email: email,
+        password: password,
+      );
+      map['user'] = _getUserData(result.user!);
       map['result'] = true;
     } on PlatformException catch (e) {
       print(e);

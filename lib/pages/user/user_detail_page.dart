@@ -7,12 +7,12 @@ import 'package:nippo/models/entities/user.dart';
 import 'package:provider/provider.dart';
 
 class UserDetailPage extends StatelessWidget {
-  const UserDetailPage({Key key}) : super(key: key);
+  const UserDetailPage({super.key});
   static const String routeName = '/user_detail';
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context).settings.arguments as UserDetailArgs;
+    final args = ModalRoute.of(context)!.settings.arguments as UserDetailArgs;
     context.watch<PostController>().fetchByUser(uid: args.user.uid);
     return Scaffold(
       appBar: AppBar(),
@@ -33,32 +33,24 @@ class UserDetailPage extends StatelessWidget {
 
 class PostListView extends StatelessWidget {
   const PostListView({
-    Key key,
-    @required this.user,
-  }) : super(key: key);
+    super.key,
+    required this.user,
+  });
 
   final User user;
 
   @override
   Widget build(BuildContext context) {
     final posts = context.select((PostState s) => s.postsByUserId);
-    if (posts != null) {
-      return PostListViewByUser(
-        posts: posts,
-        user: user,
-      );
-    }
-    return const Padding(
-      padding: EdgeInsets.only(top: 60),
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
+    return PostListViewByUser(
+      posts: posts,
+      user: user,
     );
   }
 }
 
 @immutable
 class UserDetailArgs {
-  const UserDetailArgs({this.user});
+  const UserDetailArgs({required this.user});
   final User user;
 }

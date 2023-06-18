@@ -1,5 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_state.dart';
 
@@ -9,80 +11,96 @@ part of 'user_state.dart';
 
 T _$identity<T>(T value) => value;
 
-class _$UserStateTearOff {
-  const _$UserStateTearOff();
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-  _UserState call({List<User> users = const <User>[]}) {
-    return _UserState(
-      users: users,
-    );
-  }
-}
-
-// ignore: unused_element
-const $UserState = _$UserStateTearOff();
-
+/// @nodoc
 mixin _$UserState {
-  List<User> get users;
+  List<User> get users => throw _privateConstructorUsedError;
 
-  $UserStateCopyWith<UserState> get copyWith;
+  @JsonKey(ignore: true)
+  $UserStateCopyWith<UserState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
-      _$UserStateCopyWithImpl<$Res>;
+      _$UserStateCopyWithImpl<$Res, UserState>;
+  @useResult
   $Res call({List<User> users});
 }
 
-class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
+/// @nodoc
+class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
+    implements $UserStateCopyWith<$Res> {
   _$UserStateCopyWithImpl(this._value, this._then);
 
-  final UserState _value;
   // ignore: unused_field
-  final $Res Function(UserState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object users = freezed,
+    Object? users = null,
   }) {
     return _then(_value.copyWith(
-      users: users == freezed ? _value.users : users as List<User>,
-    ));
+      users: null == users
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<User>,
+    ) as $Val);
   }
 }
 
-abstract class _$UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
-  factory _$UserStateCopyWith(
-          _UserState value, $Res Function(_UserState) then) =
-      __$UserStateCopyWithImpl<$Res>;
+/// @nodoc
+abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
+  factory _$$_UserStateCopyWith(
+          _$_UserState value, $Res Function(_$_UserState) then) =
+      __$$_UserStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<User> users});
 }
 
-class __$UserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
-    implements _$UserStateCopyWith<$Res> {
-  __$UserStateCopyWithImpl(_UserState _value, $Res Function(_UserState) _then)
-      : super(_value, (v) => _then(v as _UserState));
+/// @nodoc
+class __$$_UserStateCopyWithImpl<$Res>
+    extends _$UserStateCopyWithImpl<$Res, _$_UserState>
+    implements _$$_UserStateCopyWith<$Res> {
+  __$$_UserStateCopyWithImpl(
+      _$_UserState _value, $Res Function(_$_UserState) _then)
+      : super(_value, _then);
 
-  @override
-  _UserState get _value => super._value as _UserState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object users = freezed,
+    Object? users = null,
   }) {
-    return _then(_UserState(
-      users: users == freezed ? _value.users : users as List<User>,
+    return _then(_$_UserState(
+      users: null == users
+          ? _value._users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<User>,
     ));
   }
 }
 
-class _$_UserState with DiagnosticableTreeMixin implements _UserState {
-  const _$_UserState({this.users = const <User>[]}) : assert(users != null);
+/// @nodoc
 
-  @JsonKey(defaultValue: const <User>[])
+class _$_UserState with DiagnosticableTreeMixin implements _UserState {
+  const _$_UserState({final List<User> users = const <User>[]})
+      : _users = users;
+
+  final List<User> _users;
   @override
-  final List<User> users;
+  @JsonKey()
+  List<User> get users {
+    if (_users is EqualUnmodifiableListView) return _users;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_users);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -100,25 +118,29 @@ class _$_UserState with DiagnosticableTreeMixin implements _UserState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _UserState &&
-            (identical(other.users, users) ||
-                const DeepCollectionEquality().equals(other.users, users)));
+        (other.runtimeType == runtimeType &&
+            other is _$_UserState &&
+            const DeepCollectionEquality().equals(other._users, _users));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(users);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_users));
 
+  @JsonKey(ignore: true)
   @override
-  _$UserStateCopyWith<_UserState> get copyWith =>
-      __$UserStateCopyWithImpl<_UserState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_UserStateCopyWith<_$_UserState> get copyWith =>
+      __$$_UserStateCopyWithImpl<_$_UserState>(this, _$identity);
 }
 
 abstract class _UserState implements UserState {
-  const factory _UserState({List<User> users}) = _$_UserState;
+  const factory _UserState({final List<User> users}) = _$_UserState;
 
   @override
   List<User> get users;
   @override
-  _$UserStateCopyWith<_UserState> get copyWith;
+  @JsonKey(ignore: true)
+  _$$_UserStateCopyWith<_$_UserState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
