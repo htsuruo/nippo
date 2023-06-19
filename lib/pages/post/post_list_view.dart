@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/components/post_card.dart';
+import 'package:nippo/common/common.dart';
 import 'package:nippo/models/controllers/post/post_state.dart';
 import 'package:nippo/models/entities/post.dart';
 import 'package:provider/provider.dart';

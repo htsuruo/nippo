@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/components/app_logo.dart';
+import 'package:nippo/common/common.dart';
 import 'package:nippo/constant.dart';
 import 'package:nippo/models/repositories/auth_repository.dart';
 import 'package:nippo/pages/auth/sign_in_page.dart';

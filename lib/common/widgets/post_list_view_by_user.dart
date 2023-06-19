@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/components/post_card.dart';
-import 'package:nippo/components/profile_total_post_count.dart';
 import 'package:nippo/models/entities/post.dart';
 import 'package:nippo/models/entities/user.dart';
+
+import 'post_card.dart';
+import 'profile_total_post_count.dart';
 
 class PostListViewByUser extends StatelessWidget {
   const PostListViewByUser({

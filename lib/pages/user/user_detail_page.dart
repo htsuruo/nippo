@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/components/post_list_view_by_user.dart';
-import 'package:nippo/components/profile_area.dart';
+import 'package:nippo/common/common.dart';
 import 'package:nippo/models/controllers/post/post_controller.dart';
 import 'package:nippo/models/controllers/post/post_state.dart';
 import 'package:nippo/models/entities/user.dart';

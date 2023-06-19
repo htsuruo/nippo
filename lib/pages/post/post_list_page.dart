@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/components/app_logo.dart';
+import 'package:nippo/common/common.dart';
 import 'package:nippo/pages/post/post_create_page.dart';
 
 import 'post_list_view.dart';

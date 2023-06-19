@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:nippo/components/bottom_nav_bar.dart';
+import 'package:nippo/common/common.dart';
 import 'package:nippo/models/controllers/auth/auth_controller.dart';
 import 'package:nippo/pages/post/post_list_page.dart';
 import 'package:nippo/pages/profile/profile_page.dart';
