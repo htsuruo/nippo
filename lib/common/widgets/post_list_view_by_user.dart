@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/models/entities/post.dart';
-import 'package:nippo/models/entities/user.dart';
+import 'package:nippo/features/post/model/post.dart';
 
+import '../../features/user/model/user.dart';
 import 'post_card.dart';
 import 'profile_total_post_count.dart';
 

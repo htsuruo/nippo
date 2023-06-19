@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/models/entities/post.dart';
-import 'package:nippo/models/entities/user.dart';
+import 'package:nippo/features/post/model/post.dart';
 import 'package:nippo/theme.dart';
 import 'package:nippo/util.dart';
+
+import '../../features/user/model/user.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard({
