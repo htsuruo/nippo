@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/constant.dart';
 import 'package:nippo/services/auth_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,7 +48,7 @@ class _SplashPageState extends State<SplashPage> {
       return;
     }
     final prefs = await SharedPreferences.getInstance();
-    if (prefs.getInt(Preference.isTutorialDone) == 1) {
+    if (prefs.getInt('isTutorial_done') == 1) {
       await Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
       return;
     }

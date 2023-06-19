@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:nippo/constant.dart';
 import 'package:nippo/features/user/model/user.dart' as app;
 import 'package:nippo/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,7 +31,7 @@ class AuthRepository {
 
   Future<void> _setSharedPreference() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(Preference.isTutorialDone, 1);
+    await prefs.setInt('isTutorial_done', 1);
   }
 
   Future<bool> isLogin() async {

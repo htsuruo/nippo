@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/constant.dart';
+import 'package:nippo/gen/assets.gen.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({super.key, required this.height});
@@ -8,7 +8,7 @@ class AppLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image(
-      image: const ExactAssetImage(AssetPath.appLogoPath),
+      image: ExactAssetImage(Assets.images.icMainLogo.path),
       height: height,
       alignment: FractionalOffset.center,
     );

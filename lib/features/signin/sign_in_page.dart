@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/constant.dart';
 import 'package:nippo/features/user/user_repository.dart';
+import 'package:nippo/gen/assets.gen.dart';
 import 'package:nippo/services/auth_repository.dart';
 import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
@@ -14,13 +14,13 @@ import 'sign_in_email_page.dart';
 import 'signin_sns_button.dart';
 
 const double snsLogoHeight = 24;
-Image mailLogo = const Image(
-  image: ExactAssetImage(AssetPath.emailIcon),
+Image mailLogo = Image(
+  image: ExactAssetImage(Assets.images.icLogoMail.path),
   height: snsLogoHeight,
 );
 
-Image googleLogo = const Image(
-  image: ExactAssetImage(AssetPath.googleIcon),
+Image googleLogo = Image(
+  image: ExactAssetImage(Assets.images.icLogoGoogle.path),
   height: snsLogoHeight,
 );
 
