@@ -49,18 +49,16 @@ class PostCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 12, left: 4),
-                        child: Text(
-                          post.title,
-                          softWrap: true,
-                          maxLines: 1,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12, left: 4),
+                      child: Text(
+                        post.title,
+                        softWrap: true,
+                        maxLines: 1,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                     DefaultTextStyle(
@@ -155,6 +153,5 @@ class PostCard extends StatelessWidget {
         );
       },
     );
-    print('bottom sheet result: $res');
   }
 }

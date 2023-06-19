@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:nippo/models/entities/post.dart';
+
+import 'model/post.dart';
 
 part 'post_state.freezed.dart';
 

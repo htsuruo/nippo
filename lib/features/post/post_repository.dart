@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:nippo/features/posts/model/post.dart';
+
+import 'model/post.dart';
 
 class PostRepository {
   final firestore = FirebaseFirestore.instance;
