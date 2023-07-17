@@ -7,6 +7,7 @@ environment:
   sdk: '^3.0.0'
 
 dependencies:
+  auth_buttons: ^1.0.1+4
   cloud_firestore: ^4.8.3
   cupertino_icons: ^1.0.5
   email_validator: ^2.1.17
@@ -27,6 +28,7 @@ dependencies:
   google_sign_in: ^6.1.4
   hooks_riverpod: ^2.3.6
   # firebase_ui_auth depends on flutter_localizations from sdk which depends on intl 0.18.0,
+  intersperse: ^2.0.0
   intl: ^0.18.0
   modal_progress_hud_nsn: ^0.4.0
   provider: ^6.0.5

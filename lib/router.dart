@@ -10,7 +10,8 @@ final router = GoRouter(
   debugLogDiagnostics: kDebugMode,
   initialLocation: '/',
   redirect: (context, state) {
-    return '/';
+    // TODO(tsuruoka): 認証分岐
+    return '/signin';
   },
   routes: [
     GoRoute(
