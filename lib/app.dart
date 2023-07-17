@@ -3,7 +3,6 @@ import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:nippo/features/post/post_repository.dart';
 import 'package:nippo/features/user/user_repository.dart';
 import 'package:nippo/services/auth_repository.dart';
-import 'package:nippo/theme.dart';
 import 'package:provider/provider.dart';
 
 import 'features/base/base_page.dart';
@@ -49,7 +48,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'NIPPO',
-        theme: setTheme(context),
+        theme: ThemeData.from(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+        ),
 //      darkTheme: ThemeData.dark(), // これだけでダークモード的な事ができる.
         initialRoute: SplashPage.routeName,
         routes: <String, WidgetBuilder>{

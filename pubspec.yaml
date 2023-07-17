@@ -15,10 +15,10 @@ dependencies:
   firebase_ui_auth: ^1.6.0
   flutter:
     sdk: flutter
-  flutter_web_plugins:
-    sdk: flutter
   flutter_overboard: ^3.1.1
   flutter_state_notifier: ^0.7.3
+  flutter_web_plugins:
+    sdk: flutter
   freezed_annotation: ^2.4.1
   gap: ^3.0.1
   go_router: ^9.0.3
@@ -57,7 +57,7 @@ dependency_overrides:
 flutter_icons:
   android: true
   ios: true
-  image_path: assets/img/appicon.png
+  image_path: assets/image/appicon.png
 
 flutter:
   uses-material-design: true

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nippo/gen/assets.gen.dart';
 
 class TutorialChild extends StatelessWidget {
   const TutorialChild({
@@ -27,7 +28,7 @@ class TutorialChild extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 24),
                   child: Center(
                     child: Image.asset(
-                      'assets/img/ic_tutorial_line.png',
+                      Assets.images.icTutorialLine.path,
                       width: 60,
                       color: color,
                     ),
