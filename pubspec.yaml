@@ -17,6 +17,7 @@ dependencies:
     sdk: flutter
   flutter_overboard: ^3.1.1
   flutter_state_notifier: ^0.7.3
+  flutter_svg: ^2.0.7
   flutter_web_plugins:
     sdk: flutter
   freezed_annotation: ^2.4.1
@@ -29,6 +30,7 @@ dependencies:
   intl: ^0.18.0
   modal_progress_hud_nsn: ^0.4.0
   provider: ^6.0.5
+  recase: ^4.1.0
   riverpod_annotation: ^2.1.1
   shared_preferences: ^2.2.0
   state_notifier: ^0.7.2+1
@@ -42,7 +44,6 @@ dev_dependencies:
   flutter_gen: ^5.3.1
   flutter_gen_runner: ^5.3.1
   freezed: ^2.4.1
-  go_router_builder: ^2.2.2
   json_serializable: ^6.7.1
   melos: ^3.1.1
   pedantic_mono: ^1.23.0
@@ -59,7 +60,12 @@ flutter_icons:
   ios: true
   image_path: assets/image/appicon.png
 
+flutter_gen:
+  integrations:
+    flutter_svg: true
+
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/icons/
