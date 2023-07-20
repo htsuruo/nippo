@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nippo/authenticator.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
-      children: [AppBar(title: const Text('Profile'))],
+      children: [
+        AppBar(
+          title: const Text('Profile'),
+        ),
+        Expanded(
+          child: Center(
+            child: TextButton(
+              onPressed: () {
+                ref.read(authenticatorProvider.notifier).signOut();
+              },
+              child: const Text('Sign out'),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

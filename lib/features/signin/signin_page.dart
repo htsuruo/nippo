@@ -1,13 +1,15 @@
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nippo/authenticator.dart';
 import 'package:nippo/gen/assets.gen.dart';
 
-class SigninPage extends StatelessWidget {
+class SigninPage extends ConsumerWidget {
   const SigninPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Center(
         child: Column(
@@ -18,7 +20,9 @@ class SigninPage extends StatelessWidget {
             ),
             const Gap(80),
             GoogleAuthButton(
-              onPressed: () {},
+              onPressed: () {
+                ref.read(authenticatorProvider.notifier).signInWithGoogle();
+              },
               style: const AuthButtonStyle(
                 buttonType: AuthButtonType.secondary,
               ),
