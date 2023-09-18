@@ -8,7 +8,7 @@
 PRODUCT_NAME = nippo
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.tsuruoka.nippo
+PRODUCT_BUNDLE_IDENTIFIER = com.htsuruo.nippo
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.tsuruoka. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.htsuruo. All rights reserved.
