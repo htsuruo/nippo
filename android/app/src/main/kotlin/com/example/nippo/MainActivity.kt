@@ -1,4 +1,4 @@
-package com.tsuruoka.nippo
+package com.example.nippo
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -23,7 +23,7 @@ class UserListTile extends StatelessWidget {
       ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
+        children: [
           Text(
             '認証プロバイダ: ${user.providerData}',
             style: Theme.of(context).textTheme.bodySmall,
