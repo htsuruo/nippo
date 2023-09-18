@@ -16,15 +16,11 @@ class Authenticator extends _$Authenticator {
   }
 
   Future<void> signInWithGoogle() async {
-    final googleSignIn = GoogleSignIn(
-      clientId:
-          '554602506203-34j678spmk1vgfn2qgcj5jh9fhn6ulb5.apps.googleusercontent.com',
-    );
-    final googleUser = await googleSignIn.signIn();
-    if (googleUser == null) {
+    final googleAccount = await GoogleSignIn().signIn();
+    if (googleAccount == null) {
       return;
     }
-    final googleAuth = await googleUser.authentication;
+    final googleAuth = await googleAccount.authentication;
     if (googleAuth.idToken == null || googleAuth.accessToken == null) {
       return;
     }
