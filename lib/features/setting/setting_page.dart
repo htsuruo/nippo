@@ -56,8 +56,9 @@ class _FirUserSection extends ConsumerWidget {
         _dividerWithIndent,
         ListTile(
           title: const Text('最終ログイン日時'),
-          trailing:
-              lastSignInTime == null ? null : Text(lastSignInTime.formatted),
+          trailing: lastSignInTime == null
+              ? null
+              : Text(lastSignInTime.toLocal().formatted),
         ),
       ],
     );
