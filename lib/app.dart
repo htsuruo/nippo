@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'router.dart';
@@ -16,7 +17,7 @@ class MyApp extends ConsumerWidget {
     final listTextStyle = theme.textTheme.bodyMedium;
 
     return MaterialApp.router(
-      title: 'NIPPO',
+      title: 'nippo',
       routerConfig: ref.watch(routerProvider),
       theme: theme.copyWith(
         listTileTheme: ListTileThemeData(
@@ -24,6 +25,14 @@ class MyApp extends ConsumerWidget {
           leadingAndTrailingTextStyle: listTextStyle,
         ),
       ),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ja'),
+      ],
     );
   }
 }

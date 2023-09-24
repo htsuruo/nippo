@@ -17,6 +17,8 @@ dependencies:
   firebase_ui_auth: ^1.6.0
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_overboard: ^3.1.1
   flutter_state_notifier: ^0.7.3
   flutter_svg: ^2.0.7
