@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nippo/features/post/post_list_page.dart';
 import 'package:nippo/features/profile/profile_page.dart';
 import 'package:nippo/features/signin/signin_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -62,7 +63,7 @@ GoRouter router(RouterRef ref) {
               GoRoute(
                 path: _Location._initial,
                 pageBuilder: (context, state) => const NoTransitionPage(
-                  child: Scaffold(),
+                  child: PostListPage(),
                 ),
               ),
             ],

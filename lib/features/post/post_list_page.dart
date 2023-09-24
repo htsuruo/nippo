@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/common/common.dart';
+import 'package:nippo/gen/assets.gen.dart';
 
-import 'post_list_view.dart';
+import 'model/post.dart';
 
 class PostListPage extends StatelessWidget {
   const PostListPage({super.key});
@@ -11,35 +11,57 @@ class PostListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const AppLogo(height: 50),
+        title: Assets.images.icons.nippoYoko.svg(
+          height: 24,
+        ),
       ),
       body: const SafeArea(
-        child: PostListView(),
+        child: _ListView(posts: []),
       ),
-      floatingActionButton: const PostFloatingActionButton(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute<MaterialPageRoute<void>>(
+              builder: (BuildContext context) {
+                return const SizedBox.shrink();
+                // return PostCreatePage.wrapped();
+              },
+              fullscreenDialog: true,
+            ),
+          );
+        },
+        child: const Icon(Icons.mode_edit),
+      ),
     );
   }
 }
 
-class PostFloatingActionButton extends StatelessWidget {
-  const PostFloatingActionButton({super.key});
+class _ListView extends StatelessWidget {
+  const _ListView({
+    required this.posts,
+  });
+
+  final List<Post> posts;
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute<MaterialPageRoute<void>>(
-            builder: (BuildContext context) {
-              return const SizedBox.shrink();
-              // return PostCreatePage.wrapped();
-            },
-            fullscreenDialog: true,
-          ),
+    return ListView.builder(
+      itemCount: posts.length,
+      itemBuilder: (context, index) {
+        final data = posts[index];
+        final post = Post(
+          title: data.title,
+          description: data.description,
+          createdAt: data.createdAt,
         );
+        // TODO(tsuruoka): 仮
+        return const SizedBox.shrink();
+        // return PostCard(
+        //   post: post,
+        //   user: data.user!,
+        // );
       },
-      child: const Icon(Icons.mode_edit),
     );
   }
 }

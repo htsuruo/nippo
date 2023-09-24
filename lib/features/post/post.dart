@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../user/model/user.dart';
+import '../user/model/user.dart';
 
 // TODO(tsuruoka): JsonSerializableを利用したいがtimeStamp周りの良い書き方が分からない.
 class Post {

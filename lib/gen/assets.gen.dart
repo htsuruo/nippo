@@ -61,8 +61,12 @@ class $AssetsImagesIconsGen {
   /// File path: assets/images/icons/nippo.svg
   SvgGenImage get nippo => const SvgGenImage('assets/images/icons/nippo.svg');
 
+  /// File path: assets/images/icons/nippo_yoko.svg
+  SvgGenImage get nippoYoko =>
+      const SvgGenImage('assets/images/icons/nippo_yoko.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [nippo];
+  List<SvgGenImage> get values => [nippo, nippoYoko];
 }
 
 class Assets {
