@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nippo/features/profile/profile_page.dart';
 import 'package:nippo/features/signin/signin_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 import 'core/authentication/fir_user_provider.dart';
 import 'core/navigation/scaffold_with_navigation.dart';
@@ -46,12 +47,14 @@ GoRouter router(RouterRef ref) {
       GoRoute(
         path: _Location.signin,
         pageBuilder: (context, state) => const NoTransitionPage(
-          child: SigninPage(),
+          child: _Root(child: SigninPage()),
         ),
       ),
       StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) => ScaffoldWithNavigation(
-          navigationShell: navigationShell,
+        builder: (context, state, navigationShell) => _Root(
+          child: ScaffoldWithNavigation(
+            navigationShell: navigationShell,
+          ),
         ),
         branches: [
           StatefulShellBranch(
@@ -78,4 +81,15 @@ GoRouter router(RouterRef ref) {
       ),
     ],
   );
+}
+
+class _Root extends StatelessWidget {
+  const _Root({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return ProgressHUD(child: child);
+  }
 }
