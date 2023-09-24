@@ -9,13 +9,32 @@ import 'package:nippo/firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // late final AppInfo appInfo;
+  // await Future.wait([
+  //   // PackageInfo.fromPlatform().then((value) {
+  //   //   appInfo = AppInfo(
+  //   //     appName: value.appName,
+  //   //     packageName: value.packageName,
+  //   //     version: Version.parse(value.version),
+  //   //     buildNumber: value.buildNumber,
+  //   //     buildSignature: value.buildSignature,
+  //   //   );
+  //   // }),
+  // ]);
+
   // DateTimeのdefaultLocaleを日本時間にする
   Intl.defaultLocale = 'ja';
   runApp(
-    const ProviderScope(child: MyApp()),
+    const ProviderScope(
+      // overrides: [
+      //   appInfoProvider.overrideWithValue(appInfo),
+      // ],
+      child: MyApp(),
+    ),
   );
 }
