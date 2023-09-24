@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/core/authentication/authenticator.dart';
 import 'package:nippo/gen/assets.gen.dart';
 import 'package:nippo/logger.dart';
+import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 class SigninPage extends ConsumerWidget {
   const SigninPage({super.key});
@@ -25,8 +26,12 @@ class SigninPage extends ConsumerWidget {
               onPressed: () async {
                 try {
                   await ref
-                      .read(authenticatorProvider.notifier)
-                      .signInWithGoogle();
+                      .read(progressController.notifier)
+                      .executeWithProgress(
+                        () => ref
+                            .read(authenticatorProvider.notifier)
+                            .signInWithGoogle(),
+                      );
                 } on Exception catch (e) {
                   logger.severe(e.toString());
                   await showOkAlertDialog(
@@ -47,14 +52,6 @@ class SigninPage extends ConsumerWidget {
                 buttonType: AuthButtonType.secondary,
               ),
             ),
-            // `firebase_ui_auth`でGoogleやAppleなどのOAuth認証がどうもできなさそうなので微妙
-            // Expanded(
-            //   child: SignInScreen(
-            //     providers: [
-            //       EmailAuthProvider(),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),
