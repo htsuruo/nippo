@@ -3,7 +3,7 @@ import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:nippo/core/authentication/authenticator.dart';
+import 'package:nippo/core/authentication/auth_repository.dart';
 import 'package:nippo/gen/assets.gen.dart';
 import 'package:nippo/logger.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
@@ -28,9 +28,8 @@ class SigninPage extends ConsumerWidget {
                   await ref
                       .read(progressController.notifier)
                       .executeWithProgress(
-                        () => ref
-                            .read(authenticatorProvider.notifier)
-                            .signInWithGoogle(),
+                        () =>
+                            ref.read(authRepositoryProvider).signInWithGoogle(),
                       );
                 } on Exception catch (e) {
                   logger.severe(e.toString());

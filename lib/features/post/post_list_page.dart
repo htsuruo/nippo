@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/gen/assets.gen.dart';
 
-import 'model/post.dart';
+import 'post.dart';
 
 class PostListPage extends StatelessWidget {
   const PostListPage({super.key});

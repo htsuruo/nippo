@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nippo/common/widgets/circular_image.dart';
 
-import '../../features/user/model/user.dart';
-import 'profile_circle_image.dart';
-import 'widgets.dart';
+import '../user.dart';
 
-class ProfileArea extends StatelessWidget {
-  const ProfileArea({super.key, required this.user});
+class UserProfileView extends StatelessWidget {
+  const UserProfileView({super.key, required this.user});
   final User user;
 
   @override
@@ -14,14 +13,14 @@ class ProfileArea extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top: 8),
-          child: ProfileCircleImage(
+          child: CircularImage(
             imageUrl: user.photoUrl,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: Text(
-            user.displayName,
+            user.name,
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),

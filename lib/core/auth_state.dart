@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:nippo/features/post/model/post.dart';
+import 'package:nippo/features/post/post.dart';
 
-import '../features/user/model/user.dart';
+import '../features/user/user.dart';
 
 part 'auth_state.freezed.dart';
 

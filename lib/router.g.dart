@@ -24,7 +24,7 @@ final rootNavigatorProvider =
 );
 
 typedef RootNavigatorRef = AutoDisposeProviderRef<GlobalKey<NavigatorState>>;
-String _$routerHash() => r'34a0569a1dfa02e4eebdac30b6862441857d72af';
+String _$routerHash() => r'2d5c50b570e6bf00ce1115d1857e5f98eeb062cf';
 
 /// See also [router].
 @ProviderFor(router)

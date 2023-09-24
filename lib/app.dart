@@ -8,13 +8,21 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFD74794)),
+      useMaterial3: true,
+      dividerTheme: const DividerThemeData(space: 0),
+    );
+    final listTextStyle = theme.textTheme.bodyMedium;
+
     return MaterialApp.router(
       title: 'NIPPO',
       routerConfig: ref.watch(routerProvider),
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFD74794)),
-        useMaterial3: true,
-        dividerTheme: const DividerThemeData(space: 0),
+      theme: theme.copyWith(
+        listTileTheme: ListTileThemeData(
+          titleTextStyle: listTextStyle,
+          leadingAndTrailingTextStyle: listTextStyle,
+        ),
       ),
     );
   }

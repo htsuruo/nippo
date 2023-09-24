@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:nippo/core/authentication/authenticator.dart';
+import 'package:nippo/core/authentication/auth_repository.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -11,12 +12,20 @@ class ProfilePage extends ConsumerWidget {
       children: [
         AppBar(
           title: const Text('Profile'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings_outlined),
+              onPressed: () {
+                context.push('/setting');
+              },
+            ),
+          ],
         ),
         Expanded(
           child: Center(
             child: TextButton(
               onPressed: () {
-                ref.read(authenticatorProvider.notifier).signOut();
+                ref.read(authRepositoryProvider).signOut();
               },
               child: const Text('Sign out'),
             ),

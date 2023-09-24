@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intersperse/intersperse.dart';
+import 'package:nippo/common/extensions/date_time.dart';
+import 'package:nippo/core/authentication/auth_provider.dart';
+import 'package:nippo/core/authentication/auth_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../core/auth_state.dart';
-import '../user/model/user.dart';
-import 'sign_out_button.dart';
-import 'simple_list_section.dart';
-import 'simple_list_tile.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
-  static const String routeName = '/setting';
 
   @override
   Widget build(BuildContext context) {
@@ -20,70 +18,108 @@ class SettingPage extends StatelessWidget {
           '設定',
         ),
       ),
-      body: SafeArea(
-        child: ListView(
-          children: <Widget>[
-            ...firstSection(
-              currentUser: context.select((AuthState s) => s.user),
-            ),
-            ...secondSection(),
-            const SizedBox(
-              height: 32,
-            ),
-            const SignOutButton(),
-          ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const _FirUserSection(),
+            const _AboutSection(),
+            const _SignoutButton(),
+          ].intersperseOuter(const Gap(16)).toList(),
         ),
       ),
     );
   }
 }
 
-List<Widget> firstSection({required User currentUser}) {
-  final lastSignInTime = currentUser.lastSignInTime;
-  final providerData = currentUser.providerData;
-  final children = [
-    const SimpleListSection(title: 'ログイン情報'),
-    const Divider(),
-    SimpleListTile(
-      title: '認証プロバイダ',
-      trailing: providerData == null ? null : Text(providerData),
-      // trailing: Text(currentUser.providerData),
-    ),
-    const Divider(indent: 16),
-    SimpleListTile(
-      title: '最終ログイン日時',
-      trailing: lastSignInTime == null ? null : Text(lastSignInTime),
-    ),
-    const Divider(),
-  ];
-  return children;
+const _dividerWithIndent = Divider(indent: 16);
+
+class _FirUserSection extends ConsumerWidget {
+  const _FirUserSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final firUser = ref.watch(firUserProvider).value;
+    final providerData = firUser?.providerData.map((p) => p.providerId);
+    final lastSignInTime = firUser?.metadata.lastSignInTime;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _SectionText(label: 'ログイン情報'),
+        ListTile(
+          title: const Text('認証プロバイダ'),
+          trailing: providerData == null
+              ? null
+              : Text(
+                  providerData.join(','),
+                ),
+        ),
+        _dividerWithIndent,
+        ListTile(
+          title: const Text('最終ログイン日時'),
+          trailing:
+              lastSignInTime == null ? null : Text(lastSignInTime.formatted),
+        ),
+      ],
+    );
+  }
 }
 
-List<Widget> secondSection() {
-  final children = [
-    const SimpleListSection(title: 'サービスについて'),
-    const Divider(),
-    SimpleListTile(
-      title: 'ディベロッパー',
-      trailing: const Icon(Icons.open_in_new),
-      onTap: () async {
-        await launchUrl(url: 'https://scrapbox.io/tsuruo/');
+class _AboutSection extends StatelessWidget {
+  const _AboutSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _SectionText(label: 'このアプリについて'),
+        ListTile(
+          title: const Text('ソースコード'),
+          trailing: const Icon(Icons.open_in_new_outlined),
+          onTap: () => launchUrl(
+            Uri(
+              scheme: 'https',
+              host: 'github.com',
+              path: 'htsuruo/nippo',
+            ),
+          ),
+        ),
+        _dividerWithIndent,
+        const AboutListTile(),
+      ],
+    );
+  }
+}
+
+class _SignoutButton extends ConsumerWidget {
+  const _SignoutButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ElevatedButton(
+      onPressed: () {
+        ref.read(authRepositoryProvider).signOut();
       },
-    ),
-    const Divider(indent: 16),
-    const SimpleListTile(
-      title: 'バージョン',
-      trailing: Text('1.0.0'),
-    ),
-    const Divider(),
-  ];
-  return children;
+      child: const Text('Sign out'),
+    );
+  }
 }
 
-Future<void> launchUrl({required String url}) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    print('Could not Launch $url');
+class _SectionText extends StatelessWidget {
+  const _SectionText({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Text(
+        label,
+        style: TextStyle(color: colorScheme.primary),
+      ),
+    );
   }
 }

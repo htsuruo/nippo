@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'model/post.dart';
+import 'post.dart';
 
 part 'post_state.freezed.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/features/post/model/post.dart';
+import 'package:nippo/features/post/post.dart';
 import 'package:nippo/theme.dart';
 import 'package:nippo/util.dart';
 
-import '../../features/user/model/user.dart';
+import '../../features/user/user.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard({
@@ -30,20 +30,20 @@ class PostCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 12,
-                  ),
-                  child: CircleAvatar(
-                    child: Image.network(
-                      user.photoUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
+              // Expanded(
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(
+              //       horizontal: 12,
+              //       vertical: 12,
+              //     ),
+              //     child: CircleAvatar(
+              //       child: Image.network(
+              //         user.photoUrl,
+              //         fit: BoxFit.cover,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Expanded(
                 flex: 4,
                 child: Column(
@@ -112,16 +112,16 @@ class PostCard extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Image.network(
-                    user.photoUrl,
-                    height: 36,
-                  ),
+                  // Image.network(
+                  //   user.photoUrl,
+                  //   height: 36,
+                  // ),
                   const SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        user.displayName,
+                        user.name,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(

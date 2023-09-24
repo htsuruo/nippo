@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:nippo/features/post/model/post.dart';
+import 'package:nippo/features/post/post.dart';
 import 'package:nippo/features/post/post_repository.dart';
-import 'package:nippo/features/user/user_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import 'post_state.dart';
@@ -11,20 +9,20 @@ class PostController extends StateNotifier<PostState> with LocatorMixin {
 
   @override
   Future<void> initState() async {
-    Future<void> sync(QuerySnapshot querySnapshot) async {
-      final posts = <Post>[];
-      for (final element in querySnapshot.docs) {
-        final post = Post.fromJson(element.data()! as Map<String, dynamic>);
-        post.user =
-            await read<UserRepository>().fetchOneFromRef(ref: post.userRef!);
-        posts.add(post);
-      }
-      state = state.copyWith(
-        posts: posts,
-      );
-    }
+    // Future<void> sync(QuerySnapshot querySnapshot) async {
+    //   final posts = <Post>[];
+    //   for (final element in querySnapshot.docs) {
+    //     final post = Post.fromJson(element.data()! as Map<String, dynamic>);
+    //     post.user =
+    //         await read<UserRepository>().fetchOneFromRef(ref: post.userRef!);
+    //     posts.add(post);
+    //   }
+    //   state = state.copyWith(
+    //     posts: posts,
+    //   );
+    // }
 
-    read<PostRepository>().fetchSnapshot(func: sync);
+    // read<PostRepository>().fetchSnapshot(func: sync);
   }
 
   Future<void> fetchByUser({required String uid}) async {

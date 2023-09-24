@@ -2,16 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'authenticator.g.dart';
+part 'auth_repository.g.dart';
 
 @riverpod
-class Authenticator extends _$Authenticator {
-  final _auth = FirebaseAuth.instance;
+AuthRepository authRepository(AuthRepositoryRef ref) => AuthRepository();
 
-  @override
-  void build() {
-    return;
-  }
+class AuthRepository {
+  final _auth = FirebaseAuth.instance;
 
   Future<void> signInWithGoogle() async {
     final googleAccount = await GoogleSignIn().signIn();
@@ -32,7 +29,5 @@ class Authenticator extends _$Authenticator {
     );
   }
 
-  Future<void> signOut() async {
-    await _auth.signOut();
-  }
+  Future<void> signOut() => _auth.signOut();
 }

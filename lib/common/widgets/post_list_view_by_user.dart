@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/features/post/model/post.dart';
+import 'package:nippo/features/post/post.dart';
 
-import '../../features/user/model/user.dart';
+import '../../features/user/user.dart';
 import 'post_card.dart';
 import 'profile_total_post_count.dart';
 
@@ -38,7 +38,7 @@ class PostListViewByUser extends StatelessWidget {
               },
               itemCount: posts.length,
             ),
-          )
+          ),
         ],
       ),
     );

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/features/post/model/post.dart';
+import 'package:nippo/features/post/post.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/auth_state.dart';
 import '../../../theme.dart';
 import '../post_controller.dart';
 
@@ -18,7 +17,8 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final uid = context.select((AuthState s) => s.user.uid);
+    // final uid = context.select((AuthState s) => s.user.uid);
+    const uid = '';
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
