@@ -4,7 +4,6 @@ import 'package:nippo/core/auth_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'base/base_page.dart';
-import 'signin/sign_in_page.dart';
 import 'tutorial/tutorial_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -49,7 +48,7 @@ class _SplashPageState extends State<SplashPage> {
     }
     final prefs = await SharedPreferences.getInstance();
     if (prefs.getInt('isTutorial_done') == 1) {
-      await Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
+      // await Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
       return;
     }
     await Navigator.of(context).pushReplacementNamed(TutorialPage.routeName);

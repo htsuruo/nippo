@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 
 import 'input_description_form.dart';
@@ -18,12 +16,12 @@ class PostCreatePage extends StatelessWidget {
     'description': TextEditingController(),
   };
 
-  static Widget wrapped() {
-    return StateNotifierProvider<ProgressHUDController, bool>(
-      create: (context) => ProgressHUDController(),
-      builder: (context, child) => PostCreatePage._(),
-    );
-  }
+  // static Widget wrapped() {
+  //   return StateNotifierProvider<ProgressHUDController, bool>(
+  //     create: (context) => ProgressHUDController(),
+  //     builder: (context, child) => PostCreatePage._(),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {

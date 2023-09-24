@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/auth_controller.dart';
-import '../signin/sign_in_page.dart';
 
 class SignOutButton extends StatelessWidget {
   const SignOutButton({super.key});
@@ -20,11 +19,11 @@ class SignOutButton extends StatelessWidget {
           ),
           onTap: () async {
             await controller.signOut();
-            await Navigator.pushNamedAndRemoveUntil(
-              context,
-              SignInPage.routeName,
-              (Route<dynamic> route) => false,
-            );
+            // await Navigator.pushNamedAndRemoveUntil(
+            //   context,
+            //   SignInPage.routeName,
+            //   (Route<dynamic> route) => false,
+            // );
           },
         ),
       ),

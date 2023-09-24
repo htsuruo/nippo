@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overboard/flutter_overboard.dart';
 import 'package:nippo/theme.dart';
 
-import '../signin/sign_in_page.dart';
 import 'tutorial_child.dart';
 
 class TutorialPage extends StatelessWidget {
@@ -18,12 +17,10 @@ class TutorialPage extends StatelessWidget {
         nextText: '次へ',
         finishText: 'はじめる',
         skipCallback: () {
-          print('skipCallback');
-          Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
+          // Navigator.of(context).pushReplacementNamed(const SigninPage());
         },
         finishCallback: () {
-          print('finishCallback');
-          Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
+          // Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
         },
       ),
     );

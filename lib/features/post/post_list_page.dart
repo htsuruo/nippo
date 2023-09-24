@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/common/common.dart';
 
-import 'create/post_create_page.dart';
 import 'post_list_view.dart';
 
 class PostListPage extends StatelessWidget {
@@ -33,7 +32,8 @@ class PostFloatingActionButton extends StatelessWidget {
           context,
           MaterialPageRoute<MaterialPageRoute<void>>(
             builder: (BuildContext context) {
-              return PostCreatePage.wrapped();
+              return const SizedBox.shrink();
+              // return PostCreatePage.wrapped();
             },
             fullscreenDialog: true,
           ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/features/post/model/post.dart';
-import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/auth_state.dart';
@@ -27,15 +26,15 @@ class SubmitButton extends StatelessWidget {
       ),
       onPressed: () async {
         if (formKey.currentState!.validate()) {
-          final progressController = context.read<ProgressHUDController>()
-            ..update(newState: true);
+          // final progressController = context.read<ProgressHUDController>()
+          //   ..update(newState: true);
           final post = Post(
             title: controller['title']!.text,
             description: controller['description']!.text,
           );
           await context.read<PostController>().create(post: post, uid: uid);
           Navigator.pop(context);
-          progressController.update(newState: false);
+          // progressController.update(newState: false);
 //          controller['title'].dispose();
 //          controller['description'].dispose();
         }

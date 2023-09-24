@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:nippo/core/auth_repository.dart';
 import 'package:nippo/features/user/user_repository.dart';
-import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 
 import '../base/base_page.dart';
@@ -15,13 +13,6 @@ import 'submit_button.dart';
 class RegisterPage extends StatelessWidget {
   const RegisterPage._();
   static const String routeName = '/register';
-
-  static Widget wrapped() {
-    return StateNotifierProvider<ProgressHUDController, bool>(
-      create: (context) => ProgressHUDController(),
-      builder: (context, child) => const RegisterPage._(),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
