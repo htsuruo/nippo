@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:recase/recase.dart';
 
 enum NavigationItem {
-  timeline(iconData: Icons.view_timeline_outlined),
-  profile(iconData: Icons.person_outline),
+  timeline(iconData: Icons.view_timeline_outlined, label: 'みんなの日報'),
+  profile(iconData: Icons.person_outline, label: 'プロフィール'),
   ;
 
-  const NavigationItem({required this.iconData});
+  const NavigationItem({required this.iconData, required this.label});
   final IconData iconData;
-  String get label => name.pascalCase;
+  final String label;
 }
