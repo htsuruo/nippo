@@ -128,7 +128,7 @@ class PostCard extends StatelessWidget {
                         '${formatDateFromTimeStamp(timestamp: post.createdAt!)} に投稿',
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
