@@ -5,8 +5,8 @@ import 'package:nippo/features/profile/profile_page.dart';
 import 'package:nippo/features/signin/signin_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'core/navigation/scaffold_with_navigation.dart';
 import 'fir_user_provider.dart';
-import 'services/navigation/scaffold_with_navigation.dart';
 
 part 'router.g.dart';
 
@@ -14,6 +14,7 @@ class _Location {
   _Location._();
   static const _initial = '/';
   static const signin = '/signin';
+  static const profile = '/profile';
 }
 
 @riverpod
@@ -66,7 +67,7 @@ GoRouter router(RouterRef ref) {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/profile',
+                path: _Location.profile,
                 pageBuilder: (context, state) => const NoTransitionPage(
                   child: ProfilePage(),
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/services/auth_repository.dart';
+import 'package:nippo/core/auth_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'base/base_page.dart';

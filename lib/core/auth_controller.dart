@@ -1,5 +1,5 @@
+import 'package:nippo/core/auth_repository.dart';
 import 'package:nippo/features/post/post_repository.dart';
-import 'package:nippo/services/auth_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../features/user/model/user.dart';

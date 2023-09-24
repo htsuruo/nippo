@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nippo/core/auth_repository.dart';
 import 'package:nippo/features/user/user_repository.dart';
-import 'package:nippo/services/auth_repository.dart';
 
 import '../base/base_page.dart';
 import '../user/model/user.dart';
@@ -68,8 +68,8 @@ class SignInEmailPage extends StatelessWidget {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           final map = await submit();
-                          if (map['result'] as bool) {
-                            await onSuccess(user: map['user'] as User);
+                          if (map['result']! as bool) {
+                            await onSuccess(user: map['user']! as User);
                           } else {
                             final message = map['message'].toString();
                             onFailed(context: context, errMessage: message);
@@ -79,7 +79,7 @@ class SignInEmailPage extends StatelessWidget {
                       btnText: 'ログイン',
                     );
                   },
-                )
+                ),
               ],
             ),
           ),

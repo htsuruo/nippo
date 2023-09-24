@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:nippo/core/auth_repository.dart';
 import 'package:nippo/features/user/user_repository.dart';
-import 'package:nippo/services/auth_repository.dart';
 import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -85,8 +85,8 @@ class RegisterPage extends StatelessWidget {
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
                             final map = await submit();
-                            if (map['result'] as bool) {
-                              await onSuccess(tmpUser: map['user'] as User);
+                            if (map['result']! as bool) {
+                              await onSuccess(tmpUser: map['user']! as User);
                             } else {
                               final message = map['message'].toString();
                               onFailed(context: context, errMessage: message);

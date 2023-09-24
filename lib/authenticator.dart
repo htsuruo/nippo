@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'logger.dart';
-
 part 'authenticator.g.dart';
 
 @riverpod
@@ -18,19 +16,20 @@ class Authenticator extends _$Authenticator {
   Future<void> signInWithGoogle() async {
     final googleAccount = await GoogleSignIn().signIn();
     if (googleAccount == null) {
-      return;
+      throw Exception('GoogleSignInAccount is null');
     }
     final googleAuth = await googleAccount.authentication;
     if (googleAuth.idToken == null || googleAuth.accessToken == null) {
-      return;
+      throw Exception(
+        'Google Signin Failed because idToken or accessToken is null',
+      );
     }
-    final result = await _auth.signInWithCredential(
+    await _auth.signInWithCredential(
       GoogleAuthProvider.credential(
         idToken: googleAuth.idToken,
         accessToken: googleAuth.accessToken,
       ),
     );
-    logger.info(result);
   }
 
   Future<void> signOut() async {

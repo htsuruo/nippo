@@ -4,7 +4,7 @@ import 'package:nippo/common/common.dart';
 import 'package:nippo/features/profile/profile_page.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/auth_controller.dart';
+import '../../core/auth_controller.dart';
 import '../post/post_list_page.dart';
 import '../user/user_list_page.dart';
 
@@ -41,7 +41,7 @@ class PageView extends StatelessWidget {
     final pageList = [
       const PostListPage(),
       const UserPage(),
-      const ProfilePage()
+      const ProfilePage(),
     ];
     return pageList[page];
   }

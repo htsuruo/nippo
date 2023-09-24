@@ -4,7 +4,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:nippo/common/common.dart';
 import 'package:nippo/features/user/user_repository.dart';
 import 'package:nippo/gen/assets.gen.dart';
-import 'package:nippo/services/auth_repository.dart';
+import 'package:nippo/core/auth_repository.dart';
 import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 

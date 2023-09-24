@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/auth_controller.dart';
+import '../../core/auth_controller.dart';
 import '../signin/sign_in_page.dart';
 
 class SignOutButton extends StatelessWidget {

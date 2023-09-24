@@ -3,7 +3,7 @@ import 'package:nippo/features/post/model/post.dart';
 import 'package:nippo/states/progress_hub_controller.dart';
 import 'package:provider/provider.dart';
 
-import '../../../services/auth_state.dart';
+import '../../../core/auth_state.dart';
 import '../../../theme.dart';
 import '../post_controller.dart';
 
