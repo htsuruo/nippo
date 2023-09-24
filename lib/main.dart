@@ -14,18 +14,17 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // TODO(tsuruoka): コメントアウトを外すとAndroidで起動できなくなる🤔
   // late final AppInfo appInfo;
-  // await Future.wait([
-  //   // PackageInfo.fromPlatform().then((value) {
-  //   //   appInfo = AppInfo(
-  //   //     appName: value.appName,
-  //   //     packageName: value.packageName,
-  //   //     version: Version.parse(value.version),
-  //   //     buildNumber: value.buildNumber,
-  //   //     buildSignature: value.buildSignature,
-  //   //   );
-  //   // }),
-  // ]);
+  // await PackageInfo.fromPlatform().then((value) {
+  //   appInfo = AppInfo(
+  //     appName: value.appName,
+  //     packageName: value.packageName,
+  //     version: Version.parse(value.version),
+  //     buildNumber: value.buildNumber,
+  //     buildSignature: value.buildSignature,
+  //   );
+  // });
 
   // DateTimeのdefaultLocaleを日本時間にする
   Intl.defaultLocale = 'ja';

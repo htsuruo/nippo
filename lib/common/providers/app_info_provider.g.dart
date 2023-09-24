@@ -8,11 +8,11 @@ part of 'app_info_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appInfoHash() => r'595d81e2a2983e11044f06c496233916e34efdce';
+String _$appInfoHash() => r'd5d3151c67aea4300f4fa1b7886607bfe5bde7c1';
 
 /// See also [appInfo].
 @ProviderFor(appInfo)
-final appInfoProvider = AutoDisposeProvider<AppInfo?>.internal(
+final appInfoProvider = AutoDisposeProvider<AppInfo>.internal(
   appInfo,
   name: r'appInfoProvider',
   debugGetCreateSourceHash:
@@ -21,6 +21,6 @@ final appInfoProvider = AutoDisposeProvider<AppInfo?>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef AppInfoRef = AutoDisposeProviderRef<AppInfo?>;
+typedef AppInfoRef = AutoDisposeProviderRef<AppInfo>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

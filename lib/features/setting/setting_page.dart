@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intersperse/intersperse.dart';
-import 'package:nippo/common/extensions/date_time.dart';
+import 'package:nippo/common/common.dart';
 import 'package:nippo/core/authentication/auth_provider.dart';
 import 'package:nippo/core/authentication/auth_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,7 +20,7 @@ class SettingPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: <Widget>[
             const _FirUserSection(),
             const _AboutSection(),
             const _SignoutButton(),
@@ -65,11 +65,12 @@ class _FirUserSection extends ConsumerWidget {
   }
 }
 
-class _AboutSection extends StatelessWidget {
+class _AboutSection extends ConsumerWidget {
   const _AboutSection();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appInfo = ref.watch(appInfoProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -86,7 +87,10 @@ class _AboutSection extends StatelessWidget {
           ),
         ),
         _dividerWithIndent,
-        const AboutListTile(),
+        AboutListTile(
+          applicationVersion: appInfo.version.toString(),
+          child: const Text('アプリケーション情報'),
+        ),
       ],
     );
   }

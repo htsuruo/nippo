@@ -4,8 +4,9 @@ import 'package:version/version.dart';
 
 part 'app_info_provider.g.dart';
 
+// TODO(tsuruoka): `throw UnimplementedError()`にしたいが、Code generationだと起動できなくなる
 @riverpod
-AppInfo? appInfo(AppInfoRef ref) => throw UnimplementedError();
+AppInfo appInfo(AppInfoRef ref) => AppInfo.empty();
 
 @immutable
 class AppInfo {
@@ -16,6 +17,17 @@ class AppInfo {
     required this.buildNumber,
     required this.buildSignature,
   });
+
+  factory AppInfo.empty() {
+    return AppInfo(
+      appName: '',
+      packageName: '',
+      version: Version.parse('0.0.0'),
+      buildNumber: '',
+      buildSignature: '',
+    );
+  }
+
   final String appName;
   final String packageName;
   final Version version;
