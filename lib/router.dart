@@ -5,6 +5,7 @@ import 'package:nippo/features/profile/profile_page.dart';
 import 'package:nippo/features/signin/signin_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'core/authentication/fir_user_provider.dart';
 import 'core/navigation/scaffold_with_navigation.dart';
 import 'fir_user_provider.dart';
 

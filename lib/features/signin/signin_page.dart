@@ -3,7 +3,7 @@ import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:nippo/authenticator.dart';
+import 'package:nippo/core/authentication/authenticator.dart';
 import 'package:nippo/gen/assets.gen.dart';
 import 'package:nippo/logger.dart';
 
