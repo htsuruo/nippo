@@ -1,19 +1,21 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+import * as logger from 'firebase-functions/logger'
+import { auth } from 'firebase-functions'
 
-import {onRequest} from "firebase-functions/v2/https";
-import * as logger from "firebase-functions/logger";
+import * as admin from 'firebase-admin'
+import { userConverter } from './user'
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+admin.initializeApp()
+admin.firestore().settings({ ignoreUndefinedProperties: true })
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const firestore = admin.firestore()
+
+// Firebase Authユーザーが新規で作成された際に、そのユーザーのuidのドキュメントを作成し、
+// publicなプロフィール情報を同期します。
+export const onAuthUserCreate = auth.user().onCreate((user) => {
+  logger.info(`New user created: ${user.uid}`)
+  firestore.collection('users').doc(user.uid).withConverter(userConverter).set({
+    email: user.email,
+    name: user.displayName,
+    photoUrl: user.photoURL,
+  })
+})
