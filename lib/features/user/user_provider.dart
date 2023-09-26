@@ -3,7 +3,7 @@ import 'package:nippo/core/authentication/auth_provider.dart';
 import 'package:nippo/core/const.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'user/user.dart';
+import 'user.dart';
 
 part 'user_provider.g.dart';
 
