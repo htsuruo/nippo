@@ -23,7 +23,6 @@ mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
-  String get signInProviders => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,8 +34,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call(
-      {String name, String email, String? photoUrl, String signInProviders});
+  $Res call({String name, String email, String? photoUrl});
 }
 
 /// @nodoc
@@ -55,7 +53,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = null,
     Object? email = null,
     Object? photoUrl = freezed,
-    Object? signInProviders = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -70,10 +67,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      signInProviders: null == signInProviders
-          ? _value.signInProviders
-          : signInProviders // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -84,8 +77,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String name, String email, String? photoUrl, String signInProviders});
+  $Res call({String name, String email, String? photoUrl});
 }
 
 /// @nodoc
@@ -100,7 +92,6 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? name = null,
     Object? email = null,
     Object? photoUrl = freezed,
-    Object? signInProviders = null,
   }) {
     return _then(_$_User(
       name: null == name
@@ -115,10 +106,6 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      signInProviders: null == signInProviders
-          ? _value.signInProviders
-          : signInProviders // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -127,25 +114,21 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 @JsonSerializable()
 class _$_User implements _User {
   const _$_User(
-      {required this.name,
-      required this.email,
-      required this.photoUrl,
-      required this.signInProviders});
+      {this.name = '名無し', required this.email, required this.photoUrl});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
+  @JsonKey()
   final String name;
   @override
   final String email;
   @override
   final String? photoUrl;
-  @override
-  final String signInProviders;
 
   @override
   String toString() {
-    return 'User(name: $name, email: $email, photoUrl: $photoUrl, signInProviders: $signInProviders)';
+    return 'User(name: $name, email: $email, photoUrl: $photoUrl)';
   }
 
   @override
@@ -156,15 +139,12 @@ class _$_User implements _User {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.photoUrl, photoUrl) ||
-                other.photoUrl == photoUrl) &&
-            (identical(other.signInProviders, signInProviders) ||
-                other.signInProviders == signInProviders));
+                other.photoUrl == photoUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, email, photoUrl, signInProviders);
+  int get hashCode => Object.hash(runtimeType, name, email, photoUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -182,10 +162,9 @@ class _$_User implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final String name,
+      {final String name,
       required final String email,
-      required final String? photoUrl,
-      required final String signInProviders}) = _$_User;
+      required final String? photoUrl}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -195,8 +174,6 @@ abstract class _User implements User {
   String get email;
   @override
   String? get photoUrl;
-  @override
-  String get signInProviders;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

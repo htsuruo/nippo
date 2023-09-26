@@ -20,7 +20,7 @@ class UserProfileView extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.all(8),
           child: Text(
-            user?.name ?? '---',
+            user?.name ?? '',
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -28,7 +28,7 @@ class UserProfileView extends ConsumerWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Text(user?.email ?? '---'),
+          child: Text(user?.email ?? ''),
         ),
       ],
     );

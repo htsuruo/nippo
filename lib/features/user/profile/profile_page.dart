@@ -20,8 +20,13 @@ class ProfilePage extends ConsumerWidget {
         ],
       ),
       body: const Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           UserProfileView(),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Divider(),
+          ),
         ],
       ),
     );
