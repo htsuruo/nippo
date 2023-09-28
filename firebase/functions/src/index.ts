@@ -3,6 +3,7 @@ import { auth } from 'firebase-functions'
 
 import * as admin from 'firebase-admin'
 import { userConverter } from './user'
+import { FieldValue } from 'firebase-admin/firestore'
 
 admin.initializeApp()
 admin.firestore().settings({ ignoreUndefinedProperties: true })
@@ -17,5 +18,7 @@ export const onAuthUserCreate = auth.user().onCreate((user) => {
     email: user.email,
     name: user.displayName,
     photoUrl: user.photoURL,
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
   })
 })
