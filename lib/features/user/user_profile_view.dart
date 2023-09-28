@@ -9,7 +9,8 @@ class UserProfileView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider).value;
+    final userDoc = ref.watch(userProvider).value;
+    final user = userDoc?.data();
     return Column(
       children: <Widget>[
         Padding(
@@ -29,7 +30,7 @@ class UserProfileView extends ConsumerWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Text(user?.email ?? ''),
+          child: Text(userDoc?.id ?? ''),
         ),
       ],
     );
