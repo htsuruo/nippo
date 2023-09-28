@@ -9,13 +9,15 @@ import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 import 'core/authentication/auth_provider.dart';
 import 'core/navigation/scaffold_with_navigation.dart';
+import 'features/post/create/post_create_page.dart';
 import 'features/setting/setting_page.dart';
 
 part 'router.g.dart';
 
 class _Location {
   _Location._();
-  static const _initial = '/';
+  static const posts = '/posts';
+  static const postCreate = '/create';
   static const signin = '/signin';
   static const profile = '/profile';
   static const setting = '/setting';
@@ -33,7 +35,7 @@ extension GoRouterX on GoRouter {
 GoRouter router(RouterRef ref) {
   return GoRouter(
     debugLogDiagnostics: kDebugMode,
-    initialLocation: _Location._initial,
+    initialLocation: _Location.posts,
     navigatorKey: ref.watch(rootNavigatorProvider),
     redirect: (context, state) async {
       final signedIn = await ref.watch(isSignedInProvider.future);
@@ -41,8 +43,8 @@ GoRouter router(RouterRef ref) {
       if (!signedIn) {
         return isSigninLocation ? null : _Location.signin;
       }
-      if (isSigninLocation || state.location == _Location._initial) {
-        return _Location._initial;
+      if (isSigninLocation || state.location == _Location.posts) {
+        return _Location.posts;
       }
       return null;
     },
@@ -63,10 +65,18 @@ GoRouter router(RouterRef ref) {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: _Location._initial,
+                path: _Location.posts,
                 pageBuilder: (context, state) => const NoTransitionPage(
                   child: PostListPage(),
                 ),
+                routes: [
+                  GoRoute(
+                    path: _Location.postCreate,
+                    pageBuilder: (context, state) => const NoTransitionPage(
+                      child: PostCreatePage(),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

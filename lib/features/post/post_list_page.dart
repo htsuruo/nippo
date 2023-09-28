@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nippo/gen/assets.gen.dart';
 
 import 'post.dart';
@@ -20,16 +21,7 @@ class PostListPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute<MaterialPageRoute<void>>(
-              builder: (BuildContext context) {
-                return const SizedBox.shrink();
-                // return PostCreatePage.wrapped();
-              },
-              fullscreenDialog: true,
-            ),
-          );
+          context.go('/posts/create');
         },
         child: const Icon(Icons.mode_edit),
       ),
