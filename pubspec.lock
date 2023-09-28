@@ -797,6 +797,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.1"
+  json_converter_helper:
+    dependency: "direct main"
+    description:
+      name: json_converter_helper
+      sha256: "646aad33b2f764a1de07fde16c197e34837de901ed05e281c4a7994ca4d8179b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.2"
   json_serializable:
     dependency: "direct dev"
     description:

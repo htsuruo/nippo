@@ -34,7 +34,7 @@ class PostRepository {
 
 //  usersコレクションのサブコレクションとして追加する.
   Future<void> create({required Post post, required String uid}) async {
-    post.createdAt = Timestamp.fromDate(DateTime.now());
+    // post.createdAt = Timestamp.fromDate(DateTime.now());
     final map = post.toJson();
     await firestore
         .collection('users')
