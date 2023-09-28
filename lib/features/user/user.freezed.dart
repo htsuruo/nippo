@@ -23,6 +23,8 @@ mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
+  UnionTimestamp get updatedAt => throw _privateConstructorUsedError;
+  UnionTimestamp get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,15 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String name, String email, String? photoUrl});
+  $Res call(
+      {String name,
+      String email,
+      String? photoUrl,
+      UnionTimestamp updatedAt,
+      UnionTimestamp createdAt});
+
+  $UnionTimestampCopyWith<$Res> get updatedAt;
+  $UnionTimestampCopyWith<$Res> get createdAt;
 }
 
 /// @nodoc
@@ -53,6 +63,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = null,
     Object? email = null,
     Object? photoUrl = freezed,
+    Object? updatedAt = null,
+    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -67,7 +79,31 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as UnionTimestamp,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as UnionTimestamp,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UnionTimestampCopyWith<$Res> get updatedAt {
+    return $UnionTimestampCopyWith<$Res>(_value.updatedAt, (value) {
+      return _then(_value.copyWith(updatedAt: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UnionTimestampCopyWith<$Res> get createdAt {
+    return $UnionTimestampCopyWith<$Res>(_value.createdAt, (value) {
+      return _then(_value.copyWith(createdAt: value) as $Val);
+    });
   }
 }
 
@@ -77,7 +113,17 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String email, String? photoUrl});
+  $Res call(
+      {String name,
+      String email,
+      String? photoUrl,
+      UnionTimestamp updatedAt,
+      UnionTimestamp createdAt});
+
+  @override
+  $UnionTimestampCopyWith<$Res> get updatedAt;
+  @override
+  $UnionTimestampCopyWith<$Res> get createdAt;
 }
 
 /// @nodoc
@@ -92,6 +138,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? name = null,
     Object? email = null,
     Object? photoUrl = freezed,
+    Object? updatedAt = null,
+    Object? createdAt = null,
   }) {
     return _then(_$_User(
       name: null == name
@@ -106,15 +154,28 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as UnionTimestamp,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as UnionTimestamp,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@allJsonConvertersSerializable
 class _$_User implements _User {
   const _$_User(
-      {this.name = '名無し', required this.email, required this.photoUrl});
+      {this.name = '名無し',
+      required this.email,
+      required this.photoUrl,
+      this.updatedAt = const UnionTimestamp.serverTimestamp(),
+      this.createdAt = const UnionTimestamp.serverTimestamp()});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -125,10 +186,16 @@ class _$_User implements _User {
   final String email;
   @override
   final String? photoUrl;
+  @override
+  @JsonKey()
+  final UnionTimestamp updatedAt;
+  @override
+  @JsonKey()
+  final UnionTimestamp createdAt;
 
   @override
   String toString() {
-    return 'User(name: $name, email: $email, photoUrl: $photoUrl)';
+    return 'User(name: $name, email: $email, photoUrl: $photoUrl, updatedAt: $updatedAt, createdAt: $createdAt)';
   }
 
   @override
@@ -139,12 +206,17 @@ class _$_User implements _User {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.photoUrl, photoUrl) ||
-                other.photoUrl == photoUrl));
+                other.photoUrl == photoUrl) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, email, photoUrl);
+  int get hashCode =>
+      Object.hash(runtimeType, name, email, photoUrl, updatedAt, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -164,7 +236,9 @@ abstract class _User implements User {
   const factory _User(
       {final String name,
       required final String email,
-      required final String? photoUrl}) = _$_User;
+      required final String? photoUrl,
+      final UnionTimestamp updatedAt,
+      final UnionTimestamp createdAt}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -174,6 +248,10 @@ abstract class _User implements User {
   String get email;
   @override
   String? get photoUrl;
+  @override
+  UnionTimestamp get updatedAt;
+  @override
+  UnionTimestamp get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

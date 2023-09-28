@@ -23,5 +23,17 @@ module.exports = {
   rules: {
     'prettier/prettier': ['error', { singleQuote: true, semi: false }],
     'import/no-unresolved': 0,
+    'require-jsdoc': [
+      'error',
+      {
+        require: {
+          FunctionDeclaration: false,
+          MethodDefinition: false,
+          ClassDeclaration: false,
+          ArrowFunctionExpression: false,
+          FunctionExpression: false,
+        },
+      },
+    ],
   },
 }
