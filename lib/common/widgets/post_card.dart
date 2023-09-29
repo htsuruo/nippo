@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nippo/features/post/post.dart';
 import 'package:nippo/theme.dart';
-import 'package:nippo/util.dart';
 
 import '../../features/user/user.dart';
 
@@ -76,9 +75,7 @@ class PostCard extends StatelessWidget {
                             Text(post.description),
                             const SizedBox(height: 4),
                             Text(
-                              formatDateFromTimeStamp(
-                                timestamp: post.createdAt!,
-                              ),
+                              post.createdAt.toString(),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall!
@@ -125,7 +122,7 @@ class PostCard extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '${formatDateFromTimeStamp(timestamp: post.createdAt!)} に投稿',
+                        '${post.createdAt} に投稿',
                       ),
                     ],
                   ),
