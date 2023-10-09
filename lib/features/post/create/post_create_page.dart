@@ -1,19 +1,21 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'description_form_field.dart';
 import 'title_form_field.dart';
 
-class PostCreatePage extends StatelessWidget {
+class PostCreatePage extends HookConsumerWidget {
   const PostCreatePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final formKey = GlobalKey<FormState>();
-    final formController = {
-      'title': TextEditingController(),
-      'description': TextEditingController(),
-    };
+    final titleEditController = useTextEditingController();
+    final descriptionEditController = useTextEditingController();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -25,8 +27,19 @@ class PostCreatePage extends StatelessWidget {
               child: Row(
                 children: [
                   TextButton(
-                    style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                    onPressed: context.pop,
+                    style: TextButton.styleFrom(
+                      visualDensity: VisualDensity.compact,
+                    ),
+                    onPressed: () async {
+                      final res = await showOkCancelAlertDialog(
+                        context: context,
+                        title: '確認',
+                        message: '入力内容は破棄されますがよろしいですか？',
+                      );
+                      if (res == OkCancelResult.ok) {
+                        context.pop();
+                      }
+                    },
                     child: const Text('キャンセル'),
                   ),
                   const Spacer(),
@@ -48,12 +61,10 @@ class PostCreatePage extends StatelessWidget {
           key: formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              TitleFormField(controller: formController['title']!),
-              const SizedBox(height: 16),
-              DescriptionFormField(
-                controller: formController['description']!,
-              ),
+            children: [
+              TitleFormField(controller: titleEditController),
+              const Gap(16),
+              DescriptionFormField(controller: descriptionEditController),
             ],
           ),
         ),

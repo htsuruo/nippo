@@ -9,7 +9,6 @@ class DescriptionFormField extends StatelessWidget {
     final theme = Theme.of(context);
     return Expanded(
       child: TextFormField(
-        textInputAction: TextInputAction.done,
         controller: controller,
         style: theme.textTheme.bodyMedium,
         autofocus: true,
