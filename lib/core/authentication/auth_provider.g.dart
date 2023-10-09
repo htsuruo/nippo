@@ -36,5 +36,19 @@ final firUserProvider = AutoDisposeStreamProvider<User?>.internal(
 );
 
 typedef FirUserRef = AutoDisposeStreamProviderRef<User?>;
+String _$uidHash() => r'd0e59e78004a00da827925b949c4ee9df593a95b';
+
+/// See also [uid].
+@ProviderFor(uid)
+final uidProvider = AutoDisposeFutureProvider<String>.internal(
+  uid,
+  name: r'uidProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$uidHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef UidRef = AutoDisposeFutureProviderRef<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

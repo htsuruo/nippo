@@ -1,46 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nippo/core/authentication/auth_provider.dart';
+import 'package:nippo/core/const.dart';
+import 'package:nippo/features/post/post.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'post.dart';
+part 'post_repository.g.dart';
+
+@riverpod
+PostRepository postRepository(PostRepositoryRef ref) => PostRepository(ref);
 
 class PostRepository {
-  final firestore = FirebaseFirestore.instance;
-  static const String collection = 'posts';
-  final int limit = 20; // TODO(tsuruoka): 仮
+  PostRepository(this._ref);
+  final Ref _ref;
+  final _firestore = FirebaseFirestore.instance;
+  late final _selfRef = _firestore
+      .collection(Collection.users)
+      .doc(_ref.read(uidProvider).value)
+      .collection(Collection.posts)
+      .withConverter<Post>(
+        fromFirestore: (snapshot, options) => Post.fromJson(snapshot.data()!),
+        toFirestore: (post, options) => post.toJson(),
+      );
 
-  void fetchSnapshot({required Function(QuerySnapshot) func}) {
-    firestore
-        .collection(collection)
-        .orderBy('createdAt', descending: true)
-        .limit(limit)
-        .snapshots()
-        .listen(func);
-  }
-
-  Future<List<Post>> fetchByUser({required String uid}) async {
-    final posts = await firestore
-        .collection('users')
-        .doc(uid)
-        .collection(collection)
-        .orderBy('createdAt', descending: true)
-        .limit(limit)
-        .get();
-    final postList = <Post>[];
-    for (final post in posts.docs) {
-      final p = Post.fromJson(post.data());
-      postList.add(p);
-    }
-    return postList;
-  }
-
-//  usersコレクションのサブコレクションとして追加する.
-  Future<void> create({required Post post, required String uid}) async {
-    // post.createdAt = Timestamp.fromDate(DateTime.now());
-    final map = post.toJson();
-    await firestore
-        .collection('users')
-        .doc(uid)
-        .collection(collection)
-        .doc()
-        .set(map);
-  }
+  Future<DocumentReference<Post>> create({required Post post}) =>
+      _selfRef.add(post);
 }

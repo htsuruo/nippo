@@ -1,5 +1,5 @@
 import 'package:nippo/features/post/post.dart';
-import 'package:nippo/features/post/post_repository.dart';
+import 'package:nippo/features/post/post_repository2.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import 'post_state.dart';
@@ -27,11 +27,11 @@ class PostController extends StateNotifier<PostState> with LocatorMixin {
 
   Future<void> fetchByUser({required String uid}) async {
     state = state.copyWith(
-      postsByUserId: await read<PostRepository>().fetchByUser(uid: uid),
+      postsByUserId: await read<PostRepository2>().fetchByUser(uid: uid),
     );
   }
 
   Future<void> create({required Post post, required String uid}) async {
-    await read<PostRepository>().create(post: post, uid: uid);
+    await read<PostRepository2>().create(post: post, uid: uid);
   }
 }

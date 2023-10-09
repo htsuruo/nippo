@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class DescriptionFormField extends HookWidget {
-  const DescriptionFormField({super.key});
+  const DescriptionFormField({super.key, required this.controller});
+
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final controller = useTextEditingController();
 
     return Expanded(
       child: TextFormField(
