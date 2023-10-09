@@ -13,11 +13,19 @@ class PostListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         title: Assets.images.icons.nippoYoko.svg(
           height: 24,
+          // TODO(tsuruoka): ダークモード用のロゴを用意するのが定石
+          colorFilter: theme.brightness == Brightness.light
+              ? null
+              : ColorFilter.mode(
+                  colorScheme.onSurface,
+                  BlendMode.srcIn,
+                ),
         ),
       ),
       body: const _ListView(),
