@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/theme.dart';
 
 class SubmitButton extends StatelessWidget {
   const SubmitButton({
@@ -18,7 +17,6 @@ class SubmitButton extends StatelessWidget {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-          foregroundColor: VIC.navy,
         ),
         onPressed: onPressed,
         child: Text(

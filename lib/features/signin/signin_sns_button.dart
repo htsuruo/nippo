@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/theme.dart';
 
 class SignInSnsButton extends StatelessWidget {
   const SignInSnsButton({
@@ -19,7 +18,6 @@ class SignInSnsButton extends StatelessWidget {
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        side: const BorderSide(color: VIC.border),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
       child: SizedBox(

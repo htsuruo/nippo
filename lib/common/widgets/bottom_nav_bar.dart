@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nippo/theme.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -37,7 +36,6 @@ class BottomNavBar extends StatelessWidget {
       selectedFontSize: 12,
       elevation: 5,
       backgroundColor: Colors.white,
-      unselectedItemColor: VIC.navigationUnselected,
     );
   }
 }
