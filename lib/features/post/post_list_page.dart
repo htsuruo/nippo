@@ -42,13 +42,13 @@ class _ListView extends ConsumerWidget {
         : ListView.builder(
             padding: const EdgeInsets.all(8),
             itemCount: posts.length,
-            itemBuilder: (context, index) => _PostCard(post: posts[index]),
+            itemBuilder: (context, index) => _PostCard(posts[index]),
           );
   }
 }
 
 class _PostCard extends StatelessWidget {
-  const _PostCard({required this.post});
+  const _PostCard(this.post);
 
   final Post post;
 
@@ -58,7 +58,6 @@ class _PostCard extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Card(
-      elevation: 1,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {},
@@ -75,14 +74,19 @@ class _PostCard extends StatelessWidget {
                       style: theme.textTheme.titleMedium!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       post.description,
                       style: theme.textTheme.bodyMedium,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     const Gap(2),
                     Text(
-                      post.createdAt.date!.formatted,
+                      // ServerTimestamp確定まで微妙にラグがあるため暫定的に空文字でごまかす
+                      post.createdAt.date?.formatted ?? '',
                       style: theme.textTheme.labelSmall!
                           .copyWith(color: theme.hintColor),
                     ),
