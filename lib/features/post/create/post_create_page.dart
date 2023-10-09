@@ -13,9 +13,8 @@ class PostCreatePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final formKey = GlobalKey<FormState>();
-    final titleEditController = useTextEditingController();
-    final descriptionEditController = useTextEditingController();
+    final formKey = useMemoized(GlobalKey<FormState>.new);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -46,6 +45,7 @@ class PostCreatePage extends HookConsumerWidget {
                   FilledButton(
                     onPressed: () {
                       // TODO(tsuruoka): 保存処理
+                      if (formKey.currentState!.validate()) {}
                     },
                     child: const Text('投稿する'),
                   ),
@@ -59,12 +59,12 @@ class PostCreatePage extends HookConsumerWidget {
         padding: const EdgeInsets.all(16),
         child: Form(
           key: formKey,
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TitleFormField(controller: titleEditController),
-              const Gap(16),
-              DescriptionFormField(controller: descriptionEditController),
+              TitleFormField(),
+              Gap(16),
+              DescriptionFormField(),
             ],
           ),
         ),

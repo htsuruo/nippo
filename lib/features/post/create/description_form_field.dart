@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class DescriptionFormField extends StatelessWidget {
-  const DescriptionFormField({super.key, required this.controller});
-  final TextEditingController controller;
+class DescriptionFormField extends HookWidget {
+  const DescriptionFormField({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final controller = useTextEditingController();
+
     return Expanded(
       child: TextFormField(
         controller: controller,
@@ -16,11 +18,6 @@ class DescriptionFormField extends StatelessWidget {
         maxLines: null,
         textAlignVertical: TextAlignVertical.top,
         decoration: const InputDecoration(
-          filled: true,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          border: OutlineInputBorder(borderSide: BorderSide.none),
-          contentPadding: EdgeInsets.all(12),
-          alignLabelWithHint: true,
           hintText: '今日起きたたくさんの出来事を記録しましょう',
         ),
         validator: (value) {

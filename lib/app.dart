@@ -24,6 +24,17 @@ class MyApp extends ConsumerWidget {
           titleTextStyle: listTextStyle,
           leadingAndTrailingTextStyle: listTextStyle,
         ),
+        inputDecorationTheme: const InputDecorationTheme(
+          filled: true,
+          labelStyle: TextStyle(fontWeight: FontWeight.bold),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+          contentPadding: EdgeInsets.all(12),
+          alignLabelWithHint: true,
+        ),
       ),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
