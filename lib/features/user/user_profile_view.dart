@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:nippo/common/widgets/circular_image.dart';
+import 'package:nippo/common/common.dart';
 
 import 'user_provider.dart';
 
