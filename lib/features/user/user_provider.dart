@@ -8,7 +8,7 @@ import 'user.dart';
 part 'user_provider.g.dart';
 
 @riverpod
-Stream<DocumentSnapshot<User>> user(UserRef ref) {
+DocumentReference<User> userRef(UserRefRef ref) {
   final firUser = ref.watch(firUserProvider).value;
   return FirebaseFirestore.instance
       .collection(Collection.users)
@@ -16,6 +16,9 @@ Stream<DocumentSnapshot<User>> user(UserRef ref) {
       .withConverter<User>(
         fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
         toFirestore: (user, _) => user.toJson(),
-      )
-      .snapshots();
+      );
 }
+
+@riverpod
+Stream<DocumentSnapshot<User>> user(UserRef ref) =>
+    ref.watch(userRefProvider).snapshots();

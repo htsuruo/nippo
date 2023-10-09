@@ -8,7 +8,21 @@ part of 'user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userHash() => r'ee93fcfb671aba04cecda545b6eb6ae5648bc0e6';
+String _$userRefHash() => r'f5af154fc27e14eafcfaea31d4f2bc17ace28f09';
+
+/// See also [userRef].
+@ProviderFor(userRef)
+final userRefProvider = AutoDisposeProvider<DocumentReference<User>>.internal(
+  userRef,
+  name: r'userRefProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$userRefHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef UserRefRef = AutoDisposeProviderRef<DocumentReference<User>>;
+String _$userHash() => r'db0f1c3595ef5d64d0c6d348a6f051db240ba9d3';
 
 /// See also [user].
 @ProviderFor(user)

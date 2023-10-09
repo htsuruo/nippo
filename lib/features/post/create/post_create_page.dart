@@ -51,7 +51,7 @@ class PostCreatePage extends HookConsumerWidget {
                   FilledButton(
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
-                        await ref
+                        final documentRef = await ref
                             .read(progressController.notifier)
                             .executeWithProgress<DocumentReference<Post>>(
                               () => ref.read(postRepositoryProvider).create(
@@ -62,6 +62,9 @@ class PostCreatePage extends HookConsumerWidget {
                                     ),
                                   ),
                             );
+                        if (documentRef.id.isNotEmpty) {
+                          context.pop();
+                        }
                       }
                     },
                     child: const Text('投稿する'),
