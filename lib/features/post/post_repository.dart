@@ -14,5 +14,5 @@ class PostRepository {
   final Ref _ref;
 
   Future<DocumentReference<Post>> create({required Post post}) =>
-      _ref.read(userPostRefProvider).add(post);
+      _ref.read(selfPostRefProvider).add(post);
 }

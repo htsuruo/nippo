@@ -12,7 +12,7 @@ class UserProfileView extends ConsumerWidget {
     final userDoc = ref.watch(userProvider).value;
     final user = userDoc?.data();
     return Column(
-      children: <Widget>[
+      children: [
         Padding(
           padding: const EdgeInsets.only(top: 8),
           child: CircularImage(

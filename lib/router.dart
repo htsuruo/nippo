@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nippo/features/post/post_list_page.dart';
 import 'package:nippo/features/setting/setting_page.dart';
 import 'package:nippo/features/signin/signin_page.dart';
-import 'package:nippo/features/user/profile/profile_page.dart';
+import 'package:nippo/features/user/profile_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
