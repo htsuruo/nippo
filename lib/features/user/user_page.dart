@@ -6,8 +6,8 @@ import 'package:nippo/features/post/post_list_view.dart';
 
 import 'user_profile_view.dart';
 
-class ProfilePage extends ConsumerWidget {
-  const ProfilePage({super.key});
+class UserPage extends ConsumerWidget {
+  const UserPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
