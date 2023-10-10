@@ -82,8 +82,8 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
         StatefulShellBranchData.$branch(
           routes: [
             GoRouteData.$route(
-              path: '/profile',
-              factory: $ProfilePageRouteExtension._fromState,
+              path: '/user',
+              factory: $UserPageRouteExtension._fromState,
             ),
           ],
         ),
@@ -151,12 +151,11 @@ extension $PostCreatePageRouteExtension on PostCreatePageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ProfilePageRouteExtension on ProfilePageRoute {
-  static ProfilePageRoute _fromState(GoRouterState state) =>
-      const ProfilePageRoute();
+extension $UserPageRouteExtension on UserPageRoute {
+  static UserPageRoute _fromState(GoRouterState state) => const UserPageRoute();
 
   String get location => GoRouteData.$location(
-        '/profile',
+        '/user',
       );
 
   void go(BuildContext context) => context.go(location);

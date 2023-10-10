@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nippo/features/post/post_list_view.dart';
 import 'package:nippo/gen/assets.gen.dart';
+import 'package:nippo/router.dart';
 
 class PostListPage extends StatelessWidget {
   const PostListPage({super.key});
@@ -26,7 +26,7 @@ class PostListPage extends StatelessWidget {
       body: const PostListView(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.go('/posts/create');
+          PostCreatePageRoute().go(context);
         },
         child: const Icon(Icons.mode_edit),
       ),
