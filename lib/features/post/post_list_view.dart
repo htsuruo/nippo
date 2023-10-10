@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
 import 'package:nippo/features/post/post_provider.dart';
+import 'package:nippo/logger.dart';
 
 import 'post.dart';
 
@@ -15,33 +17,36 @@ class PostListView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final uid = this.uid;
     // TODO(tsuruoka): Providerを分けずにまとめても良いかも
-    final posts = uid == null
+    final snapshots = uid == null
         ? ref.watch(postsProvider).value
         : ref.watch(userPostsProvider(uid)).value;
-    return posts == null
+    return snapshots == null
         ? const Center(child: CircularProgressIndicator())
         : ListView.builder(
             padding: const EdgeInsets.all(8),
-            itemCount: posts.length,
-            itemBuilder: (context, index) => _PostCard(posts[index]),
+            itemCount: snapshots.length,
+            itemBuilder: (context, index) => _PostCard(snapshots[index]),
           );
   }
 }
 
 class _PostCard extends StatelessWidget {
-  const _PostCard(this.post);
+  const _PostCard(this.postSnapshot);
 
-  final Post post;
+  final QueryDocumentSnapshot<Post> postSnapshot;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final post = postSnapshot.data();
 
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          logger.info(postSnapshot.id);
+        },
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(

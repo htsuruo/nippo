@@ -8,11 +8,12 @@ part of 'post_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postsHash() => r'3e54610b9144256455b64f046f61d32b4843d8e2';
+String _$postsHash() => r'b8d0329b16f935c2b0115ac717016afa8a0b8880';
 
 /// See also [posts].
 @ProviderFor(posts)
-final postsProvider = AutoDisposeStreamProvider<List<Post>>.internal(
+final postsProvider =
+    AutoDisposeStreamProvider<List<QueryDocumentSnapshot<Post>>>.internal(
   posts,
   name: r'postsProvider',
   debugGetCreateSourceHash:
@@ -21,8 +22,9 @@ final postsProvider = AutoDisposeStreamProvider<List<Post>>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef PostsRef = AutoDisposeStreamProviderRef<List<Post>>;
-String _$userPostsHash() => r'cb7f87b0c6c0bc8ae88f9d433b87aef7a79023b3';
+typedef PostsRef
+    = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
+String _$userPostsHash() => r'83f5d27a1e5f87552c4bce030b4bf93bc9772ce4';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -45,14 +47,16 @@ class _SystemHash {
   }
 }
 
-typedef UserPostsRef = AutoDisposeStreamProviderRef<List<Post>>;
+typedef UserPostsRef
+    = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
 
 /// See also [userPosts].
 @ProviderFor(userPosts)
 const userPostsProvider = UserPostsFamily();
 
 /// See also [userPosts].
-class UserPostsFamily extends Family<AsyncValue<List<Post>>> {
+class UserPostsFamily
+    extends Family<AsyncValue<List<QueryDocumentSnapshot<Post>>>> {
   /// See also [userPosts].
   const UserPostsFamily();
 
@@ -90,7 +94,8 @@ class UserPostsFamily extends Family<AsyncValue<List<Post>>> {
 }
 
 /// See also [userPosts].
-class UserPostsProvider extends AutoDisposeStreamProvider<List<Post>> {
+class UserPostsProvider
+    extends AutoDisposeStreamProvider<List<QueryDocumentSnapshot<Post>>> {
   /// See also [userPosts].
   UserPostsProvider(
     this.uid,

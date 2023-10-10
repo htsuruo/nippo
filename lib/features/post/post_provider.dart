@@ -23,8 +23,9 @@ class _Converter {
       post.toJson();
 }
 
+// documentIdが取得できるようにQueryDocumentSnapshotから返すProviderにしてみた。
 @riverpod
-Stream<List<Post>> posts(PostsRef ref) {
+Stream<List<QueryDocumentSnapshot<Post>>> posts(PostsRef ref) {
   return FirebaseFirestore.instance
       .collectionGroup(Collection.posts)
       .withConverter<Post>(
@@ -32,14 +33,14 @@ Stream<List<Post>> posts(PostsRef ref) {
         toFirestore: _Converter.to,
       )
       .snapshots()
-      .map(
-        (snapshot) =>
-            snapshot.docs.map((docSnapshot) => docSnapshot.data()).toList(),
-      );
+      .map((snapshot) => snapshot.docs);
 }
 
 @riverpod
-Stream<List<Post>> userPosts(UserPostsRef ref, String uid) {
+Stream<List<QueryDocumentSnapshot<Post>>> userPosts(
+  UserPostsRef ref,
+  String uid,
+) {
   return FirebaseFirestore.instance
       .collection(Collection.users)
       .doc(uid)
@@ -50,8 +51,7 @@ Stream<List<Post>> userPosts(UserPostsRef ref, String uid) {
       )
       .snapshots()
       .map(
-        (snapshot) =>
-            snapshot.docs.map((docSnapshot) => docSnapshot.data()).toList(),
+        (snapshot) => snapshot.docs.toList(),
       );
 }
 
