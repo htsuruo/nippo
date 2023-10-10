@@ -24,7 +24,7 @@ final postsProvider =
 
 typedef PostsRef
     = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
-String _$userPostsHash() => r'83f5d27a1e5f87552c4bce030b4bf93bc9772ce4';
+String _$postHash() => r'0c4055ee9dfe6529d5537872788751807039d20e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -47,6 +47,86 @@ class _SystemHash {
   }
 }
 
+typedef PostRef = AutoDisposeStreamProviderRef<QueryDocumentSnapshot<Post>?>;
+
+/// See also [post].
+@ProviderFor(post)
+const postProvider = PostFamily();
+
+/// See also [post].
+class PostFamily extends Family<AsyncValue<QueryDocumentSnapshot<Post>?>> {
+  /// See also [post].
+  const PostFamily();
+
+  /// See also [post].
+  PostProvider call(
+    String? postId,
+  ) {
+    return PostProvider(
+      postId,
+    );
+  }
+
+  @override
+  PostProvider getProviderOverride(
+    covariant PostProvider provider,
+  ) {
+    return call(
+      provider.postId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'postProvider';
+}
+
+/// See also [post].
+class PostProvider
+    extends AutoDisposeStreamProvider<QueryDocumentSnapshot<Post>?> {
+  /// See also [post].
+  PostProvider(
+    this.postId,
+  ) : super.internal(
+          (ref) => post(
+            ref,
+            postId,
+          ),
+          from: postProvider,
+          name: r'postProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product') ? null : _$postHash,
+          dependencies: PostFamily._dependencies,
+          allTransitiveDependencies: PostFamily._allTransitiveDependencies,
+        );
+
+  final String? postId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is PostProvider && other.postId == postId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, postId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$userPostsHash() => r'83f5d27a1e5f87552c4bce030b4bf93bc9772ce4';
 typedef UserPostsRef
     = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
 

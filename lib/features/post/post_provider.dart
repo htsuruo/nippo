@@ -39,6 +39,21 @@ Stream<List<QueryDocumentSnapshot<Post>>> posts(PostsRef ref) {
 }
 
 @riverpod
+Stream<QueryDocumentSnapshot<Post>?> post(PostRef ref, String? postId) {
+  return postId == null
+      ? Stream.value(null)
+      : FirebaseFirestore.instance
+          .collectionGroup(Collection.posts)
+          .withConverter<Post>(
+            fromFirestore: _Converter.from,
+            toFirestore: _Converter.to,
+          )
+          .where(Field.postId, isEqualTo: postId)
+          .snapshots()
+          .map((post) => post.docs.firstOrNull);
+}
+
+@riverpod
 Stream<List<QueryDocumentSnapshot<Post>>> userPosts(
   UserPostsRef ref,
   String uid,

@@ -9,8 +9,8 @@ import 'package:nippo/features/post/post.dart';
 import 'package:nippo/features/post/post_repository.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
-import 'description_form_field.dart';
-import 'title_form_field.dart';
+import 'widgets/description_form_field.dart';
+import 'widgets/title_form_field.dart';
 
 class PostCreatePage extends HookConsumerWidget {
   const PostCreatePage({super.key});
