@@ -14,7 +14,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // TODO(tsuruoka): コメントアウトを外すとAndroidで起動できなくなる🤔
+  // TODO(htsuruo): コメントアウトを外すとAndroidで起動できなくなる🤔
   // late final AppInfo appInfo;
   // await PackageInfo.fromPlatform().then((value) {
   //   appInfo = AppInfo(

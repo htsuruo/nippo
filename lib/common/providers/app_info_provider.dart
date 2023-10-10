@@ -4,7 +4,7 @@ import 'package:version/version.dart';
 
 part 'app_info_provider.g.dart';
 
-// TODO(tsuruoka): `throw UnimplementedError()`にしたいが、Code generationだと起動できなくなる
+// TODO(htsuruo): `throw UnimplementedError()`にしたいが、Code generationだと起動できなくなる
 @riverpod
 AppInfo appInfo(AppInfoRef ref) => AppInfo.empty();
 

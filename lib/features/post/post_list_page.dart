@@ -14,7 +14,7 @@ class PostListPage extends StatelessWidget {
       appBar: AppBar(
         title: Assets.images.icons.nippoYoko.svg(
           height: 24,
-          // TODO(tsuruoka): ダークモード用のロゴを用意するのが定石
+          // TODO(htsuruo): ダークモード用のロゴを用意するのが定石
           colorFilter: theme.brightness == Brightness.light
               ? null
               : ColorFilter.mode(

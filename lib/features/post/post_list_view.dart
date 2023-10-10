@@ -16,7 +16,7 @@ class PostListView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uid = this.uid;
-    // TODO(tsuruoka): Providerを分けずにまとめても良いかも
+    // TODO(htsuruo): Providerを分けずにまとめても良いかも
     final snapshots = uid == null
         ? ref.watch(postsProvider).value
         : ref.watch(userPostsProvider(uid)).value;

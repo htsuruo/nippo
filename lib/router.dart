@@ -140,7 +140,7 @@ class PostDetailPageRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    // TODO(tsuruoka):
+    // TODO(htsuruo):
     return const PostCreatePage();
   }
 }
