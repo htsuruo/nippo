@@ -31,7 +31,7 @@ class UserPage extends ConsumerWidget {
             padding: EdgeInsets.symmetric(vertical: 16),
             child: Divider(),
           ),
-          // TODO(htsuruo): 仮置き。実際は各ユーザーの値にする
+          // TODO(htsuruo): ログインユーザーに固定されているが、実際はuidは外から指定された値にする
           if (uid != null)
             Expanded(
               child: PostListView(uid: uid),

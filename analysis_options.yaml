@@ -9,6 +9,7 @@ analyzer:
   exclude:
     - lib/**/*.g.dart
     - lib/**/*.freezed.dart
+    - lib/firebase_options.dart
 linter:
   rules:
     use_build_context_synchronously: false
