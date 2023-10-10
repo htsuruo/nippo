@@ -8,6 +8,8 @@ part 'post.g.dart';
 class Post with _$Post {
   @allJsonConvertersSerializable
   const factory Post({
+    // コレクショングループで引用するためにフィールドにドキュメントIDを持たせる必要がある
+    required String postId,
     required String title,
     required String description,
     @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp updatedAt,

@@ -9,6 +9,7 @@ part of 'post.dart';
 // **************************************************************************
 
 _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
+      postId: json['postId'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
       updatedAt: json['updatedAt'] == null
@@ -22,6 +23,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
     );
 
 Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
+      'postId': instance.postId,
       'title': instance.title,
       'description': instance.description,
       'updatedAt': const UnionTimestampConverter().toJson(instance.updatedAt),
