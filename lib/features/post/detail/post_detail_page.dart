@@ -11,6 +11,7 @@ class PostDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // TODO(htsuruo): familiyのうけとりをRecordsでTypeDef定義する
     final post = ref.watch(postProvider(uid, pid));
 
     return Scaffold(
