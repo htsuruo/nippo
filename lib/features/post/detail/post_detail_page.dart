@@ -4,13 +4,14 @@ import 'package:nippo/features/post/post_provider.dart';
 import 'package:nippo/logger.dart';
 
 class PostDetailPage extends ConsumerWidget {
-  const PostDetailPage({super.key, required this.postId});
+  const PostDetailPage({super.key, required this.uid, required this.pid});
 
-  final String? postId;
+  final String? uid;
+  final String? pid;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final post = ref.watch(postProvider(postId));
+    final post = ref.watch(postProvider(uid, pid));
 
     return Scaffold(
       appBar: AppBar(
@@ -18,12 +19,12 @@ class PostDetailPage extends ConsumerWidget {
       ),
       body: post.when(
         data: (postSnapshot) {
-          if (postSnapshot == null) {
+          final post = postSnapshot.data();
+          if (post == null) {
             return const Center(
               child: Text('データがありません'),
             );
           }
-          final post = postSnapshot.data();
           return Center(
             child: Text(
               post.title,

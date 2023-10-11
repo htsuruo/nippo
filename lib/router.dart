@@ -18,7 +18,10 @@ part 'router.g.dart';
 class _Location {
   _Location._();
   static const posts = '/posts';
-  static const post = ':postId';
+
+  // REVIEW(htsuruo): 本来はZennのように`[uid]/posts/[pid]`のようなパスにしたいが、
+  // StatefulShellBranchでは親ルートのpostsが頭にきてしまうため実現できなさそう？
+  static const post = ':uid/:pid';
   static const postCreate = 'create';
   static const signin = '/signin';
   static const user = '/user';
@@ -137,13 +140,14 @@ class PostsPageRoute extends GoRouteData {
 }
 
 class PostDetailPageRoute extends GoRouteData {
-  const PostDetailPageRoute({required this.postId});
+  const PostDetailPageRoute({required this.uid, required this.pid});
 
-  final String postId;
+  final String uid;
+  final String pid;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PostDetailPage(postId: postId);
+    return PostDetailPage(uid: uid, pid: pid);
   }
 }
 

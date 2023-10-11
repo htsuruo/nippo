@@ -24,7 +24,7 @@ final postsProvider =
 
 typedef PostsRef
     = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
-String _$postHash() => r'0c4055ee9dfe6529d5537872788751807039d20e';
+String _$postHash() => r'df8115663ab7400a86421409215a6903be155323';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -47,22 +47,24 @@ class _SystemHash {
   }
 }
 
-typedef PostRef = AutoDisposeStreamProviderRef<QueryDocumentSnapshot<Post>?>;
+typedef PostRef = AutoDisposeStreamProviderRef<DocumentSnapshot<Post>>;
 
 /// See also [post].
 @ProviderFor(post)
 const postProvider = PostFamily();
 
 /// See also [post].
-class PostFamily extends Family<AsyncValue<QueryDocumentSnapshot<Post>?>> {
+class PostFamily extends Family<AsyncValue<DocumentSnapshot<Post>>> {
   /// See also [post].
   const PostFamily();
 
   /// See also [post].
   PostProvider call(
+    String? uid,
     String? postId,
   ) {
     return PostProvider(
+      uid,
       postId,
     );
   }
@@ -72,6 +74,7 @@ class PostFamily extends Family<AsyncValue<QueryDocumentSnapshot<Post>?>> {
     covariant PostProvider provider,
   ) {
     return call(
+      provider.uid,
       provider.postId,
     );
   }
@@ -92,14 +95,15 @@ class PostFamily extends Family<AsyncValue<QueryDocumentSnapshot<Post>?>> {
 }
 
 /// See also [post].
-class PostProvider
-    extends AutoDisposeStreamProvider<QueryDocumentSnapshot<Post>?> {
+class PostProvider extends AutoDisposeStreamProvider<DocumentSnapshot<Post>> {
   /// See also [post].
   PostProvider(
+    this.uid,
     this.postId,
   ) : super.internal(
           (ref) => post(
             ref,
+            uid,
             postId,
           ),
           from: postProvider,
@@ -110,16 +114,18 @@ class PostProvider
           allTransitiveDependencies: PostFamily._allTransitiveDependencies,
         );
 
+  final String? uid;
   final String? postId;
 
   @override
   bool operator ==(Object other) {
-    return other is PostProvider && other.postId == postId;
+    return other is PostProvider && other.uid == uid && other.postId == postId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, uid.hashCode);
     hash = _SystemHash.combine(hash, postId.hashCode);
 
     return _SystemHash.finish(hash);

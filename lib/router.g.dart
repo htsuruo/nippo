@@ -68,7 +68,7 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
               factory: $PostsPageRouteExtension._fromState,
               routes: [
                 GoRouteData.$route(
-                  path: ':postId',
+                  path: ':uid/:pid',
                   factory: $PostDetailPageRouteExtension._fromState,
                 ),
                 GoRouteData.$route(
@@ -116,11 +116,12 @@ extension $PostsPageRouteExtension on PostsPageRoute {
 extension $PostDetailPageRouteExtension on PostDetailPageRoute {
   static PostDetailPageRoute _fromState(GoRouterState state) =>
       PostDetailPageRoute(
-        postId: state.pathParameters['postId']!,
+        uid: state.pathParameters['uid']!,
+        pid: state.pathParameters['pid']!,
       );
 
   String get location => GoRouteData.$location(
-        '/posts/${Uri.encodeComponent(postId)}',
+        '/posts/${Uri.encodeComponent(uid)}/${Uri.encodeComponent(pid)}',
       );
 
   void go(BuildContext context) => context.go(location);
