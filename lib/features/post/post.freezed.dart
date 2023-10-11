@@ -20,8 +20,6 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Post {
-// コレクショングループで引用するためにフィールドにドキュメントIDを持たせる必要がある
-  String get postId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   UnionTimestamp get updatedAt => throw _privateConstructorUsedError;
@@ -38,8 +36,7 @@ abstract class $PostCopyWith<$Res> {
       _$PostCopyWithImpl<$Res, Post>;
   @useResult
   $Res call(
-      {String postId,
-      String title,
+      {String title,
       String description,
       UnionTimestamp updatedAt,
       UnionTimestamp createdAt});
@@ -61,17 +58,12 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? postId = null,
     Object? title = null,
     Object? description = null,
     Object? updatedAt = null,
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -115,8 +107,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String postId,
-      String title,
+      {String title,
       String description,
       UnionTimestamp updatedAt,
       UnionTimestamp createdAt});
@@ -136,17 +127,12 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? postId = null,
     Object? title = null,
     Object? description = null,
     Object? updatedAt = null,
     Object? createdAt = null,
   }) {
     return _then(_$_Post(
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -172,17 +158,13 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 @allJsonConvertersSerializable
 class _$_Post implements _Post {
   const _$_Post(
-      {required this.postId,
-      required this.title,
+      {required this.title,
       required this.description,
       this.updatedAt = const UnionTimestamp.serverTimestamp(),
       this.createdAt = const UnionTimestamp.serverTimestamp()});
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
-// コレクショングループで引用するためにフィールドにドキュメントIDを持たせる必要がある
-  @override
-  final String postId;
   @override
   final String title;
   @override
@@ -196,7 +178,7 @@ class _$_Post implements _Post {
 
   @override
   String toString() {
-    return 'Post(postId: $postId, title: $title, description: $description, updatedAt: $updatedAt, createdAt: $createdAt)';
+    return 'Post(title: $title, description: $description, updatedAt: $updatedAt, createdAt: $createdAt)';
   }
 
   @override
@@ -204,7 +186,6 @@ class _$_Post implements _Post {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Post &&
-            (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -216,8 +197,8 @@ class _$_Post implements _Post {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, postId, title, description, updatedAt, createdAt);
+  int get hashCode =>
+      Object.hash(runtimeType, title, description, updatedAt, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -235,16 +216,13 @@ class _$_Post implements _Post {
 
 abstract class _Post implements Post {
   const factory _Post(
-      {required final String postId,
-      required final String title,
+      {required final String title,
       required final String description,
       final UnionTimestamp updatedAt,
       final UnionTimestamp createdAt}) = _$_Post;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
-  @override // コレクショングループで引用するためにフィールドにドキュメントIDを持たせる必要がある
-  String get postId;
   @override
   String get title;
   @override

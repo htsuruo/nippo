@@ -8,11 +8,6 @@ part 'post.g.dart';
 class Post with _$Post {
   @allJsonConvertersSerializable
   const factory Post({
-    // コレクショングループで引用するためにフィールドにドキュメントIDを持たせる必要がある
-    // [uid]/posts/[postId] というパスにしたほうが良さそう。
-    // 投稿はユーザーの所有物なのでそれが正しいはず
-    // ref. https://zenn.dev/tsuruo/articles/142d35b5e6395c
-    required String postId,
     required String title,
     required String description,
     @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp updatedAt,
