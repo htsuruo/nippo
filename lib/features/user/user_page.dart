@@ -11,7 +11,7 @@ class UserPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final uid = ref.watch(uidProvider).value;
+    final uid = ref.watch(firUserProvider.select((s) => s.value?.uid));
     return Scaffold(
       appBar: AppBar(
         actions: [

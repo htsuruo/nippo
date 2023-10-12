@@ -81,8 +81,6 @@ class SettingPageRoute extends GoRouteData {
         TypedGoRoute<PostsPageRoute>(
           path: _Location.posts,
           routes: [
-            // TODO(htsuruo): post/createとpost/:idを共存させたかったが
-            // post/:idが優先されてすべて詳細画面に飛んでしまうので調査が必要
             TypedGoRoute<PostDetailPageRoute>(
               path: _Location.post,
             ),

@@ -12,8 +12,3 @@ Future<bool> isSignedIn(IsSignedInRef ref) {
 Stream<User?> firUser(FirUserRef ref) {
   return FirebaseAuth.instance.authStateChanges();
 }
-
-@riverpod
-Future<String> uid(UidRef ref) {
-  return ref.watch(firUserProvider.future).then((user) => user?.uid ?? '');
-}
