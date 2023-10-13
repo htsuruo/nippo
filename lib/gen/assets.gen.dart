@@ -14,59 +14,29 @@ import 'package:flutter/services.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/appicon.png
-  AssetGenImage get appicon => const AssetGenImage('assets/images/appicon.png');
+  /// File path: assets/images/google_signin_dark_normal.png
+  AssetGenImage get googleSigninDarkNormal =>
+      const AssetGenImage('assets/images/google_signin_dark_normal.png');
 
-  /// File path: assets/images/ic_logo_google.png
-  AssetGenImage get icLogoGoogle =>
-      const AssetGenImage('assets/images/ic_logo_google.png');
-
-  /// File path: assets/images/ic_logo_mail.png
-  AssetGenImage get icLogoMail =>
-      const AssetGenImage('assets/images/ic_logo_mail.png');
-
-  /// File path: assets/images/ic_logo_twitter.png
-  AssetGenImage get icLogoTwitter =>
-      const AssetGenImage('assets/images/ic_logo_twitter.png');
-
-  /// File path: assets/images/ic_main_logo.png
-  AssetGenImage get icMainLogo =>
-      const AssetGenImage('assets/images/ic_main_logo.png');
-
-  /// File path: assets/images/ic_tutorial_line.png
-  AssetGenImage get icTutorialLine =>
-      const AssetGenImage('assets/images/ic_tutorial_line.png');
-
-  $AssetsImagesIconsGen get icons => const $AssetsImagesIconsGen();
-
-  /// File path: assets/images/profile_dummy.png
-  AssetGenImage get profileDummy =>
-      const AssetGenImage('assets/images/profile_dummy.png');
+  $AssetsImagesLogoGen get logo => const $AssetsImagesLogoGen();
 
   /// List of all assets
-  List<AssetGenImage> get values => [
-        appicon,
-        icLogoGoogle,
-        icLogoMail,
-        icLogoTwitter,
-        icMainLogo,
-        icTutorialLine,
-        profileDummy
-      ];
+  List<AssetGenImage> get values => [googleSigninDarkNormal];
 }
 
-class $AssetsImagesIconsGen {
-  const $AssetsImagesIconsGen();
+class $AssetsImagesLogoGen {
+  const $AssetsImagesLogoGen();
 
-  /// File path: assets/images/icons/nippo.svg
-  SvgGenImage get nippo => const SvgGenImage('assets/images/icons/nippo.svg');
+  /// File path: assets/images/logo/logo_yoko_dark.svg
+  SvgGenImage get logoYokoDark =>
+      const SvgGenImage('assets/images/logo/logo_yoko_dark.svg');
 
-  /// File path: assets/images/icons/nippo_yoko.svg
-  SvgGenImage get nippoYoko =>
-      const SvgGenImage('assets/images/icons/nippo_yoko.svg');
+  /// File path: assets/images/logo/logo_yoko_light.svg
+  SvgGenImage get logoYokoLight =>
+      const SvgGenImage('assets/images/logo/logo_yoko_light.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [nippo, nippoYoko];
+  List<SvgGenImage> get values => [logoYokoDark, logoYokoLight];
 }
 
 class Assets {

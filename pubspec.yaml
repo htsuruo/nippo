@@ -9,11 +9,9 @@ environment:
 dependencies:
   adaptive_dialog: ^1.9.0+2
   adaptive_theme: ^3.4.1
-  auth_buttons: ^1.0.1+4
   cached_network_image: ^3.3.0
   cloud_firestore: ^4.8.3
   cupertino_icons: ^1.0.5
-  email_validator: ^2.1.17
   firebase_auth: ^4.7.0
   firebase_core: ^2.15.0
   firebase_ui_auth: ^1.6.0
@@ -81,4 +79,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/images/icons/
+    - assets/images/logo/

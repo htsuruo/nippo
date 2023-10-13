@@ -1,10 +1,9 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nippo/common/common.dart';
 import 'package:nippo/core/authentication/auth_repository.dart';
-import 'package:nippo/gen/assets.gen.dart';
 import 'package:nippo/logger.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
@@ -18,11 +17,9 @@ class SigninPage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Assets.images.icons.nippo.svg(
-              width: 180,
-            ),
-            const Gap(80),
-            GoogleAuthButton(
+            const AppLogo(),
+            const Gap(44),
+            ElevatedButton(
               onPressed: () async {
                 try {
                   await ref
@@ -40,16 +37,7 @@ class SigninPage extends ConsumerWidget {
                   );
                 }
               },
-              style: const AuthButtonStyle(
-                buttonType: AuthButtonType.secondary,
-              ),
-            ),
-            const Gap(20),
-            AppleAuthButton(
-              onPressed: () {},
-              style: const AuthButtonStyle(
-                buttonType: AuthButtonType.secondary,
-              ),
+              child: const Text('Sign in with Google'),
             ),
           ],
         ),

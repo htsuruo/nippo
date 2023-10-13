@@ -14,7 +14,7 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
         brightness: brightness,
-        seedColor: const Color(0xFFD74794),
+        seedColor: Colors.deepPurple,
       ),
     );
     final listTextStyle = themeData.textTheme.bodyMedium;
