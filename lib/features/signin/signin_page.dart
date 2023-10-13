@@ -19,6 +19,7 @@ class SigninPage extends ConsumerWidget {
           children: [
             const AppLogo(),
             const Gap(44),
+            // 本来は`Sign in with Google`アイコンのレギュレーションに準拠するべきだが今回は割愛
             ElevatedButton(
               onPressed: () async {
                 try {

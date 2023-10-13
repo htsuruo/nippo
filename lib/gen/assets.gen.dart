@@ -14,14 +14,7 @@ import 'package:flutter/services.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/google_signin_dark_normal.png
-  AssetGenImage get googleSigninDarkNormal =>
-      const AssetGenImage('assets/images/google_signin_dark_normal.png');
-
   $AssetsImagesLogoGen get logo => const $AssetsImagesLogoGen();
-
-  /// List of all assets
-  List<AssetGenImage> get values => [googleSigninDarkNormal];
 }
 
 class $AssetsImagesLogoGen {
