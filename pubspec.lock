@@ -353,14 +353,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  desktop_webview_auth:
-    dependency: transitive
-    description:
-      name: desktop_webview_auth
-      sha256: f90d9fa88344fb1446d4f876ee2a12d07f4345f96fdb787d3ce1c76bd9d41feb
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.13"
   dynamic_color:
     dependency: transitive
     description:
@@ -369,14 +361,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.6.7"
-  email_validator:
-    dependency: transitive
-    description:
-      name: email_validator
-      sha256: e9a90f27ab2b915a27d7f9c2a7ddda5dd752d6942616ee83529b686fc086221b
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.17"
   fake_async:
     dependency: transitive
     description:
@@ -449,54 +433,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.8.0"
-  firebase_dynamic_links:
-    dependency: transitive
-    description:
-      name: firebase_dynamic_links
-      sha256: "3747775b9d9a4500af1be160879068e1f44acff2e51b62727ab5554aa075b117"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.3.6"
-  firebase_dynamic_links_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_dynamic_links_platform_interface
-      sha256: "110d5d35891f7c6a596940b21cb60d38819c0818982094c9e37ede056bef8979"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.6+6"
-  firebase_ui_auth:
-    dependency: "direct main"
-    description:
-      name: firebase_ui_auth
-      sha256: "655f4d57799d989bacc223bef820d1dabfb2c0654adeb352b7c15171fbe7eadf"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.8.0"
-  firebase_ui_localizations:
-    dependency: transitive
-    description:
-      name: firebase_ui_localizations
-      sha256: "44a31e8dd846d56d744630836cce79a0463ed6f6442e53de48d54cbc5e860fe1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.6.1"
-  firebase_ui_oauth:
-    dependency: transitive
-    description:
-      name: firebase_ui_oauth
-      sha256: dc443817d3f76de02e375348248224d6245461efb7f78aec57a8438a527069ee
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.11"
-  firebase_ui_shared:
-    dependency: transitive
-    description:
-      name: firebase_ui_shared
-      sha256: "48324f76339ba9bd0242a08b5a8843d0b57a6ab9af46ac426fc24122f6eb944b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.1"
   fixnum:
     dependency: transitive
     description:
@@ -563,14 +499,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_overboard:
-    dependency: "direct main"
-    description:
-      name: flutter_overboard
-      sha256: b42fd1b27566147379d68aff218b661f3ec5ceff4a60fad65fabe2e6bb829321
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.1"
   flutter_riverpod:
     dependency: transitive
     description:
@@ -579,14 +507,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
-  flutter_state_notifier:
-    dependency: "direct main"
-    description:
-      name: flutter_state_notifier
-      sha256: "4a1d282df8ab549d0c6aed0a2cdb486111c830778028f14048980c886bbb74fa"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.3"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -893,14 +813,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  modal_progress_hud_nsn:
-    dependency: "direct main"
-    description:
-      name: modal_progress_hud_nsn
-      sha256: "0b0d95e5ce3e1884390624fbe79fcf90d7de10abe05d26c0e276c25e7130e3e0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.0"
   mustache_template:
     dependency: transitive
     description:
@@ -1307,7 +1219,7 @@ packages:
     source: hosted
     version: "1.11.0"
   state_notifier:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: state_notifier
       sha256: "8fe42610f179b843b12371e40db58c9444f8757f8b69d181c97e50787caed289"
