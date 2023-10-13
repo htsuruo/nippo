@@ -34,6 +34,7 @@ Stream<List<QueryDocumentSnapshot<Post>>> posts(PostsRef ref) {
         fromFirestore: _Converter.from,
         toFirestore: _Converter.to,
       )
+      .orderBy(Field.createdAt, descending: true)
       .snapshots()
       .map((snapshot) => snapshot.docs);
 }
@@ -69,6 +70,7 @@ Stream<List<QueryDocumentSnapshot<Post>>> userPosts(
         fromFirestore: _Converter.from,
         toFirestore: _Converter.to,
       )
+      .orderBy(Field.createdAt, descending: true)
       .snapshots()
       .map(
         (snapshot) => snapshot.docs.toList(),

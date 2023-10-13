@@ -4,5 +4,5 @@ class Collection {
 }
 
 class Field {
-  static const postId = 'postId';
+  static const createdAt = 'createdAt';
 }
