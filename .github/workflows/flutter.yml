@@ -1,0 +1,57 @@
+name: Flutter
+
+on:
+  push:
+    branches: [ "main" ]
+    # ref. https://qiita.com/nacam403/items/3e2a5df5e88ba20aa76a
+    paths:
+      - 'lib/**'
+      - '!**.md'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'lib/**'
+      - '!**.md'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+
+      - name: Parse an FVM config file into environment variables
+        uses: kuhnroyal/flutter-fvm-config-action@v1
+        with:
+          path: '.fvm/fvm_config.json'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+          # バージョン固定したい場合はこちら
+          # flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Uncomment this step to verify the use of 'dart format' on each commit.
+      # - name: Verify formatting
+      #   run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze project source
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
