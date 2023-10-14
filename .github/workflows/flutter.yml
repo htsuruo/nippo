@@ -2,13 +2,13 @@ name: Flutter
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
     # ref. https://qiita.com/nacam403/items/3e2a5df5e88ba20aa76a
     paths:
       - 'lib/**'
       - '!**.md'
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
     paths:
       - 'lib/**'
       - '!**.md'
@@ -42,16 +42,24 @@ jobs:
           # バージョン固定したい場合はこちら
           # flutter-version: ${{ env.FLUTTER_VERSION }}
 
-      - name: Install dependencies
-        run: flutter pub get
+      # fvmのsdkを参照するために`melos.yaml`に`sdkPath`を指定しているため、
+      # より優先度の高い環境変数`MELOS_SDK_PATH`を指定します。
+      - name: Set MELOS_SDK_PATH
+        run: echo "MELOS_SDK_PATH=${{ env.FLUTTER_ROOT }}" >> $GITHUB_ENV
 
-      # Uncomment this step to verify the use of 'dart format' on each commit.
-      # - name: Verify formatting
-      #   run: dart format --output=none --set-exit-if-changed .
+      - name: Setup Melos
+        run: dart pub global activate melos && melos bs
 
-      - name: Analyze project source
-        run: flutter analyze
+      - name: Analyze
+        run: melos run analyze
 
-      - name: Run tests
-        run: flutter test
+      - name: Run custom_lint
+        run: melos run run:custom_lint
 
+      - name: Check Format
+        run: |
+          melos run format
+          ../.github/workflows/scripts/validate-formatting.sh
+
+      - name: Test
+        run: melos run test
