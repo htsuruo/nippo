@@ -8,8 +8,6 @@ class AppTheme {
   static ThemeData get dark => _themeData(Brightness.dark);
 
   static ThemeData _themeData(Brightness brightness) {
-    // デフォルトの`deepPurple`指定であれば`ThemeData.light`のコンストラクタ指定で十分だが
-    // テンプレート利用時に`seedColor`を変更しやすいように`fromSeed`で書いておく
     final themeData = ThemeData.from(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
@@ -21,9 +19,8 @@ class AppTheme {
 
     return themeData.copyWith(
       splashFactory: InkSparkle.splashFactory,
-      // `ThemeData.from`で生成されるTextThemeに対してapplyしたいので`copyWith`で繋げない
       textTheme: themeData.textTheme.apply(
-        fontFamily: GoogleFonts.poppins().fontFamily,
+        fontFamily: GoogleFonts.lato().fontFamily,
       ),
       dividerTheme: const DividerThemeData(space: 0),
       listTileTheme: ListTileThemeData(
