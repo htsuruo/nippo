@@ -21,7 +21,7 @@ class PostListView extends ConsumerWidget {
         ? ref.watch(postsProvider).value
         : ref.watch(userPostsProvider(uid)).value;
     return snapshots == null
-        ? const Center(child: CircularProgressIndicator())
+        ? const CenteredCircularProgressIndicator()
         : ListView.builder(
             padding: const EdgeInsets.all(8),
             itemCount: snapshots.length,

@@ -20,6 +20,12 @@ class PostDetailPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(),
       body: post.when(
+        loading: CenteredCircularProgressIndicator.new,
+        error: (error, stackTrace) {
+          return Center(
+            child: Text(error.toString()),
+          );
+        },
         data: (postSnapshot) {
           final post = postSnapshot.data();
           if (post == null) {
@@ -52,14 +58,6 @@ class PostDetailPage extends ConsumerWidget {
             ),
           );
         },
-        error: (error, stackTrace) {
-          return Center(
-            child: Text(error.toString()),
-          );
-        },
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
-        ),
       ),
     );
   }
