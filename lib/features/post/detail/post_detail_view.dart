@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/features/post/post.dart';
+import 'package:nippo/features/post/model/post.dart';
 
 class PostDetailView extends ConsumerWidget {
   const PostDetailView({super.key, required this.postAsync});

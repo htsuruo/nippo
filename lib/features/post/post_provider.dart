@@ -3,7 +3,7 @@ import 'package:nippo/core/const.dart';
 import 'package:nippo/features/user/user_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'post.dart';
+import 'model/post.dart';
 
 part 'post_provider.g.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/core/authentication/auth_provider.dart';
-import 'package:nippo/features/post/post_list_view.dart';
+import 'package:nippo/features/post/widgets/post_list_view.dart';
 import 'package:nippo/router.dart';
 
 import '../post/post_provider.dart';

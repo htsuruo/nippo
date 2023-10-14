@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:nippo/features/post/post.dart';
+import 'package:nippo/features/post/model/post.dart';
 import 'package:nippo/features/post/post_repository.dart';
 
 import 'widgets/description_form_field.dart';
