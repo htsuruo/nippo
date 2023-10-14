@@ -1,7 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:nippo/features/post/post.dart';
 import 'package:nippo/features/post/post_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import 'model/post.dart';
 
 part 'post_repository.g.dart';
 

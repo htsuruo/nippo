@@ -6,7 +6,7 @@ import 'package:nippo/features/post/post_list_view.dart';
 import 'package:nippo/router.dart';
 
 import '../post/post_provider.dart';
-import 'user_profile_view.dart';
+import 'widgets/widgets.dart';
 
 class UserPage extends ConsumerWidget {
   const UserPage({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
 
-import 'user_provider.dart';
+import '../user_provider.dart';
 
 class UserProfileView extends ConsumerWidget {
   const UserProfileView({super.key});

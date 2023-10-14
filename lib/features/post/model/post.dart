@@ -25,5 +25,5 @@ class Post with _$Post {
   Post._();
 
   // ignore: deprecated_member_use_from_same_package
-  late final postId = nullablePostId!;
+  late final String postId = nullablePostId!;
 }

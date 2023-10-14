@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/features/post/post_list_view.dart';
 import 'package:nippo/features/post/post_provider.dart';
 import 'package:nippo/router.dart';
+
+import 'widgets/widgets.dart';
 
 class PostListPage extends ConsumerWidget {
   const PostListPage({super.key});

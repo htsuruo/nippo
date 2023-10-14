@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
 
-import 'post.dart';
+import '../model/post.dart';
 
 /// Post一覧からの遷移とUserPageからの遷移で共通して利用されるListView
 /// StatefulShellRouteの影響でパスを同一に出来ないため、
