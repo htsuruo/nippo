@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/features/post/post.dart';
 import 'package:nippo/features/post/post_provider.dart';
@@ -13,6 +12,8 @@ class PostRepository {
   PostRepository(this._ref);
   final Ref _ref;
 
-  Future<DocumentReference<Post>> create({required Post post}) =>
-      _ref.read(selfPostRefProvider).add(post);
+  Future<void> create({required Post post}) async {
+    final doc = _ref.read(selfPostRefProvider).doc();
+    await doc.set(post.copyWith(nullablePostId: doc.id));
+  }
 }

@@ -20,6 +20,12 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Post {
+// コレクショングループで引くためにフィールドにドキュメントIDをもたせる必要がある
+// フォームからインプットする時点ではドキュメントIDが決まらないのでnullableにしておく
+// 利用時には`late final`の非null版を利用すること
+  @Deprecated('Use late field postId instead')
+  @JsonKey(name: Field.postId)
+  String? get nullablePostId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   UnionTimestamp get updatedAt => throw _privateConstructorUsedError;
@@ -36,7 +42,10 @@ abstract class $PostCopyWith<$Res> {
       _$PostCopyWithImpl<$Res, Post>;
   @useResult
   $Res call(
-      {String title,
+      {@Deprecated('Use late field postId instead')
+      @JsonKey(name: Field.postId)
+      String? nullablePostId,
+      String title,
       String description,
       UnionTimestamp updatedAt,
       UnionTimestamp createdAt});
@@ -58,12 +67,17 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? nullablePostId = freezed,
     Object? title = null,
     Object? description = null,
     Object? updatedAt = null,
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
+      nullablePostId: freezed == nullablePostId
+          ? _value.nullablePostId
+          : nullablePostId // ignore: cast_nullable_to_non_nullable
+              as String?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -107,7 +121,10 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String title,
+      {@Deprecated('Use late field postId instead')
+      @JsonKey(name: Field.postId)
+      String? nullablePostId,
+      String title,
       String description,
       UnionTimestamp updatedAt,
       UnionTimestamp createdAt});
@@ -127,12 +144,17 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? nullablePostId = freezed,
     Object? title = null,
     Object? description = null,
     Object? updatedAt = null,
     Object? createdAt = null,
   }) {
     return _then(_$_Post(
+      nullablePostId: freezed == nullablePostId
+          ? _value.nullablePostId
+          : nullablePostId // ignore: cast_nullable_to_non_nullable
+              as String?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -156,15 +178,26 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 /// @nodoc
 
 @allJsonConvertersSerializable
-class _$_Post implements _Post {
-  const _$_Post(
-      {required this.title,
+class _$_Post extends _Post {
+  _$_Post(
+      {@Deprecated('Use late field postId instead')
+      @JsonKey(name: Field.postId)
+      this.nullablePostId,
+      required this.title,
       required this.description,
       this.updatedAt = const UnionTimestamp.serverTimestamp(),
-      this.createdAt = const UnionTimestamp.serverTimestamp()});
+      this.createdAt = const UnionTimestamp.serverTimestamp()})
+      : super._();
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
+// コレクショングループで引くためにフィールドにドキュメントIDをもたせる必要がある
+// フォームからインプットする時点ではドキュメントIDが決まらないのでnullableにしておく
+// 利用時には`late final`の非null版を利用すること
+  @override
+  @Deprecated('Use late field postId instead')
+  @JsonKey(name: Field.postId)
+  final String? nullablePostId;
   @override
   final String title;
   @override
@@ -178,7 +211,7 @@ class _$_Post implements _Post {
 
   @override
   String toString() {
-    return 'Post(title: $title, description: $description, updatedAt: $updatedAt, createdAt: $createdAt)';
+    return 'Post(nullablePostId: $nullablePostId, title: $title, description: $description, updatedAt: $updatedAt, createdAt: $createdAt)';
   }
 
   @override
@@ -186,6 +219,8 @@ class _$_Post implements _Post {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Post &&
+            (identical(other.nullablePostId, nullablePostId) ||
+                other.nullablePostId == nullablePostId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -197,8 +232,8 @@ class _$_Post implements _Post {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, description, updatedAt, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType, nullablePostId, title, description, updatedAt, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -214,15 +249,25 @@ class _$_Post implements _Post {
   }
 }
 
-abstract class _Post implements Post {
-  const factory _Post(
-      {required final String title,
+abstract class _Post extends Post {
+  factory _Post(
+      {@Deprecated('Use late field postId instead')
+      @JsonKey(name: Field.postId)
+      final String? nullablePostId,
+      required final String title,
       required final String description,
       final UnionTimestamp updatedAt,
       final UnionTimestamp createdAt}) = _$_Post;
+  _Post._() : super._();
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
+  @override // コレクショングループで引くためにフィールドにドキュメントIDをもたせる必要がある
+// フォームからインプットする時点ではドキュメントIDが決まらないのでnullableにしておく
+// 利用時には`late final`の非null版を利用すること
+  @Deprecated('Use late field postId instead')
+  @JsonKey(name: Field.postId)
+  String? get nullablePostId;
   @override
   String get title;
   @override
