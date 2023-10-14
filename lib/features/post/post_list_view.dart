@@ -3,38 +3,48 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/router.dart';
 
 import 'post.dart';
-import 'post_provider.dart';
 
+/// Post一覧からの遷移とUserPageからの遷移で共通して利用されるListView
+/// StatefulShellRouteの影響でパスを同一に出来ないため、
+/// それぞれの遷移元に合わせて[postSelected]にて遷移先を指定する。
 class PostListView extends ConsumerWidget {
-  const PostListView({super.key, this.uid});
+  const PostListView({
+    super.key,
+    required this.snapshots,
+    required this.postSelected,
+  });
 
-  final String? uid;
+  final List<QueryDocumentSnapshot<Post>>? snapshots;
+  final ValueChanged<String>? postSelected;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final uid = this.uid;
+    final snapshots = this.snapshots;
 
-    // TODO(htsuruo): Providerを分けずにまとめても良いかも
-    final snapshots = uid == null
-        ? ref.watch(postsProvider).value
-        : ref.watch(userPostsProvider(uid)).value;
     return snapshots == null
         ? const CenteredCircularProgressIndicator()
-        : ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: snapshots.length,
-            itemBuilder: (context, index) => _PostCard(snapshots[index]),
-          );
+        : snapshots.isEmpty
+            ? const Center(
+                child: Text('データがありません'),
+              )
+            : ListView.builder(
+                padding: const EdgeInsets.all(8),
+                itemCount: snapshots.length,
+                itemBuilder: (context, index) => _PostCard(
+                  snapshots[index],
+                  postSelected: postSelected,
+                ),
+              );
   }
 }
 
 class _PostCard extends StatelessWidget {
-  const _PostCard(this.postSnapshot);
+  const _PostCard(this.postSnapshot, {required this.postSelected});
 
   final QueryDocumentSnapshot<Post> postSnapshot;
+  final ValueChanged<String>? postSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +56,7 @@ class _PostCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
-          // 親コレクションのドキュメントを辿ってuidを取得する
-          final uid = postSnapshot.reference.parent.parent!.id;
-          UserPostPageRoute(uid: uid, pid: postSnapshot.id).go(context);
+          postSelected?.call(postSnapshot.id);
         },
         child: Padding(
           padding: const EdgeInsets.all(16),
