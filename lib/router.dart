@@ -6,6 +6,7 @@ import 'package:nippo/features/post/post_list_page.dart';
 import 'package:nippo/features/setting/setting_page.dart';
 import 'package:nippo/features/signin/signin_page.dart';
 import 'package:nippo/features/user/user_page.dart';
+import 'package:nippo/features/user/user_post_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
@@ -153,7 +154,7 @@ class PostDetailPageRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PostDetailPage(uid: null, pid: pid);
+    return PostDetailPage(pid: pid);
   }
 }
 
@@ -180,6 +181,6 @@ class UserPostPageRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PostDetailPage(uid: uid, pid: pid);
+    return UserPostPage(uid: uid, pid: pid);
   }
 }

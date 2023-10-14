@@ -24,7 +24,7 @@ final postsProvider =
 
 typedef PostsRef
     = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
-String _$postHash() => r'df8115663ab7400a86421409215a6903be155323';
+String _$postHash() => r'f992a5465ced17f85fbd8ce1653316acccd3cbc1';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -47,24 +47,22 @@ class _SystemHash {
   }
 }
 
-typedef PostRef = AutoDisposeStreamProviderRef<DocumentSnapshot<Post>>;
+typedef PostRef = AutoDisposeStreamProviderRef<QueryDocumentSnapshot<Post>?>;
 
 /// See also [post].
 @ProviderFor(post)
 const postProvider = PostFamily();
 
 /// See also [post].
-class PostFamily extends Family<AsyncValue<DocumentSnapshot<Post>>> {
+class PostFamily extends Family<AsyncValue<QueryDocumentSnapshot<Post>?>> {
   /// See also [post].
   const PostFamily();
 
   /// See also [post].
   PostProvider call(
-    String? uid,
     String? postId,
   ) {
     return PostProvider(
-      uid,
       postId,
     );
   }
@@ -74,7 +72,6 @@ class PostFamily extends Family<AsyncValue<DocumentSnapshot<Post>>> {
     covariant PostProvider provider,
   ) {
     return call(
-      provider.uid,
       provider.postId,
     );
   }
@@ -95,15 +92,14 @@ class PostFamily extends Family<AsyncValue<DocumentSnapshot<Post>>> {
 }
 
 /// See also [post].
-class PostProvider extends AutoDisposeStreamProvider<DocumentSnapshot<Post>> {
+class PostProvider
+    extends AutoDisposeStreamProvider<QueryDocumentSnapshot<Post>?> {
   /// See also [post].
   PostProvider(
-    this.uid,
     this.postId,
   ) : super.internal(
           (ref) => post(
             ref,
-            uid,
             postId,
           ),
           from: postProvider,
@@ -114,12 +110,101 @@ class PostProvider extends AutoDisposeStreamProvider<DocumentSnapshot<Post>> {
           allTransitiveDependencies: PostFamily._allTransitiveDependencies,
         );
 
+  final String? postId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is PostProvider && other.postId == postId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, postId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$userPostHash() => r'6d8bba05a837fb4d89c2793dd815d4c67eb70302';
+typedef UserPostRef = AutoDisposeStreamProviderRef<DocumentSnapshot<Post>?>;
+
+/// See also [userPost].
+@ProviderFor(userPost)
+const userPostProvider = UserPostFamily();
+
+/// See also [userPost].
+class UserPostFamily extends Family<AsyncValue<DocumentSnapshot<Post>?>> {
+  /// See also [userPost].
+  const UserPostFamily();
+
+  /// See also [userPost].
+  UserPostProvider call(
+    String? uid,
+    String? postId,
+  ) {
+    return UserPostProvider(
+      uid,
+      postId,
+    );
+  }
+
+  @override
+  UserPostProvider getProviderOverride(
+    covariant UserPostProvider provider,
+  ) {
+    return call(
+      provider.uid,
+      provider.postId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'userPostProvider';
+}
+
+/// See also [userPost].
+class UserPostProvider
+    extends AutoDisposeStreamProvider<DocumentSnapshot<Post>?> {
+  /// See also [userPost].
+  UserPostProvider(
+    this.uid,
+    this.postId,
+  ) : super.internal(
+          (ref) => userPost(
+            ref,
+            uid,
+            postId,
+          ),
+          from: userPostProvider,
+          name: r'userPostProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$userPostHash,
+          dependencies: UserPostFamily._dependencies,
+          allTransitiveDependencies: UserPostFamily._allTransitiveDependencies,
+        );
+
   final String? uid;
   final String? postId;
 
   @override
   bool operator ==(Object other) {
-    return other is PostProvider && other.uid == uid && other.postId == postId;
+    return other is UserPostProvider &&
+        other.uid == uid &&
+        other.postId == postId;
   }
 
   @override
