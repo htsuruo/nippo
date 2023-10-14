@@ -41,7 +41,7 @@ jobs:
           cache: true
           # バージョン固定したい場合はこちら
           # flutter-version: ${{ env.FLUTTER_VERSION }}
-          
+
       # fvmのsdkを参照するために`melos.yaml`に`sdkPath`を指定しているため、
       # より優先度の高い環境変数`MELOS_SDK_PATH`を指定します。
       - name: Set MELOS_SDK_PATH
