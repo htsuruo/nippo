@@ -21,10 +21,12 @@ class _Location {
 
   // REVIEW(htsuruo): 本来はZennのように`[uid]/posts/[pid]`のようなパスにしたいが、
   // StatefulShellBranchでは親ルートのpostsが頭にきてしまうため実現できなさそう？
-  static const post = ':uid/:pid';
+  // PostのドキュメントIDを取得するためにはコレクショングループで引くしかない。
+  static const post = ':pid';
   static const postCreate = 'create';
   static const signin = '/signin';
   static const user = '/user';
+  static const userPost = ':uid/posts/:pid';
   static const setting = '/setting';
 }
 
@@ -95,6 +97,11 @@ class SettingPageRoute extends GoRouteData {
       routes: [
         TypedGoRoute<UserPageRoute>(
           path: _Location.user,
+          routes: [
+            TypedGoRoute<UserPostPageRoute>(
+              path: _Location.userPost,
+            ),
+          ],
         ),
       ],
     ),
@@ -138,14 +145,13 @@ class PostsPageRoute extends GoRouteData {
 }
 
 class PostDetailPageRoute extends GoRouteData {
-  const PostDetailPageRoute({required this.uid, required this.pid});
+  const PostDetailPageRoute({required this.pid});
 
-  final String uid;
   final String pid;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PostDetailPage(uid: uid, pid: pid);
+    return PostDetailPage(uid: null, pid: pid);
   }
 }
 
@@ -161,5 +167,17 @@ class UserPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const UserPage();
+  }
+}
+
+class UserPostPageRoute extends GoRouteData {
+  const UserPostPageRoute({required this.uid, required this.pid});
+
+  final String uid;
+  final String pid;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PostDetailPage(uid: uid, pid: pid);
   }
 }

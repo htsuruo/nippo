@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/features/post/post_provider.dart';
 import 'package:nippo/router.dart';
 
 import 'post.dart';
+import 'post_provider.dart';
 
 class PostListView extends ConsumerWidget {
   const PostListView({super.key, this.uid});
@@ -16,6 +16,7 @@ class PostListView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uid = this.uid;
+
     // TODO(htsuruo): Providerを分けずにまとめても良いかも
     final snapshots = uid == null
         ? ref.watch(postsProvider).value
@@ -47,7 +48,7 @@ class _PostCard extends StatelessWidget {
         onTap: () {
           // 親コレクションのドキュメントを辿ってuidを取得する
           final uid = postSnapshot.reference.parent.parent!.id;
-          PostDetailPageRoute(uid: uid, pid: postSnapshot.id).go(context);
+          UserPostPageRoute(uid: uid, pid: postSnapshot.id).go(context);
         },
         child: Padding(
           padding: const EdgeInsets.all(16),

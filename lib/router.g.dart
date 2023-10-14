@@ -68,7 +68,7 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
               factory: $PostsPageRouteExtension._fromState,
               routes: [
                 GoRouteData.$route(
-                  path: ':uid/:pid',
+                  path: ':pid',
                   factory: $PostDetailPageRouteExtension._fromState,
                 ),
                 GoRouteData.$route(
@@ -84,6 +84,12 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
             GoRouteData.$route(
               path: '/user',
               factory: $UserPageRouteExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: ':uid/posts/:pid',
+                  factory: $UserPostPageRouteExtension._fromState,
+                ),
+              ],
             ),
           ],
         ),
@@ -116,12 +122,11 @@ extension $PostsPageRouteExtension on PostsPageRoute {
 extension $PostDetailPageRouteExtension on PostDetailPageRoute {
   static PostDetailPageRoute _fromState(GoRouterState state) =>
       PostDetailPageRoute(
-        uid: state.pathParameters['uid']!,
         pid: state.pathParameters['pid']!,
       );
 
   String get location => GoRouteData.$location(
-        '/posts/${Uri.encodeComponent(uid)}/${Uri.encodeComponent(pid)}',
+        '/posts/${Uri.encodeComponent(pid)}',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -157,6 +162,26 @@ extension $UserPageRouteExtension on UserPageRoute {
 
   String get location => GoRouteData.$location(
         '/user',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $UserPostPageRouteExtension on UserPostPageRoute {
+  static UserPostPageRoute _fromState(GoRouterState state) => UserPostPageRoute(
+        uid: state.pathParameters['uid']!,
+        pid: state.pathParameters['pid']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/user/${Uri.encodeComponent(uid)}/posts/${Uri.encodeComponent(pid)}',
       );
 
   void go(BuildContext context) => context.go(location);
