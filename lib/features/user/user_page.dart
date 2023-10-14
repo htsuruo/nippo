@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/core/authentication/auth_provider.dart';
 import 'package:nippo/features/post/widgets/post_list_view.dart';
@@ -21,7 +20,7 @@ class UserPage extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             onPressed: () {
-              context.push('/setting');
+              SettingPageRoute().push<void>(context);
             },
           ),
         ],
