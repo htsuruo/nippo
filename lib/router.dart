@@ -82,14 +82,14 @@ class SettingPageRoute extends GoRouteData {
       routes: [
         TypedGoRoute<PostsPageRoute>(
           path: _Location.posts,
-          // TODO(htsuruo): `:pid`と`create`が衝突してしまい、共存ができない問題
-          // `create`にアクセスすると`posts/:pid`に飛んでしまう
+          // `:pid`を先頭にすると`create`がIDとして解釈されてしまいcreateページに遷移できなくなるので注意
+          // ベタ指定されるパスを先に書く必要がある。
           routes: [
-            TypedGoRoute<PostDetailPageRoute>(
-              path: _Location.post,
-            ),
             TypedGoRoute<PostCreatePageRoute>(
               path: _Location.postCreate,
+            ),
+            TypedGoRoute<PostDetailPageRoute>(
+              path: _Location.post,
             ),
           ],
         ),

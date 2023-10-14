@@ -68,12 +68,12 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
               factory: $PostsPageRouteExtension._fromState,
               routes: [
                 GoRouteData.$route(
-                  path: ':pid',
-                  factory: $PostDetailPageRouteExtension._fromState,
-                ),
-                GoRouteData.$route(
                   path: 'create',
                   factory: $PostCreatePageRouteExtension._fromState,
+                ),
+                GoRouteData.$route(
+                  path: ':pid',
+                  factory: $PostDetailPageRouteExtension._fromState,
                 ),
               ],
             ),
@@ -119,14 +119,12 @@ extension $PostsPageRouteExtension on PostsPageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $PostDetailPageRouteExtension on PostDetailPageRoute {
-  static PostDetailPageRoute _fromState(GoRouterState state) =>
-      PostDetailPageRoute(
-        pid: state.pathParameters['pid']!,
-      );
+extension $PostCreatePageRouteExtension on PostCreatePageRoute {
+  static PostCreatePageRoute _fromState(GoRouterState state) =>
+      PostCreatePageRoute();
 
   String get location => GoRouteData.$location(
-        '/posts/${Uri.encodeComponent(pid)}',
+        '/posts/create',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -139,12 +137,14 @@ extension $PostDetailPageRouteExtension on PostDetailPageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $PostCreatePageRouteExtension on PostCreatePageRoute {
-  static PostCreatePageRoute _fromState(GoRouterState state) =>
-      PostCreatePageRoute();
+extension $PostDetailPageRouteExtension on PostDetailPageRoute {
+  static PostDetailPageRoute _fromState(GoRouterState state) =>
+      PostDetailPageRoute(
+        pid: state.pathParameters['pid']!,
+      );
 
   String get location => GoRouteData.$location(
-        '/posts/create',
+        '/posts/${Uri.encodeComponent(pid)}',
       );
 
   void go(BuildContext context) => context.go(location);
