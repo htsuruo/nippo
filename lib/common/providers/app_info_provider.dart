@@ -4,9 +4,8 @@ import 'package:version/version.dart';
 
 part 'app_info_provider.g.dart';
 
-// TODO(htsuruo): `throw UnimplementedError()`にしたいが、Code generationだと起動できなくなる
 @riverpod
-AppInfo appInfo(AppInfoRef ref) => AppInfo.empty();
+AppInfo appInfo(AppInfoRef ref) => throw UnimplementedError();
 
 @immutable
 class AppInfo {
@@ -18,19 +17,34 @@ class AppInfo {
     required this.buildSignature,
   });
 
-  factory AppInfo.empty() {
-    return AppInfo(
-      appName: '',
-      packageName: '',
-      version: Version.parse('0.0.0'),
-      buildNumber: '',
-      buildSignature: '',
-    );
-  }
-
   final String appName;
   final String packageName;
   final Version version;
   final String buildNumber;
   final String buildSignature;
+
+  @override
+  String toString() {
+    // ignore: lines_longer_than_80_chars
+    return 'AppInfo{appName: $appName, packageName: $packageName, version: $version, buildNumber: $buildNumber, buildSignature: $buildSignature}';
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AppInfo &&
+          runtimeType == other.runtimeType &&
+          appName == other.appName &&
+          packageName == other.packageName &&
+          version == other.version &&
+          buildNumber == other.buildNumber &&
+          buildSignature == other.buildSignature;
+
+  @override
+  int get hashCode =>
+      appName.hashCode ^
+      packageName.hashCode ^
+      version.hashCode ^
+      buildNumber.hashCode ^
+      buildSignature.hashCode;
 }

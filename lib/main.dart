@@ -5,6 +5,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:nippo/app.dart';
 import 'package:nippo/firebase_options.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:version/version.dart';
+
+import 'common/common.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,26 +18,25 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // TODO(htsuruo): コメントアウトを外すとAndroidで起動できなくなる🤔
-  // late final AppInfo appInfo;
-  // await PackageInfo.fromPlatform().then((value) {
-  //   appInfo = AppInfo(
-  //     appName: value.appName,
-  //     packageName: value.packageName,
-  //     version: Version.parse(value.version),
-  //     buildNumber: value.buildNumber,
-  //     buildSignature: value.buildSignature,
-  //   );
-  // });
+  late final AppInfo appInfo;
+  await PackageInfo.fromPlatform().then((value) {
+    appInfo = AppInfo(
+      appName: value.appName,
+      packageName: value.packageName,
+      version: Version.parse(value.version),
+      buildNumber: value.buildNumber,
+      buildSignature: value.buildSignature,
+    );
+  });
 
   // DateTimeのdefaultLocaleを日本時間にする
   Intl.defaultLocale = 'ja';
   runApp(
-    const ProviderScope(
-      // overrides: [
-      //   appInfoProvider.overrideWithValue(appInfo),
-      // ],
-      child: MyApp(),
+    ProviderScope(
+      overrides: [
+        appInfoProvider.overrideWithValue(appInfo),
+      ],
+      child: const MyApp(),
     ),
   );
 }

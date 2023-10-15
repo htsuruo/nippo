@@ -89,6 +89,13 @@ class _AboutSection extends ConsumerWidget {
         _dividerWithIndent,
         AboutListTile(
           applicationVersion: appInfo.version.toString(),
+          aboutBoxChildren: [
+            Padding(
+              // AboutDialogのpaddingに合わせる
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Text(appInfo.packageName),
+            ),
+          ],
           child: const Text('アプリケーション情報'),
         ),
       ],
