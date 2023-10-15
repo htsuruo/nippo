@@ -29,7 +29,7 @@ class UserPage extends ConsumerWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const _ProfileInfo(),
+          const _Profile(),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16),
             child: Divider(),
@@ -50,8 +50,8 @@ class UserPage extends ConsumerWidget {
   }
 }
 
-class _ProfileInfo extends ConsumerWidget {
-  const _ProfileInfo();
+class _Profile extends ConsumerWidget {
+  const _Profile();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
