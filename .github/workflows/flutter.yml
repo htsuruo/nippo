@@ -63,7 +63,7 @@ jobs:
       - name: Check Format
         run: |
           melos run format
-          ../.github/workflows/scripts/validate-formatting.sh
+          .github/scripts/validate-formatting.sh
 
       - name: Test
         run: melos run test
