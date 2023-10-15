@@ -79,11 +79,7 @@ class _AboutSection extends ConsumerWidget {
           title: const Text('ソースコード'),
           trailing: const Icon(Icons.open_in_new_outlined),
           onTap: () => launchUrl(
-            Uri(
-              scheme: 'https',
-              host: 'github.com',
-              path: 'htsuruo/nippo',
-            ),
+            Uri.parse('https://github.com/htsuruo/nippo'),
           ),
         ),
         _dividerWithIndent,
