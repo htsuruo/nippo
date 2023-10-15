@@ -27,6 +27,12 @@ class AppTheme {
         titleTextStyle: listTextStyle,
         leadingAndTrailingTextStyle: listTextStyle,
       ),
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
       inputDecorationTheme: const InputDecorationTheme(
         filled: true,
         labelStyle: TextStyle(fontWeight: FontWeight.bold),

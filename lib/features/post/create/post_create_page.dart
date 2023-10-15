@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/features/post/model/post.dart';
 import 'package:nippo/features/post/post_repository.dart';
+import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 import 'widgets/description_form_field.dart';
 import 'widgets/title_form_field.dart';
@@ -46,19 +47,10 @@ class PostCreatePage extends HookConsumerWidget {
                     child: const Text('キャンセル'),
                   ),
                   const Spacer(),
-                  FilledButton(
-                    onPressed: () async {
-                      if (formKey.currentState!.validate()) {
-                        await ref.read(postRepositoryProvider).create(
-                              post: Post(
-                                title: titleEditController.text,
-                                description: descriptionEditController.text,
-                              ),
-                            );
-                        context.pop();
-                      }
-                    },
-                    child: const Text('投稿する'),
+                  _SaveButton(
+                    formKey: formKey,
+                    titleEditingController: titleEditController,
+                    descriptionEditingController: descriptionEditController,
                   ),
                 ],
               ),
@@ -80,6 +72,40 @@ class PostCreatePage extends HookConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _SaveButton extends ConsumerWidget {
+  const _SaveButton({
+    required this.formKey,
+    required this.titleEditingController,
+    required this.descriptionEditingController,
+  });
+
+  final GlobalKey<FormState> formKey;
+  final TextEditingController titleEditingController;
+  final TextEditingController descriptionEditingController;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return FilledButton(
+      child: const Text('投稿する'),
+      onPressed: () async {
+        if (formKey.currentState!.validate()) {
+          final title = titleEditingController.text;
+          await ref.read(postRepositoryProvider).create(
+                post: Post(
+                  title: title,
+                  description: descriptionEditingController.text,
+                ),
+              );
+          ref.read(scaffoldMessengerKey).currentState!.showMessage(
+                '[$title]を投稿しました',
+              );
+          context.pop();
+        }
+      },
     );
   }
 }
