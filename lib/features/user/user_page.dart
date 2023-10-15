@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/widgets/widgets.dart';
+import 'package:nippo/core/authentication/auth_provider.dart';
 import 'package:nippo/core/router/router.dart';
-import 'package:nippo/features/authentication/auth_provider.dart';
 import 'package:nippo/features/post/widgets/post_list_view.dart';
 
 import '../post/post_provider.dart';

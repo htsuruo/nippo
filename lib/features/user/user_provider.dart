@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nippo/core/authentication/auth_provider.dart';
 import 'package:nippo/core/const.dart';
-import 'package:nippo/features/authentication/auth_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'model/user.dart';
