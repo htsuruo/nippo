@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
 import 'package:nippo/core/authentication/auth_repository.dart';
-import 'package:nippo/logger.dart';
+import 'package:nippo/core/logger.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 class SigninPage extends ConsumerWidget {

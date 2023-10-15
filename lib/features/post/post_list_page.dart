@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
+import 'package:nippo/core/router/router.dart';
 import 'package:nippo/features/post/post_provider.dart';
-import 'package:nippo/router.dart';
 
 import 'widgets/widgets.dart';
 

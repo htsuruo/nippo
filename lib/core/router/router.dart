@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nippo/features/post/create/post_create_page.dart';
 import 'package:nippo/features/post/detail/post_detail_page.dart';
 import 'package:nippo/features/post/post_list_page.dart';
 import 'package:nippo/features/setting/setting_page.dart';
@@ -10,9 +11,8 @@ import 'package:nippo/features/user/user_post_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
-import 'core/authentication/auth_provider.dart';
-import 'core/navigation/scaffold_with_navigation.dart';
-import 'features/post/create/post_create_page.dart';
+import '../authentication/auth_provider.dart';
+import '../navigation/scaffold_with_navigation.dart';
 
 part 'router.g.dart';
 
