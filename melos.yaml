@@ -10,15 +10,24 @@ scripts:
     exec: flutter pub upgrade
     packageFilters:
       flutter: true
+
+  #  ref. https://github.com/firebase/flutterfire/blob/27a7f44e02f2ed533e0249622afdd0a421261385/melos.yaml#L27-L32
   analyze:
     run: |
       melos exec -c 1 -- \
         dart analyze . --fatal-infos
 
+  run:custom_lint:
+    run: |
+      melos exec --fail-fast --depends-on=custom_lint \
+      -- "dart run custom_lint"
+
   fix:format:
     exec: melos run fix && melos run format
+
   fix:
     exec: dart fix --apply .
+
   format:
     exec: dart format .
 

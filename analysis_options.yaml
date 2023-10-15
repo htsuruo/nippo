@@ -1,5 +1,15 @@
 include: package:pedantic_mono/analysis_options.yaml
 analyzer:
+  plugins:
+    - custom_lint
+  errors:
+    # @serializableやJsonKeyを無視する
+    # https://github.com/rrousselGit/freezed/issues/488
+    invalid_annotation_target: ignore
   exclude:
     - lib/**/*.g.dart
     - lib/**/*.freezed.dart
+    - lib/firebase_options.dart
+linter:
+  rules:
+    use_build_context_synchronously: false
