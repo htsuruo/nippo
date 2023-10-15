@@ -11,7 +11,7 @@ import 'package:nippo/features/user/user_post_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
-import '../authentication/auth_provider.dart';
+import '../../features/authentication/auth_provider.dart';
 import '../navigation/scaffold_with_navigation.dart';
 
 part 'router.g.dart';

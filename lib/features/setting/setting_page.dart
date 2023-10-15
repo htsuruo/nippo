@@ -3,8 +3,8 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intersperse/intersperse.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/core/authentication/auth_provider.dart';
-import 'package:nippo/core/authentication/auth_repository.dart';
+import 'package:nippo/features/authentication/auth_provider.dart';
+import 'package:nippo/features/authentication/auth_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
