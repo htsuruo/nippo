@@ -13,6 +13,8 @@ class AuthRepository {
 
   Future<GoogleSignInAccount?> _signIn() async {
     return switch (kIsWeb) {
+      false => await GoogleSignIn().signIn(),
+
       // v0.12からGIS(Google Identity Services)方式に変更となっている
       // ref. https://pub.dev/packages/google_sign_in_web
       // TODO(htsuruo): このままではaccessTokenを取得できないため修正が必要
@@ -25,7 +27,6 @@ class AuthRepository {
             'https://www.googleapis.com/auth/contacts.readonly',
           ],
         ).signInSilently(),
-      false => await GoogleSignIn().signIn()
     };
   }
 
