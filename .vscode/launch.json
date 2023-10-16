@@ -11,6 +11,13 @@
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
+    },
+    {
+      "name": "nippo(web)",
+      "request": "launch",
+      "type": "dart",
+      // Google OAuthのクライアントIDホワイトリストに固定するため5000ポートを指定
+      "args": ["-d", "chrome", "--web-port=5000"]
     }
   ]
 }

@@ -6,10 +6,23 @@
 - シンプルな日報投稿型のSNS
 - Flutter + Firebaseの学習用プロジェクト
 
+**[View Demo](https://nippo-e8922.web.app)**
+
 ## セットアップ
 
-- Firebaseプロジェクトに関する情報はgit管理対象外のため、下記コマンドにてお手元のFirebaseプロジェクトにてセットアップしてください。
-  - 参考: [Add Firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup?platform=ios)
+- 1. `.firebaserc`のデフォルトプロジェクトをご自身のFirebaseプロジェクトIDに変更してください。
+
+```yaml
+{
+  "projects": {
+    "default": "nippo-e8922"
+  }
+}
+```
+
+- 2. Firebaseプロジェクトに関する情報はgit管理対象外のため、下記コマンドにてお手元のFirebaseプロジェクトにてセットアップしてください。
+   - 事前に[flutterfire_cli | Dart Package](https://pub.dev/packages/flutterfire_cli)のインストールが必要です
+   - 参考: [Add Firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup?platform=ios)
 
 ```sh
 flutter configure
