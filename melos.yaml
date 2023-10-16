@@ -36,3 +36,9 @@ scripts:
       melos exec --ignore="*example*" --dir-exists=test \
       --fail-fast -- \
       "flutter test --no-pub"
+
+  deploy:web:
+    run: |
+      flutter build web
+      cd ./firebase
+      firebase deploy --only hosting
