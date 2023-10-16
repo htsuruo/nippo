@@ -1,5 +1,7 @@
 ![README](./.github/images/nippo_readme_eyecatch.png)
 
+[![Flutter](https://github.com/htsuruo/nippo/actions/workflows/flutter.yml/badge.svg)](https://github.com/htsuruo/nippo/actions/workflows/flutter.yml)
+
 # NIPPO
 
 - 毎日の学びを、もっと楽しく、わかりやすく。
