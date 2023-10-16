@@ -6,15 +6,32 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
+    paths:
+      - '!**.md'
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm ci && npm run build
+      - uses: kuhnroyal/flutter-fvm-config-action@v1
+        with:
+          path: '.fvm/fvm_config.json'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+      - run: mv lib/firebase_options_dummy.dart lib/firebase_options.dart
+      - run: echo "MELOS_SDK_PATH=${{ env.FLUTTER_ROOT }}" >> $GITHUB_ENV
+      - run: dart pub global activate melos && melos bs
+
+      - name: Build Web
+        run: flutter build web
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NIPPO_E8922 }}'
           channelId: live
           projectId: nippo-e8922
+          entryPoint: ./firebase
