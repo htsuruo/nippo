@@ -6,6 +6,8 @@
 - シンプルな日報投稿型のSNS
 - Flutter + Firebaseの学習用プロジェクト
 
+**[View Demo](https://nippo-e8922.web.app)**
+
 ## セットアップ
 
 - Firebaseプロジェクトに関する情報はgit管理対象外のため、下記コマンドにてお手元のFirebaseプロジェクトにてセットアップしてください。
