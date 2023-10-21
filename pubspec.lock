@@ -364,10 +364,11 @@ packages:
   desktop_webview_auth:
     dependency: "direct main"
     description:
-      name: desktop_webview_auth
-      sha256: f90d9fa88344fb1446d4f876ee2a12d07f4345f96fdb787d3ce1c76bd9d41feb
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "1ba2f3a8a588b43f5dd62c6b484b3137ef8b4432"
+      url: "https://github.com/andyshephard/flutter_desktop_webview_auth"
+    source: git
     version: "0.0.13"
   dynamic_color:
     dependency: transitive
