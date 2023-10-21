@@ -21,7 +21,7 @@ class AuthRepository {
 
   static const _clientId =
       // ignore: lines_longer_than_80_chars
-      '554602506203-i1vug0gcsln9gn83s29aatni3aftv6oj.apps.googleusercontent.com';
+      '554602506203-gv6vpvdndlppghdn3sv9cr2n3fc4d854.apps.googleusercontent.com';
   static const _scopes = [
     'email',
     // Googleアカウント名やプロフィール画像の取得に必要
@@ -71,9 +71,9 @@ class AuthRepository {
     final args = GoogleSignInArgs(
       clientId: _clientId,
       redirectUri: 'https://nippo-e8922.firebaseapp.com/__/auth/handler',
-      // TODO(htsuruo): スコープがListではなくStringで指定する形になっていて、
-      // 試しにカンマ区切りで投げてみたがうまく行かないので仕様を確認する
-      // scope: _scopes.join(','),
+      // scopeがListではなくStringで指定する必要があれば半角スペースで複数指定できることを確認。
+      // ref. https://github.com/invertase/flutter_desktop_webview_auth/issues/48
+      scope: _scopes.join(' '),
     );
     final res = await DesktopWebviewAuth.signIn(args);
     return (idToken: res?.idToken, accessToken: res?.accessToken);
