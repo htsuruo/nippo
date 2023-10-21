@@ -361,6 +361,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  desktop_webview_auth:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "1ba2f3a8a588b43f5dd62c6b484b3137ef8b4432"
+      url: "https://github.com/andyshephard/flutter_desktop_webview_auth"
+    source: git
+    version: "0.0.13"
   dynamic_color:
     dependency: transitive
     description:

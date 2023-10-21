@@ -1,7 +1,7 @@
 name: nippo
 description: This is a daily report app, and it's a sample app using Flutter and Firebase.
-
 version: 1.0.0+1
+publish_to: none
 
 environment:
   sdk: '^3.0.0'
@@ -12,6 +12,10 @@ dependencies:
   cached_network_image: ^3.3.0
   cloud_firestore: ^4.8.3
   cupertino_icons: ^1.0.5
+  # 未マージのためgit指定
+  # ref. https://github.com/invertase/flutter_desktop_webview_auth/pull/51
+  desktop_webview_auth:
+    git: https://github.com/andyshephard/flutter_desktop_webview_auth
   firebase_auth: ^4.7.0
   firebase_core: ^2.15.0
   flutter:
