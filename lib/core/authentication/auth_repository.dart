@@ -71,7 +71,7 @@ class AuthRepository {
     final args = GoogleSignInArgs(
       clientId: _clientId,
       redirectUri: 'https://nippo-e8922.firebaseapp.com/__/auth/handler',
-      // scopeがListではなくStringで指定する必要があれば半角スペースで複数指定できることを確認。
+      // scopeがListではなくStringで指定する必要があるが、半角スペース（カンマではNG）で複数指定できることを確認。
       // ref. https://github.com/invertase/flutter_desktop_webview_auth/issues/48
       scope: _scopes.join(' '),
     );
