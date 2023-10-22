@@ -1,0 +1,1 @@
+describe('users security rule', () => {})
