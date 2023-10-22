@@ -20,9 +20,8 @@ service cloud.firestore {
       allow list: if isAuthenticated();
 
       // 自分以外の投稿を閲覧できないようにする場合は以下などで書き換える。
+      // userRef: "databases/(default)/documents/users/{userId}/posts/{postId}"
       // allow list: request.path.split('/')[4] == request.auth.uid;
-      // userRef: "databases/(default)/documents/users/{userId}"
-      // allow list: existingData().userRef[4] == request.auth.uid;
     }
 
     match /users/{userId} {
