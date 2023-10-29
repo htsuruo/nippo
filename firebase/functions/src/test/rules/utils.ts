@@ -10,7 +10,7 @@ export class Tester {
   #env!: RulesTestEnvironment
   static async init(projectId?: string): Promise<Tester> {
     const tester = new Tester()
-    process.env.FIRESTORE_EMULATOR_HOST = 'localhost:8080'
+    process.env.FIRESTORE_EMULATOR_HOST = '127.0.0.1:8080'
     tester.#env = await initializeTestEnvironment({
       // テスト用で利用するなら"demo-*"が推奨
       projectId: projectId ?? 'demo-project',
