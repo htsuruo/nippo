@@ -46,3 +46,22 @@ flutter configure
 3. **設定**
    - 認証プロバイダおよび最終ログインなどのログイン情報が閲覧できる
    - アプリケーション情報やらいせんず情報が閲覧できる
+
+## セキュリティ周り
+
+### Google Cloud(Firebase) APIキーの制限
+
+- Google Cloud コンソールの認証情報よりAPIキーを制限
+
+| プラットフォーム | 制限内容 |
+| --- | --- |
+| iOS,Android | `com.htsuruo.nippo`のバンドルID,パッケージ名のみ利用を制限 |
+| Web | Firebase Hostingのデフォルトサイトおよびlocalhost等にドメインを制限 |
+
+### Cloud Firestoreのセキュリティルール
+
+- ref. https://github.com/htsuruo/nippo/blob/main/firebase/firestore.rules
+
+### App Checkの設定
+
+- 未設定
