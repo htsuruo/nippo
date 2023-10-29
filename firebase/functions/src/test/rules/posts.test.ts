@@ -3,7 +3,7 @@ import { Auth, Tester } from './utils'
 import { Collection } from '../../collection'
 import { assertUnauthenticatedAccessFails } from './common'
 import { assertFails, assertSucceeds } from '@firebase/rules-unit-testing'
-import { Post } from '../../post'
+import { Post } from '../../model/post'
 
 const auth = {
   userId: 'alice',
