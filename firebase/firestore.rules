@@ -1,24 +1,53 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // match /{document=**} {
-    //   allow read: if request.auth.uid != null;
-    // }
+
     function isAuthenticated() {
-      return request.auth.uid != null;
+      return request.auth != null;
     }
     function isUserAuthenticated(userId) {
       return request.auth.uid == userId;
     }
-    match /posts/{postId} {
-      allow read: if isAuthenticated();
+    function existingData() {
+      return resource.data;
     }
+    function incomingData() {
+      return request.resource.data;
+    }
+
+    // コレクショングループ
+    match /{path=**}/posts/{postId} {
+      allow list: if isAuthenticated();
+
+      // 自分以外の投稿を閲覧できないようにする場合は以下などで書き換える。
+      // userRef: "databases/(default)/documents/users/{userId}/posts/{postId}"
+      // allow list: request.path.split('/')[4] == request.auth.uid;
+    }
+
     match /users/{userId} {
-      allow read: if isAuthenticated();
-      allow write: if isUserAuthenticated(userId);
+      // ドキュメントはExtensionのAuthトリガーで作成・削除するためcreate,deleteは不要
+      allow get: if isAuthenticated();
+      allow update: if isUserAuthenticated(userId);
+
       match /posts/{postId} {
         allow read: if isAuthenticated();
-        allow write: if isUserAuthenticated(userId);
+        allow delete: if isUserAuthenticated(userId);
+        allow create, update: if isUserAuthenticated(userId)
+        && validatePostText()
+        && incomingData().updatedAt == request.time
+        && incomingData().keys().hasAll(['postId']);
+      }
+
+      function validatePostText() {
+        let title = incomingData().title.size();
+        let description = incomingData().description.size();
+        return validateTextLength(title, 20) && validateTextLength(description, 200);
+      }
+
+      // テキストの文字数バリデーション
+      // UTF16ベースのため絵文字絵文字を考慮し緩く制限を設ける必要あり
+      function validateTextLength(size, length) {
+        return size >= 1 && size <= length;
       }
     }
   }

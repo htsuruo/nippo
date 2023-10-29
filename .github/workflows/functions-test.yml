@@ -1,0 +1,52 @@
+name: Cloud Functions for Firebase
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'firebase/functions/**'
+      - '!**.md'
+  pull_request:
+    paths:
+      - 'firebase/functions/**'
+      - '!**.md'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ./firebase/functions
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+          # ref. https://zenn.dev/nixieminton/articles/8b26a92feb26d8
+          cache-dependency-path: ./firebase/functions/package-lock.json
+
+      - name: Cache firebase emulators
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/firebase/emulators
+          key: ${{ runner.os }}-firebase-emulators-${{ hashFiles('~/.cache/firebase/emulators/**') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        # - --project: GitHub Actionsでは`firebase login`ができないため、プロジェクトの`default`指定が必要
+        # `default`は`.firebaserc`の値に依存する
+        #
+        # - --forceExit: 実行されたjestが終了せずCIがタイムアウトしてしまうため`--forceExit`でテスト終了後強制終了させる
+        # ref. https://jestjs.io/docs/cli#--forceexit
+        run: npm run test:instance -- --project default
