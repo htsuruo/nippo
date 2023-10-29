@@ -16,6 +16,7 @@ dependencies:
   # ref. https://github.com/invertase/flutter_desktop_webview_auth/pull/51
   desktop_webview_auth:
     git: https://github.com/andyshephard/flutter_desktop_webview_auth
+  firebase_app_check: ^0.2.1+2
   firebase_auth: ^4.7.0
   firebase_core: ^2.15.0
   flutter:
