@@ -45,5 +45,25 @@ describe('users security rule', () => {
       })
       await assertSucceeds(documentRef().update({}))
     })
+    test('delete: できない', async () => {
+      await assertFails(documentRef().delete())
+    })
+
+    describe('自分以外のユーザーに対して', () => {
+      beforeEach(() => {
+        db = tester.db({ userId: 'bob' })
+      })
+
+      test('get: できる', async () => {
+        // 他ユーザーのプロフィール表示などを想定
+        await assertSucceeds(documentRef().get())
+      })
+      test('update: できない', async () => {
+        await tester.withSecurityRulesDisabled(async (db) => {
+          await db.doc(documentRef().path).set({})
+        })
+        await assertFails(documentRef().update({}))
+      })
+    })
   })
 })
