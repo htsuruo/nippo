@@ -21,6 +21,20 @@ export class Tester {
     return tester
   }
 
+  // How to Use:
+  // await tester.withSecurityRulesDisabled(async (db) => {
+  //   await db.doc(_documentRef().path).set({})
+  // })
+  async withSecurityRulesDisabled<T>(
+    f: (db: firebase.firestore.Firestore) => Promise<T>
+  ): Promise<T> {
+    let result!: T
+    await this.#env.withSecurityRulesDisabled(async (context) => {
+      result = await f(context.firestore())
+    })
+    return result
+  }
+
   db(auth?: Auth): firebase.firestore.Firestore {
     if (!auth?.userId) {
       return this.#env.unauthenticatedContext().firestore()
