@@ -49,7 +49,7 @@ describe('users security rule', () => {
       await assertFails(documentRef().delete())
     })
 
-    describe('自分以外のユーザーに対して', () => {
+    describe('他人のデータに対して', () => {
       let otherUserRef: firebase.firestore.DocumentReference
       beforeEach(() => {
         otherUserRef = collectionRef().doc('bob')
