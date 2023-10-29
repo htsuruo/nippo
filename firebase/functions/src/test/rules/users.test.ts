@@ -50,19 +50,20 @@ describe('users security rule', () => {
     })
 
     describe('自分以外のユーザーに対して', () => {
+      let otherUserRef: firebase.firestore.DocumentReference
       beforeEach(() => {
-        db = tester.db({ userId: 'bob' })
+        otherUserRef = collectionRef().doc('bob')
       })
 
       test('get: できる', async () => {
         // 他ユーザーのプロフィール表示などを想定
-        await assertSucceeds(documentRef().get())
+        await assertSucceeds(otherUserRef.get())
       })
       test('update: できない', async () => {
         await tester.withSecurityRulesDisabled(async (db) => {
-          await db.doc(documentRef().path).set({})
+          await db.doc(otherUserRef.path).set({})
         })
-        await assertFails(documentRef().update({}))
+        await assertFails(otherUserRef.update({}))
       })
     })
   })
