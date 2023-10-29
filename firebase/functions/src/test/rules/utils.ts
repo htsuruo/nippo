@@ -1,8 +1,10 @@
 import {
   initializeTestEnvironment,
   RulesTestEnvironment,
+  TokenOptions,
 } from '@firebase/rules-unit-testing'
 import { readFileSync } from 'fs'
+import firebase from 'firebase/compat/app'
 
 export class Tester {
   #env!: RulesTestEnvironment
@@ -19,6 +21,13 @@ export class Tester {
     return tester
   }
 
+  db(auth?: Auth): firebase.firestore.Firestore {
+    if (!auth?.userId) {
+      return this.#env.unauthenticatedContext().firestore()
+    }
+    return this.#env.authenticatedContext(auth.userId, { ...auth }).firestore()
+  }
+
   async afterEach(): Promise<void> {
     await this.#env.clearFirestore()
   }
@@ -27,3 +36,6 @@ export class Tester {
     await this.#env.cleanup()
   }
 }
+
+// ToeknOptionsにneverのuid指定が存在し衝突するため、`userId`として定義
+export type Auth = TokenOptions & { readonly userId: string }
