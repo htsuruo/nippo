@@ -1,5 +1,6 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -34,8 +35,9 @@ Future<void> main() async {
     webProvider: ReCaptchaV3Provider(
       '6Le3MeQoAAAAANvhE-K5ZL2F7jwuE0GNQz1Pka_x',
     ),
-    androidProvider: AndroidProvider.debug,
-    appleProvider: AppleProvider.debug,
+    androidProvider:
+        kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+    appleProvider: kDebugMode ? AppleProvider.debug : AppleProvider.deviceCheck,
   );
 
   // DateTimeのdefaultLocaleを日本時間にする
