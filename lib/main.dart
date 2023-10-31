@@ -14,20 +14,20 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  late final AppInfo appInfo;
-  await PackageInfo.fromPlatform().then((value) {
-    appInfo = AppInfo(
-      appName: value.appName,
-      packageName: value.packageName,
-      version: Version.parse(value.version),
-      buildNumber: value.buildNumber,
-      buildSignature: value.buildSignature,
-    );
-  });
+  final (_, appInfo) = await (
+    Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    ),
+    PackageInfo.fromPlatform().then(
+      (value) => AppInfo(
+        appName: value.appName,
+        packageName: value.packageName,
+        version: Version.parse(value.version),
+        buildNumber: value.buildNumber,
+        buildSignature: value.buildSignature,
+      ),
+    ),
+  ).wait;
 
   // DateTimeのdefaultLocaleを日本時間にする
   Intl.defaultLocale = 'ja';
