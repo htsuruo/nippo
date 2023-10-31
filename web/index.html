@@ -35,6 +35,12 @@
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
+
+    // localhostで開発する際に必要となるデバックトークンの取得する
+    // reCAPTCHAにlocalhostを許可はアンチパターンのため
+    // デバッグトークンを新しく登録したい場合はコメントアウトを外してコンソールより取得する
+    // 本来はデバッグモードかいなかで切り替えるべきだが、index.html内で分岐が難しいためコメントアウト運用にする
+    // self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
