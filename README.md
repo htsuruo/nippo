@@ -49,19 +49,29 @@ flutter configure
 
 ## セキュリティ周り
 
-### Google Cloud(Firebase) APIキーの制限
+本レポジトリはFirebase APIキーを公開していますが、データリソースへのアクセスを筆頭に、APIの不正利用からの保護を行っているため、第三者からの意図しないリクエストで超過料金が請求されるなどのリスクもありません。
 
-- Google Cloud コンソールの認証情報よりAPIキーを制限
+- データの保護: セキュリティルール
+- APIリソース不正使用からの保護: App Check
+- APIキーの制限: ホワイトリストで制限
+
+### データの保護
+
+本アプリケーションはCloud Firestore を利用しているため、セキュリティルールによって保護しています。
+
+- ref. https://github.com/htsuruo/nippo/blob/main/firebase/firestore.rules
+
+### APIリソース不正使用からの保護
+
+Fireabse App Checkを有効化（Enforcement）し、本アプリケーションで有効化しているAPIに対する不正なAPIアクセスをブロックしています。
+
+- [Flutter アプリで App Check を使ってみる  |  Firebase ドキュメント](https://firebase.google.com/docs/app-check/flutter/default-providers?hl=ja)
+
+### APIキーの制限
+
+各プラットフォームのAPIキーが利用可能なドメイン等をホワイトリストで管理し、アクセス元を制限しています。具体的には、Google Cloud コンソールの認証情報よりAPIキーを制限を設定しています。
 
 | プラットフォーム | 制限内容 |
 | --- | --- |
 | iOS,Android | `com.htsuruo.nippo`のバンドルID,パッケージ名のみ利用を制限 |
 | Web | Firebase Hostingのデフォルトサイトおよびlocalhost等にドメインを制限 |
-
-### Cloud Firestoreのセキュリティルール
-
-- ref. https://github.com/htsuruo/nippo/blob/main/firebase/firestore.rules
-
-### App Checkの設定
-
-- [Flutter アプリで App Check を使ってみる  |  Firebase ドキュメント](https://firebase.google.com/docs/app-check/flutter/default-providers?hl=ja)
