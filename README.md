@@ -69,7 +69,7 @@ flutter configure
 
 ### APIリソースの保護
 
-Fireabse App Checkを有効化（Enforcement）し、本アプリケーションで有効化しているAPIリソースに対する不正なAPIアクセスをブロックしています。APIキーの制限ではドメインなりすましやシミュレータ実行で迂回されてしまう可能性がありますが、App Checkでは検証された実機以外からのアクセスを受け付けないためプロジェクトが破壊される心配こともありません。
+Firebase App Checkを有効化（Enforcement）し、本アプリケーションで有効化しているAPIリソースに対する不正なAPIアクセスをブロックしています。APIキーの制限ではドメインなりすましやシミュレータ実行で迂回されてしまう可能性がありますが、App Checkでは検証された実機以外からのアクセスを受け付けないためプロジェクトが破壊される心配こともありません。
 
 - ref. [Flutter アプリで App Check を使ってみる  |  Firebase ドキュメント](https://firebase.google.com/docs/app-check/flutter/default-providers?hl=ja)
 
