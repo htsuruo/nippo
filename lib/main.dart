@@ -31,7 +31,7 @@ Future<void> main() async {
   ).wait;
 
   await FirebaseAppCheck.instance.activate(
-    webProvider: ReCaptchaV3Provider(
+    webProvider: ReCaptchaEnterpriseProvider(
       '6Le3MeQoAAAAANvhE-K5ZL2F7jwuE0GNQz1Pka_x',
     ),
     // デバッグトークンを新たに取得したい場合は以下コメントアウトを外して確認してください。
