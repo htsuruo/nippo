@@ -51,27 +51,32 @@ flutter configure
 
 本レポジトリはFirebase APIキーを公開していますが、データリソースへのアクセスを筆頭に、APIの不正利用からの保護を行っているため、第三者からの意図しないリクエストで超過料金が請求されるなどのリスクもありません。
 
-- データの保護: セキュリティルール
-- APIリソース不正使用からの保護: App Check
-- APIキーの制限: ホワイトリストで制限
+それだけだと防ぐのがやや難しいものとしては、例えばブログサービスでスパム記事やスパムコメントを大量に投稿されて一般ユーザーの目に触れてしまうことなどですね。
+アプリ・サービスのGUI上での人力に比べてスクリプト操作をされると桁違いに荒らす速度を上げられるため、主にそういうのを軽減するためにGCP APIキー制限やApp Checkがあるという理解です。
 
-### データの保護
-
-本アプリケーションはCloud Firestore を利用しているため、セキュリティルールによって保護しています。
-
-- ref. https://github.com/htsuruo/nippo/blob/main/firebase/firestore.rules
-
-### APIリソース不正使用からの保護
-
-Fireabse App Checkを有効化（Enforcement）し、本アプリケーションで有効化しているAPIに対する不正なAPIアクセスをブロックしています。
-
-- [Flutter アプリで App Check を使ってみる  |  Firebase ドキュメント](https://firebase.google.com/docs/app-check/flutter/default-providers?hl=ja)
+- APIキーの制限
+- APIリソースの保護
+- データの保護
 
 ### APIキーの制限
 
-各プラットフォームのAPIキーが利用可能なドメイン等をホワイトリストで管理し、アクセス元を制限しています。具体的には、Google Cloud コンソールの認証情報よりAPIキーを制限を設定しています。
+各プラットフォームのAPIキーが利用可能なドメイン等をホワイトリストで管理し、アクセス元を制限しています。具体的には、Google Cloud コンソールの認証情報よりAPIキーを制限を設定しています。これにより、ホワイトリスト以外のクライアントからAPIキーを利用することを防ぐことができます。
 
 | プラットフォーム | 制限内容 |
 | --- | --- |
 | iOS,Android | `com.htsuruo.nippo`のバンドルID,パッケージ名のみ利用を制限 |
 | Web | Firebase Hostingのデフォルトサイトおよびlocalhost等にドメインを制限 |
+
+### APIリソースの保護
+
+Fireabse App Checkを有効化（Enforcement）し、本アプリケーションで有効化しているAPIリソースに対する不正なAPIアクセスをブロックしています。APIキーの制限ではドメインなりすましやシミュレータ実行で迂回されてしまう可能性がありますが、App Checkでは検証された実機以外からのアクセスを受け付けないためプロジェクトが破壊される心配こともありません。
+
+- ref. [Flutter アプリで App Check を使ってみる  |  Firebase ドキュメント](https://firebase.google.com/docs/app-check/flutter/default-providers?hl=ja)
+
+### データの保護
+
+本アプリケーションはCloud Firestore を利用しているため、セキュリティルールによって保護しています。
+サービス提供において最も重要なインシデントである、ユーザー情報の漏洩やサービスの深刻な破壊がされるリスクを防ぎます。
+また、アプリケーションの利用者が他人のデータを勝手に編集・削除するような、想定されない操作を制限しアプリケーションのデータを健全に保ちます。
+
+- ref. https://github.com/htsuruo/nippo/blob/main/firebase/firestore.rules
