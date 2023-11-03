@@ -27,8 +27,10 @@ Future<void> main() async {
     ),
     // デバッグトークンを新たに取得したい場合は以下コメントアウトを外して確認してください。
     // androidProvider: AndroidProvider.debug,
-    // appleProvider: AppleProvider.debug,
+    appleProvider: AppleProvider.debug,
   );
+
+  final token = await FirebaseAppCheck.instance.getToken();
 
   // DateTimeのdefaultLocaleを日本時間にする
   Intl.defaultLocale = 'ja';
