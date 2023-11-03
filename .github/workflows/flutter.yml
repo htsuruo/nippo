@@ -43,10 +43,6 @@ jobs:
           # バージョン固定したい場合はこちら
           # flutter-version: ${{ env.FLUTTER_VERSION }}
 
-      # git管理対象外のため`firebase_options.dart`が存在せずエラーになるため、ダミーファイルをコピーします。
-      - name: Set firebase_options.dart
-        run: mv lib/firebase_options_dummy.dart lib/firebase_options.dart
-
       # fvmのsdkを参照するために`melos.yaml`に`sdkPath`を指定しているため、
       # より優先度の高い環境変数`MELOS_SDK_PATH`を指定します。
       - name: Set MELOS_SDK_PATH
