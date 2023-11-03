@@ -23,10 +23,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
@@ -64,6 +61,18 @@ class DefaultFirebaseOptions {
     projectId: 'nippo-e8922',
     databaseURL: 'https://nippo-e8922.firebaseio.com',
     storageBucket: 'nippo-e8922.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyALpm4NWeHM-PkaBkMaVuOWUJhRG0DHE-I',
+    appId: '1:554602506203:ios:28faf2e71f77493b3ee9fe',
+    messagingSenderId: '554602506203',
+    projectId: 'nippo-e8922',
+    databaseURL: 'https://nippo-e8922.firebaseio.com',
+    storageBucket: 'nippo-e8922.appspot.com',
+    androidClientId: '554602506203-cvqnsumv3q5c3mk5oj800tr7lugoo81u.apps.googleusercontent.com',
+    iosClientId: '554602506203-2e3jkpfh6rabqmci2cck8k7ufkr9665e.apps.googleusercontent.com',
+    iosBundleId: 'com.htsuruo.nippo',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
