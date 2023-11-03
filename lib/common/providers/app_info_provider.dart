@@ -32,6 +32,7 @@ class AppInfo {
   final Version version;
   final String buildNumber;
   final String buildSignature;
+
   @override
   String toString() {
     // ignore: lines_longer_than_80_chars
