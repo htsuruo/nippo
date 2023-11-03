@@ -27,8 +27,8 @@ Future<void> main() async {
       '6Le3MeQoAAAAANvhE-K5ZL2F7jwuE0GNQz1Pka_x',
     ),
     // 一度デバッグトークンを登録しておけば、その後は優先的にデバッグトークンを使い続けるものと思っていたが、
-    // activate時に`debug`指定しないとサーバ検証時にエラーになってしまい
-    // トークンが返却されない（未検証リクエスト判定）ので、デバッグトークンを使いたい場合は`debug`指定が必要
+    // activate時に`debug`指定しないとサーバ検証時にエラーになってしまトークンが返却されない
+    // （未検証リクエスト判定）ので、一度登録した場合でもデバッグトークンを使いたい場合は`debug`指定が必要
     androidProvider:
         kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
     appleProvider: kDebugMode
