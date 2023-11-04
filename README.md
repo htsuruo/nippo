@@ -10,6 +10,8 @@
 
 **[View Demo](https://nippo-e8922.web.app)**
 
+※デモは現在 [#32](https://github.com/htsuruo/nippo/issues/32) のため利用できません。
+
 ## セットアップ
 
 1. `.firebaserc`のデフォルトプロジェクトをご自身のFirebaseプロジェクトIDに変更してください。
@@ -49,7 +51,7 @@ flutter configure
 
 ## セキュリティ周り
 
-本レポジトリはFirebase APIキーを公開していますが、データリソースへのアクセスを筆頭に、APIの不正利用からの保護を行っているため、第三者からの意図しないリクエストで超過料金が請求されるなどのリスクが無いように配慮しています。
+本レポジトリはFirebase APIキーを公開していますが、データリソースへのアクセスを筆頭に、APIの不正利用からの保護を行っているため、第三者からの意図しないリクエストで超過料金が請求されるなどのリスクが無いように配慮しています。また、第三者からの攻撃だけでなく開発者の実装ミス（ex. Cloud Functionsの無限ループミス）などによる事故に気づけるよう、[Cloud Billingの予算アラート](https://cloud.google.com/billing/docs/how-to/budgets?hl=ja)を設定し気付けるようにしています。
 
 - APIキーの制限
 - APIリソースの保護
@@ -61,7 +63,7 @@ flutter configure
 
 | プラットフォーム | 制限内容 |
 | --- | --- |
-| iOS,Android | `com.htsuruo.nippo`のバンドルID,パッケージ名のみ利用を制限 |
+| iOS+,Android | `com.htsuruo.nippo`のバンドルID,パッケージ名のみ利用を制限 |
 | Web | Firebase Hostingのデフォルトサイトおよび独自のドメインに制限 |
 
 ### APIリソースの保護
@@ -74,6 +76,6 @@ Firebase App Checkを有効化（Enforcement）し、本アプリケーション
 
 本アプリケーションはCloud Firestore を利用しているため、セキュリティルールによって保護しています。
 サービス提供において最も重要なインシデントである、ユーザー情報の漏洩やサービスの深刻な破壊がされるリスクを防ぎます。
-また、アプリケーションの利用者が他人のデータを勝手に編集・削除するような、想定されない操作を制限しアプリケーションのデータを健全に保ちます。
+また、アプリケーションの利用者が他人のデータを勝手に編集・削除するような、想定されない操作を制限しアプリケーションのデータを健全に保ちます。また、[単体テスト](https://github.com/htsuruo/nippo/tree/main/firebase/functions/src/test/rules)にて意図通りのルール設定になっていることを検証済です。
 
 - ref. https://github.com/htsuruo/nippo/blob/main/firebase/firestore.rules
