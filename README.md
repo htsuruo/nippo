@@ -57,6 +57,8 @@ flutter configure
 - APIリソースの保護
 - データの保護
 
+※本アプリケーションでは未設定ですが、[Using Cloud Monitoring to monitor App Check and Security Rules](https://firebase.blog/posts/2022/12/monitoring-app-check-and-rules/) のようにCloud Monitoringで閾値を設定し、Slackなどにレポートする形も良さそうです。
+
 ### APIキーの制限
 
 各プラットフォームのAPIキーが利用可能なドメイン等をホワイトリストで管理し、アクセス元を制限しています。具体的には、Google Cloud コンソールの認証情報によりAPIキーを制限を設定しています。これにより、ホワイトリスト以外のクライアントからAPIキーが利用されるのを防ぎます。
