@@ -628,8 +628,12 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - appkit_ui_element_colors (1.0.0):
-    - FlutterMacOS
+  - AppAuth (1.6.2):
+    - AppAuth/Core (= 1.6.2)
+    - AppAuth/ExternalUserAgent (= 1.6.2)
+  - AppAuth/Core (1.6.2)
+  - AppAuth/ExternalUserAgent (1.6.2):
+    - AppAuth/Core
   - BoringSSL-GRPC (0.0.24):
     - BoringSSL-GRPC/Implementation (= 0.0.24)
     - BoringSSL-GRPC/Interface (= 0.0.24)
@@ -637,18 +641,12 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
   - cloud_firestore (4.12.1):
-    - Firebase/CoreOnly (~> 10.16.0)
-    - Firebase/Firestore (~> 10.16.0)
+    - Firebase/Firestore (= 10.16.0)
     - firebase_core
-    - FlutterMacOS
+    - Flutter
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - desktop_webview_auth (0.0.1):
-    - FlutterMacOS
-  - dynamic_color (0.0.2):
-    - FlutterMacOS
-  - Firebase/AppCheck (10.16.0):
-    - Firebase/CoreOnly
-    - FirebaseAppCheck (~> 10.16.0)
+    - Flutter
   - Firebase/Auth (10.16.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 10.16.0)
@@ -658,18 +656,17 @@ PODS:
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 10.16.0)
   - firebase_app_check (0.2.1-2):
-    - Firebase/AppCheck (~> 10.16.0)
     - Firebase/CoreOnly (~> 10.16.0)
     - firebase_core
-    - FlutterMacOS
+    - FirebaseAppCheck (~> 10.16.0-beta)
+    - Flutter
   - firebase_auth (4.12.0):
-    - Firebase/Auth (~> 10.16.0)
-    - Firebase/CoreOnly (~> 10.16.0)
+    - Firebase/Auth (= 10.16.0)
     - firebase_core
-    - FlutterMacOS
+    - Flutter
   - firebase_core (2.20.0):
-    - Firebase/CoreOnly (~> 10.16.0)
-    - FlutterMacOS
+    - Firebase/CoreOnly (= 10.16.0)
+    - Flutter
   - FirebaseAppCheck (10.16.0):
     - FirebaseAppCheckInterop (~> 10.16)
     - FirebaseCore (~> 10.0)
@@ -702,10 +699,17 @@ PODS:
     - "gRPC-C++ (~> 1.49.1)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FlutterMacOS (1.0.0)
+  - Flutter (1.0.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - google_sign_in_ios (0.0.1):
+    - Flutter
+    - GoogleSignIn (~> 6.2)
+  - GoogleSignIn (6.2.4):
+    - AppAuth (~> 1.5)
+    - GTMAppAuth (~> 1.3)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.1)
   - GoogleUtilities/AppDelegateSwizzler (7.11.6):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -782,52 +786,50 @@ PODS:
     - BoringSSL-GRPC (= 0.0.24)
     - gRPC-Core/Interface (= 1.49.1)
   - gRPC-Core/Interface (1.49.1)
-  - GTMSessionFetcher/Core (3.1.1)
+  - GTMAppAuth (1.3.1):
+    - AppAuth/Core (~> 1.6)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.5)
+  - GTMSessionFetcher/Core (2.3.0)
   - leveldb-library (1.22.2)
-  - macos_ui (0.1.0):
-    - FlutterMacOS
-  - macos_window_utils (1.0.0):
-    - FlutterMacOS
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - package_info_plus (0.0.1):
-    - FlutterMacOS
+  - package_info_plus (0.4.5):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
   - PromisesObjC (2.3.1)
+  - RecaptchaInterop (100.0.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - sqflite (0.0.2):
-    - FlutterMacOS
+  - sqflite (0.0.3):
+    - Flutter
     - FMDB (>= 2.7.5)
-  - url_launcher_macos (0.0.1):
-    - FlutterMacOS
+  - url_launcher_ios (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
-  - appkit_ui_element_colors (from `Flutter/ephemeral/.symlinks/plugins/appkit_ui_element_colors/macos`)
-  - cloud_firestore (from `Flutter/ephemeral/.symlinks/plugins/cloud_firestore/macos`)
-  - desktop_webview_auth (from `Flutter/ephemeral/.symlinks/plugins/desktop_webview_auth/macos`)
-  - dynamic_color (from `Flutter/ephemeral/.symlinks/plugins/dynamic_color/macos`)
-  - firebase_app_check (from `Flutter/ephemeral/.symlinks/plugins/firebase_app_check/macos`)
-  - firebase_auth (from `Flutter/ephemeral/.symlinks/plugins/firebase_auth/macos`)
-  - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
-  - FlutterMacOS (from `Flutter/ephemeral`)
-  - macos_ui (from `Flutter/ephemeral/.symlinks/plugins/macos_ui/macos`)
-  - macos_window_utils (from `Flutter/ephemeral/.symlinks/plugins/macos_window_utils/macos`)
-  - package_info_plus (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos`)
-  - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
-  - shared_preferences_foundation (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin`)
-  - sqflite (from `Flutter/ephemeral/.symlinks/plugins/sqflite/macos`)
-  - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
+  - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
+  - desktop_webview_auth (from `.symlinks/plugins/desktop_webview_auth/ios`)
+  - firebase_app_check (from `.symlinks/plugins/firebase_app_check/ios`)
+  - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
+  - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - Flutter (from `Flutter`)
+  - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
   trunk:
     - abseil
+    - AppAuth
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAppCheck
@@ -837,80 +839,78 @@ SPEC REPOS:
     - FirebaseCoreInternal
     - FirebaseFirestore
     - FMDB
+    - GoogleSignIn
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
+    - GTMAppAuth
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - RecaptchaInterop
 
 EXTERNAL SOURCES:
-  appkit_ui_element_colors:
-    :path: Flutter/ephemeral/.symlinks/plugins/appkit_ui_element_colors/macos
   cloud_firestore:
-    :path: Flutter/ephemeral/.symlinks/plugins/cloud_firestore/macos
+    :path: ".symlinks/plugins/cloud_firestore/ios"
   desktop_webview_auth:
-    :path: Flutter/ephemeral/.symlinks/plugins/desktop_webview_auth/macos
-  dynamic_color:
-    :path: Flutter/ephemeral/.symlinks/plugins/dynamic_color/macos
+    :path: ".symlinks/plugins/desktop_webview_auth/ios"
   firebase_app_check:
-    :path: Flutter/ephemeral/.symlinks/plugins/firebase_app_check/macos
+    :path: ".symlinks/plugins/firebase_app_check/ios"
   firebase_auth:
-    :path: Flutter/ephemeral/.symlinks/plugins/firebase_auth/macos
+    :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
-    :path: Flutter/ephemeral/.symlinks/plugins/firebase_core/macos
-  FlutterMacOS:
-    :path: Flutter/ephemeral
-  macos_ui:
-    :path: Flutter/ephemeral/.symlinks/plugins/macos_ui/macos
-  macos_window_utils:
-    :path: Flutter/ephemeral/.symlinks/plugins/macos_window_utils/macos
+    :path: ".symlinks/plugins/firebase_core/ios"
+  Flutter:
+    :path: Flutter
+  google_sign_in_ios:
+    :path: ".symlinks/plugins/google_sign_in_ios/ios"
   package_info_plus:
-    :path: Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos
+    :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
-    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
-    :path: Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sqflite:
-    :path: Flutter/ephemeral/.symlinks/plugins/sqflite/macos
-  url_launcher_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos
+    :path: ".symlinks/plugins/sqflite/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
-  appkit_ui_element_colors: 39bb2d80be3f19b152ccf4c70d5bbe6cba43d74a
+  AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  cloud_firestore: 985ed6f1e4cd3c3cc3ef3a102aee112322fe6ac8
-  desktop_webview_auth: 9bba53a29c9bc6a4ff621fd0ebfbb18856c4dada
-  dynamic_color: 2eaa27267de1ca20d879fbd6e01259773fb1670f
+  cloud_firestore: abc819b936be92e6167aec1a8983d1e48ded2674
+  desktop_webview_auth: d645139460ef203d50bd0cdb33356785dd939cce
   Firebase: 25899099b77d255a636e3579c3d9dce10ec150d5
-  firebase_app_check: adcdabef7d333644819e99c7c0376cb530bfa115
-  firebase_auth: 3772a5d55ff9fc6209b32fef2c4104035f04bfca
-  firebase_core: 844b9a36afc5874a395699929626d594a448183d
+  firebase_app_check: acb38ffa7bcf770c6434cd3b44847bc60aff783d
+  firebase_auth: 015dab4ffe9e4d97f7d84a3373ad4c8a7712c5c7
+  firebase_core: 2e0e89436a00b664a23bebb08859e5fede7215e9
   FirebaseAppCheck: f3b56655048e2a24d3b03fd910cbf3e540502c6d
   FirebaseAppCheckInterop: 534d033d8d0436b4ab066a8205013d271e18a2b9
   FirebaseAuth: 3862d87d4d58deff08f705d471896a2f66e8bbf0
   FirebaseCore: 65a801af84cca84361ef9eac3fd868656968a53b
   FirebaseCoreInternal: 2cf9202e226e3f78d2bf6d56c472686b935bfb7f
   FirebaseFirestore: 17bd5c8a0ea4be0fcae5a6f95f817983623adb4a
-  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
+  GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
   GoogleUtilities: 202e7a9f5128accd11160fb9c19612de1911aa19
   "gRPC-C++": 2df8cba576898bdacd29f0266d5236fa0e26ba6a
   gRPC-Core: a21a60aefc08c68c247b439a9ef97174b0c54f96
-  GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
+  GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
+  GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
-  macos_ui: 6229a8922cd97bafb7d9636c8eb8dfb0744183ca
-  macos_window_utils: 933f91f64805e2eb91a5bd057cf97cd097276663
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  package_info_plus: 02d7a575e80f194102bef286361c6c326e4c29ce
+  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
+  RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
-  sqflite: a5789cceda41d54d23f31d6de539d65bb14100ea
-  url_launcher_macos: 5335912b679c073563f29d89d33d10d459f95451
+  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
+  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
-PODFILE CHECKSUM: 9ebaf0ce3d369aaa26a9ea0e159195ed94724cf3
+PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
 
 COCOAPODS: 1.14.2

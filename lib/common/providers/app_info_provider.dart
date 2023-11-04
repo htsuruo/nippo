@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:version/version.dart';
 
@@ -9,13 +10,22 @@ AppInfo appInfo(AppInfoRef ref) => throw UnimplementedError();
 
 @immutable
 class AppInfo {
-  const AppInfo({
+  const AppInfo._({
     required this.appName,
     required this.packageName,
     required this.version,
     required this.buildNumber,
     required this.buildSignature,
   });
+
+  AppInfo.fromPackageInfo(PackageInfo info)
+      : this._(
+          appName: info.appName,
+          packageName: info.packageName,
+          version: Version.parse(info.version),
+          buildNumber: info.buildNumber,
+          buildSignature: info.buildSignature,
+        );
 
   final String appName;
   final String packageName;

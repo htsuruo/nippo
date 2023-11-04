@@ -34,9 +34,3 @@
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-
-# Firebase app info
-android/app/google-services.json
-lib/firebase_options.dart
-macos/Runner/GoogleService-Info.plist
-macos/firebase_app_id_file.json
