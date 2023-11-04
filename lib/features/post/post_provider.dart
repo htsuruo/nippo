@@ -98,7 +98,7 @@ Stream<List<QueryDocumentSnapshot<Post>>> userPosts(
 @riverpod
 CollectionReference<Post> selfPostRef(SelfPostRefRef ref) {
   return ref
-      .watch(userRefProvider)
+      .watch(authUserRefProvider)
       .collection(Collection.posts)
       .withConverter<Post>(
         fromFirestore: _Converter.from,

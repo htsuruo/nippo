@@ -301,7 +301,7 @@ class UserPostsProvider
   }
 }
 
-String _$selfPostRefHash() => r'cd5bb07b848f305c913174e9037de7a67827d069';
+String _$selfPostRefHash() => r'2471af5db201a20b96bd7ef9c6a7b3896f5b77b9';
 
 /// See also [selfPostRef].
 @ProviderFor(selfPostRef)

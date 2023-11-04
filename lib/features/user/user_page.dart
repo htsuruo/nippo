@@ -29,7 +29,8 @@ class UserPage extends ConsumerWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const _Profile(),
+          // TODO(htsuruo): uidを選択されたユーザーのuidにする
+          _Profile(uid: uid),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16),
             child: Divider(),
@@ -51,11 +52,13 @@ class UserPage extends ConsumerWidget {
 }
 
 class _Profile extends ConsumerWidget {
-  const _Profile();
+  const _Profile({required this.uid});
+
+  final String? uid;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userDoc = ref.watch(userProvider).value;
+    final userDoc = ref.watch(userProvider(uid: uid)).value;
     final user = userDoc?.data();
     return Column(
       children: [

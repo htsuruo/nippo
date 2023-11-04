@@ -8,7 +8,13 @@ import 'model/user.dart';
 part 'user_provider.g.dart';
 
 @riverpod
-DocumentReference<User> userRef(UserRefRef ref) {
+DocumentReference<User> authUserRef(AuthUserRefRef ref) {
+  final firUser = ref.watch(firUserProvider).value;
+  return ref.watch(userRefProvider(firUser?.uid));
+}
+
+@riverpod
+DocumentReference<User> userRef(UserRefRef ref, String? uid) {
   final firUser = ref.watch(firUserProvider).value;
   return FirebaseFirestore.instance
       .collection(Collection.users)
@@ -20,5 +26,5 @@ DocumentReference<User> userRef(UserRefRef ref) {
 }
 
 @riverpod
-Stream<DocumentSnapshot<User>> user(UserRef ref) =>
-    ref.watch(userRefProvider).snapshots();
+Stream<DocumentSnapshot<User>> user(UserRef ref, {required String? uid}) =>
+    ref.watch(userRefProvider(uid)).snapshots();
