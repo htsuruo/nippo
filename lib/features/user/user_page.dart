@@ -1,84 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:nippo/common/widgets/widgets.dart';
 import 'package:nippo/core/authentication/auth_provider.dart';
 import 'package:nippo/core/router/router.dart';
-import 'package:nippo/features/post/widgets/post_list_view.dart';
 
 import '../post/post_provider.dart';
-import 'user_provider.dart';
+import '../post/widgets/widgets.dart';
+import 'widgets/profile.dart';
 
 class UserPage extends ConsumerWidget {
-  const UserPage({super.key});
+  const UserPage._({this.uid, required this.isMe});
+
+  // 投稿一覧からユーザーアバターを押下した場合はそのユーザーのプロフィールを表示する
+  const UserPage.uid(String uid) : this._(uid: uid, isMe: false);
+
+  // プロフィールタブを押下した場合は自分のプロフィールを表示する
+  const UserPage.me() : this._(isMe: true);
+
+  final String? uid;
+  final bool isMe;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final uid = ref.watch(firUserProvider.select((s) => s.value?.uid));
+    final uid = isMe
+        ? ref.watch(firUserProvider.select((s) => s.value?.uid))
+        : this.uid;
 
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: () {
-              SettingPageRoute().push<void>(context);
-            },
-          ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const _Profile(),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Divider(),
-          ),
-          // TODO(htsuruo): ログインユーザーに固定されているが、実際はuidは外から指定された値にする
-          if (uid != null)
-            Expanded(
-              child: PostListView(
-                snapshots: ref.watch(userPostsProvider(uid)).value,
-                postSelected: (postId) {
-                  UserPostPageRoute(uid: uid, pid: postId).go(context);
-                },
-              ),
+          if (isMe)
+            IconButton(
+              icon: const Icon(Icons.settings_outlined),
+              onPressed: () {
+                SettingPageRoute().push<void>(context);
+              },
             ),
         ],
       ),
+      body: uid == null
+          ? const _UserNotFound()
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Profile(uid: uid),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: Divider(),
+                ),
+                Expanded(
+                  child: PostListView(
+                    snapshots: ref.watch(userPostsProvider(uid)).value,
+                    postSelected: (postId) {
+                      UserPostPageRoute(uid: uid, pid: postId)
+                          .push<void>(context);
+                    },
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }
 
-class _Profile extends ConsumerWidget {
-  const _Profile();
+class _UserNotFound extends StatelessWidget {
+  const _UserNotFound();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final userDoc = ref.watch(userProvider).value;
-    final user = userDoc?.data();
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: CircularImage(
-            imageUrl: user?.photoUrl,
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'ユーザーIDが存在しません',
+            style: theme.textTheme.bodyLarge,
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Text(
-            user?.name ?? '',
-            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Text(userDoc?.id ?? ''),
-        ),
-      ],
+          Text(GoRouterState.of(context).uri.toString()),
+        ],
+      ),
     );
   }
 }

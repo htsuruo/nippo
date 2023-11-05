@@ -26,8 +26,9 @@ class _Location {
   static const post = ':pid';
   static const postCreate = 'create';
   static const signin = '/signin';
-  static const user = '/user';
-  static const userPost = ':uid/posts/:pid';
+  static const user = '/user/:uid';
+  static const userPost = '/user/:uid/posts/:pid';
+  static const profile = '/profile';
   static const setting = '/setting';
 }
 
@@ -48,11 +49,12 @@ GoRouter router(RouterRef ref) {
     navigatorKey: ref.watch(rootNavigatorProvider),
     redirect: (context, state) async {
       final signedIn = await ref.watch(isSignedInProvider.future);
-      final isSigninLocation = state.location == _Location.signin;
+      final location = state.uri.toString();
+      final isSigninLocation = location == _Location.signin;
       if (!signedIn) {
         return isSigninLocation ? null : _Location.signin;
       }
-      if (isSigninLocation || state.location == _Location.posts) {
+      if (isSigninLocation || location == _Location.posts) {
         return _Location.posts;
       }
       return null;
@@ -77,6 +79,32 @@ class SettingPageRoute extends GoRouteData {
       );
 }
 
+@TypedGoRoute<UserPageRoute>(path: _Location.user)
+class UserPageRoute extends GoRouteData {
+  const UserPageRoute({required this.uid});
+
+  final String uid;
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      MaterialPage(
+        child: _Root(child: UserPage.uid(uid)),
+      );
+}
+
+@TypedGoRoute<UserPostPageRoute>(path: _Location.userPost)
+class UserPostPageRoute extends GoRouteData {
+  const UserPostPageRoute({required this.uid, required this.pid});
+
+  final String uid;
+  final String pid;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return UserPostPage(uid: uid, pid: pid);
+  }
+}
+
 @TypedStatefulShellRoute<ShellRouteData>(
   branches: [
     TypedStatefulShellBranch(
@@ -98,13 +126,8 @@ class SettingPageRoute extends GoRouteData {
     ),
     TypedStatefulShellBranch(
       routes: [
-        TypedGoRoute<UserPageRoute>(
-          path: _Location.user,
-          routes: [
-            TypedGoRoute<UserPostPageRoute>(
-              path: _Location.userPost,
-            ),
-          ],
+        TypedGoRoute<ProfilePageRoute>(
+          path: _Location.profile,
         ),
       ],
     ),
@@ -164,23 +187,11 @@ class PostCreatePageRoute extends GoRouteData {
       const _Root(child: PostCreatePage());
 }
 
-class UserPageRoute extends GoRouteData {
-  const UserPageRoute();
+class ProfilePageRoute extends GoRouteData {
+  const ProfilePageRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const UserPage();
-  }
-}
-
-class UserPostPageRoute extends GoRouteData {
-  const UserPostPageRoute({required this.uid, required this.pid});
-
-  final String uid;
-  final String pid;
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return UserPostPage(uid: uid, pid: pid);
+    return const UserPage.me();
   }
 }

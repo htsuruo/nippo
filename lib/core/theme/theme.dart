@@ -22,6 +22,8 @@ class AppTheme {
       textTheme: themeData.textTheme.apply(
         fontFamily: GoogleFonts.lato().fontFamily,
       ),
+      // スクロール時にAppBarのElevationがでカラーが切り替わる表現を無効化
+      appBarTheme: const AppBarTheme(scrolledUnderElevation: 0),
       dividerTheme: const DividerThemeData(space: 0),
       listTileTheme: ListTileThemeData(
         titleTextStyle: listTextStyle,

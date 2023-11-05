@@ -5,7 +5,7 @@ import 'package:version/version.dart';
 
 part 'app_info_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 AppInfo appInfo(AppInfoRef ref) => throw UnimplementedError();
 
 @immutable

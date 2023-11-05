@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
 
 import '../model/post.dart';
+import 'user_avatar.dart';
 
 /// Post一覧からの遷移とUserPageからの遷移で共通して利用されるListView
 /// StatefulShellRouteの影響でパスを同一に出来ないため、
@@ -60,38 +61,46 @@ class _PostCard extends StatelessWidget {
         },
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      post.title,
-                      style: theme.textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      post.description,
-                      style: theme.textTheme.bodyMedium,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const Gap(2),
-                    Text(
-                      // ServerTimestamp確定まで微妙にラグがあるため暫定的に空文字でごまかす
-                      post.createdAt.date?.formatted ?? '',
-                      style: theme.textTheme.labelSmall!
-                          .copyWith(color: theme.hintColor),
-                    ),
-                  ],
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: UserAvatar(postRef: postSnapshot.reference),
                 ),
-              ),
-              Icon(Icons.navigate_next, color: colorScheme.primary),
-            ],
+                const Gap(12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        post.title,
+                        style: theme.textTheme.titleMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        post.description,
+                        style: theme.textTheme.bodyMedium,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const Gap(2),
+                      Text(
+                        // ServerTimestamp確定まで微妙にラグがあるため暫定的に空文字でごまかす
+                        post.createdAt.date?.formatted ?? '',
+                        style: theme.textTheme.labelSmall!
+                            .copyWith(color: theme.hintColor),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(Icons.navigate_next, color: colorScheme.primary),
+              ],
+            ),
           ),
         ),
       ),

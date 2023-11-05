@@ -11,6 +11,8 @@ part of 'router.dart';
 List<RouteBase> get $appRoutes => [
       $signinPageRoute,
       $settingPageRoute,
+      $userPageRoute,
+      $userPostPageRoute,
       $shellRouteData,
     ];
 
@@ -58,6 +60,55 @@ extension $SettingPageRouteExtension on SettingPageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $userPageRoute => GoRouteData.$route(
+      path: '/user/:uid',
+      factory: $UserPageRouteExtension._fromState,
+    );
+
+extension $UserPageRouteExtension on UserPageRoute {
+  static UserPageRoute _fromState(GoRouterState state) => UserPageRoute(
+        uid: state.pathParameters['uid']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/user/${Uri.encodeComponent(uid)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $userPostPageRoute => GoRouteData.$route(
+      path: '/user/:uid/posts/:pid',
+      factory: $UserPostPageRouteExtension._fromState,
+    );
+
+extension $UserPostPageRouteExtension on UserPostPageRoute {
+  static UserPostPageRoute _fromState(GoRouterState state) => UserPostPageRoute(
+        uid: state.pathParameters['uid']!,
+        pid: state.pathParameters['pid']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/user/${Uri.encodeComponent(uid)}/posts/${Uri.encodeComponent(pid)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $shellRouteData => StatefulShellRouteData.$route(
       factory: $ShellRouteDataExtension._fromState,
       branches: [
@@ -82,14 +133,8 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
         StatefulShellBranchData.$branch(
           routes: [
             GoRouteData.$route(
-              path: '/user',
-              factory: $UserPageRouteExtension._fromState,
-              routes: [
-                GoRouteData.$route(
-                  path: ':uid/posts/:pid',
-                  factory: $UserPostPageRouteExtension._fromState,
-                ),
-              ],
+              path: '/profile',
+              factory: $ProfilePageRouteExtension._fromState,
             ),
           ],
         ),
@@ -157,31 +202,12 @@ extension $PostDetailPageRouteExtension on PostDetailPageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $UserPageRouteExtension on UserPageRoute {
-  static UserPageRoute _fromState(GoRouterState state) => const UserPageRoute();
+extension $ProfilePageRouteExtension on ProfilePageRoute {
+  static ProfilePageRoute _fromState(GoRouterState state) =>
+      const ProfilePageRoute();
 
   String get location => GoRouteData.$location(
-        '/user',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $UserPostPageRouteExtension on UserPostPageRoute {
-  static UserPostPageRoute _fromState(GoRouterState state) => UserPostPageRoute(
-        uid: state.pathParameters['uid']!,
-        pid: state.pathParameters['pid']!,
-      );
-
-  String get location => GoRouteData.$location(
-        '/user/${Uri.encodeComponent(uid)}/posts/${Uri.encodeComponent(pid)}',
+        '/profile',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -214,7 +240,7 @@ final rootNavigatorProvider =
 );
 
 typedef RootNavigatorRef = AutoDisposeProviderRef<GlobalKey<NavigatorState>>;
-String _$routerHash() => r'6cacf039171019443419e997b8478a32aff9a7ae';
+String _$routerHash() => r'245bb81778d5739be5bae86ca1ab8cbe32bea623';
 
 /// See also [router].
 @ProviderFor(router)

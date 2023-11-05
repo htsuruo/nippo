@@ -44,7 +44,7 @@ abstract class $PostCopyWith<$Res> {
   $Res call(
       {@Deprecated('Use late field postId instead')
       @JsonKey(name: Field.postId)
-      String? nullablePostId,
+          String? nullablePostId,
       String title,
       String description,
       UnionTimestamp updatedAt,
@@ -123,7 +123,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   $Res call(
       {@Deprecated('Use late field postId instead')
       @JsonKey(name: Field.postId)
-      String? nullablePostId,
+          String? nullablePostId,
       String title,
       String description,
       UnionTimestamp updatedAt,
@@ -182,7 +182,7 @@ class _$_Post extends _Post {
   _$_Post(
       {@Deprecated('Use late field postId instead')
       @JsonKey(name: Field.postId)
-      this.nullablePostId,
+          this.nullablePostId,
       required this.title,
       required this.description,
       this.updatedAt = const UnionTimestamp.serverTimestamp(),
@@ -253,7 +253,7 @@ abstract class _Post extends Post {
   factory _Post(
       {@Deprecated('Use late field postId instead')
       @JsonKey(name: Field.postId)
-      final String? nullablePostId,
+          final String? nullablePostId,
       required final String title,
       required final String description,
       final UnionTimestamp updatedAt,
