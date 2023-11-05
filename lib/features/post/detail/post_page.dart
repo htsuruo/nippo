@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
+import 'package:nippo/features/post/detail/action_menu_button.dart';
 import 'package:nippo/features/post/detail/post_detail_view.dart';
 import 'package:nippo/features/post/post_provider.dart';
 
@@ -25,7 +27,12 @@ class PostPage extends ConsumerWidget {
         : ref.watch(userPostProvider(uid, pid));
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          ActionMenuButton(postSnapAsync: postSnapAsync),
+          const Gap(8),
+        ],
+      ),
       body: postSnapAsync.when(
         loading: CenteredCircularProgressIndicator.new,
         error: (error, stackTrace) {
