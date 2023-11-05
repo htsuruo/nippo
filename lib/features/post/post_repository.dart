@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/features/post/post_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,4 +18,7 @@ class PostRepository {
     final doc = _ref.read(selfPostRefProvider).doc();
     await doc.set(post.copyWith(nullablePostId: doc.id));
   }
+
+  Future<void> delete({required DocumentReference<Post> postRef}) =>
+      postRef.delete();
 }

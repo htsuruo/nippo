@@ -10,8 +10,6 @@ class PostDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => PostDetailView(
-        postAsync: ref.watch(postProvider(pid)).whenData(
-              (snapshot) => snapshot?.data(),
-            ),
+        postSnapAsync: ref.watch(postProvider(pid)),
       );
 }

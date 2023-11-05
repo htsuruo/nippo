@@ -12,8 +12,6 @@ class UserPostPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => PostDetailView(
-        postAsync: ref
-            .watch(userPostProvider(uid, pid))
-            .whenData((snapshot) => snapshot?.data()),
+        postSnapAsync: ref.watch(userPostProvider(uid, pid)),
       );
 }
