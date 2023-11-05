@@ -65,8 +65,9 @@ class _Profile extends ConsumerWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 8),
-          child: CircularImage(
+          child: CachedCircleAvatar(
             imageUrl: user?.photoUrl,
+            radius: 52,
           ),
         ),
         Padding(
