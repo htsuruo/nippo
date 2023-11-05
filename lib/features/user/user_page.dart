@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/core/authentication/auth_provider.dart';
 import 'package:nippo/core/router/router.dart';
@@ -37,23 +38,46 @@ class UserPage extends ConsumerWidget {
             ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Profile(uid: uid),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Divider(),
-          ),
-          if (uid != null)
-            Expanded(
-              child: PostListView(
-                snapshots: ref.watch(userPostsProvider(uid)).value,
-                postSelected: (postId) {
-                  UserPostPageRoute(uid: uid, pid: postId).push<void>(context);
-                },
-              ),
+      body: uid == null
+          ? const _UserNotFound()
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Profile(uid: uid),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: Divider(),
+                ),
+                Expanded(
+                  child: PostListView(
+                    snapshots: ref.watch(userPostsProvider(uid)).value,
+                    postSelected: (postId) {
+                      UserPostPageRoute(uid: uid, pid: postId)
+                          .push<void>(context);
+                    },
+                  ),
+                ),
+              ],
             ),
+    );
+  }
+}
+
+class _UserNotFound extends StatelessWidget {
+  const _UserNotFound();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'ユーザーIDが存在しません',
+            style: theme.textTheme.bodyLarge,
+          ),
+          Text(GoRouterState.of(context).uri.toString()),
         ],
       ),
     );

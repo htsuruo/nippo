@@ -7,7 +7,7 @@ import '../user_provider.dart';
 class Profile extends ConsumerWidget {
   const Profile({super.key, required this.uid});
 
-  final String? uid;
+  final String uid;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
