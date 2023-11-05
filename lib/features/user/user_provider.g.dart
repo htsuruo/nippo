@@ -8,12 +8,11 @@ part of 'user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authUserRefHash() => r'679aea1e96d79af208c52327e68fa1694889e60a';
+String _$authUserRefHash() => r'd02e05053c7123e1b2804fd58cc332e5052187a2';
 
 /// See also [authUserRef].
 @ProviderFor(authUserRef)
-final authUserRefProvider =
-    AutoDisposeProvider<DocumentReference<User>>.internal(
+final authUserRefProvider = Provider<DocumentReference<User>>.internal(
   authUserRef,
   name: r'authUserRefProvider',
   debugGetCreateSourceHash:
@@ -22,8 +21,8 @@ final authUserRefProvider =
   allTransitiveDependencies: null,
 );
 
-typedef AuthUserRefRef = AutoDisposeProviderRef<DocumentReference<User>>;
-String _$userRefHash() => r'259d13d6d9e10225d8b35e4efdfb54c94371beec';
+typedef AuthUserRefRef = ProviderRef<DocumentReference<User>>;
+String _$userRefHash() => r'262c5ca26e671b237801cb4de1391320e216f972';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -46,7 +45,7 @@ class _SystemHash {
   }
 }
 
-typedef UserRefRef = AutoDisposeProviderRef<DocumentReference<User>>;
+typedef UserRefRef = ProviderRef<DocumentReference<User>>;
 
 /// See also [userRef].
 @ProviderFor(userRef)
@@ -91,7 +90,7 @@ class UserRefFamily extends Family<DocumentReference<User>> {
 }
 
 /// See also [userRef].
-class UserRefProvider extends AutoDisposeProvider<DocumentReference<User>> {
+class UserRefProvider extends Provider<DocumentReference<User>> {
   /// See also [userRef].
   UserRefProvider(
     this.uid,

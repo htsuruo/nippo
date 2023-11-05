@@ -7,13 +7,13 @@ import 'model/user.dart';
 
 part 'user_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 DocumentReference<User> authUserRef(AuthUserRefRef ref) {
   final firUser = ref.watch(firUserProvider).value;
   return ref.watch(userRefProvider(firUser?.uid));
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 DocumentReference<User> userRef(UserRefRef ref, String? uid) {
   final firUser = ref.watch(firUserProvider).value;
   return FirebaseFirestore.instance

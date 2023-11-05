@@ -8,11 +8,11 @@ part of 'auth_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isSignedInHash() => r'c27def8c3f17926899bb150f850224c6e81baee4';
+String _$isSignedInHash() => r'66951a5711a8cba0b0e18f9d1b39aa61a267f8d6';
 
 /// See also [isSignedIn].
 @ProviderFor(isSignedIn)
-final isSignedInProvider = AutoDisposeFutureProvider<bool>.internal(
+final isSignedInProvider = FutureProvider<bool>.internal(
   isSignedIn,
   name: r'isSignedInProvider',
   debugGetCreateSourceHash:
@@ -21,12 +21,12 @@ final isSignedInProvider = AutoDisposeFutureProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef IsSignedInRef = AutoDisposeFutureProviderRef<bool>;
-String _$firUserHash() => r'2c8d62d3e4771d17671a88a5b544ef02f4118a5c';
+typedef IsSignedInRef = FutureProviderRef<bool>;
+String _$firUserHash() => r'e1a7491f8287541a42289c27ecbe613d5c37f7fd';
 
 /// See also [firUser].
 @ProviderFor(firUser)
-final firUserProvider = AutoDisposeStreamProvider<User?>.internal(
+final firUserProvider = StreamProvider<User?>.internal(
   firUser,
   name: r'firUserProvider',
   debugGetCreateSourceHash:
@@ -35,6 +35,6 @@ final firUserProvider = AutoDisposeStreamProvider<User?>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef FirUserRef = AutoDisposeStreamProviderRef<User?>;
+typedef FirUserRef = StreamProviderRef<User?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
