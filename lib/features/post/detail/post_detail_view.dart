@@ -7,60 +7,44 @@ import 'package:nippo/core/authentication/auth_provider.dart';
 import 'package:nippo/features/post/model/post.dart';
 
 class PostDetailView extends ConsumerWidget {
-  const PostDetailView({super.key, required this.postSnapAsync});
+  const PostDetailView({super.key, required this.postSnap});
 
-  final AsyncValue<DocumentSnapshot<Post>?> postSnapAsync;
+  final DocumentSnapshot<Post>? postSnap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final postSnap = this.postSnap;
+    if (postSnap == null) {
+      return const Center(
+        child: Text('データがありません'),
+      );
+    }
 
-    return Scaffold(
-      appBar: AppBar(
-        actions: const [
-          // _MenuButton(),
-          Gap(4),
-        ],
-      ),
-      body: postSnapAsync.when(
-        loading: CenteredCircularProgressIndicator.new,
-        error: (error, stackTrace) {
-          return Center(
-            child: Text(error.toString()),
-          );
-        },
-        data: (postSnap) {
-          if (postSnap == null) {
-            return const Center(
-              child: Text('データがありません'),
-            );
-          }
-          final post = postSnap.data()!;
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  post.title,
-                  style: theme.textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Gap(4),
-                Text('作成日: ${post.createdAt.date!.formatted}'),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  child: Divider(),
-                ),
-                Text(
-                  post.description,
-                  style: theme.textTheme.bodyLarge,
-                ),
-              ],
+    final post = postSnap.data()!;
+    // TODO(htsuruo): AppBarをどういれるか
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            post.title,
+            style: theme.textTheme.titleLarge!.copyWith(
+              fontWeight: FontWeight.bold,
             ),
-          );
-        },
+          ),
+          const Gap(4),
+          Text('作成日: ${post.createdAt.date!.formatted}'),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Divider(),
+          ),
+          Text(
+            post.description,
+            style: theme.textTheme.bodyLarge,
+          ),
+        ],
       ),
     );
   }
