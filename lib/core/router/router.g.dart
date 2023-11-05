@@ -158,10 +158,15 @@ extension $PostDetailPageRouteExtension on PostDetailPageRoute {
 }
 
 extension $UserPageRouteExtension on UserPageRoute {
-  static UserPageRoute _fromState(GoRouterState state) => const UserPageRoute();
+  static UserPageRoute _fromState(GoRouterState state) => UserPageRoute(
+        uid: state.uri.queryParameters['uid']!,
+      );
 
   String get location => GoRouteData.$location(
         '/user',
+        queryParams: {
+          'uid': uid,
+        },
       );
 
   void go(BuildContext context) => context.go(location);

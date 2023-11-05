@@ -48,11 +48,12 @@ GoRouter router(RouterRef ref) {
     navigatorKey: ref.watch(rootNavigatorProvider),
     redirect: (context, state) async {
       final signedIn = await ref.watch(isSignedInProvider.future);
-      final isSigninLocation = state.location == _Location.signin;
+      final location = state.uri.toString();
+      final isSigninLocation = location == _Location.signin;
       if (!signedIn) {
         return isSigninLocation ? null : _Location.signin;
       }
-      if (isSigninLocation || state.location == _Location.posts) {
+      if (isSigninLocation || location == _Location.posts) {
         return _Location.posts;
       }
       return null;
@@ -165,11 +166,13 @@ class PostCreatePageRoute extends GoRouteData {
 }
 
 class UserPageRoute extends GoRouteData {
-  const UserPageRoute();
+  const UserPageRoute({required this.uid});
+
+  final String uid;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const UserPage();
+    return UserPage(uid: uid);
   }
 }
 

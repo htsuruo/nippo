@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
+import 'package:nippo/core/router/router.dart';
+import 'package:nippo/features/user/user_provider.dart';
 
 import '../model/post.dart';
 
@@ -61,7 +64,10 @@ class _PostCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _UserAvatar(postRef: postSnapshot.reference),
+              const Gap(12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,5 +102,33 @@ class _PostCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _UserAvatar extends ConsumerWidget {
+  const _UserAvatar({required this.postRef});
+
+  final DocumentReference<Post> postRef;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // users/[uid]/posts/[postId]
+    final userSnapshot =
+        ref.watch(userProvider(uid: postRef.path.split('/')[1])).value;
+    const placeHolder = CircleAvatar();
+    return userSnapshot == null
+        ? placeHolder
+        : InkWell(
+            onTap: () {
+              UserPageRoute(uid: userSnapshot.id).go(context);
+            },
+            child: CachedNetworkImage(
+              imageUrl: userSnapshot.data()?.photoUrl ?? '',
+              placeholder: (context, _) => placeHolder,
+              imageBuilder: (context, imageProvider) {
+                return CircleAvatar(backgroundImage: imageProvider);
+              },
+            ),
+          );
   }
 }
