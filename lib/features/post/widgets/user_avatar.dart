@@ -14,16 +14,15 @@ class UserAvatar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // users/[uid]/posts/[postId]
-    final userSnapshot =
-        ref.watch(userProvider(uid: postRef.path.split('/')[1])).value;
-    const placeHolder = CircleAvatar();
-    return userSnapshot == null
-        ? placeHolder
-        : CachedCircleAvatar(
-            onTap: () {
-              UserPageRoute(uid: userSnapshot.id).push<void>(context);
+    final user = ref.watch(userProvider(uid: postRef.path.split('/')[1])).value;
+    return CachedCircleAvatar(
+      // TODO(htsuruo): `applyUnlessNull`に書き換える
+      onTap: user == null
+          ? null
+          : () {
+              UserPageRoute(uid: user.id).push<void>(context);
             },
-            imageUrl: userSnapshot.data()?.photoUrl ?? '',
-          );
+      imageUrl: user?.data()?.photoUrl,
+    );
   }
 }

@@ -16,21 +16,23 @@ class CachedCircleAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final placeHolder = CircleAvatar(radius: radius);
-    return CachedNetworkImage(
-      imageUrl: imageUrl ?? '',
-      placeholder: (context, _) => placeHolder,
-      imageBuilder: (context, imageProvider) {
-        return CircleAvatar(
-          backgroundImage: imageProvider,
-          radius: radius,
-          child: ClipOval(
-            child: Material(
-              type: MaterialType.transparency,
-              child: InkWell(onTap: onTap),
-            ),
-          ),
-        );
-      },
-    );
+    return imageUrl == null
+        ? placeHolder
+        : CachedNetworkImage(
+            imageUrl: imageUrl ?? '',
+            placeholder: (context, _) => placeHolder,
+            imageBuilder: (context, imageProvider) {
+              return CircleAvatar(
+                backgroundImage: imageProvider,
+                radius: radius,
+                child: ClipOval(
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: InkWell(onTap: onTap),
+                  ),
+                ),
+              );
+            },
+          );
   }
 }
