@@ -125,7 +125,7 @@ class _UserAvatar extends ConsumerWidget {
         ? placeHolder
         : InkWell(
             onTap: () {
-              UserPageRoute(uid: userSnapshot.id).go(context);
+              UserPageRoute(uid: userSnapshot.id).push<void>(context);
             },
             child: CachedNetworkImage(
               imageUrl: userSnapshot.data()?.photoUrl ?? '',

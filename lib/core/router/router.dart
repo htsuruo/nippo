@@ -6,6 +6,7 @@ import 'package:nippo/features/post/detail/post_detail_page.dart';
 import 'package:nippo/features/post/post_list_page.dart';
 import 'package:nippo/features/setting/setting_page.dart';
 import 'package:nippo/features/signin/signin_page.dart';
+import 'package:nippo/features/user/profile_page.dart';
 import 'package:nippo/features/user/user_page.dart';
 import 'package:nippo/features/user/user_post_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -26,7 +27,8 @@ class _Location {
   static const post = ':pid';
   static const postCreate = 'create';
   static const signin = '/signin';
-  static const user = '/user';
+  static const user = '/user/:uid';
+  static const profile = '/profile';
   static const userPost = ':uid/posts/:pid';
   static const setting = '/setting';
 }
@@ -78,6 +80,19 @@ class SettingPageRoute extends GoRouteData {
       );
 }
 
+@TypedGoRoute<UserPageRoute>(path: _Location.user)
+class UserPageRoute extends GoRouteData {
+  const UserPageRoute({required this.uid});
+
+  final String uid;
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      MaterialPage(
+        child: _Root(child: UserPage(uid: uid)),
+      );
+}
+
 @TypedStatefulShellRoute<ShellRouteData>(
   branches: [
     TypedStatefulShellBranch(
@@ -99,8 +114,8 @@ class SettingPageRoute extends GoRouteData {
     ),
     TypedStatefulShellBranch(
       routes: [
-        TypedGoRoute<UserPageRoute>(
-          path: _Location.user,
+        TypedGoRoute<ProfilePageRoute>(
+          path: _Location.profile,
           routes: [
             TypedGoRoute<UserPostPageRoute>(
               path: _Location.userPost,
@@ -165,14 +180,12 @@ class PostCreatePageRoute extends GoRouteData {
       const _Root(child: PostCreatePage());
 }
 
-class UserPageRoute extends GoRouteData {
-  const UserPageRoute({required this.uid});
-
-  final String uid;
+class ProfilePageRoute extends GoRouteData {
+  const ProfilePageRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return UserPage(uid: uid);
+    return const ProfilePage();
   }
 }
 
