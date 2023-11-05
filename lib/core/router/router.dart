@@ -6,7 +6,6 @@ import 'package:nippo/features/post/detail/post_detail_page.dart';
 import 'package:nippo/features/post/post_list_page.dart';
 import 'package:nippo/features/setting/setting_page.dart';
 import 'package:nippo/features/signin/signin_page.dart';
-import 'package:nippo/features/user/profile_page.dart';
 import 'package:nippo/features/user/user_page.dart';
 import 'package:nippo/features/user/user_post_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -89,7 +88,7 @@ class UserPageRoute extends GoRouteData {
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
       MaterialPage(
-        child: _Root(child: UserPage(uid: uid)),
+        child: _Root(child: UserPage.uid(uid)),
       );
 }
 
@@ -193,6 +192,6 @@ class ProfilePageRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const ProfilePage();
+    return const UserPage.me();
   }
 }
