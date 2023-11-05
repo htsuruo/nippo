@@ -31,7 +31,7 @@ class UserScaffold extends ConsumerWidget {
               child: PostListView(
                 snapshots: ref.watch(userPostsProvider(uid)).value,
                 postSelected: (postId) {
-                  UserPostPageRoute(uid: uid, pid: postId).go(context);
+                  UserPostPageRoute(uid: uid, pid: postId).push<void>(context);
                 },
               ),
             ),

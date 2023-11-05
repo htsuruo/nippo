@@ -28,8 +28,8 @@ class _Location {
   static const postCreate = 'create';
   static const signin = '/signin';
   static const user = '/user/:uid';
+  static const userPost = '/user/:uid/posts/:pid';
   static const profile = '/profile';
-  static const userPost = ':uid/posts/:pid';
   static const setting = '/setting';
 }
 
@@ -93,6 +93,19 @@ class UserPageRoute extends GoRouteData {
       );
 }
 
+@TypedGoRoute<UserPostPageRoute>(path: _Location.userPost)
+class UserPostPageRoute extends GoRouteData {
+  const UserPostPageRoute({required this.uid, required this.pid});
+
+  final String uid;
+  final String pid;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return UserPostPage(uid: uid, pid: pid);
+  }
+}
+
 @TypedStatefulShellRoute<ShellRouteData>(
   branches: [
     TypedStatefulShellBranch(
@@ -116,11 +129,6 @@ class UserPageRoute extends GoRouteData {
       routes: [
         TypedGoRoute<ProfilePageRoute>(
           path: _Location.profile,
-          routes: [
-            TypedGoRoute<UserPostPageRoute>(
-              path: _Location.userPost,
-            ),
-          ],
         ),
       ],
     ),
@@ -186,17 +194,5 @@ class ProfilePageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const ProfilePage();
-  }
-}
-
-class UserPostPageRoute extends GoRouteData {
-  const UserPostPageRoute({required this.uid, required this.pid});
-
-  final String uid;
-  final String pid;
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return UserPostPage(uid: uid, pid: pid);
   }
 }

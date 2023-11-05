@@ -12,6 +12,7 @@ List<RouteBase> get $appRoutes => [
       $signinPageRoute,
       $settingPageRoute,
       $userPageRoute,
+      $userPostPageRoute,
       $shellRouteData,
     ];
 
@@ -83,6 +84,31 @@ extension $UserPageRouteExtension on UserPageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $userPostPageRoute => GoRouteData.$route(
+      path: '/user/:uid/posts/:pid',
+      factory: $UserPostPageRouteExtension._fromState,
+    );
+
+extension $UserPostPageRouteExtension on UserPostPageRoute {
+  static UserPostPageRoute _fromState(GoRouterState state) => UserPostPageRoute(
+        uid: state.pathParameters['uid']!,
+        pid: state.pathParameters['pid']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/user/${Uri.encodeComponent(uid)}/posts/${Uri.encodeComponent(pid)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 RouteBase get $shellRouteData => StatefulShellRouteData.$route(
       factory: $ShellRouteDataExtension._fromState,
       branches: [
@@ -109,12 +135,6 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
             GoRouteData.$route(
               path: '/profile',
               factory: $ProfilePageRouteExtension._fromState,
-              routes: [
-                GoRouteData.$route(
-                  path: ':uid/posts/:pid',
-                  factory: $UserPostPageRouteExtension._fromState,
-                ),
-              ],
             ),
           ],
         ),
@@ -188,26 +208,6 @@ extension $ProfilePageRouteExtension on ProfilePageRoute {
 
   String get location => GoRouteData.$location(
         '/profile',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $UserPostPageRouteExtension on UserPostPageRoute {
-  static UserPostPageRoute _fromState(GoRouterState state) => UserPostPageRoute(
-        uid: state.pathParameters['uid']!,
-        pid: state.pathParameters['pid']!,
-      );
-
-  String get location => GoRouteData.$location(
-        '/profile/${Uri.encodeComponent(uid)}/posts/${Uri.encodeComponent(pid)}',
       );
 
   void go(BuildContext context) => context.go(location);
