@@ -18,7 +18,7 @@ class ActionMenuButton extends ConsumerWidget {
     final postSnap = postSnapAsync.value;
     final isMine = ref.watch(
       firUserProvider.select(
-        (s) => s.value?.uid == postSnap?.reference.parent.parent?.id,
+        (s) => s.value?.uid == postSnap?.reference.uid,
       ),
     );
 
