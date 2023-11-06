@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/core/authentication/auth_provider.dart';
+import 'package:nippo/features/post/detail/post_action_handler.dart';
 
 import '../model/post.dart';
 
-class ActionMenuButton extends ConsumerWidget {
-  const ActionMenuButton({super.key, required this.postSnapAsync});
+class PostActionMenuButton extends ConsumerWidget {
+  const PostActionMenuButton({super.key, required this.postSnapAsync});
 
   final AsyncValue<DocumentSnapshot<Post>?> postSnapAsync;
 
@@ -26,17 +27,16 @@ class ActionMenuButton extends ConsumerWidget {
         ? const SizedBox.shrink()
         : PopupMenuButton<_MenuItem>(
             icon: const Icon(Icons.more_horiz_outlined),
+            // TODO(htsuruo): 書き換える
             onSelected: postSnap == null
                 ? null
-                : (item) {
+                : (item) async {
+                    final handler = ref.read(postActionProvider);
                     switch (item) {
                       case _MenuItem.edit:
-                        // TODO(htsuruo): 編集
-                        break;
+                        await handler.edit(postSnap: postSnap);
                       case _MenuItem.delete:
-                        // TODO(htsuruo): 削除
-                        // ref.read(postRepositoryProvider).delete(postRef: postRef);
-                        break;
+                        await handler.delete(postSnap: postSnap);
                     }
                   },
             itemBuilder: (context) => _MenuItem.values.map((item) {

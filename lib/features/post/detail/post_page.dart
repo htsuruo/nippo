@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/features/post/detail/action_menu_button.dart';
+import 'package:nippo/features/post/detail/post_action_menu_button.dart';
 import 'package:nippo/features/post/detail/post_detail_view.dart';
 import 'package:nippo/features/post/post_provider.dart';
 
@@ -29,7 +29,7 @@ class PostPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          ActionMenuButton(postSnapAsync: postSnapAsync),
+          PostActionMenuButton(postSnapAsync: postSnapAsync),
           const Gap(8),
         ],
       ),

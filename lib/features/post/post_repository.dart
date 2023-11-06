@@ -19,6 +19,5 @@ class PostRepository {
     await doc.set(post.copyWith(nullablePostId: doc.id));
   }
 
-  Future<void> delete({required DocumentReference<Post> postRef}) =>
-      postRef.delete();
+  void delete({required DocumentReference<Post> postRef}) => postRef.delete();
 }
