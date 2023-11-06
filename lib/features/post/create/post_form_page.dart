@@ -1,4 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -22,8 +23,10 @@ class PostFormPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final postSnap = ref.watch(postProvider(postId: postId)).value;
+    final post = postSnap?.data();
+
     final formKey = useMemoized(GlobalKey<FormState>.new);
-    final post = ref.watch(postProvider(postId: postId)).value?.data();
     final titleEditController = useTextEditingController(text: post?.title);
     final descriptionEditController = useTextEditingController(
       text: post?.description,
@@ -44,12 +47,12 @@ class PostFormPage extends HookConsumerWidget {
                       visualDensity: VisualDensity.compact,
                     ),
                     onPressed: () async {
-                      final res = await showOkCancelAlertDialog(
-                        context: context,
-                        title: '確認',
-                        message: '入力内容は破棄されますがよろしいですか？',
-                      );
-                      if (res == OkCancelResult.ok) {
+                      if (OkCancelResult.ok ==
+                          await showOkCancelAlertDialog(
+                            context: context,
+                            title: '確認',
+                            message: '入力内容は破棄されますがよろしいですか？',
+                          )) {
                         context.pop();
                       }
                     },
@@ -60,6 +63,7 @@ class PostFormPage extends HookConsumerWidget {
                     formKey: formKey,
                     titleEditingController: titleEditController,
                     descriptionEditingController: descriptionEditController,
+                    postSnap: postSnap,
                   ),
                 ],
               ),
@@ -90,11 +94,13 @@ class _SaveButton extends ConsumerWidget {
     required this.formKey,
     required this.titleEditingController,
     required this.descriptionEditingController,
+    this.postSnap,
   });
 
   final GlobalKey<FormState> formKey;
   final TextEditingController titleEditingController;
   final TextEditingController descriptionEditingController;
+  final DocumentSnapshot<Post>? postSnap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -103,15 +109,30 @@ class _SaveButton extends ConsumerWidget {
       onPressed: () async {
         if (formKey.currentState!.validate()) {
           final title = titleEditingController.text;
-          await ref.read(postRepositoryProvider).create(
+          final description = descriptionEditingController.text;
+
+          final postSnap = this.postSnap;
+          if (postSnap == null) {
+            ref
+              ..read(postRepositoryProvider).create(
                 post: Post(
                   title: title,
-                  description: descriptionEditingController.text,
+                  description: description,
                 ),
-              );
-          ref.read(scaffoldMessengerKey).currentState!.showMessage(
-                '[$title]を投稿しました',
-              );
+              )
+              ..read(scaffoldMessengerKey).currentState!.showMessage(
+                    '[$title]を投稿しました',
+                  );
+          } else {
+            await ref.read(postRepositoryProvider).update(
+                  reference: postSnap.reference,
+                  post: postSnap.data()!.copyWith(
+                        title: title,
+                        description: description,
+                      ),
+                );
+          }
+
           context.pop();
         }
       },
