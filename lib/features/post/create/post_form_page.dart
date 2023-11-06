@@ -106,7 +106,7 @@ class _SaveButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return FilledButton(
       child: const Text('投稿する'),
-      onPressed: () async {
+      onPressed: () {
         if (formKey.currentState!.validate()) {
           final title = titleEditingController.text;
           final description = descriptionEditingController.text;
@@ -124,7 +124,7 @@ class _SaveButton extends ConsumerWidget {
                     '[$title]を投稿しました',
                   );
           } else {
-            await ref.read(postRepositoryProvider).update(
+            ref.read(postRepositoryProvider).update(
                   reference: postSnap.reference,
                   post: postSnap.data()!.copyWith(
                         title: title,

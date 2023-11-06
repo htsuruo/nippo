@@ -19,7 +19,7 @@ class PostRepository {
     doc.set(post.copyWith(nullablePostId: doc.id));
   }
 
-  Future<void> update({
+  void update({
     required DocumentReference<Post> reference,
     required Post post,
   }) =>
