@@ -39,30 +39,26 @@ Stream<List<QueryDocumentSnapshot<Post>>> posts(PostsRef ref) {
       .map((snapshot) => snapshot.docs);
 }
 
-// コレクショングループで取得する
 @riverpod
-Stream<QueryDocumentSnapshot<Post>?> post(
-  PostRef ref,
+Stream<DocumentSnapshot<Post>?> post(
+  PostRef ref, {
   String? postId,
-) {
-  return FirebaseFirestore.instance
-      .collectionGroup(Collection.posts)
-      .withConverter<Post>(
-        fromFirestore: _Converter.from,
-        toFirestore: _Converter.to,
-      )
-      .where(Field.postId, isEqualTo: postId)
-      .snapshots()
-      .map((s) => s.docs.firstOrNull);
-}
-
-// ドキュメントで取得する
-@riverpod
-Stream<DocumentSnapshot<Post>?> userPost(
-  UserPostRef ref,
   String? uid,
-  String? postId,
-) {
+}) {
+  if (uid == null) {
+    // コレクショングループで取得
+    return FirebaseFirestore.instance
+        .collectionGroup(Collection.posts)
+        .withConverter<Post>(
+          fromFirestore: _Converter.from,
+          toFirestore: _Converter.to,
+        )
+        .where(Field.postId, isEqualTo: postId)
+        .snapshots()
+        .map((s) => s.docs.firstOrNull);
+  }
+
+  // ドキュメントで取得
   return FirebaseFirestore.instance
       .collection(Collection.users)
       .doc(uid)

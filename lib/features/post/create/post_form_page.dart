@@ -23,7 +23,7 @@ class PostFormPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = useMemoized(GlobalKey<FormState>.new);
-    final post = ref.watch(postProvider(postId)).value?.data();
+    final post = ref.watch(postProvider(postId: postId)).value?.data();
     final titleEditController = useTextEditingController(text: post?.title);
     final descriptionEditController = useTextEditingController(
       text: post?.description,

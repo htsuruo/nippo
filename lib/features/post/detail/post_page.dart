@@ -22,9 +22,7 @@ class PostPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uid = this.uid;
-    final postSnapAsync = uid == null
-        ? ref.watch(postProvider(pid))
-        : ref.watch(userPostProvider(uid, pid));
+    final postSnapAsync = ref.watch(postProvider(postId: pid, uid: uid));
 
     return Scaffold(
       appBar: AppBar(
