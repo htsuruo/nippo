@@ -13,14 +13,13 @@ class PostDetailView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final postSnap = this.postSnap;
-    if (postSnap == null) {
+    final post = postSnap?.data();
+    if (post == null) {
       return const Center(
         child: Text('データがありません'),
       );
     }
 
-    final post = postSnap.data()!;
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
