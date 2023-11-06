@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:json_converter_helper/json_converter_helper.dart';
 import 'package:nippo/features/post/post_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -23,7 +24,11 @@ class PostRepository {
     required DocumentReference<Post> reference,
     required Post post,
   }) =>
-      reference.update(post.toJson());
+      reference.update(
+        post
+            .copyWith(updatedAt: const UnionTimestamp.serverTimestamp())
+            .toJson(),
+      );
 
   void delete({required DocumentReference<Post> postRef}) => postRef.delete();
 }
