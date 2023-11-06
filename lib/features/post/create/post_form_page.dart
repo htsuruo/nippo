@@ -6,8 +6,8 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
+import 'package:nippo/features/post/create/post_form_controller.dart';
 import 'package:nippo/features/post/model/post.dart';
-import 'package:nippo/features/post/post_provider.dart';
 import 'package:nippo/features/post/post_repository.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
@@ -24,20 +24,13 @@ class PostFormPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO(htsuruo): 混雑してきたので要リファクタ
-    final provider = ref.watch(postProvider(postId: postId));
-    final isLoading = provider.isLoading;
-    final postSnap = provider.value;
-    final post = provider.value?.data();
+    final controller = ref.watch(postFormControllerProvider(postId: postId));
+    final formState = controller.value;
 
     final formKey = useMemoized(GlobalKey<FormState>.new);
-    final title = post?.title;
-    final description = post?.description;
-    final titleEditController =
-        useTextEditingController(text: title, keys: [title]);
-    final descriptionEditController = useTextEditingController(
-      text: description,
-      keys: [description],
+    final titleEditController = TextEditingController(text: formState?.title);
+    final descriptionEditController = TextEditingController(
+      text: formState?.description,
     );
 
     return Scaffold(
@@ -71,7 +64,7 @@ class PostFormPage extends HookConsumerWidget {
                     formKey: formKey,
                     titleEditingController: titleEditController,
                     descriptionEditingController: descriptionEditController,
-                    postSnap: postSnap,
+                    postRef: formState?.postRef,
                   ),
                 ],
               ),
@@ -81,7 +74,7 @@ class PostFormPage extends HookConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: isLoading
+        child: controller.isLoading
             // TODO(htsuruo): 不自然なので1秒未満は非表示にする
             ? const CenteredCircularProgressIndicator()
             : Form(
@@ -105,13 +98,13 @@ class _SaveButton extends ConsumerWidget {
     required this.formKey,
     required this.titleEditingController,
     required this.descriptionEditingController,
-    this.postSnap,
+    this.postRef,
   });
 
   final GlobalKey<FormState> formKey;
   final TextEditingController titleEditingController;
   final TextEditingController descriptionEditingController;
-  final DocumentSnapshot<Post>? postSnap;
+  final DocumentReference<Post>? postRef;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -122,8 +115,8 @@ class _SaveButton extends ConsumerWidget {
           final title = titleEditingController.text;
           final description = descriptionEditingController.text;
 
-          final postSnap = this.postSnap;
-          if (postSnap == null) {
+          final postRef = this.postRef;
+          if (postRef == null) {
             ref
               ..read(postRepositoryProvider).create(
                 post: Post(
@@ -135,13 +128,14 @@ class _SaveButton extends ConsumerWidget {
                     '[$title]を投稿しました',
                   );
           } else {
-            ref.read(postRepositoryProvider).update(
-                  reference: postSnap.reference,
-                  post: postSnap.data()!.copyWith(
-                        title: title,
-                        description: description,
-                      ),
-                );
+            // TODO(htsuruo): 要修正
+            // ref.read(postRepositoryProvider).update(
+            //       reference: postSnap.reference,
+            //       post: postSnap.data()!.copyWith(
+            //             title: title,
+            //             description: description,
+            //           ),
+            //     );
           }
 
           context.pop();
