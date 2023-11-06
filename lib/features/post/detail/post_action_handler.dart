@@ -21,9 +21,11 @@ class PostActionHandler {
 
   BuildContext get _context => _ref.read(routerProvider).navigator.context;
 
-  // TODO(htsuruo): 編集処理
-  Future<void> edit({required DocumentSnapshot<Post> postSnap}) async {}
+  /// 編集
+  Future<void> edit({required DocumentSnapshot<Post> postSnap}) async =>
+      PostEditPageRoute(pid: postSnap.id).push<void>(_context);
 
+  /// 削除
   Future<void> delete({required DocumentSnapshot<Post> postSnap}) async {
     final post = postSnap.data()!;
     if (OkCancelResult.ok ==

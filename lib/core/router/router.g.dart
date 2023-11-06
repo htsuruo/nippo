@@ -123,6 +123,10 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
                   factory: $PostCreatePageRouteExtension._fromState,
                 ),
                 GoRouteData.$route(
+                  path: 'edit/:pid',
+                  factory: $PostEditPageRouteExtension._fromState,
+                ),
+                GoRouteData.$route(
                   path: ':pid',
                   factory: $PostDetailPageRouteExtension._fromState,
                 ),
@@ -170,6 +174,25 @@ extension $PostCreatePageRouteExtension on PostCreatePageRoute {
 
   String get location => GoRouteData.$location(
         '/posts/create',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $PostEditPageRouteExtension on PostEditPageRoute {
+  static PostEditPageRoute _fromState(GoRouterState state) => PostEditPageRoute(
+        pid: state.pathParameters['pid']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/posts/edit/${Uri.encodeComponent(pid)}',
       );
 
   void go(BuildContext context) => context.go(location);

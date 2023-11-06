@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nippo/features/post/create/post_create_page.dart';
+import 'package:nippo/features/post/create/post_form_page.dart';
 import 'package:nippo/features/post/detail/post_page.dart';
 import 'package:nippo/features/post/post_list_page.dart';
 import 'package:nippo/features/setting/setting_page.dart';
@@ -24,6 +24,7 @@ class _Location {
   // PostのドキュメントIDを取得するためにはコレクショングループで引くしかない。
   static const post = ':pid';
   static const postCreate = 'create';
+  static const postEdit = 'edit/:pid';
   static const signin = '/signin';
   static const user = '/user/:uid';
   static const userPost = '/user/:uid/posts/:pid';
@@ -116,6 +117,9 @@ class UserPostPageRoute extends GoRouteData {
             TypedGoRoute<PostCreatePageRoute>(
               path: _Location.postCreate,
             ),
+            TypedGoRoute<PostEditPageRoute>(
+              path: _Location.postEdit,
+            ),
             TypedGoRoute<PostDetailPageRoute>(
               path: _Location.post,
             ),
@@ -183,7 +187,16 @@ class PostDetailPageRoute extends GoRouteData {
 class PostCreatePageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const _Root(child: PostCreatePage());
+      const PostFormPage.create();
+}
+
+class PostEditPageRoute extends GoRouteData {
+  const PostEditPageRoute({required this.pid});
+  final String pid;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      PostFormPage.edit(postId: pid);
 }
 
 class ProfilePageRoute extends GoRouteData {

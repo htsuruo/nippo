@@ -5,20 +5,29 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/features/post/model/post.dart';
+import 'package:nippo/features/post/post_provider.dart';
 import 'package:nippo/features/post/post_repository.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 import 'widgets/description_form_field.dart';
 import 'widgets/title_form_field.dart';
 
-class PostCreatePage extends HookConsumerWidget {
-  const PostCreatePage({super.key});
+class PostFormPage extends HookConsumerWidget {
+  const PostFormPage._({this.postId});
+
+  const PostFormPage.create() : this._();
+  const PostFormPage.edit({required String postId}) : this._(postId: postId);
+
+  final String? postId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = useMemoized(GlobalKey<FormState>.new);
-    final titleEditController = useTextEditingController();
-    final descriptionEditController = useTextEditingController();
+    final post = ref.watch(postProvider(postId)).value?.data();
+    final titleEditController = useTextEditingController(text: post?.title);
+    final descriptionEditController = useTextEditingController(
+      text: post?.description,
+    );
 
     return Scaffold(
       appBar: AppBar(
