@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nippo/common/common.dart';
 import 'package:nippo/features/post/model/post.dart';
 import 'package:nippo/features/post/post_provider.dart';
 import 'package:nippo/features/post/post_repository.dart';
@@ -23,13 +24,20 @@ class PostFormPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final postSnap = ref.watch(postProvider(postId: postId)).value;
-    final post = postSnap?.data();
+    // TODO(htsuruo): 混雑してきたので要リファクタ
+    final provider = ref.watch(postProvider(postId: postId));
+    final isLoading = provider.isLoading;
+    final postSnap = provider.value;
+    final post = provider.value?.data();
 
     final formKey = useMemoized(GlobalKey<FormState>.new);
-    final titleEditController = useTextEditingController(text: post?.title);
+    final title = post?.title;
+    final description = post?.description;
+    final titleEditController =
+        useTextEditingController(text: title, keys: [title]);
     final descriptionEditController = useTextEditingController(
-      text: post?.description,
+      text: description,
+      keys: [description],
     );
 
     return Scaffold(
@@ -73,17 +81,20 @@ class PostFormPage extends HookConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TitleFormField(controller: titleEditController),
-              const Gap(12),
-              DescriptionFormField(controller: descriptionEditController),
-            ],
-          ),
-        ),
+        child: isLoading
+            // TODO(htsuruo): 不自然なので1秒未満は非表示にする
+            ? const CenteredCircularProgressIndicator()
+            : Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    TitleFormField(controller: titleEditController),
+                    const Gap(12),
+                    DescriptionFormField(controller: descriptionEditController),
+                  ],
+                ),
+              ),
       ),
     );
   }
