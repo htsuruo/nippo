@@ -19,7 +19,7 @@ class PostActionHandler {
   PostActionHandler(this._ref);
   final Ref _ref;
 
-  BuildContext get context => _ref.read(routerProvider).navigator.context;
+  BuildContext get _context => _ref.read(routerProvider).navigator.context;
 
   // TODO(htsuruo): 編集処理
   Future<void> edit({required DocumentSnapshot<Post> postSnap}) async {}
@@ -28,7 +28,7 @@ class PostActionHandler {
     final post = postSnap.data()!;
     if (OkCancelResult.ok ==
         await showOkCancelAlertDialog(
-          context: context,
+          context: _context,
           title: '確認',
           message: '本当に削除しますか？',
         )) {
@@ -37,7 +37,7 @@ class PostActionHandler {
           .read(scaffoldMessengerKey)
           .currentState!
           .showMessage('[${post.title}]を削除しました');
-      context.pop();
+      _context.pop();
     }
   }
 }
