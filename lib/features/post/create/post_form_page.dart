@@ -28,9 +28,13 @@ class PostFormPage extends HookConsumerWidget {
     final formState = controller.value;
 
     final formKey = useMemoized(GlobalKey<FormState>.new);
-    final titleEditController = TextEditingController(text: formState?.title);
-    final descriptionEditController = TextEditingController(
+    final titleEditController = useTextEditingController(
+      text: formState?.title,
+      keys: [formState?.title],
+    );
+    final descriptionEditController = useTextEditingController(
       text: formState?.description,
+      keys: [formState?.description],
     );
 
     return Scaffold(
