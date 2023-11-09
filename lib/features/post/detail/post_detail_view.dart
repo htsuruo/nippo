@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
 import 'package:nippo/features/post/model/post.dart';
+import 'package:smooth_highlight/smooth_highlight.dart';
 
 class PostDetailView extends ConsumerWidget {
   const PostDetailView({super.key, required this.postSnap});
@@ -25,10 +26,13 @@ class PostDetailView extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            post.title,
-            style: theme.textTheme.titleLarge!.copyWith(
-              fontWeight: FontWeight.bold,
+          _Highlight<String>(
+            value: post.title,
+            child: Text(
+              post.title,
+              style: theme.textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const Gap(4),
@@ -37,12 +41,38 @@ class PostDetailView extends ConsumerWidget {
             padding: EdgeInsets.symmetric(vertical: 16),
             child: Divider(),
           ),
-          Text(
-            post.description,
-            style: theme.textTheme.bodyLarge,
+          _Highlight<String>(
+            value: post.description,
+            child: Text(
+              post.description,
+              style: theme.textTheme.bodyLarge,
+            ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _Highlight<T> extends StatelessWidget {
+  const _Highlight({
+    super.key,
+    required this.value,
+    required this.child,
+  });
+
+  final T? value;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return ValueChangeHighlight<T>(
+      value: value,
+      color: colorScheme.primary.withOpacity(.4),
+      child: child,
     );
   }
 }
