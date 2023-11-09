@@ -64,7 +64,7 @@ class PostFormPage extends HookConsumerWidget {
                     child: const Text('キャンセル'),
                   ),
                   const Spacer(),
-                  _SaveButton(
+                  _SubmitButton(
                     formKey: formKey,
                     titleEditingController: titleEditController,
                     descriptionEditingController: descriptionEditController,
@@ -97,8 +97,8 @@ class PostFormPage extends HookConsumerWidget {
   }
 }
 
-class _SaveButton extends ConsumerWidget {
-  const _SaveButton({
+class _SubmitButton extends ConsumerWidget {
+  const _SubmitButton({
     required this.formKey,
     required this.titleEditingController,
     required this.descriptionEditingController,
