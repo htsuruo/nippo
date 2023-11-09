@@ -24,18 +24,21 @@ class PostFormPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // TODO(htsuruo): 他デバイスからデータの更新があったときに入力途中でも破棄されて強制的に更新されてしまう問題。
+    // `ref.listen`を使うようにコメントがあるが対象がAutoDisposeなProviderなので使えない。
+    // ref. https://github.com/rrousselGit/riverpod/discussions/1069#discussioncomment-1919829
     final postSnap = ref.watch(postProvider(postId: postId)).value;
-    final formState = postSnap?.data();
+    final post = postSnap?.data();
     final isLoading = postId != null && postSnap == null;
 
     final formKey = useMemoized(GlobalKey<FormState>.new);
     final titleEditController = useTextEditingController(
-      text: formState?.title,
-      keys: [formState?.title],
+      text: post?.title,
+      keys: [post?.title],
     );
     final descriptionEditController = useTextEditingController(
-      text: formState?.description,
-      keys: [formState?.description],
+      text: post?.description,
+      keys: [post?.description],
     );
 
     return Scaffold(
@@ -53,11 +56,20 @@ class PostFormPage extends HookConsumerWidget {
                       visualDensity: VisualDensity.compact,
                     ),
                     onPressed: () async {
+                      final skipConfirm = post ==
+                          post?.copyWith(
+                            title: titleEditController.text,
+                            description: descriptionEditController.text,
+                          );
+                      if (skipConfirm) {
+                        context.pop();
+                        return;
+                      }
                       if (OkCancelResult.ok ==
                           await showOkCancelAlertDialog(
                             context: context,
                             title: '確認',
-                            message: '入力内容は破棄されますがよろしいですか？',
+                            message: '変更内容は破棄されますがよろしいですか？',
                           )) {
                         context.pop();
                       }
