@@ -6,11 +6,11 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/features/post/create/post_form_controller.dart';
 import 'package:nippo/features/post/model/post.dart';
 import 'package:nippo/features/post/post_repository.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
+import '../post_provider.dart';
 import 'widgets/description_form_field.dart';
 import 'widgets/title_form_field.dart';
 
@@ -24,8 +24,9 @@ class PostFormPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(postFormControllerProvider(postId: postId));
-    final formState = controller.value;
+    final postSnap = ref.watch(postProvider(postId: postId)).value;
+    final formState = postSnap?.data();
+    final isLoading = postId != null && postSnap == null;
 
     final formKey = useMemoized(GlobalKey<FormState>.new);
     final titleEditController = useTextEditingController(
@@ -68,7 +69,7 @@ class PostFormPage extends HookConsumerWidget {
                     formKey: formKey,
                     titleEditingController: titleEditController,
                     descriptionEditingController: descriptionEditController,
-                    postRef: formState?.postRef,
+                    postRef: postSnap?.reference,
                   ),
                 ],
               ),
@@ -78,7 +79,7 @@ class PostFormPage extends HookConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: controller.isLoading
+        child: isLoading
             // TODO(htsuruo): 不自然なので1秒未満は非表示にする
             ? const CenteredCircularProgressIndicator()
             : Form(
