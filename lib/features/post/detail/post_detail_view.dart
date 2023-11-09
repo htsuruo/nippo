@@ -54,6 +54,7 @@ class PostDetailView extends ConsumerWidget {
   }
 }
 
+// TODO(htsuruo): アニメーションの開始が早くてチラついてしまうので、ディレイを設定できるようにする
 class _Highlight<T> extends StatelessWidget {
   const _Highlight({
     super.key,
