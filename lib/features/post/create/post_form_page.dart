@@ -77,12 +77,13 @@ class PostFormPage extends HookConsumerWidget {
                     child: const Text('キャンセル'),
                   ),
                   const Spacer(),
-                  _SubmitButton(
-                    formKey: formKey,
-                    titleEditingController: titleEditController,
-                    descriptionEditingController: descriptionEditController,
-                    postRef: postSnap?.reference,
-                  ),
+                  if (!isLoading)
+                    _SubmitButton(
+                      formKey: formKey,
+                      titleEditingController: titleEditController,
+                      descriptionEditingController: descriptionEditController,
+                      postSnap: postSnap,
+                    ),
                 ],
               ),
             ),
@@ -115,13 +116,13 @@ class _SubmitButton extends ConsumerWidget {
     required this.formKey,
     required this.titleEditingController,
     required this.descriptionEditingController,
-    this.postRef,
+    this.postSnap,
   });
 
   final GlobalKey<FormState> formKey;
   final TextEditingController titleEditingController;
   final TextEditingController descriptionEditingController;
-  final DocumentReference<Post>? postRef;
+  final DocumentSnapshot<Post>? postSnap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -132,8 +133,8 @@ class _SubmitButton extends ConsumerWidget {
           final title = titleEditingController.text;
           final description = descriptionEditingController.text;
 
-          final postRef = this.postRef;
-          if (postRef == null) {
+          final postSnap = this.postSnap;
+          if (postSnap == null) {
             ref
               ..read(postRepositoryProvider).create(
                 post: Post(
@@ -145,16 +146,14 @@ class _SubmitButton extends ConsumerWidget {
                     '[$title]を投稿しました',
                   );
           } else {
-            // TODO(htsuruo): 要修正
-            // ref.read(postRepositoryProvider).update(
-            //       reference: postSnap.reference,
-            //       post: postSnap.data()!.copyWith(
-            //             title: title,
-            //             description: description,
-            //           ),
-            //     );
+            ref.read(postRepositoryProvider).update(
+                  reference: postSnap.reference,
+                  post: postSnap.data()!.copyWith(
+                        title: title,
+                        description: description,
+                      ),
+                );
           }
-
           context.pop();
         }
       },
