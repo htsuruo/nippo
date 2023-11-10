@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:nippo/features/post/form/widgets/form_validator.dart';
 
 class TitleFormField extends HookWidget {
   const TitleFormField({super.key, required this.controller});
@@ -19,12 +20,7 @@ class TitleFormField extends HookWidget {
         label: Text('件名'),
         hintText: '今日を一言で表現しましょう',
       ),
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'テキストを入力しましょう';
-        }
-        return null;
-      },
+      validator: FormValidator.validateTitle,
     );
   }
 }

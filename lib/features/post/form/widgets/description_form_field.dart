@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import 'form_validator.dart';
+
 class DescriptionFormField extends HookWidget {
   const DescriptionFormField({super.key, required this.controller});
 
@@ -21,12 +23,7 @@ class DescriptionFormField extends HookWidget {
         decoration: const InputDecoration(
           hintText: '今日起きたたくさんの出来事を記録しましょう',
         ),
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'テキストを入力しましょう';
-          }
-          return null;
-        },
+        validator: FormValidator.validateDescription,
       ),
     );
   }
