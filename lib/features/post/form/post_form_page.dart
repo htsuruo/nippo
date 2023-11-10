@@ -51,37 +51,17 @@ class PostFormPage extends HookConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      visualDensity: VisualDensity.compact,
-                    ),
-                    onPressed: () async {
-                      final skipConfirm = post ==
-                          post?.copyWith(
-                            title: titleEditController.text,
-                            description: descriptionEditController.text,
-                          );
-                      if (skipConfirm) {
-                        context.pop();
-                        return;
-                      }
-                      if (OkCancelResult.ok ==
-                          await showOkCancelAlertDialog(
-                            context: context,
-                            title: '確認',
-                            message: '変更内容は破棄されますがよろしいですか？',
-                          )) {
-                        context.pop();
-                      }
-                    },
-                    child: const Text('キャンセル'),
+                  _CancelButton(
+                    post: post,
+                    titleController: titleEditController,
+                    descriptionController: descriptionEditController,
                   ),
                   const Spacer(),
                   if (!isLoading)
                     _SubmitButton(
                       formKey: formKey,
-                      titleEditingController: titleEditController,
-                      descriptionEditingController: descriptionEditController,
+                      titleController: titleEditController,
+                      descriptionController: descriptionEditController,
                       postSnap: postSnap,
                     ),
                 ],
@@ -111,17 +91,58 @@ class PostFormPage extends HookConsumerWidget {
   }
 }
 
+class _CancelButton extends StatelessWidget {
+  const _CancelButton({
+    required this.post,
+    required this.titleController,
+    required this.descriptionController,
+  });
+
+  final Post? post;
+  final TextEditingController titleController;
+  final TextEditingController descriptionController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: TextButton.styleFrom(
+        visualDensity: VisualDensity.compact,
+      ),
+      onPressed: () async {
+        final skipConfirm = post ==
+            post?.copyWith(
+              title: titleController.text,
+              description: descriptionController.text,
+            );
+        if (skipConfirm) {
+          context.pop();
+          return;
+        }
+        if (OkCancelResult.ok ==
+            await showOkCancelAlertDialog(
+              context: context,
+              title: '確認',
+              message: '変更内容は破棄されますがよろしいですか？',
+            )) {
+          context.pop();
+        }
+      },
+      child: const Text('キャンセル'),
+    );
+  }
+}
+
 class _SubmitButton extends ConsumerWidget {
   const _SubmitButton({
     required this.formKey,
-    required this.titleEditingController,
-    required this.descriptionEditingController,
+    required this.titleController,
+    required this.descriptionController,
     this.postSnap,
   });
 
   final GlobalKey<FormState> formKey;
-  final TextEditingController titleEditingController;
-  final TextEditingController descriptionEditingController;
+  final TextEditingController titleController;
+  final TextEditingController descriptionController;
   final DocumentSnapshot<Post>? postSnap;
 
   @override
@@ -130,8 +151,8 @@ class _SubmitButton extends ConsumerWidget {
       child: const Text('投稿する'),
       onPressed: () {
         if (formKey.currentState!.validate()) {
-          final title = titleEditingController.text;
-          final description = descriptionEditingController.text;
+          final title = titleController.text;
+          final description = descriptionController.text;
 
           final postSnap = this.postSnap;
           if (postSnap == null) {
