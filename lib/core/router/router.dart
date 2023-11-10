@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nippo/features/post/create/post_form_page.dart';
 import 'package:nippo/features/post/detail/post_page.dart';
+import 'package:nippo/features/post/form/post_form_page.dart';
 import 'package:nippo/features/post/post_list_page.dart';
 import 'package:nippo/features/setting/setting_page.dart';
 import 'package:nippo/features/signin/signin_page.dart';
