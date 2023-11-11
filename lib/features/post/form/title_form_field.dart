@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:nippo/features/post/form/widgets/form_validator.dart';
+
+import 'form_validator.dart';
 
 class TitleFormField extends HookWidget {
   const TitleFormField({super.key, required this.controller});
