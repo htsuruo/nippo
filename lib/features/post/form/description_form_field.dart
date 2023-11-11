@@ -12,19 +12,17 @@ class DescriptionFormField extends HookWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Expanded(
-      child: TextFormField(
-        controller: controller,
-        style: theme.textTheme.bodyMedium,
-        autofocus: true,
-        expands: true,
-        maxLines: null,
-        textAlignVertical: TextAlignVertical.top,
-        decoration: const InputDecoration(
-          hintText: '今日起きたたくさんの出来事を記録しましょう',
-        ),
-        validator: FormValidator.validateDescription,
+    return TextFormField(
+      controller: controller,
+      style: theme.textTheme.bodyMedium,
+      autofocus: true,
+      expands: true,
+      maxLines: null,
+      textAlignVertical: TextAlignVertical.top,
+      decoration: const InputDecoration(
+        hintText: '今日起きたたくさんの出来事を記録しましょう',
       ),
+      validator: FormValidator.validateDescription,
     );
   }
 }

@@ -82,7 +82,11 @@ class PostFormPage extends HookConsumerWidget {
                   children: [
                     TitleFormField(controller: titleEditController),
                     const Gap(12),
-                    DescriptionFormField(controller: descriptionEditController),
+                    Expanded(
+                      child: DescriptionFormField(
+                        controller: descriptionEditController,
+                      ),
+                    ),
                   ],
                 ),
               ),
