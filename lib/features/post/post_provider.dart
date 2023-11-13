@@ -14,9 +14,9 @@ part 'post_provider.g.dart';
 @riverpod
 Stream<List<QueryDocumentSnapshot<Post>>> posts(PostsRef ref) {
   return FirebaseFirestore.instance
-      .collectionGroup(Collection.posts)
+      .collectionGroup(CollectionName.posts)
       .withPostConverter()
-      .orderBy(Field.createdAt, descending: true)
+      .orderBy(FieldName.createdAt, descending: true)
       .snapshots()
       .map((snapshot) => snapshot.docs);
 }
@@ -30,18 +30,18 @@ Stream<DocumentSnapshot<Post>?> post(
   if (uid == null) {
     // コレクショングループで取得
     return FirebaseFirestore.instance
-        .collectionGroup(Collection.posts)
+        .collectionGroup(CollectionName.posts)
         .withPostConverter()
-        .where(Field.postId, isEqualTo: postId)
+        .where(FieldName.postId, isEqualTo: postId)
         .snapshots()
         .map((s) => s.docs.firstOrNull);
   }
 
   // ドキュメントで取得
   return FirebaseFirestore.instance
-      .collection(Collection.users)
+      .collection(CollectionName.users)
       .doc(uid)
-      .collection(Collection.posts)
+      .collection(CollectionName.posts)
       .doc(postId)
       .withPostConverter()
       .snapshots();
@@ -53,11 +53,11 @@ Stream<List<QueryDocumentSnapshot<Post>>> userPosts(
   String uid,
 ) {
   return FirebaseFirestore.instance
-      .collection(Collection.users)
+      .collection(CollectionName.users)
       .doc(uid)
-      .collection(Collection.posts)
+      .collection(CollectionName.posts)
       .withPostConverter()
-      .orderBy(Field.createdAt, descending: true)
+      .orderBy(FieldName.createdAt, descending: true)
       .snapshots()
       .map(
         (snapshot) => snapshot.docs.toList(),
@@ -68,6 +68,6 @@ Stream<List<QueryDocumentSnapshot<Post>>> userPosts(
 CollectionReference<Post> selfPostRef(SelfPostRefRef ref) {
   return ref
       .watch(authUserRefProvider)
-      .collection(Collection.posts)
+      .collection(CollectionName.posts)
       .withPostConverter();
 }
