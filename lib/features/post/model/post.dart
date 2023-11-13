@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_converter_helper/json_converter_helper.dart';
-import 'package:nippo/core/const.dart';
+import 'package:nippo/core/const.dart' hide Collection;
 
 part 'post.freezed.dart';
 part 'post.g.dart';
@@ -28,6 +29,9 @@ class Post with _$Post {
   // ignore: deprecated_member_use_from_same_package
   late final String postId = nullablePostId!;
 }
+
+@Collection<Post>('posts')
+final postsRef = PostCollectionReference();
 
 extension PostDocumentReferenceX on DocumentReference<Post> {
   String? get uid => parent.parent?.id;

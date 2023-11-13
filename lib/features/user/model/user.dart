@@ -1,3 +1,4 @@
+import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_converter_helper/json_converter_helper.dart';
 
@@ -17,3 +18,6 @@ class User with _$User {
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
+
+@Collection<User>('users')
+final usersRef = UserCollectionReference();
