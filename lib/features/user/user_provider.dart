@@ -17,7 +17,7 @@ DocumentReference<User> authUserRef(AuthUserRefRef ref) {
 DocumentReference<User> userRef(UserRefRef ref, String? uid) {
   final firUser = ref.watch(firUserProvider).value;
   return FirebaseFirestore.instance
-      .collection(Collection.users)
+      .collection(CollectionName.users)
       .doc(firUser?.uid)
       .withConverter<User>(
         fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),

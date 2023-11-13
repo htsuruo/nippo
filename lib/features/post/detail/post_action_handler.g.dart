@@ -2,25 +2,25 @@
 
 // ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
-part of 'app_info_provider.dart';
+part of 'post_action_handler.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appInfoHash() => r'2476c12ab36a7b9e00c26e1c81d54fee92d1f0ad';
+String _$postActionHash() => r'5cb345468f2cff919c6ed57ca69804f08cb371b8';
 
-/// See also [appInfo].
-@ProviderFor(appInfo)
-final appInfoProvider = Provider<AppInfo>.internal(
-  appInfo,
-  name: r'appInfoProvider',
+/// See also [postAction].
+@ProviderFor(postAction)
+final postActionProvider = Provider<PostActionHandler>.internal(
+  postAction,
+  name: r'postActionProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$appInfoHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$postActionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef AppInfoRef = ProviderRef<AppInfo>;
+typedef PostActionRef = ProviderRef<PostActionHandler>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

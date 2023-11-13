@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
+// ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
 part of 'post_provider.dart';
 
@@ -8,7 +8,7 @@ part of 'post_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postsHash() => r'fccba1be3d94abb9d6b492dc0c7947d07ff74f05';
+String _$postsHash() => r'0801cab42b4e213141541e13762c3d266fc2bfe2';
 
 /// See also [posts].
 @ProviderFor(posts)
@@ -24,7 +24,7 @@ final postsProvider =
 
 typedef PostsRef
     = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
-String _$postHash() => r'f992a5465ced17f85fbd8ce1653316acccd3cbc1';
+String _$postHash() => r'ac9db26baec705ea3a36a3f8c99f536129c3b991';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -47,23 +47,25 @@ class _SystemHash {
   }
 }
 
-typedef PostRef = AutoDisposeStreamProviderRef<QueryDocumentSnapshot<Post>?>;
+typedef PostRef = AutoDisposeStreamProviderRef<DocumentSnapshot<Post>?>;
 
 /// See also [post].
 @ProviderFor(post)
 const postProvider = PostFamily();
 
 /// See also [post].
-class PostFamily extends Family<AsyncValue<QueryDocumentSnapshot<Post>?>> {
+class PostFamily extends Family<AsyncValue<DocumentSnapshot<Post>?>> {
   /// See also [post].
   const PostFamily();
 
   /// See also [post].
-  PostProvider call(
+  PostProvider call({
     String? postId,
-  ) {
+    String? uid,
+  }) {
     return PostProvider(
-      postId,
+      postId: postId,
+      uid: uid,
     );
   }
 
@@ -72,7 +74,8 @@ class PostFamily extends Family<AsyncValue<QueryDocumentSnapshot<Post>?>> {
     covariant PostProvider provider,
   ) {
     return call(
-      provider.postId,
+      postId: provider.postId,
+      uid: provider.uid,
     );
   }
 
@@ -92,15 +95,16 @@ class PostFamily extends Family<AsyncValue<QueryDocumentSnapshot<Post>?>> {
 }
 
 /// See also [post].
-class PostProvider
-    extends AutoDisposeStreamProvider<QueryDocumentSnapshot<Post>?> {
+class PostProvider extends AutoDisposeStreamProvider<DocumentSnapshot<Post>?> {
   /// See also [post].
-  PostProvider(
+  PostProvider({
     this.postId,
-  ) : super.internal(
+    this.uid,
+  }) : super.internal(
           (ref) => post(
             ref,
-            postId,
+            postId: postId,
+            uid: uid,
           ),
           from: postProvider,
           name: r'postProvider',
@@ -111,113 +115,24 @@ class PostProvider
         );
 
   final String? postId;
-
-  @override
-  bool operator ==(Object other) {
-    return other is PostProvider && other.postId == postId;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, postId.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-String _$userPostHash() => r'6d8bba05a837fb4d89c2793dd815d4c67eb70302';
-typedef UserPostRef = AutoDisposeStreamProviderRef<DocumentSnapshot<Post>?>;
-
-/// See also [userPost].
-@ProviderFor(userPost)
-const userPostProvider = UserPostFamily();
-
-/// See also [userPost].
-class UserPostFamily extends Family<AsyncValue<DocumentSnapshot<Post>?>> {
-  /// See also [userPost].
-  const UserPostFamily();
-
-  /// See also [userPost].
-  UserPostProvider call(
-    String? uid,
-    String? postId,
-  ) {
-    return UserPostProvider(
-      uid,
-      postId,
-    );
-  }
-
-  @override
-  UserPostProvider getProviderOverride(
-    covariant UserPostProvider provider,
-  ) {
-    return call(
-      provider.uid,
-      provider.postId,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'userPostProvider';
-}
-
-/// See also [userPost].
-class UserPostProvider
-    extends AutoDisposeStreamProvider<DocumentSnapshot<Post>?> {
-  /// See also [userPost].
-  UserPostProvider(
-    this.uid,
-    this.postId,
-  ) : super.internal(
-          (ref) => userPost(
-            ref,
-            uid,
-            postId,
-          ),
-          from: userPostProvider,
-          name: r'userPostProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$userPostHash,
-          dependencies: UserPostFamily._dependencies,
-          allTransitiveDependencies: UserPostFamily._allTransitiveDependencies,
-        );
-
   final String? uid;
-  final String? postId;
 
   @override
   bool operator ==(Object other) {
-    return other is UserPostProvider &&
-        other.uid == uid &&
-        other.postId == postId;
+    return other is PostProvider && other.postId == postId && other.uid == uid;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, uid.hashCode);
     hash = _SystemHash.combine(hash, postId.hashCode);
+    hash = _SystemHash.combine(hash, uid.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-String _$userPostsHash() => r'2af8c30f1c8ff8c466e00462e99b5e2561d1ff7e';
+String _$userPostsHash() => r'4236a1c8ed5ed6e3523a71242fde520555b5ea84';
 typedef UserPostsRef
     = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
 
@@ -301,7 +216,7 @@ class UserPostsProvider
   }
 }
 
-String _$selfPostRefHash() => r'2471af5db201a20b96bd7ef9c6a7b3896f5b77b9';
+String _$selfPostRefHash() => r'7be56a0a57599296310b9b6a388198045eb2c81a';
 
 /// See also [selfPostRef].
 @ProviderFor(selfPostRef)

@@ -14,7 +14,7 @@ class UserAvatar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // users/[uid]/posts/[postId]
-    final user = ref.watch(userProvider(uid: postRef.path.split('/')[1])).value;
+    final user = ref.watch(userProvider(uid: postRef.uid)).value;
     return CachedCircleAvatar(
       // TODO(htsuruo): `applyUnlessNull`に書き換える
       onTap: user == null

@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:json_converter_helper/json_converter_helper.dart';
 import 'package:nippo/features/post/post_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,8 +15,20 @@ class PostRepository {
   PostRepository(this._ref);
   final Ref _ref;
 
-  Future<void> create({required Post post}) async {
+  void create({required Post post}) {
     final doc = _ref.read(selfPostRefProvider).doc();
-    await doc.set(post.copyWith(nullablePostId: doc.id));
+    doc.set(post.copyWith(nullablePostId: doc.id));
   }
+
+  void update({
+    required DocumentReference<Post> reference,
+    required Post post,
+  }) =>
+      reference.update(
+        post
+            .copyWith(updatedAt: const UnionTimestamp.serverTimestamp())
+            .toJson(),
+      );
+
+  void delete({required DocumentReference<Post> postRef}) => postRef.delete();
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class TitleFormField extends HookWidget {
-  const TitleFormField({super.key, required this.controller});
+import 'form_validator.dart';
+
+class DescriptionFormField extends HookWidget {
+  const DescriptionFormField({super.key, required this.controller});
 
   final TextEditingController controller;
 
@@ -13,18 +15,14 @@ class TitleFormField extends HookWidget {
     return TextFormField(
       controller: controller,
       style: theme.textTheme.bodyMedium,
-      textInputAction: TextInputAction.next,
       autofocus: true,
+      expands: true,
+      maxLines: null,
+      textAlignVertical: TextAlignVertical.top,
       decoration: const InputDecoration(
-        label: Text('件名'),
-        hintText: '今日を一言で表現しましょう',
+        hintText: '今日起きたたくさんの出来事を記録しましょう',
       ),
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'テキストを入力しましょう';
-        }
-        return null;
-      },
+      validator: FormValidator.validateDescription,
     );
   }
 }

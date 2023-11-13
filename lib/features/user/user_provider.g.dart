@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
+// ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
 part of 'user_provider.dart';
 
@@ -22,7 +22,7 @@ final authUserRefProvider = Provider<DocumentReference<User>>.internal(
 );
 
 typedef AuthUserRefRef = ProviderRef<DocumentReference<User>>;
-String _$userRefHash() => r'262c5ca26e671b237801cb4de1391320e216f972';
+String _$userRefHash() => r'f5da0ecc758923f69f5be9c659c4b778dfd52026';
 
 /// Copied from Dart SDK
 class _SystemHash {
