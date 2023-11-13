@@ -47,8 +47,6 @@ class _SystemHash {
   }
 }
 
-typedef PostRef = AutoDisposeStreamProviderRef<DocumentSnapshot<Post>?>;
-
 /// See also [post].
 @ProviderFor(post)
 const postProvider = PostFamily();
@@ -98,11 +96,11 @@ class PostFamily extends Family<AsyncValue<DocumentSnapshot<Post>?>> {
 class PostProvider extends AutoDisposeStreamProvider<DocumentSnapshot<Post>?> {
   /// See also [post].
   PostProvider({
-    this.postId,
-    this.uid,
-  }) : super.internal(
+    String? postId,
+    String? uid,
+  }) : this._internal(
           (ref) => post(
-            ref,
+            ref as PostRef,
             postId: postId,
             uid: uid,
           ),
@@ -112,10 +110,47 @@ class PostProvider extends AutoDisposeStreamProvider<DocumentSnapshot<Post>?> {
               const bool.fromEnvironment('dart.vm.product') ? null : _$postHash,
           dependencies: PostFamily._dependencies,
           allTransitiveDependencies: PostFamily._allTransitiveDependencies,
+          postId: postId,
+          uid: uid,
         );
+
+  PostProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.postId,
+    required this.uid,
+  }) : super.internal();
 
   final String? postId;
   final String? uid;
+
+  @override
+  Override overrideWith(
+    Stream<DocumentSnapshot<Post>?> Function(PostRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: PostProvider._internal(
+        (ref) => create(ref as PostRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        postId: postId,
+        uid: uid,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<DocumentSnapshot<Post>?> createElement() {
+    return _PostProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -132,9 +167,26 @@ class PostProvider extends AutoDisposeStreamProvider<DocumentSnapshot<Post>?> {
   }
 }
 
+mixin PostRef on AutoDisposeStreamProviderRef<DocumentSnapshot<Post>?> {
+  /// The parameter `postId` of this provider.
+  String? get postId;
+
+  /// The parameter `uid` of this provider.
+  String? get uid;
+}
+
+class _PostProviderElement
+    extends AutoDisposeStreamProviderElement<DocumentSnapshot<Post>?>
+    with PostRef {
+  _PostProviderElement(super.provider);
+
+  @override
+  String? get postId => (origin as PostProvider).postId;
+  @override
+  String? get uid => (origin as PostProvider).uid;
+}
+
 String _$userPostsHash() => r'4236a1c8ed5ed6e3523a71242fde520555b5ea84';
-typedef UserPostsRef
-    = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
 
 /// See also [userPosts].
 @ProviderFor(userPosts)
@@ -184,10 +236,10 @@ class UserPostsProvider
     extends AutoDisposeStreamProvider<List<QueryDocumentSnapshot<Post>>> {
   /// See also [userPosts].
   UserPostsProvider(
-    this.uid,
-  ) : super.internal(
+    String uid,
+  ) : this._internal(
           (ref) => userPosts(
-            ref,
+            ref as UserPostsRef,
             uid,
           ),
           from: userPostsProvider,
@@ -198,9 +250,45 @@ class UserPostsProvider
                   : _$userPostsHash,
           dependencies: UserPostsFamily._dependencies,
           allTransitiveDependencies: UserPostsFamily._allTransitiveDependencies,
+          uid: uid,
         );
 
+  UserPostsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.uid,
+  }) : super.internal();
+
   final String uid;
+
+  @override
+  Override overrideWith(
+    Stream<List<QueryDocumentSnapshot<Post>>> Function(UserPostsRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: UserPostsProvider._internal(
+        (ref) => create(ref as UserPostsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        uid: uid,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<List<QueryDocumentSnapshot<Post>>>
+      createElement() {
+    return _UserPostsProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -214,6 +302,21 @@ class UserPostsProvider
 
     return _SystemHash.finish(hash);
   }
+}
+
+mixin UserPostsRef
+    on AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>> {
+  /// The parameter `uid` of this provider.
+  String get uid;
+}
+
+class _UserPostsProviderElement
+    extends AutoDisposeStreamProviderElement<List<QueryDocumentSnapshot<Post>>>
+    with UserPostsRef {
+  _UserPostsProviderElement(super.provider);
+
+  @override
+  String get uid => (origin as UserPostsProvider).uid;
 }
 
 String _$selfPostRefHash() => r'7be56a0a57599296310b9b6a388198045eb2c81a';
@@ -232,4 +335,4 @@ final selfPostRefProvider =
 
 typedef SelfPostRefRef = AutoDisposeProviderRef<CollectionReference<Post>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

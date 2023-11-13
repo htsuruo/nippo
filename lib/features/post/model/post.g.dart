@@ -1454,7 +1454,7 @@ class PostQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<Post>
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
+_$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       nullablePostId: json['postId'] as String?,
       title: json['title'] as String,
       description: json['description'] as String,
@@ -1468,7 +1468,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
               .fromJson(json['createdAt'] as Object),
     );
 
-const _$$_PostFieldMap = <String, String>{
+const _$$PostImplFieldMap = <String, String>{
   'nullablePostId': 'postId',
   'title': 'title',
   'description': 'description',
@@ -1477,7 +1477,7 @@ const _$$_PostFieldMap = <String, String>{
 };
 
 // ignore: unused_element
-abstract class _$$_PostPerFieldToJson {
+abstract class _$$PostImplPerFieldToJson {
   // ignore: unused_element
   static Object? nullablePostId(String? instance) => instance;
   // ignore: unused_element
@@ -1492,7 +1492,8 @@ abstract class _$$_PostPerFieldToJson {
       const UnionTimestampConverter().toJson(instance);
 }
 
-Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
+Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
+    <String, dynamic>{
       'postId': instance.nullablePostId,
       'title': instance.title,
       'description': instance.description,

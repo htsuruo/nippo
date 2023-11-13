@@ -44,7 +44,7 @@ abstract class $PostCopyWith<$Res> {
   $Res call(
       {@Deprecated('Use late field postId instead')
       @JsonKey(name: FieldName.postId)
-          String? nullablePostId,
+      String? nullablePostId,
       String title,
       String description,
       UnionTimestamp updatedAt,
@@ -115,15 +115,16 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
 }
 
 /// @nodoc
-abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
-  factory _$$_PostCopyWith(_$_Post value, $Res Function(_$_Post) then) =
-      __$$_PostCopyWithImpl<$Res>;
+abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
+  factory _$$PostImplCopyWith(
+          _$PostImpl value, $Res Function(_$PostImpl) then) =
+      __$$PostImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@Deprecated('Use late field postId instead')
       @JsonKey(name: FieldName.postId)
-          String? nullablePostId,
+      String? nullablePostId,
       String title,
       String description,
       UnionTimestamp updatedAt,
@@ -136,9 +137,10 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
-    implements _$$_PostCopyWith<$Res> {
-  __$$_PostCopyWithImpl(_$_Post _value, $Res Function(_$_Post) _then)
+class __$$PostImplCopyWithImpl<$Res>
+    extends _$PostCopyWithImpl<$Res, _$PostImpl>
+    implements _$$PostImplCopyWith<$Res> {
+  __$$PostImplCopyWithImpl(_$PostImpl _value, $Res Function(_$PostImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -150,7 +152,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? updatedAt = null,
     Object? createdAt = null,
   }) {
-    return _then(_$_Post(
+    return _then(_$PostImpl(
       nullablePostId: freezed == nullablePostId
           ? _value.nullablePostId
           : nullablePostId // ignore: cast_nullable_to_non_nullable
@@ -178,18 +180,19 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 /// @nodoc
 
 @allJsonConvertersSerializable
-class _$_Post extends _Post {
-  _$_Post(
+class _$PostImpl extends _Post {
+  _$PostImpl(
       {@Deprecated('Use late field postId instead')
       @JsonKey(name: FieldName.postId)
-          this.nullablePostId,
+      this.nullablePostId,
       required this.title,
       required this.description,
       this.updatedAt = const UnionTimestamp.serverTimestamp(),
       this.createdAt = const UnionTimestamp.serverTimestamp()})
       : super._();
 
-  factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
+  factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostImplFromJson(json);
 
 // コレクショングループで引くためにフィールドにドキュメントIDをもたせる必要がある
 // フォームからインプットする時点ではドキュメントIDが決まらないのでnullableにしておく
@@ -218,7 +221,7 @@ class _$_Post extends _Post {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Post &&
+            other is _$PostImpl &&
             (identical(other.nullablePostId, nullablePostId) ||
                 other.nullablePostId == nullablePostId) &&
             (identical(other.title, title) || other.title == title) &&
@@ -238,12 +241,12 @@ class _$_Post extends _Post {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostCopyWith<_$_Post> get copyWith =>
-      __$$_PostCopyWithImpl<_$_Post>(this, _$identity);
+  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
+      __$$PostImplCopyWithImpl<_$PostImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostToJson(
+    return _$$PostImplToJson(
       this,
     );
   }
@@ -253,14 +256,14 @@ abstract class _Post extends Post {
   factory _Post(
       {@Deprecated('Use late field postId instead')
       @JsonKey(name: FieldName.postId)
-          final String? nullablePostId,
+      final String? nullablePostId,
       required final String title,
       required final String description,
       final UnionTimestamp updatedAt,
-      final UnionTimestamp createdAt}) = _$_Post;
+      final UnionTimestamp createdAt}) = _$PostImpl;
   _Post._() : super._();
 
-  factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
+  factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
 
   @override // コレクショングループで引くためにフィールドにドキュメントIDをもたせる必要がある
 // フォームからインプットする時点ではドキュメントIDが決まらないのでnullableにしておく
@@ -278,5 +281,6 @@ abstract class _Post extends Post {
   UnionTimestamp get createdAt;
   @override
   @JsonKey(ignore: true)
-  _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;
+  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

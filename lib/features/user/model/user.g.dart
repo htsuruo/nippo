@@ -1449,7 +1449,7 @@ class UserQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<User>
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
+_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       name: json['name'] as String? ?? '名無し',
       email: json['email'] as String,
       photoUrl: json['photoUrl'] as String?,
@@ -1463,7 +1463,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
               .fromJson(json['createdAt'] as Object),
     );
 
-const _$$_UserFieldMap = <String, String>{
+const _$$UserImplFieldMap = <String, String>{
   'name': 'name',
   'email': 'email',
   'photoUrl': 'photoUrl',
@@ -1472,7 +1472,7 @@ const _$$_UserFieldMap = <String, String>{
 };
 
 // ignore: unused_element
-abstract class _$$_UserPerFieldToJson {
+abstract class _$$UserImplPerFieldToJson {
   // ignore: unused_element
   static Object? name(String instance) => instance;
   // ignore: unused_element
@@ -1487,7 +1487,8 @@ abstract class _$$_UserPerFieldToJson {
       const UnionTimestampConverter().toJson(instance);
 }
 
-Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
+Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'email': instance.email,
       'photoUrl': instance.photoUrl,
