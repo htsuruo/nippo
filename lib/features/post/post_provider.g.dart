@@ -8,7 +8,7 @@ part of 'post_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postsHash() => r'66d1f4623063c0a7a3dacc1c467208434932938c';
+String _$postsHash() => r'0801cab42b4e213141541e13762c3d266fc2bfe2';
 
 /// See also [posts].
 @ProviderFor(posts)
@@ -24,7 +24,7 @@ final postsProvider =
 
 typedef PostsRef
     = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
-String _$postHash() => r'41da198b9852df05c7a2af5a86e64aeac2e5371b';
+String _$postHash() => r'ac9db26baec705ea3a36a3f8c99f536129c3b991';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -132,7 +132,7 @@ class PostProvider extends AutoDisposeStreamProvider<DocumentSnapshot<Post>?> {
   }
 }
 
-String _$userPostsHash() => r'5903566292963a81f608d6c86010d4c6540bb930';
+String _$userPostsHash() => r'4236a1c8ed5ed6e3523a71242fde520555b5ea84';
 typedef UserPostsRef
     = AutoDisposeStreamProviderRef<List<QueryDocumentSnapshot<Post>>>;
 
@@ -216,7 +216,7 @@ class UserPostsProvider
   }
 }
 
-String _$selfPostRefHash() => r'b75ca1a5e65bfa151601fe4971e6af0c701d44a3';
+String _$selfPostRefHash() => r'7be56a0a57599296310b9b6a388198045eb2c81a';
 
 /// See also [selfPostRef].
 @ProviderFor(selfPostRef)

@@ -24,7 +24,7 @@ mixin _$Post {
 // フォームからインプットする時点ではドキュメントIDが決まらないのでnullableにしておく
 // 利用時には`late final`の非null版を利用すること
   @Deprecated('Use late field postId instead')
-  @JsonKey(name: Field.postId)
+  @JsonKey(name: FieldName.postId)
   String? get nullablePostId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $PostCopyWith<$Res> {
   @useResult
   $Res call(
       {@Deprecated('Use late field postId instead')
-      @JsonKey(name: Field.postId)
+      @JsonKey(name: FieldName.postId)
           String? nullablePostId,
       String title,
       String description,
@@ -122,7 +122,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @useResult
   $Res call(
       {@Deprecated('Use late field postId instead')
-      @JsonKey(name: Field.postId)
+      @JsonKey(name: FieldName.postId)
           String? nullablePostId,
       String title,
       String description,
@@ -181,7 +181,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 class _$_Post extends _Post {
   _$_Post(
       {@Deprecated('Use late field postId instead')
-      @JsonKey(name: Field.postId)
+      @JsonKey(name: FieldName.postId)
           this.nullablePostId,
       required this.title,
       required this.description,
@@ -196,7 +196,7 @@ class _$_Post extends _Post {
 // 利用時には`late final`の非null版を利用すること
   @override
   @Deprecated('Use late field postId instead')
-  @JsonKey(name: Field.postId)
+  @JsonKey(name: FieldName.postId)
   final String? nullablePostId;
   @override
   final String title;
@@ -252,7 +252,7 @@ class _$_Post extends _Post {
 abstract class _Post extends Post {
   factory _Post(
       {@Deprecated('Use late field postId instead')
-      @JsonKey(name: Field.postId)
+      @JsonKey(name: FieldName.postId)
           final String? nullablePostId,
       required final String title,
       required final String description,
@@ -266,7 +266,7 @@ abstract class _Post extends Post {
 // フォームからインプットする時点ではドキュメントIDが決まらないのでnullableにしておく
 // 利用時には`late final`の非null版を利用すること
   @Deprecated('Use late field postId instead')
-  @JsonKey(name: Field.postId)
+  @JsonKey(name: FieldName.postId)
   String? get nullablePostId;
   @override
   String get title;
