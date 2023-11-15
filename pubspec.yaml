@@ -11,7 +11,6 @@ dependencies:
   adaptive_theme: ^3.4.1
   cached_network_image: ^3.3.0
   cloud_firestore: ^4.13.0
-  cloud_firestore_odm: ^1.0.0-dev.75
   cupertino_icons: ^1.0.6
   # 未マージのためgit指定
   # ref. https://github.com/invertase/flutter_desktop_webview_auth/pull/51
@@ -49,10 +48,8 @@ dependencies:
   version: ^3.0.2
 
 dev_dependencies:
-  # `cloud_firestore_odm_generator`が^5.12.0依存
-  analyzer: ^5.12.0
+  analyzer: ^5.13.0
   build_runner: ^2.4.6
-  cloud_firestore_odm_generator: ^1.0.0-dev.73
   custom_lint: ^0.5.6
   flutter_gen: ^5.3.2
   flutter_gen_runner: ^5.3.2
