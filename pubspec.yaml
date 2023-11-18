@@ -19,6 +19,10 @@ dependencies:
   firebase_app_check: ^0.2.1+4
   firebase_auth: ^4.13.0
   firebase_core: ^2.15.0
+  firestore_converter_annotation:
+    git:
+      url: https://github.com/htsuruo/firestore_converter_gen
+      path: packages/firestore_converter_annotation
   flutter:
     sdk: flutter
   flutter_hooks: ^0.20.3
@@ -48,9 +52,12 @@ dependencies:
   version: ^3.0.2
 
 dev_dependencies:
-  analyzer: ^5.13.0
   build_runner: ^2.4.6
   custom_lint: ^0.5.6
+  firestore_converter_gen:
+    git:
+      url: https://github.com/htsuruo/firestore_converter_gen
+      path: packages/firestore_converter_gen
   flutter_gen: ^5.3.2
   flutter_gen_runner: ^5.3.2
   freezed: ^2.4.5
