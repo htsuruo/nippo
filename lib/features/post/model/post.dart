@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firestore_converter_annotation/firestore_converter_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_converter_helper/json_converter_helper.dart';
 import 'package:nippo/core/const.dart';
+import 'package:nippo/features/user/model/user.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';
 
 @freezed
+@FirestoreConverter('posts', parent: User)
 class Post with _$Post {
   @allJsonConvertersSerializable
   factory Post({

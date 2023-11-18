@@ -22,7 +22,7 @@ final authUserRefProvider = Provider<DocumentReference<User>>.internal(
 );
 
 typedef AuthUserRefRef = ProviderRef<DocumentReference<User>>;
-String _$userRefHash() => r'f5da0ecc758923f69f5be9c659c4b778dfd52026';
+String _$userRefHash() => r'2db9e8a94ec23f4c26d434c1164aaccedfaa928f';
 
 /// Copied from Dart SDK
 class _SystemHash {

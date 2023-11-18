@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nippo/core/authentication/auth_provider.dart';
 import 'package:nippo/core/const.dart';
-import 'package:nippo/features/post/model/post_converter.dart';
-import 'package:nippo/features/user/user_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'model/post.dart';
@@ -13,9 +12,7 @@ part 'post_provider.g.dart';
 // List<Post>のデータモデルを返却する形にしておけば、差し替えは容易そうだがFirestoreを使う場合は割り切ったほうが良いのだろうか。
 @riverpod
 Stream<List<QueryDocumentSnapshot<Post>>> posts(PostsRef ref) {
-  return FirebaseFirestore.instance
-      .collectionGroup(CollectionName.posts)
-      .withPostConverter()
+  return postCollectionGroup
       .orderBy(FieldName.createdAt, descending: true)
       .snapshots()
       .map((snapshot) => snapshot.docs);
@@ -29,22 +26,14 @@ Stream<DocumentSnapshot<Post>?> post(
 }) {
   if (uid == null) {
     // コレクショングループで取得
-    return FirebaseFirestore.instance
-        .collectionGroup(CollectionName.posts)
-        .withPostConverter()
+    return postCollectionGroup
         .where(FieldName.postId, isEqualTo: postId)
         .snapshots()
         .map((s) => s.docs.firstOrNull);
   }
 
   // ドキュメントで取得
-  return FirebaseFirestore.instance
-      .collection(CollectionName.users)
-      .doc(uid)
-      .collection(CollectionName.posts)
-      .doc(postId)
-      .withPostConverter()
-      .snapshots();
+  return postCollectionRef(userId: uid).doc(postId).snapshots();
 }
 
 @riverpod
@@ -52,11 +41,7 @@ Stream<List<QueryDocumentSnapshot<Post>>> userPosts(
   UserPostsRef ref,
   String uid,
 ) {
-  return FirebaseFirestore.instance
-      .collection(CollectionName.users)
-      .doc(uid)
-      .collection(CollectionName.posts)
-      .withPostConverter()
+  return postCollectionRef(userId: uid)
       .orderBy(FieldName.createdAt, descending: true)
       .snapshots()
       .map(
@@ -66,8 +51,6 @@ Stream<List<QueryDocumentSnapshot<Post>>> userPosts(
 
 @riverpod
 CollectionReference<Post> selfPostRef(SelfPostRefRef ref) {
-  return ref
-      .watch(authUserRefProvider)
-      .collection(CollectionName.posts)
-      .withPostConverter();
+  final firUser = ref.watch(firUserProvider).value;
+  return postCollectionRef(userId: firUser?.uid ?? '');
 }

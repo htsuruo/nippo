@@ -1,3 +1,4 @@
+import 'package:firestore_converter_annotation/firestore_converter_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_converter_helper/json_converter_helper.dart';
 
@@ -5,6 +6,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
+@FirestoreConverter('users')
 class User with _$User {
   @allJsonConvertersSerializable
   const factory User({
