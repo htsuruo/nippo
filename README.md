@@ -54,8 +54,8 @@ flutter configure
 本レポジトリはFirebase APIキーを公開していますが、データリソースへのアクセスを筆頭に、APIの不正利用からの保護を行っているため、第三者からの意図しないリクエストで超過料金が請求されるなどのリスクが無いように配慮しています。また、第三者からの攻撃だけでなく開発者の実装ミス（ex. Cloud Functionsの無限ループミス）などによる事故に気づけるよう、[Cloud Billingの予算アラート](https://cloud.google.com/billing/docs/how-to/budgets?hl=ja)を設定し気付けるようにしています。
 
 - APIキーの制限
-- APIリソースの保護
-- データの保護
+- APIリソースの保護（App Check）
+- データの保護（Security Rule）
 
 ※本アプリケーションでは未設定ですが、[Using Cloud Monitoring to monitor App Check and Security Rules](https://firebase.blog/posts/2022/12/monitoring-app-check-and-rules/) のようにCloud Monitoringで閾値を設定し、Slackなどにレポートする形も良さそうです。
 
