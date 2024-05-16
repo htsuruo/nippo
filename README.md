@@ -29,7 +29,7 @@
    - 参考: [Add Firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup?platform=ios)
 
 ```sh
-flutter configure
+flutterfire configure
 ```
 
 ## 機能要件
