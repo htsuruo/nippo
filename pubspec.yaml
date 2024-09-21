@@ -74,3 +74,14 @@ flutter:
   assets:
     - assets/images/
     - assets/images/logo/
+
+icons_launcher:
+  image_path: 'assets/images/app_icon.png'
+  platforms:
+    android:
+      enable: true
+      adaptive_foreground_image: 'assets/images/app_adaptive_foreground.png'
+      adaptive_background_image: 'assets/images/app_adaptive_background.png'
+      notification_image: 'assets/images/app_adaptive_foreground.png'
+    ios:
+      enable: true
