@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:554602506203:android:73f34ea6c319d7283ee9fe",
+        "mobilesdk_app_id": "1:554602506203:android:052255c36e16460d3ee9fe",
         "android_client_info": {
           "package_name": "com.htsuruo.nippo"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "554602506203-cvqnsumv3q5c3mk5oj800tr7lugoo81u.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.htsuruo.nippo",
-            "certificate_hash": "1565789112ad8476eeaa26ecbc47d964d3649d88"
-          }
-        },
         {
           "client_id": "554602506203-gv6vpvdndlppghdn3sv9cr2n3fc4d854.apps.googleusercontent.com",
           "client_type": 3
@@ -40,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "554602506203-q1q39al7pn6i409hs0ec5t7r1hqs27te.apps.googleusercontent.com",
+              "client_id": "554602506203-2e3jkpfh6rabqmci2cck8k7ufkr9665e.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.htsuruo.nippo.RunnerTests"
+                "bundle_id": "com.htsuruo.nippo"
               }
             }
           ]

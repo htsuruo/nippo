@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>554602506203-q1q39al7pn6i409hs0ec5t7r1hqs27te.apps.googleusercontent.com</string>
+	<string>554602506203-2e3jkpfh6rabqmci2cck8k7ufkr9665e.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.554602506203-q1q39al7pn6i409hs0ec5t7r1hqs27te</string>
+	<string>com.googleusercontent.apps.554602506203-2e3jkpfh6rabqmci2cck8k7ufkr9665e</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>554602506203-cvqnsumv3q5c3mk5oj800tr7lugoo81u.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBtybmYxxJXGKEenplwwACZ9Oh860cYhds</string>
+	<string>AIzaSyALpm4NWeHM-PkaBkMaVuOWUJhRG0DHE-I</string>
 	<key>GCM_SENDER_ID</key>
 	<string>554602506203</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.htsuruo.nippo.RunnerTests</string>
+	<string>com.htsuruo.nippo</string>
 	<key>PROJECT_ID</key>
 	<string>nippo-e8922</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:554602506203:ios:82ca5bda76750c973ee9fe</string>
+	<string>1:554602506203:ios:28faf2e71f77493b3ee9fe</string>
 	<key>DATABASE_URL</key>
 	<string>https://nippo-e8922.firebaseio.com</string>
 </dict>
