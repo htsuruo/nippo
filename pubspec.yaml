@@ -83,5 +83,6 @@ icons_launcher:
       adaptive_foreground_image: 'assets/images/app_adaptive_foreground.png'
       adaptive_background_image: 'assets/images/app_adaptive_background.png'
       notification_image: 'assets/images/app_adaptive_foreground.png'
+      adaptive_monochrome_image: 'assets/images/app_adaptive_monochrome.png'
     ios:
       enable: true
