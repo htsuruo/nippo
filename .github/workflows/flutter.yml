@@ -1,14 +1,12 @@
 name: Flutter
 
 on:
-  push:
-    branches: ['main']
-    # ref. https://qiita.com/nacam403/items/3e2a5df5e88ba20aa76a
-    paths:
-      - 'lib/**'
-      - '!**.md'
   pull_request:
-    branches: ['main']
+  push:
+    branches:
+      - '*'
+      - '!main'
+    # ref. https://qiita.com/nacam403/items/3e2a5df5e88ba20aa76a
     paths:
       - 'lib/**'
       - '!**.md'
