@@ -55,6 +55,7 @@ dev_dependencies:
   flutter_gen_runner:
   freezed:
   go_router_builder:
+  icons_launcher:
   json_serializable:
   melos:
   pedantic_mono:
@@ -63,11 +64,6 @@ dev_dependencies:
 
 dependency_overrides:
   http:
-
-flutter_icons:
-  android: true
-  ios: true
-  image_path: assets/image/appicon.png
 
 flutter_gen:
   integrations:
