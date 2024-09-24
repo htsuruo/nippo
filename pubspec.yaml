@@ -35,6 +35,7 @@ dependencies:
   hooks_riverpod:
   intersperse:
   intl:
+  json_annotation:
   json_converter_helper:
   package_info_plus:
   provider:

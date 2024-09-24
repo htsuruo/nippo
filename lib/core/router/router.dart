@@ -15,26 +15,7 @@ import '../navigation/scaffold_with_navigation.dart';
 
 part 'router.g.dart';
 
-class _Location {
-  _Location._();
-  static const posts = '/posts';
-
-  // REVIEW(htsuruo): 本来はZennのように`[uid]/posts/[pid]`のようなパスにしたいが、
-  // StatefulShellBranchでは親ルートのpostsが頭にきてしまうため実現できなさそう？
-  // PostのドキュメントIDを取得するためにはコレクショングループで引くしかない。
-  static const post = ':pid';
-  static const postCreate = 'create';
-  static const postEdit = 'edit/:pid';
-  static const signin = '/signin';
-  static const user = '/user/:uid';
-  static const userPost = '/user/:uid/posts/:pid';
-  static const profile = '/profile';
-  static const setting = '/setting';
-}
-
-@riverpod
-GlobalKey<NavigatorState> rootNavigator(RootNavigatorRef ref) =>
-    GlobalKey<NavigatorState>(debugLabel: 'root');
+final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
 extension GoRouterX on GoRouter {
   NavigatorState get navigator => routerDelegate.navigatorKey.currentState!;
@@ -45,64 +26,21 @@ GoRouter router(RouterRef ref) {
   return GoRouter(
     routes: $appRoutes,
     debugLogDiagnostics: kDebugMode,
-    initialLocation: _Location.posts,
-    navigatorKey: ref.watch(rootNavigatorProvider),
+    initialLocation: const PostsPageRoute().location,
+    navigatorKey: _rootNavigatorKey,
     redirect: (context, state) async {
       final signedIn = await ref.watch(isSignedInProvider.future);
       final location = state.uri.toString();
-      final isSigninLocation = location == _Location.signin;
+      final isSigninLocation = location == SigninPageRoute().location;
       if (!signedIn) {
-        return isSigninLocation ? null : _Location.signin;
+        return isSigninLocation ? null : SigninPageRoute().location;
       }
-      if (isSigninLocation || location == _Location.posts) {
-        return _Location.posts;
+      if (isSigninLocation || location == const PostsPageRoute().location) {
+        return const PostsPageRoute().location;
       }
       return null;
     },
   );
-}
-
-@TypedGoRoute<SigninPageRoute>(path: _Location.signin)
-class SigninPageRoute extends GoRouteData {
-  @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const _Root(child: SigninPage());
-}
-
-@TypedGoRoute<SettingPageRoute>(path: _Location.setting)
-class SettingPageRoute extends GoRouteData {
-  @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      const MaterialPage(
-        fullscreenDialog: true,
-        child: _Root(child: SettingPage()),
-      );
-}
-
-@TypedGoRoute<UserPageRoute>(path: _Location.user)
-class UserPageRoute extends GoRouteData {
-  const UserPageRoute({required this.uid});
-
-  final String uid;
-
-  @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      MaterialPage(
-        child: _Root(child: UserPage.uid(uid)),
-      );
-}
-
-@TypedGoRoute<UserPostPageRoute>(path: _Location.userPost)
-class UserPostPageRoute extends GoRouteData {
-  const UserPostPageRoute({required this.uid, required this.pid});
-
-  final String uid;
-  final String pid;
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return PostPage.fromProfile(uid: uid, pid: pid);
-  }
 }
 
 @TypedStatefulShellRoute<ShellRouteData>(
@@ -110,18 +48,21 @@ class UserPostPageRoute extends GoRouteData {
     TypedStatefulShellBranch(
       routes: [
         TypedGoRoute<PostsPageRoute>(
-          path: _Location.posts,
+          path: '/posts',
           // `:pid`を先頭にすると`create`がIDとして解釈されてしまいcreateページに遷移できなくなるので注意
           // ベタ指定されるパスを先に書く必要がある。
           routes: [
+            TypedGoRoute<PostPageRoute>(
+              // NOTE(htsuruo): 本来はZennのように`[uid]/posts/[pid]`のようなパスにしたいが、
+              // StatefulShellBranchでは親ルートのpostsが頭にきてしまうため実現できなさそう？
+              // PostのドキュメントIDを取得するためにはコレクショングループで引くしかない。
+              path: ':pid',
+            ),
             TypedGoRoute<PostCreatePageRoute>(
-              path: _Location.postCreate,
+              path: 'create',
             ),
             TypedGoRoute<PostEditPageRoute>(
-              path: _Location.postEdit,
-            ),
-            TypedGoRoute<PostDetailPageRoute>(
-              path: _Location.post,
+              path: 'edit/:pid',
             ),
           ],
         ),
@@ -130,7 +71,12 @@ class UserPostPageRoute extends GoRouteData {
     TypedStatefulShellBranch(
       routes: [
         TypedGoRoute<ProfilePageRoute>(
-          path: _Location.profile,
+          path: '/profile',
+          routes: [
+            TypedGoRoute<SettingPageRoute>(
+              path: 'setting',
+            ),
+          ],
         ),
       ],
     ),
@@ -153,15 +99,11 @@ class ShellRouteData extends StatefulShellRouteData {
   }
 }
 
-class _Root extends StatelessWidget {
-  const _Root({required this.child});
-
-  final Widget child;
-
+@TypedGoRoute<SigninPageRoute>(path: '/signin')
+class SigninPageRoute extends GoRouteData {
   @override
-  Widget build(BuildContext context) {
-    return ProgressHUD(child: child);
-  }
+  Widget build(BuildContext context, GoRouterState state) =>
+      const _Root(child: SigninPage());
 }
 
 class PostsPageRoute extends GoRouteData {
@@ -173,8 +115,8 @@ class PostsPageRoute extends GoRouteData {
   }
 }
 
-class PostDetailPageRoute extends GoRouteData {
-  const PostDetailPageRoute({required this.pid});
+class PostPageRoute extends GoRouteData {
+  const PostPageRoute({required this.pid});
 
   final String pid;
 
@@ -205,5 +147,55 @@ class ProfilePageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const UserPage.me();
+  }
+}
+
+class SettingPageRoute extends GoRouteData {
+  // ref. https://github.com/flutter/packages/tree/main/packages/go_router_builder#typedshellroute-and-navigator-keys
+  static final GlobalKey<NavigatorState> $parentNavigatorKey =
+      _rootNavigatorKey;
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      const MaterialPage(
+        fullscreenDialog: true,
+        child: SettingPage(),
+      );
+}
+
+@TypedGoRoute<UserPageRoute>(path: '/user/:uid')
+class UserPageRoute extends GoRouteData {
+  const UserPageRoute({required this.uid});
+
+  final String uid;
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      MaterialPage(
+        child: _Root(child: UserPage.uid(uid)),
+      );
+}
+
+@TypedGoRoute<UserPostPageRoute>(path: '/user/:uid/posts/:pid')
+class UserPostPageRoute extends GoRouteData {
+  const UserPostPageRoute({required this.uid, required this.pid});
+
+  final String uid;
+  final String pid;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PostPage.fromProfile(uid: uid, pid: pid);
+  }
+}
+
+class _Root extends StatelessWidget {
+  const _Root({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return ProgressHUD(child: child);
   }
 }

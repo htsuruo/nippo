@@ -30,6 +30,14 @@ const _$$UserImplFieldMap = <String, String>{
   'createdAt': 'createdAt',
 };
 
+abstract final class _$$UserImplJsonKeys {
+  static const String name = 'name';
+  static const String email = 'email';
+  static const String photoUrl = 'photoUrl';
+  static const String updatedAt = 'updatedAt';
+  static const String createdAt = 'createdAt';
+}
+
 // ignore: unused_element
 abstract class _$$UserImplPerFieldToJson {
   // ignore: unused_element
