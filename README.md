@@ -12,9 +12,11 @@
 
 ※デモは現在 [#32](https://github.com/htsuruo/nippo/issues/32) のため利用できません。
 
-## セットアップ
+## Get started
 
-1. `.firebaserc`のデフォルトプロジェクトをご自身のFirebaseプロジェクトIDに変更してください。
+### 1. Firebaseプロジェクトの作成
+
+1.`.firebaserc`のデフォルトプロジェクトをご自身のFirebaseプロジェクトIDに変更してください。
 
 ```yaml
 {
@@ -24,13 +26,34 @@
 }
 ```
 
-2. Firebaseプロジェクトに関する情報はgit管理対象外のため、下記コマンドにてお手元のFirebaseプロジェクトにてセットアップしてください。
+2.Firebaseプロジェクトに関する情報はgit管理対象外のため、下記コマンドにてお手元のFirebaseプロジェクトにてセットアップしてください。
    - 事前に[flutterfire_cli | Dart Package](https://pub.dev/packages/flutterfire_cli)のインストールが必要です
    - 参考: [Add Firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup?platform=ios)
 
 ```sh
 flutterfire configure
 ```
+
+### 2. App Checkのデバッグトークンを登録
+
+Firebase コンソールからApp Checkのデバッグトークンを登録します。デバッグトークンを自身のFirebaseプロジェクトに登録しておくことで、開発環境でリクエストが弾かれないようにします。
+
+ref. [Use App Check with the debug provider with Flutter  |  Firebase App Check](https://firebase.google.com/docs/app-check/flutter/debug-provider)
+
+#### Androidの場合
+
+`flutter run`でデバッグコンソールに以下のようにデバッグトークンが出力されますので、これをFirebaseコンソールに登録します。
+
+```bash
+D/com.google.firebase.appcheck.debug.internal.DebugAppCheckProvider(10075): Enter this debug secret into the allow list in the Firebase Console for your project: xxxxxxx
+```
+
+#### iOSの場合
+
+- Apple Developer Programから「Device Check」を有効にした`.p8`の認証キーをFirebaseコンソールに登録
+- `-FIRDebugEnabled`をRunのArgumentsに登録
+
+詳細: https://firebase.google.com/docs/app-check/flutter/debug-provider#apple_platforms
 
 ## 機能要件
 
