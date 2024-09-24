@@ -48,6 +48,7 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
               routes: [
                 GoRouteData.$route(
                   path: 'setting',
+                  parentNavigatorKey: SettingPageRoute.$parentNavigatorKey,
                   factory: $SettingPageRouteExtension._fromState,
                 ),
               ],

@@ -151,6 +151,10 @@ class ProfilePageRoute extends GoRouteData {
 }
 
 class SettingPageRoute extends GoRouteData {
+  // ref. https://github.com/flutter/packages/tree/main/packages/go_router_builder#typedshellroute-and-navigator-keys
+  static final GlobalKey<NavigatorState> $parentNavigatorKey =
+      _rootNavigatorKey;
+
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
       const MaterialPage(
