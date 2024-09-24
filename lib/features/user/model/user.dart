@@ -9,7 +9,6 @@ part 'user.g.dart';
 @Collection<User>('users')
 @freezed
 class User with _$User {
-  // @allJsonConvertersSerializable
   @JsonSerializable(
     converters: [
       ...firestoreJsonConverters,
