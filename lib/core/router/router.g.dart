@@ -9,105 +9,11 @@ part of 'router.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
+      $shellRouteData,
       $signinPageRoute,
-      $settingPageRoute,
       $userPageRoute,
       $userPostPageRoute,
-      $shellRouteData,
     ];
-
-RouteBase get $signinPageRoute => GoRouteData.$route(
-      path: '/signin',
-      factory: $SigninPageRouteExtension._fromState,
-    );
-
-extension $SigninPageRouteExtension on SigninPageRoute {
-  static SigninPageRoute _fromState(GoRouterState state) => SigninPageRoute();
-
-  String get location => GoRouteData.$location(
-        '/signin',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $settingPageRoute => GoRouteData.$route(
-      path: '/setting',
-      factory: $SettingPageRouteExtension._fromState,
-    );
-
-extension $SettingPageRouteExtension on SettingPageRoute {
-  static SettingPageRoute _fromState(GoRouterState state) => SettingPageRoute();
-
-  String get location => GoRouteData.$location(
-        '/setting',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $userPageRoute => GoRouteData.$route(
-      path: '/user/:uid',
-      factory: $UserPageRouteExtension._fromState,
-    );
-
-extension $UserPageRouteExtension on UserPageRoute {
-  static UserPageRoute _fromState(GoRouterState state) => UserPageRoute(
-        uid: state.pathParameters['uid']!,
-      );
-
-  String get location => GoRouteData.$location(
-        '/user/${Uri.encodeComponent(uid)}',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $userPostPageRoute => GoRouteData.$route(
-      path: '/user/:uid/posts/:pid',
-      factory: $UserPostPageRouteExtension._fromState,
-    );
-
-extension $UserPostPageRouteExtension on UserPostPageRoute {
-  static UserPostPageRoute _fromState(GoRouterState state) => UserPostPageRoute(
-        uid: state.pathParameters['uid']!,
-        pid: state.pathParameters['pid']!,
-      );
-
-  String get location => GoRouteData.$location(
-        '/user/${Uri.encodeComponent(uid)}/posts/${Uri.encodeComponent(pid)}',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
 
 RouteBase get $shellRouteData => StatefulShellRouteData.$route(
       factory: $ShellRouteDataExtension._fromState,
@@ -139,6 +45,12 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
             GoRouteData.$route(
               path: '/profile',
               factory: $ProfilePageRouteExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'setting',
+                  factory: $SettingPageRouteExtension._fromState,
+                ),
+              ],
             ),
           ],
         ),
@@ -243,27 +155,99 @@ extension $ProfilePageRouteExtension on ProfilePageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+extension $SettingPageRouteExtension on SettingPageRoute {
+  static SettingPageRoute _fromState(GoRouterState state) => SettingPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/profile/setting',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $signinPageRoute => GoRouteData.$route(
+      path: '/signin',
+      factory: $SigninPageRouteExtension._fromState,
+    );
+
+extension $SigninPageRouteExtension on SigninPageRoute {
+  static SigninPageRoute _fromState(GoRouterState state) => SigninPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/signin',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $userPageRoute => GoRouteData.$route(
+      path: '/user/:uid',
+      factory: $UserPageRouteExtension._fromState,
+    );
+
+extension $UserPageRouteExtension on UserPageRoute {
+  static UserPageRoute _fromState(GoRouterState state) => UserPageRoute(
+        uid: state.pathParameters['uid']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/user/${Uri.encodeComponent(uid)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $userPostPageRoute => GoRouteData.$route(
+      path: '/user/:uid/posts/:pid',
+      factory: $UserPostPageRouteExtension._fromState,
+    );
+
+extension $UserPostPageRouteExtension on UserPostPageRoute {
+  static UserPostPageRoute _fromState(GoRouterState state) => UserPostPageRoute(
+        uid: state.pathParameters['uid']!,
+        pid: state.pathParameters['pid']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/user/${Uri.encodeComponent(uid)}/posts/${Uri.encodeComponent(pid)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$rootNavigatorHash() => r'bf3a55396e6c7a536bad5970f01cdf155352c0db';
-
-/// See also [rootNavigator].
-@ProviderFor(rootNavigator)
-final rootNavigatorProvider =
-    AutoDisposeProvider<GlobalKey<NavigatorState>>.internal(
-  rootNavigator,
-  name: r'rootNavigatorProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$rootNavigatorHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef RootNavigatorRef = AutoDisposeProviderRef<GlobalKey<NavigatorState>>;
-String _$routerHash() => r'245bb81778d5739be5bae86ca1ab8cbe32bea623';
+String _$routerHash() => r'cef1cfc671e64b65ca923f7bb1cce6a34fbe5c1e';
 
 /// See also [router].
 @ProviderFor(router)

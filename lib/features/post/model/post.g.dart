@@ -30,6 +30,14 @@ const _$$PostImplFieldMap = <String, String>{
   'createdAt': 'createdAt',
 };
 
+abstract final class _$$PostImplJsonKeys {
+  static const String nullablePostId = 'postId';
+  static const String title = 'title';
+  static const String description = 'description';
+  static const String updatedAt = 'updatedAt';
+  static const String createdAt = 'createdAt';
+}
+
 // ignore: unused_element
 abstract class _$$PostImplPerFieldToJson {
   // ignore: unused_element
