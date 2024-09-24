@@ -58,8 +58,9 @@ class AuthRepository {
 
   Future<({String? idToken, String? accessToken})>
       _signInWithGoogleAccount() async {
-    final googleAccount =
-        await (kIsWeb ? _signInWithWeb() : GoogleSignIn().signIn());
+    final googleAccount = await (kIsWeb
+        ? _signInWithWeb()
+        : GoogleSignIn(scopes: _scopes).signIn());
     if (googleAccount == null) {
       throw Exception('GoogleSignInAccount is null');
     }
