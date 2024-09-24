@@ -182,7 +182,8 @@ class __$$UserImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@allJsonConvertersSerializable
+@JsonSerializable(
+    converters: [...firestoreJsonConverters, ...allJsonConverters])
 class _$UserImpl implements _User {
   const _$UserImpl(
       {this.name = '名無し',
