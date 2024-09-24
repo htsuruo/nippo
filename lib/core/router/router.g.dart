@@ -25,16 +25,16 @@ RouteBase get $shellRouteData => StatefulShellRouteData.$route(
               factory: $PostsPageRouteExtension._fromState,
               routes: [
                 GoRouteData.$route(
+                  path: ':pid',
+                  factory: $PostPageRouteExtension._fromState,
+                ),
+                GoRouteData.$route(
                   path: 'create',
                   factory: $PostCreatePageRouteExtension._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'edit/:pid',
                   factory: $PostEditPageRouteExtension._fromState,
-                ),
-                GoRouteData.$route(
-                  path: ':pid',
-                  factory: $PostDetailPageRouteExtension._fromState,
                 ),
               ],
             ),
@@ -80,6 +80,25 @@ extension $PostsPageRouteExtension on PostsPageRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+extension $PostPageRouteExtension on PostPageRoute {
+  static PostPageRoute _fromState(GoRouterState state) => PostPageRoute(
+        pid: state.pathParameters['pid']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/posts/${Uri.encodeComponent(pid)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 extension $PostCreatePageRouteExtension on PostCreatePageRoute {
   static PostCreatePageRoute _fromState(GoRouterState state) =>
       PostCreatePageRoute();
@@ -105,26 +124,6 @@ extension $PostEditPageRouteExtension on PostEditPageRoute {
 
   String get location => GoRouteData.$location(
         '/posts/edit/${Uri.encodeComponent(pid)}',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-extension $PostDetailPageRouteExtension on PostDetailPageRoute {
-  static PostDetailPageRoute _fromState(GoRouterState state) =>
-      PostDetailPageRoute(
-        pid: state.pathParameters['pid']!,
-      );
-
-  String get location => GoRouteData.$location(
-        '/posts/${Uri.encodeComponent(pid)}',
       );
 
   void go(BuildContext context) => context.go(location);

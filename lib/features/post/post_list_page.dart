@@ -20,7 +20,7 @@ class PostListPage extends ConsumerWidget {
       body: PostListView(
         snapshots: postsSnapshots,
         postSelected: (postId) {
-          PostDetailPageRoute(pid: postId).push<void>(context);
+          PostPageRoute(pid: postId).push<void>(context);
         },
       ),
       floatingActionButton: FloatingActionButton(

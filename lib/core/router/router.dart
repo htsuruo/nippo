@@ -52,17 +52,17 @@ GoRouter router(RouterRef ref) {
           // `:pid`を先頭にすると`create`がIDとして解釈されてしまいcreateページに遷移できなくなるので注意
           // ベタ指定されるパスを先に書く必要がある。
           routes: [
+            TypedGoRoute<PostPageRoute>(
+              // NOTE(htsuruo): 本来はZennのように`[uid]/posts/[pid]`のようなパスにしたいが、
+              // StatefulShellBranchでは親ルートのpostsが頭にきてしまうため実現できなさそう？
+              // PostのドキュメントIDを取得するためにはコレクショングループで引くしかない。
+              path: ':pid',
+            ),
             TypedGoRoute<PostCreatePageRoute>(
               path: 'create',
             ),
             TypedGoRoute<PostEditPageRoute>(
               path: 'edit/:pid',
-            ),
-            TypedGoRoute<PostDetailPageRoute>(
-              // NOTE(htsuruo): 本来はZennのように`[uid]/posts/[pid]`のようなパスにしたいが、
-              // StatefulShellBranchでは親ルートのpostsが頭にきてしまうため実現できなさそう？
-              // PostのドキュメントIDを取得するためにはコレクショングループで引くしかない。
-              path: ':pid',
             ),
           ],
         ),
@@ -115,8 +115,8 @@ class PostsPageRoute extends GoRouteData {
   }
 }
 
-class PostDetailPageRoute extends GoRouteData {
-  const PostDetailPageRoute({required this.pid});
+class PostPageRoute extends GoRouteData {
+  const PostPageRoute({required this.pid});
 
   final String pid;
 
