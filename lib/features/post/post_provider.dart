@@ -67,7 +67,7 @@ Stream<List<QueryDocumentSnapshot<Post>>> userPosts(
 @riverpod
 CollectionReference<Post> selfPostRef(SelfPostRefRef ref) {
   return ref
-      .watch(authUserRefProvider)
+      .watch(authUserProvider)
       .collection(CollectionName.posts)
       .withPostConverter();
 }

@@ -319,7 +319,7 @@ class _UserPostsProviderElement
   String get uid => (origin as UserPostsProvider).uid;
 }
 
-String _$selfPostRefHash() => r'7be56a0a57599296310b9b6a388198045eb2c81a';
+String _$selfPostRefHash() => r'31cc7f347a2b5467b8ad6ea5994133f1fc9a1686';
 
 /// See also [selfPostRef].
 @ProviderFor(selfPostRef)
