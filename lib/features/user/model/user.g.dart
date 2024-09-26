@@ -1592,14 +1592,14 @@ abstract class PostCollectionReference
     DocumentSnapshot<Map<String, Object?>> snapshot,
     SnapshotOptions? options,
   ) {
-    return Post.fromJson({'nullablePostId': snapshot.id, ...?snapshot.data()});
+    return Post.fromJson({'nullableId': snapshot.id, ...?snapshot.data()});
   }
 
   static Map<String, Object?> toFirestore(
     Post value,
     SetOptions? options,
   ) {
-    return {...value.toJson()}..remove('nullablePostId');
+    return {...value.toJson()}..remove('nullableId');
   }
 
   @override
@@ -3026,7 +3026,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     };
 
 _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
-      nullablePostId: json['nullablePostId'] as String?,
+      nullableId: json['nullableId'] as String?,
       title: json['title'] as String,
       description: json['description'] as String,
       updatedAt: json['updatedAt'] == null
@@ -3040,7 +3040,7 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
     );
 
 const _$$PostImplFieldMap = <String, String>{
-  'nullablePostId': 'nullablePostId',
+  'nullableId': 'nullableId',
   'title': 'title',
   'description': 'description',
   'updatedAt': 'updatedAt',
@@ -3050,7 +3050,7 @@ const _$$PostImplFieldMap = <String, String>{
 // ignore: unused_element
 abstract class _$$PostImplPerFieldToJson {
   // ignore: unused_element
-  static Object? nullablePostId(String? instance) => instance;
+  static Object? nullableId(String? instance) => instance;
   // ignore: unused_element
   static Object? title(String instance) => instance;
   // ignore: unused_element
@@ -3065,7 +3065,7 @@ abstract class _$$PostImplPerFieldToJson {
 
 Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
     <String, dynamic>{
-      'nullablePostId': instance.nullablePostId,
+      'nullableId': instance.nullableId,
       'title': instance.title,
       'description': instance.description,
       'updatedAt': const UnionTimestampConverter().toJson(instance.updatedAt),

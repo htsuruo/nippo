@@ -38,7 +38,7 @@ class Post with _$Post {
   factory Post({
     // コレクショングループで引くためにdocument IDが必要だが、フォーム登録時点では
     // ドキュメントIDが決まらないのでnullableにしておく。利用時には`late final`の非null版を利用すること。
-    @Deprecated('Use late field postId instead') @Id() String? nullablePostId,
+    @Deprecated('Use late field `id` instead') @Id() String? nullableId,
     required String title,
     required String description,
     @Default(UnionTimestamp.serverTimestamp()) UnionTimestamp updatedAt,
@@ -49,5 +49,5 @@ class Post with _$Post {
   Post._();
 
   // ignore: deprecated_member_use_from_same_package
-  late final String postId = nullablePostId!;
+  late final String id = nullableId!;
 }
