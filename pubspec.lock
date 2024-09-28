@@ -262,6 +262,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.2"
+  cloud_firestore_odm:
+    dependency: "direct main"
+    description:
+      name: cloud_firestore_odm
+      sha256: "71cae160bf887f89acf6a97954d59892473a319fd73808ab6522b5c8a233c910"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0-dev.87"
+  cloud_firestore_odm_generator:
+    dependency: "direct dev"
+    description:
+      name: cloud_firestore_odm_generator
+      sha256: "714033f33e1fb1867d5d3f981167bdf3549c0c936919e7d7403a3b8f4c566565"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0-dev.88"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:

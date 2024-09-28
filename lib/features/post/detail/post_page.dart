@@ -27,7 +27,7 @@ class PostPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          PostActionMenuButton(postSnapAsync: postSnapAsync),
+          PostActionMenuButton(postAsync: postSnapAsync),
           const Gap(8),
         ],
       ),
@@ -38,7 +38,7 @@ class PostPage extends ConsumerWidget {
             child: Text(error.toString()),
           );
         },
-        data: (postSnap) => PostDetailView(postSnap: postSnap),
+        data: (postSnap) => PostDetailView(post: postSnap),
       ),
     );
   }

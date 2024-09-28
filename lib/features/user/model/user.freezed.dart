@@ -20,6 +20,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
+  @Id()
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
@@ -41,7 +43,8 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String name,
+      {@Id() String id,
+      String name,
       String email,
       String? photoUrl,
       UnionTimestamp updatedAt,
@@ -66,6 +69,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? email = null,
     Object? photoUrl = freezed,
@@ -73,6 +77,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -125,7 +133,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String name,
+      {@Id() String id,
+      String name,
       String email,
       String? photoUrl,
       UnionTimestamp updatedAt,
@@ -149,6 +158,7 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? email = null,
     Object? photoUrl = freezed,
@@ -156,6 +166,10 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? createdAt = null,
   }) {
     return _then(_$UserImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -182,10 +196,11 @@ class __$$UserImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@allJsonConvertersSerializable
+@_serializable
 class _$UserImpl implements _User {
   const _$UserImpl(
-      {this.name = '名無し',
+      {@Id() required this.id,
+      required this.name,
       required this.email,
       required this.photoUrl,
       this.updatedAt = const UnionTimestamp.serverTimestamp(),
@@ -195,7 +210,9 @@ class _$UserImpl implements _User {
       _$$UserImplFromJson(json);
 
   @override
-  @JsonKey()
+  @Id()
+  final String id;
+  @override
   final String name;
   @override
   final String email;
@@ -210,7 +227,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(name: $name, email: $email, photoUrl: $photoUrl, updatedAt: $updatedAt, createdAt: $createdAt)';
+    return 'User(id: $id, name: $name, email: $email, photoUrl: $photoUrl, updatedAt: $updatedAt, createdAt: $createdAt)';
   }
 
   @override
@@ -218,6 +235,7 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.photoUrl, photoUrl) ||
@@ -231,7 +249,7 @@ class _$UserImpl implements _User {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, email, photoUrl, updatedAt, createdAt);
+      Object.hash(runtimeType, id, name, email, photoUrl, updatedAt, createdAt);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -251,7 +269,8 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {final String name,
+      {@Id() required final String id,
+      required final String name,
       required final String email,
       required final String? photoUrl,
       final UnionTimestamp updatedAt,
@@ -259,6 +278,9 @@ abstract class _User implements User {
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
+  @override
+  @Id()
+  String get id;
   @override
   String get name;
   @override
@@ -275,5 +297,285 @@ abstract class _User implements User {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Post _$PostFromJson(Map<String, dynamic> json) {
+  return _Post.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Post {
+// コレクショングループで引くためにdocument IDが必要だが、フォーム登録時点では
+// ドキュメントIDが決まらないのでnullableにしておく。利用時には`late final`の非null版を利用すること。
+  @Deprecated('Use late field `id` instead')
+  @Id()
+  String? get nullableId => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  UnionTimestamp get updatedAt => throw _privateConstructorUsedError;
+  UnionTimestamp get createdAt => throw _privateConstructorUsedError;
+
+  /// Serializes this Post to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PostCopyWith<$Res> {
+  factory $PostCopyWith(Post value, $Res Function(Post) then) =
+      _$PostCopyWithImpl<$Res, Post>;
+  @useResult
+  $Res call(
+      {@Deprecated('Use late field `id` instead') @Id() String? nullableId,
+      String title,
+      String description,
+      UnionTimestamp updatedAt,
+      UnionTimestamp createdAt});
+
+  $UnionTimestampCopyWith<$Res> get updatedAt;
+  $UnionTimestampCopyWith<$Res> get createdAt;
+}
+
+/// @nodoc
+class _$PostCopyWithImpl<$Res, $Val extends Post>
+    implements $PostCopyWith<$Res> {
+  _$PostCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nullableId = freezed,
+    Object? title = null,
+    Object? description = null,
+    Object? updatedAt = null,
+    Object? createdAt = null,
+  }) {
+    return _then(_value.copyWith(
+      nullableId: freezed == nullableId
+          ? _value.nullableId
+          : nullableId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as UnionTimestamp,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as UnionTimestamp,
+    ) as $Val);
+  }
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UnionTimestampCopyWith<$Res> get updatedAt {
+    return $UnionTimestampCopyWith<$Res>(_value.updatedAt, (value) {
+      return _then(_value.copyWith(updatedAt: value) as $Val);
+    });
+  }
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UnionTimestampCopyWith<$Res> get createdAt {
+    return $UnionTimestampCopyWith<$Res>(_value.createdAt, (value) {
+      return _then(_value.copyWith(createdAt: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
+  factory _$$PostImplCopyWith(
+          _$PostImpl value, $Res Function(_$PostImpl) then) =
+      __$$PostImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@Deprecated('Use late field `id` instead') @Id() String? nullableId,
+      String title,
+      String description,
+      UnionTimestamp updatedAt,
+      UnionTimestamp createdAt});
+
+  @override
+  $UnionTimestampCopyWith<$Res> get updatedAt;
+  @override
+  $UnionTimestampCopyWith<$Res> get createdAt;
+}
+
+/// @nodoc
+class __$$PostImplCopyWithImpl<$Res>
+    extends _$PostCopyWithImpl<$Res, _$PostImpl>
+    implements _$$PostImplCopyWith<$Res> {
+  __$$PostImplCopyWithImpl(_$PostImpl _value, $Res Function(_$PostImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nullableId = freezed,
+    Object? title = null,
+    Object? description = null,
+    Object? updatedAt = null,
+    Object? createdAt = null,
+  }) {
+    return _then(_$PostImpl(
+      nullableId: freezed == nullableId
+          ? _value.nullableId
+          : nullableId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as UnionTimestamp,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as UnionTimestamp,
+    ));
+  }
+}
+
+/// @nodoc
+
+@_serializable
+class _$PostImpl extends _Post {
+  _$PostImpl(
+      {@Deprecated('Use late field `id` instead') @Id() this.nullableId,
+      required this.title,
+      required this.description,
+      this.updatedAt = const UnionTimestamp.serverTimestamp(),
+      this.createdAt = const UnionTimestamp.serverTimestamp()})
+      : super._();
+
+  factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostImplFromJson(json);
+
+// コレクショングループで引くためにdocument IDが必要だが、フォーム登録時点では
+// ドキュメントIDが決まらないのでnullableにしておく。利用時には`late final`の非null版を利用すること。
+  @override
+  @Deprecated('Use late field `id` instead')
+  @Id()
+  final String? nullableId;
+  @override
+  final String title;
+  @override
+  final String description;
+  @override
+  @JsonKey()
+  final UnionTimestamp updatedAt;
+  @override
+  @JsonKey()
+  final UnionTimestamp createdAt;
+
+  @override
+  String toString() {
+    return 'Post(nullableId: $nullableId, title: $title, description: $description, updatedAt: $updatedAt, createdAt: $createdAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PostImpl &&
+            (identical(other.nullableId, nullableId) ||
+                other.nullableId == nullableId) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, nullableId, title, description, updatedAt, createdAt);
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
+      __$$PostImplCopyWithImpl<_$PostImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PostImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Post extends Post {
+  factory _Post(
+      {@Deprecated('Use late field `id` instead')
+      @Id()
+      final String? nullableId,
+      required final String title,
+      required final String description,
+      final UnionTimestamp updatedAt,
+      final UnionTimestamp createdAt}) = _$PostImpl;
+  _Post._() : super._();
+
+  factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
+
+// コレクショングループで引くためにdocument IDが必要だが、フォーム登録時点では
+// ドキュメントIDが決まらないのでnullableにしておく。利用時には`late final`の非null版を利用すること。
+  @override
+  @Deprecated('Use late field `id` instead')
+  @Id()
+  String? get nullableId;
+  @override
+  String get title;
+  @override
+  String get description;
+  @override
+  UnionTimestamp get updatedAt;
+  @override
+  UnionTimestamp get createdAt;
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

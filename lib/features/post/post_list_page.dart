@@ -18,7 +18,7 @@ class PostListPage extends ConsumerWidget {
         title: const AppLogo(height: 28),
       ),
       body: PostListView(
-        snapshots: postsSnapshots,
+        posts: postsSnapshots,
         postSelected: (postId) {
           PostPageRoute(pid: postId).push<void>(context);
         },

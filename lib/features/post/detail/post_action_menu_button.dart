@@ -1,42 +1,42 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:nippo/core/authentication/auth_provider.dart';
 import 'package:nippo/features/post/detail/post_action_handler.dart';
-
-import '../model/post.dart';
+import 'package:nippo/features/user/model/user.dart';
 
 class PostActionMenuButton extends ConsumerWidget {
-  const PostActionMenuButton({super.key, required this.postSnapAsync});
+  const PostActionMenuButton({super.key, required this.postAsync});
 
-  final AsyncValue<DocumentSnapshot<Post>?> postSnapAsync;
+  final AsyncValue<Post?> postAsync;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final postSnap = postSnapAsync.value;
-    final isMine = ref.watch(
-      firUserProvider.select(
-        (s) => s.value?.uid == postSnap?.reference.uid,
-      ),
-    );
+    final post = postAsync.value;
+    // TODO(htsuruo): どうやるか検討
+    // final isMine = ref.watch(
+    //   firUserProvider.select(
+    //     (s) => s.value?.uid == post?.reference.id,
+    //   ),
+    // );
+
+    const isMine = true;
 
     return !isMine
         ? const SizedBox.shrink()
         : PopupMenuButton<_MenuItem>(
             icon: const Icon(Icons.more_horiz_outlined),
             // TODO(htsuruo): 書き換える
-            onSelected: postSnap == null
+            onSelected: post == null
                 ? null
                 : (item) async {
                     final handler = ref.read(postActionProvider);
                     switch (item) {
                       case _MenuItem.edit:
-                        await handler.edit(postSnap: postSnap);
+                        await handler.edit(post: post);
                       case _MenuItem.delete:
-                        await handler.delete(postSnap: postSnap);
+                        await handler.delete(post: post);
                     }
                   },
             itemBuilder: (context) => _MenuItem.values.map((item) {

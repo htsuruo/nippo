@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
+// ignore_for_file: implicit_dynamic_parameter, implicit_dynamic_type, implicit_dynamic_method, strict_raw_type
 
 part of 'user_provider.dart';
 
@@ -8,21 +8,21 @@ part of 'user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authUserRefHash() => r'd02e05053c7123e1b2804fd58cc332e5052187a2';
+String _$authUserHash() => r'f39c8a292446b0f549b11b208c4bda2d0f8263d4';
 
-/// See also [authUserRef].
-@ProviderFor(authUserRef)
-final authUserRefProvider = Provider<DocumentReference<User>>.internal(
-  authUserRef,
-  name: r'authUserRefProvider',
+/// See also [authUser].
+@ProviderFor(authUser)
+final authUserProvider = AutoDisposeFutureProvider<User?>.internal(
+  authUser,
+  name: r'authUserProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$authUserRefHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$authUserHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef AuthUserRefRef = ProviderRef<DocumentReference<User>>;
-String _$userRefHash() => r'f5da0ecc758923f69f5be9c659c4b778dfd52026';
+typedef AuthUserRef = AutoDisposeFutureProviderRef<User?>;
+String _$userHash() => r'e637291f170e846ece7cf9e7a7aa359bc054370e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -45,145 +45,18 @@ class _SystemHash {
   }
 }
 
-/// See also [userRef].
-@ProviderFor(userRef)
-const userRefProvider = UserRefFamily();
-
-/// See also [userRef].
-class UserRefFamily extends Family<DocumentReference<User>> {
-  /// See also [userRef].
-  const UserRefFamily();
-
-  /// See also [userRef].
-  UserRefProvider call(
-    String? uid,
-  ) {
-    return UserRefProvider(
-      uid,
-    );
-  }
-
-  @override
-  UserRefProvider getProviderOverride(
-    covariant UserRefProvider provider,
-  ) {
-    return call(
-      provider.uid,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'userRefProvider';
-}
-
-/// See also [userRef].
-class UserRefProvider extends Provider<DocumentReference<User>> {
-  /// See also [userRef].
-  UserRefProvider(
-    String? uid,
-  ) : this._internal(
-          (ref) => userRef(
-            ref as UserRefRef,
-            uid,
-          ),
-          from: userRefProvider,
-          name: r'userRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$userRefHash,
-          dependencies: UserRefFamily._dependencies,
-          allTransitiveDependencies: UserRefFamily._allTransitiveDependencies,
-          uid: uid,
-        );
-
-  UserRefProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.uid,
-  }) : super.internal();
-
-  final String? uid;
-
-  @override
-  Override overrideWith(
-    DocumentReference<User> Function(UserRefRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: UserRefProvider._internal(
-        (ref) => create(ref as UserRefRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        uid: uid,
-      ),
-    );
-  }
-
-  @override
-  ProviderElement<DocumentReference<User>> createElement() {
-    return _UserRefProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is UserRefProvider && other.uid == uid;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, uid.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-mixin UserRefRef on ProviderRef<DocumentReference<User>> {
-  /// The parameter `uid` of this provider.
-  String? get uid;
-}
-
-class _UserRefProviderElement extends ProviderElement<DocumentReference<User>>
-    with UserRefRef {
-  _UserRefProviderElement(super.provider);
-
-  @override
-  String? get uid => (origin as UserRefProvider).uid;
-}
-
-String _$userHash() => r'3d569a61a339756f549c24d2b3dc78cf65e2aca9';
-
 /// See also [user].
 @ProviderFor(user)
 const userProvider = UserFamily();
 
 /// See also [user].
-class UserFamily extends Family<AsyncValue<DocumentSnapshot<User>>> {
+class UserFamily extends Family<AsyncValue<User?>> {
   /// See also [user].
   const UserFamily();
 
   /// See also [user].
   UserProvider call({
-    required String? uid,
+    required String uid,
   }) {
     return UserProvider(
       uid: uid,
@@ -215,10 +88,10 @@ class UserFamily extends Family<AsyncValue<DocumentSnapshot<User>>> {
 }
 
 /// See also [user].
-class UserProvider extends AutoDisposeStreamProvider<DocumentSnapshot<User>> {
+class UserProvider extends AutoDisposeFutureProvider<User?> {
   /// See also [user].
   UserProvider({
-    required String? uid,
+    required String uid,
   }) : this._internal(
           (ref) => user(
             ref as UserRef,
@@ -243,11 +116,11 @@ class UserProvider extends AutoDisposeStreamProvider<DocumentSnapshot<User>> {
     required this.uid,
   }) : super.internal();
 
-  final String? uid;
+  final String uid;
 
   @override
   Override overrideWith(
-    Stream<DocumentSnapshot<User>> Function(UserRef provider) create,
+    FutureOr<User?> Function(UserRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -264,7 +137,7 @@ class UserProvider extends AutoDisposeStreamProvider<DocumentSnapshot<User>> {
   }
 
   @override
-  AutoDisposeStreamProviderElement<DocumentSnapshot<User>> createElement() {
+  AutoDisposeFutureProviderElement<User?> createElement() {
     return _UserProviderElement(this);
   }
 
@@ -282,18 +155,17 @@ class UserProvider extends AutoDisposeStreamProvider<DocumentSnapshot<User>> {
   }
 }
 
-mixin UserRef on AutoDisposeStreamProviderRef<DocumentSnapshot<User>> {
+mixin UserRef on AutoDisposeFutureProviderRef<User?> {
   /// The parameter `uid` of this provider.
-  String? get uid;
+  String get uid;
 }
 
-class _UserProviderElement
-    extends AutoDisposeStreamProviderElement<DocumentSnapshot<User>>
+class _UserProviderElement extends AutoDisposeFutureProviderElement<User?>
     with UserRef {
   _UserProviderElement(super.provider);
 
   @override
-  String? get uid => (origin as UserProvider).uid;
+  String get uid => (origin as UserProvider).uid;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

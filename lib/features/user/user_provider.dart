@@ -1,30 +1,24 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nippo/core/authentication/auth_provider.dart';
-import 'package:nippo/core/const.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'model/user.dart';
 
 part 'user_provider.g.dart';
 
-@Riverpod(keepAlive: true)
-DocumentReference<User> authUserRef(AuthUserRefRef ref) {
-  final firUser = ref.watch(firUserProvider).value;
-  return ref.watch(userRefProvider(firUser?.uid));
-}
-
-@Riverpod(keepAlive: true)
-DocumentReference<User> userRef(UserRefRef ref, String? uid) {
-  final firUser = ref.watch(firUserProvider).value;
-  return FirebaseFirestore.instance
-      .collection(CollectionName.users)
-      .doc(firUser?.uid)
-      .withConverter<User>(
-        fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!),
-        toFirestore: (user, _) => user.toJson(),
-      );
+@riverpod
+Future<User?> authUser(UserRef ref) async {
+  final firUser = await ref.watch(firUserProvider.future);
+  return firUser == null
+      ? null
+      : ref.watch(userProvider(uid: firUser.uid)).value;
 }
 
 @riverpod
-Stream<DocumentSnapshot<User>> user(UserRef ref, {required String? uid}) =>
-    ref.watch(userRefProvider(uid)).snapshots();
+Future<User?> user(UserRef ref, {required String uid}) {
+  return usersRef
+      .doc(uid)
+      .snapshots()
+      .map((snap) => snap.data)
+      // StreamにはfirstOrNullがないので、firstWhereで代用
+      .firstWhere((_) => true);
+}

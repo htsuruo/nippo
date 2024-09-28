@@ -1,13 +1,12 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
-import 'package:nippo/features/post/model/post.dart';
 import 'package:nippo/features/post/post_repository.dart';
+import 'package:nippo/features/user/model/user.dart';
 import 'package:tsuruo_kit/tsuruo_kit.dart';
 
 import '../post_provider.dart';
@@ -27,9 +26,8 @@ class PostFormPage extends HookConsumerWidget {
     // TODO(htsuruo): 他デバイスからデータの更新があったときに入力途中でも破棄されて強制的に更新されてしまう問題。
     // `ref.listen`を使うようにコメントがあるが対象がAutoDisposeなProviderなので使えない。
     // ref. https://github.com/rrousselGit/riverpod/discussions/1069#discussioncomment-1919829
-    final postSnap = ref.watch(postProvider(postId: postId)).value;
-    final post = postSnap?.data();
-    final isLoading = postId != null && postSnap == null;
+    final post = ref.watch(postProvider(postId: postId)).value;
+    final isLoading = postId != null && post == null;
 
     final formKey = useMemoized(GlobalKey<FormState>.new);
     final titleEditController = useTextEditingController(
@@ -62,7 +60,7 @@ class PostFormPage extends HookConsumerWidget {
                       formKey: formKey,
                       titleController: titleEditController,
                       descriptionController: descriptionEditController,
-                      postSnap: postSnap,
+                      post: post,
                     ),
                 ],
               ),
@@ -141,13 +139,13 @@ class _SubmitButton extends ConsumerWidget {
     required this.formKey,
     required this.titleController,
     required this.descriptionController,
-    this.postSnap,
+    this.post,
   });
 
   final GlobalKey<FormState> formKey;
   final TextEditingController titleController;
   final TextEditingController descriptionController;
-  final DocumentSnapshot<Post>? postSnap;
+  final Post? post;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -157,9 +155,9 @@ class _SubmitButton extends ConsumerWidget {
         if (formKey.currentState!.validate()) {
           final title = titleController.text;
           final description = descriptionController.text;
+          final post = this.post;
 
-          final postSnap = this.postSnap;
-          if (postSnap == null) {
+          if (post == null) {
             ref
               ..read(postRepositoryProvider).create(
                 post: Post(
@@ -172,11 +170,10 @@ class _SubmitButton extends ConsumerWidget {
                   );
           } else {
             ref.read(postRepositoryProvider).update(
-                  reference: postSnap.reference,
-                  post: postSnap.data()!.copyWith(
-                        title: title,
-                        description: description,
-                      ),
+                  post: post.copyWith(
+                    title: title,
+                    description: description,
+                  ),
                 );
           }
           context.pop();

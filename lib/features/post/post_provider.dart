@@ -1,73 +1,45 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nippo/core/const.dart';
-import 'package:nippo/features/post/model/post_converter.dart';
-import 'package:nippo/features/user/user_provider.dart';
+import 'package:nippo/features/user/model/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'model/post.dart';
 
 part 'post_provider.g.dart';
 
-// REVIEW(htsuruo): ドキュメントIDが取得できるようにQueryDocumentSnapshotから返すProviderにしてみた。
-// ただ、仮にデータソースをFirestoreからSupabaseやREST APIに差し替えたくなった場合は不都合が生じそう。
-// List<Post>のデータモデルを返却する形にしておけば、差し替えは容易そうだがFirestoreを使う場合は割り切ったほうが良いのだろうか。
 @riverpod
-Stream<List<QueryDocumentSnapshot<Post>>> posts(PostsRef ref) {
-  return FirebaseFirestore.instance
-      .collectionGroup(CollectionName.posts)
-      .withPostConverter()
+Stream<List<Post>> posts(PostsRef ref) {
+  return postsQuery
       .orderBy(FieldName.createdAt, descending: true)
       .snapshots()
-      .map((snapshot) => snapshot.docs);
+      .map((snapshot) => snapshot.docs.map((p) => p.data()).toList());
 }
 
 @riverpod
-Stream<DocumentSnapshot<Post>?> post(
+Stream<Post?> post(
   PostRef ref, {
   String? postId,
   String? uid,
 }) {
   if (uid == null) {
     // コレクショングループで取得
-    return FirebaseFirestore.instance
-        .collectionGroup(CollectionName.posts)
-        .withPostConverter()
+    return postsQuery
         .where(FieldName.postId, isEqualTo: postId)
         .snapshots()
-        .map((s) => s.docs.firstOrNull);
+        .map((s) => s.docs.map((e) => e.data()).firstOrNull);
   }
 
   // ドキュメントで取得
-  return FirebaseFirestore.instance
-      .collection(CollectionName.users)
-      .doc(uid)
-      .collection(CollectionName.posts)
-      .doc(postId)
-      .withPostConverter()
-      .snapshots();
+  return usersRef.doc(uid).posts.doc(postId).snapshots().map((e) => e.data);
 }
 
 @riverpod
-Stream<List<QueryDocumentSnapshot<Post>>> userPosts(
+Stream<List<Post>> userPosts(
   UserPostsRef ref,
   String uid,
 ) {
-  return FirebaseFirestore.instance
-      .collection(CollectionName.users)
-      .doc(uid)
-      .collection(CollectionName.posts)
-      .withPostConverter()
+  return postsQuery
       .orderBy(FieldName.createdAt, descending: true)
       .snapshots()
       .map(
-        (snapshot) => snapshot.docs.toList(),
+        (snapshot) => snapshot.docs.map((p) => p.data()).toList(),
       );
-}
-
-@riverpod
-CollectionReference<Post> selfPostRef(SelfPostRefRef ref) {
-  return ref
-      .watch(authUserRefProvider)
-      .collection(CollectionName.posts)
-      .withPostConverter();
 }
