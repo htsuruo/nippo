@@ -1,20 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
 import 'package:nippo/core/router/router.dart';
-import 'package:nippo/features/post/model/post.dart';
+import 'package:nippo/features/user/model/user.dart';
 import 'package:nippo/features/user/user_provider.dart';
 
 class UserAvatar extends ConsumerWidget {
-  const UserAvatar({super.key, required this.postRef});
+  const UserAvatar({super.key, required this.post});
 
-  final DocumentReference<Post> postRef;
+  final Post post;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // users/[uid]/posts/[postId]
-    final user = ref.watch(userProvider(uid: postRef.uid)).value;
+    // TODO(htsuruo): uidいれるべきところがpostIdになっている
+    final user = ref.watch(userProvider(uid: post.id)).value;
     return CachedCircleAvatar(
       // TODO(htsuruo): `applyUnlessNull`に書き換える
       onTap: user == null
@@ -22,7 +22,7 @@ class UserAvatar extends ConsumerWidget {
           : () {
               UserPageRoute(uid: user.id).push<void>(context);
             },
-      imageUrl: user?.data()?.photoUrl,
+      imageUrl: user?.photoUrl,
     );
   }
 }

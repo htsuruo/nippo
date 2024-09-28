@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:json_converter_helper/json_converter_helper.dart';
-import 'package:nippo/features/post/post_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'model/post.dart';
+import '../user/model/user.dart';
+import '../user/user_provider.dart';
 
 part 'post_repository.g.dart';
 
@@ -16,19 +15,30 @@ class PostRepository {
   final Ref _ref;
 
   void create({required Post post}) {
-    final doc = _ref.read(selfPostRefProvider).doc();
-    doc.set(post.copyWith(nullablePostId: doc.id));
+    final auth = _ref.read(authUserProvider).value;
+    if (auth == null) {
+      throw Exception('User is not authenticated');
+    }
+    usersRef.doc(auth.id).posts.add(post);
   }
 
   void update({
-    required DocumentReference<Post> reference,
     required Post post,
-  }) =>
-      reference.update(
-        post
-            .copyWith(updatedAt: const UnionTimestamp.serverTimestamp())
-            .toJson(),
-      );
+  }) {
+    final auth = _ref.read(authUserProvider).value;
+    if (auth == null) {
+      throw Exception('User is not authenticated');
+    }
+    usersRef.doc(auth.id).posts.doc(post.id).update(
+          updatedAt: const UnionTimestamp.serverTimestamp(),
+        );
+  }
 
-  void delete({required DocumentReference<Post> postRef}) => postRef.delete();
+  void delete({required Post post}) {
+    final auth = _ref.read(authUserProvider).value;
+    if (auth == null) {
+      throw Exception('User is not authenticated');
+    }
+    usersRef.doc(auth.id).posts.doc(post.id).delete();
+  }
 }

@@ -50,7 +50,7 @@ class UserPage extends ConsumerWidget {
                 ),
                 Expanded(
                   child: PostListView(
-                    snapshots: ref.watch(userPostsProvider(uid)).value,
+                    posts: ref.watch(userPostsProvider(uid)).value,
                     postSelected: (postId) {
                       UserPostPageRoute(uid: uid, pid: postId)
                           .push<void>(context);

@@ -51,3 +51,11 @@ class Post with _$Post {
   // ignore: deprecated_member_use_from_same_package
   late final String id = nullableId!;
 }
+
+final postsQuery =
+    FirebaseFirestore.instance.collectionGroup('posts').withConverter(
+          fromFirestore: (snap, _) => Post.fromJson(snap.data()!).copyWith(
+            nullableId: snap.id,
+          ),
+          toFirestore: (post, _) => post.toJson(),
+        );

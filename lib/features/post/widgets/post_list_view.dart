@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nippo/common/common.dart';
+import 'package:nippo/features/user/model/user.dart';
 
-import '../model/post.dart';
 import 'user_avatar.dart';
 
 /// Post一覧からの遷移とUserPageからの遷移で共通して利用されるListView
@@ -13,28 +12,28 @@ import 'user_avatar.dart';
 class PostListView extends ConsumerWidget {
   const PostListView({
     super.key,
-    required this.snapshots,
+    required this.posts,
     required this.postSelected,
   });
 
-  final List<QueryDocumentSnapshot<Post>>? snapshots;
+  final List<Post>? posts;
   final ValueChanged<String>? postSelected;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final snapshots = this.snapshots;
+    final posts = this.posts;
 
-    return snapshots == null
+    return posts == null
         ? const CenteredCircularProgressIndicator()
-        : snapshots.isEmpty
+        : posts.isEmpty
             ? const Center(
                 child: Text('データがありません'),
               )
             : ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: snapshots.length,
+                itemCount: posts.length,
                 itemBuilder: (context, index) => _PostCard(
-                  snapshots[index],
+                  posts[index],
                   postSelected: postSelected,
                 ),
               );
@@ -42,22 +41,21 @@ class PostListView extends ConsumerWidget {
 }
 
 class _PostCard extends StatelessWidget {
-  const _PostCard(this.postSnapshot, {required this.postSelected});
+  const _PostCard(this.post, {required this.postSelected});
 
-  final QueryDocumentSnapshot<Post> postSnapshot;
+  final Post post;
   final ValueChanged<String>? postSelected;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final post = postSnapshot.data();
 
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
-          postSelected?.call(postSnapshot.id);
+          postSelected?.call(post.id);
         },
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -67,7 +65,7 @@ class _PostCard extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.topCenter,
-                  child: UserAvatar(postRef: postSnapshot.reference),
+                  child: UserAvatar(post: post),
                 ),
                 const Gap(12),
                 Expanded(
